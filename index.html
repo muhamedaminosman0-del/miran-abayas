@@ -82,7 +82,7 @@
                     አማርኛ
                 </button>
 
-                <!-- Vendor / Admin Add Abaya Button (ONLY visible to approved vendors) -->
+                <!-- Vendor Add Abaya Button -->
                 <button id="open-admin-btn" class="hidden bg-gold text-white hover:bg-goldDark px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1 shadow-xs">
                     <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline" data-i18n="btn_add_abaya">Add Abaya</span>
                 </button>
@@ -394,7 +394,7 @@
         </div>
     </a>
 
-    <!-- VENDOR / ADMIN MODAL (Approved Vendors Only + 10% Hidden Markup) -->
+    <!-- VENDOR / ADMIN MODAL -->
     <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-charcoal/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-cream max-w-xl w-full border border-gold/40 shadow-2xl p-6 sm:p-8 relative my-8 max-h-[92vh] overflow-y-auto">
             <button id="close-admin-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center text-charcoal hover:bg-gold hover:text-white transition-colors">
@@ -533,7 +533,7 @@
                         <a href="https://t.me/mame15" target="_blank" class="w-full border border-gold/40 hover:border-gold text-charcoal py-2 text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 transition-colors">
                             <i class="fa-brands fa-telegram text-[#229ED9]"></i> <span data-i18n="btn_ask_admin">Ask Admin About Colors/Sizes</span>
                         </a>
-                        <!-- Delete button (Visible ONLY to Super Admin or the Vendor who uploaded this specific item) -->
+                        <!-- Delete button -->
                         <button id="modal-delete-product" class="hidden w-full border border-red-300 text-red-600 hover:bg-red-50 py-1.5 text-[11px] uppercase tracking-wider font-semibold transition-colors">
                             <i class="fa-solid fa-trash-can mr-1"></i> Delete This Product
                         </button>
@@ -658,12 +658,9 @@
             measurementId: "G-3FN5X46186"
         };
 
-        // SUPER ADMIN & APPROVED VENDORS LIST
-        // Add approved vendor emails here so they can upload their own items!
         const SUPER_ADMIN_EMAIL = "muhamedaminosman0@gmail.com";
         const APPROVED_VENDORS = [
             "muhamedaminosman0@gmail.com"
-            // እዚህ ጋር ሌላ የፈቀድከውን ሻጭ ኢሜል ማስገባት ትችላለህ (ለምሳሌ: "vendor2@gmail.com")
         ];
 
         const app = initializeApp(firebaseConfig);
@@ -673,6 +670,10 @@
 
         let currentUser = null;
         let isVendor = false;
+
+        // Capture Referral Parameter from URL (e.g. ?ref=hanna)
+        const urlParams = new URLSearchParams(window.location.search);
+        const referralPartner = urlParams.get('ref') || "";
 
         let currentLang = 'en';
         const translations = {
@@ -736,7 +737,6 @@
         }
         langToggleBtn.addEventListener('click', () => applyLanguage(currentLang === 'en' ? 'am' : 'en'));
 
-        // GOOGLE AUTH & VENDOR PERMISSION CHECK
         const googleLoginBtn = document.getElementById('google-login-btn');
         const googleLogoutBtn = document.getElementById('google-logout-btn');
         const userProfilePill = document.getElementById('user-profile-pill');
@@ -786,14 +786,13 @@
             showToast("Signed out.");
         });
 
-        // PRODUCTS & CLOUD FIRESTORE SYNC
         const defaultProducts = [
             {
                 id: "default-1",
                 name: "The Midnight Royal Nidah",
                 category: "classic",
                 categoryLabel: "Classic Black",
-                price: 4800, // Includes 10% hidden markup
+                price: 4800,
                 fabric: "Korean Zoom Nidah",
                 colorVariants: [
                     { name: "Royal Black", hex: "#1A1A1A", img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop" },
@@ -967,7 +966,6 @@
             });
         }
 
-        // VENDOR UPLOADER WITH AUTOMATIC 10% HIDDEN MARKUP
         const adminModal = document.getElementById('admin-modal');
         const photoInput = document.getElementById('new-product-photo');
         const photoPreview = document.getElementById('photo-preview');
@@ -1060,7 +1058,6 @@
             }
 
             const rawPrice = Number(document.getElementById('new-product-price').value);
-            // AUTOMATIC 10% HIDDEN MARKUP ADDED TO PRICE
             const finalMarkedUpPrice = Math.round(rawPrice * 1.10);
 
             const catValue = document.getElementById('new-product-category').value;
@@ -1097,7 +1094,6 @@
             }
         });
 
-        // Filter & Search
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => {
@@ -1133,7 +1129,6 @@
         document.getElementById('mobile-menu-btn').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
         document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden')));
 
-        // Product Modal Logic & Strict Ownership Delete Control
         const modal = document.getElementById('product-modal');
         const deleteProductBtn = document.getElementById('modal-delete-product');
         const modalQtyInput = document.getElementById('modal-qty');
@@ -1210,7 +1205,6 @@
             modalQtyInput.value = 1;
             updateModalBulkHint();
 
-            // STRICT OWNERSHIP CONTROL: Delete button is shown ONLY if Super Admin OR the vendor who uploaded this specific item
             const userEmail = currentUser ? currentUser.email.toLowerCase() : "";
             const isSuperAdmin = userEmail === SUPER_ADMIN_EMAIL.toLowerCase();
             const isOwner = selectedProduct.vendorEmail && selectedProduct.vendorEmail.toLowerCase() === userEmail;
@@ -1293,7 +1287,6 @@
             showToast(`Added ${qtyToAdd}x "${selectedProduct.name}" (${selectedColorVariant.name}, Size ${selectedSize})`);
         });
 
-        // Cart Drawer & Payment Logic
         const cartDrawer = document.getElementById('cart-drawer');
         const locationSelect = document.getElementById('location-type');
         const telebirrBtn = document.getElementById('pay-telebirr-btn');
@@ -1477,6 +1470,8 @@
                 ? `🏷️ *Bulk Discount (${Math.round(discountRate * 100)}%):* -${discountValue.toLocaleString()} ETB\n` 
                 : "";
 
+            const referralText = referralPartner ? `🤝 *Referred By (Partner):* ${referralPartner}\n` : "";
+
             const paymentRuleText = isAddis 
                 ? `Addis Ababa (50% Deposit Paid: ${paidNow.toLocaleString()} ETB | Balance on Delivery: ${balanceDue.toLocaleString()} ETB)`
                 : `Outside Addis / International (100% Full Payment: ${paidNow.toLocaleString()} ETB)`;
@@ -1484,13 +1479,14 @@
             const message = `✨ *NEW ORDER - MIRAN ABAYAS* ✨\n\n` +
                             `👤 *Customer:* ${name}${userEmailText}\n` +
                             `📞 *Phone:* ${phone}\n` +
-                            `📍 *Location:* ${address}\n\n` +
+                            `📍 *Location:* ${address}\n` +
+                            referralText + `\n` +
                             `🛍️ *Ordered Items (${totalQty} pcs):*\n${orderLines}\n\n` +
                             `💵 *Original Subtotal:* ${subtotal.toLocaleString()} ETB\n` +
                             discountText +
                             `💰 *Grand Total:* ${grandTotal.toLocaleString()} ETB\n` +
                             `💳 *Payment Plan:* ${paymentRuleText}\n` +
-                            `🏦 *Paid Via:* **${selectedPaymentMethod}**\n` +
+                            `🏦 *Paid Via:* ${selectedPaymentMethod}\n` +
                             `🧾 *Transaction ID:* ${txRef}\n\n` +
                             `I am attaching my payment receipt screenshot below.`;
 
@@ -1501,9 +1497,8 @@
             const toast = document.getElementById('toast');
             toast.textContent = msg;
             toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('end', () => toast.classList.add('hidden')), 3500);
             setTimeout(() => toast.classList.add('hidden'), 3500);
         }
     </script>
 </body>
-</html>
+    </html>
