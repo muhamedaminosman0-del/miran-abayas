@@ -75,14 +75,14 @@
                 <a href="#size-guide" class="hover:text-gold transition-colors" data-i18n="nav_size">Size Guide</a>
             </nav>
 
-            <!-- Right Icons (Language, Google Login, Admin Add Abaya, Search, Cart) -->
+            <!-- Right Icons -->
             <div class="flex items-center space-x-2 sm:space-x-3">
                 <!-- Language Toggle -->
                 <button id="lang-toggle-btn" class="border border-gold/50 hover:border-gold bg-white px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-charcoal hover:text-gold transition-colors">
                     አማርኛ
                 </button>
 
-                <!-- Admin Button (ONLY visible when muhamedaminosman0@gmail.com logs in) -->
+                <!-- Vendor / Admin Add Abaya Button (ONLY visible to approved vendors) -->
                 <button id="open-admin-btn" class="hidden bg-gold text-white hover:bg-goldDark px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1 shadow-xs">
                     <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline" data-i18n="btn_add_abaya">Add Abaya</span>
                 </button>
@@ -93,7 +93,7 @@
                     <span id="auth-btn-text" class="hidden sm:inline">Sign In</span>
                 </button>
 
-                <!-- Logged-in User Pill (Hidden until signed in) -->
+                <!-- Logged-in User Pill -->
                 <div id="user-profile-pill" class="hidden flex items-center gap-1.5 bg-white border border-gold/40 px-2 py-1">
                     <img id="user-avatar" src="" alt="User" class="w-5 h-5 rounded-full object-cover">
                     <span id="user-first-name" class="text-[11px] font-bold max-w-[70px] truncate"></span>
@@ -132,7 +132,7 @@
         </div>
     </header>
 
-    <!-- FIRST SECTION: ABAYA GALLERY / CATALOG TABLE-GRID AT THE VERY TOP -->
+    <!-- ABAYA GALLERY / CATALOG -->
     <section id="collection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-gold/20 pb-6">
             <div>
@@ -150,7 +150,7 @@
             </div>
         </div>
 
-        <!-- Structured Table-Style Photo Grid -->
+        <!-- Product Grid -->
         <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-t border-l border-gold/30 bg-white shadow-sm">
             <!-- Products loaded dynamically -->
         </div>
@@ -187,7 +187,7 @@
         </div>
     </section>
 
-    <!-- BUYER PROTECTION & GUARANTEE SECTION -->
+    <!-- BUYER PROTECTION SECTION -->
     <section id="protection" class="bg-creamDark/60 border-b border-gold/20 py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-14">
@@ -203,9 +203,7 @@
                         <i class="fa-solid fa-rotate-left"></i>
                     </div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp1_title">100% Return Guarantee</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp1_desc">
-                        If the delivered abaya differs from the photo or has any defect, your deposit is refunded or exchanged immediately.
-                    </p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp1_desc">If the delivered abaya differs from the photo or has any defect, your deposit is refunded or exchanged immediately.</p>
                 </div>
 
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
@@ -213,9 +211,7 @@
                         <i class="fa-solid fa-hand-holding-dollar"></i>
                     </div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp2_title">Inspect Before Final Pay</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp2_desc">
-                        Addis Ababa customers pay only 50% deposit upfront and pay the remaining 50% after inspecting the abaya upon delivery.
-                    </p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp2_desc">Addis Ababa customers pay only 50% deposit upfront and pay the remaining 50% after inspecting the abaya upon delivery.</p>
                 </div>
 
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
@@ -223,9 +219,7 @@
                         <i class="fa-solid fa-video"></i>
                     </div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp3_title">Live Video Verification</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp3_desc">
-                        Want to check fabric texture before paying? Message Admin (@mame15) on Telegram for a live close-up video.
-                    </p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp3_desc">Want to check fabric texture before paying? Message Admin (@mame15) on Telegram for a live close-up video.</p>
                 </div>
 
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
@@ -233,15 +227,13 @@
                         <i class="fa-solid fa-user-shield"></i>
                     </div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp4_title">Verified Delivery</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp4_desc">
-                        Every order is personally supervised by Miran Admin and delivered safely on schedule.
-                    </p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp4_desc">Every order is personally supervised by Miran Admin and delivered safely on schedule.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CUSTOMER REVIEWS SECTION -->
+    <!-- CUSTOMER REVIEWS -->
     <section id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="text-center max-w-2xl mx-auto mb-14">
             <span class="text-gold uppercase tracking-[0.2em] text-xs font-bold block mb-2" data-i18n="rev_sub">Testimonials</span>
@@ -255,17 +247,13 @@
                 <div class="flex text-gold text-xs mb-3">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">
-                    "ጨርቁ በጣም ልስልስ ያለ ኦሪጅናል ኒዳ ነው። ፎቶው ላይ ካየሁት በላይ ሲለበስ በጣም ያምራል! ቦሌ ድረስ በሰዓቱ ስላደረሳችሁልኝ አመሰግናለሁ።"
-                </p>
+                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">"ጨርቁ በጣም ልስልስ ያለ ኦሪጅናል ኒዳ ነው። ፎቶው ላይ ካየሁት በላይ ሲለበስ በጣም ያምራል! ቦሌ ድረስ በሰዓቱ ስላደረሳችሁልኝ አመሰግናለሁ።"</p>
                 <div class="flex items-center justify-between border-t border-gold/10 pt-4">
                     <div>
                         <h4 class="font-serif font-bold text-sm">ሰሚራ አህመድ (Semira A.)</h4>
                         <span class="text-[11px] text-charcoal/50">Bole, Addis Ababa</span>
                     </div>
-                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full">
-                        <i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer
-                    </span>
+                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full"><i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer</span>
                 </div>
             </div>
 
@@ -273,17 +261,13 @@
                 <div class="flex text-gold text-xs mb-3">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">
-                    "ለሱቄ 6 አባያዎችን በብዛት አዝዤ 15% ቅናሽ አግኝቻለሁ። ጥልፉ እና ስፌቱ እጅግ በጣም ጥራት ያለው ነው፤ ደንበኞቼ በጣም ወደውታል።"
-                </p>
+                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">"ለሱቄ 6 አባያዎችን በብዛት አዝዤ 15% ቅናሽ አግኝቻለሁ። ጥልፉ እና ስፌቱ እጅግ በጣም ጥራት ያለው ነው፤ ደንበኞቼ በጣም ወደውታል።"</p>
                 <div class="flex items-center justify-between border-t border-gold/10 pt-4">
                     <div>
                         <h4 class="font-serif font-bold text-sm">ሀናን መሀመድ (Hanan M.)</h4>
                         <span class="text-[11px] text-charcoal/50">Adama (Wholesale Buyer)</span>
                     </div>
-                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full">
-                        <i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer
-                    </span>
+                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full"><i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer</span>
                 </div>
             </div>
 
@@ -291,23 +275,19 @@
                 <div class="flex text-gold text-xs mb-3">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">
-                    "በቴሌግራም አናግሬያቸው ቪዲዮ አሳይተውኝ ነው ያዘዝኩት። 50% ቀብድ ከፍዬ ሲደርሰኝ ቀሪውን ከፈልኩ—በጣም ታማኝ እና ፈጣን ናችሁ!"
-                </p>
+                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">"በቴሌግራም አናግሬያቸው ቪዲዮ አሳይተውኝ ነው ያዘዝኩት። 50% ቀብድ ከፍዬ ሲደርሰኝ ቀሪውን ከፈልኩ—በጣም ታማኝ እና ፈጣን ናችሁ!"</p>
                 <div class="flex items-center justify-between border-t border-gold/10 pt-4">
                     <div>
                         <h4 class="font-serif font-bold text-sm">መርየም ዩሱፍ (Meryem Y.)</h4>
                         <span class="text-[11px] text-charcoal/50">CMC, Addis Ababa</span>
                     </div>
-                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full">
-                        <i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer
-                    </span>
+                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full"><i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Size & Length Guide Section -->
+    <!-- SIZE GUIDE -->
     <section id="size-guide" class="bg-creamDark/40 py-20 border-y border-gold/10">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
@@ -371,9 +351,7 @@
                 <a href="#" class="font-serif text-3xl tracking-widest font-bold text-charcoal uppercase">
                     Miran<span class="text-gold">.</span>
                 </a>
-                <p class="text-cream/70 text-sm max-w-md leading-relaxed" data-i18n="footer_desc">
-                    Luxury modest fashion curated for elegance and comfort. Retail & Wholesale orders delivered across Addis Ababa, regional Ethiopia, and worldwide.
-                </p>
+                <p class="text-cream/70 text-sm max-w-md leading-relaxed" data-i18n="footer_desc">Luxury modest fashion curated for elegance and comfort. Retail & Wholesale orders delivered across Addis Ababa, regional Ethiopia, and worldwide.</p>
                 <div class="flex space-x-4 pt-2">
                     <a href="https://t.me/mame15" target="_blank" class="px-4 py-2 rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-white transition-colors text-xs font-bold flex items-center gap-2">
                         <i class="fa-brands fa-telegram text-base"></i> @mame15
@@ -416,14 +394,14 @@
         </div>
     </a>
 
-    <!-- ADMIN MODAL: Upload Abaya + Color Variants (ONLY ACCESSIBLE BY muhamedaminosman0@gmail.com) -->
+    <!-- VENDOR / ADMIN MODAL (Approved Vendors Only + 10% Hidden Markup) -->
     <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-charcoal/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-cream max-w-xl w-full border border-gold/40 shadow-2xl p-6 sm:p-8 relative my-8 max-h-[92vh] overflow-y-auto">
             <button id="close-admin-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center text-charcoal hover:bg-gold hover:text-white transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="mb-5">
-                <span class="text-xs uppercase tracking-widest text-gold font-bold">Verified Admin: muhamedaminosman0@gmail.com</span>
+                <span id="vendor-email-badge" class="text-xs uppercase tracking-widest text-gold font-bold">Verified Vendor</span>
                 <h3 class="font-serif text-2xl font-bold mt-1">አዲስ አባያ እና ከለሮቹን መጫኛ</h3>
                 <p class="text-xs text-charcoal/60 mt-1">የሚጭኑት አባያ ለሁሉም ደንበኞች በስልካቸው ላይ ወዲያውኑ ይታያል።</p>
             </div>
@@ -457,17 +435,15 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider mb-1">4. የአንድ ፍሬ ዋጋ (Price ETB) *</label>
-                        <input type="number" id="new-product-price" placeholder="ለምሳሌ: 4800" required class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-1">4. የሰጡት ዋጋ (ETB) *</label>
+                        <input type="number" id="new-product-price" placeholder="ለምሳሌ: 4000" required class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
                     </div>
                 </div>
 
-                <!-- Dynamic Color Variants Uploader -->
+                <!-- Color Variants Uploader -->
                 <div class="bg-white p-3.5 border border-gold/40 space-y-3">
                     <div class="flex items-center justify-between">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-charcoal">
-                            5. የከለር አይነቶችን ይጫኑ (Color Variants)
-                        </label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-charcoal">5. የከለር አይነቶችን ይጫኑ (Color Variants)</label>
                         <button type="button" id="add-color-variant-btn" class="bg-charcoal hover:bg-gold text-white px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider transition-colors">
                             <i class="fa-solid fa-plus mr-1"></i> ከለር ጨምር
                         </button>
@@ -495,7 +471,7 @@
         </div>
     </div>
 
-    <!-- Quick View / Color, Size & Quantity Selection Modal -->
+    <!-- Quick View / Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden bg-charcoal/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-cream max-w-2xl w-full border border-gold/30 shadow-2xl overflow-hidden relative my-8">
             <button id="close-modal-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center text-charcoal hover:bg-gold hover:text-white transition-colors z-10">
@@ -513,7 +489,7 @@
                         <p id="modal-price" class="text-lg font-semibold text-charcoal mb-2"></p>
                         <p id="modal-desc" class="text-xs text-charcoal/70 leading-relaxed mb-4"></p>
 
-                        <!-- 1. Color Selector -->
+                        <!-- Color Selector -->
                         <div class="mb-4">
                             <label class="block text-xs uppercase tracking-wider font-bold mb-1.5">
                                 <span data-i18n="modal_color">1. Select Color:</span> <span id="selected-color-label" class="text-goldDark normal-case font-semibold">Default</span>
@@ -521,7 +497,7 @@
                             <div id="modal-color-options" class="flex flex-wrap gap-2"></div>
                         </div>
 
-                        <!-- 2. Size Selector -->
+                        <!-- Size Selector -->
                         <div class="mb-4">
                             <div class="flex justify-between items-center mb-1.5">
                                 <label class="text-xs uppercase tracking-wider font-bold" data-i18n="modal_size">2. Select Length (Size):</label>
@@ -536,7 +512,7 @@
                             </div>
                         </div>
 
-                        <!-- 3. Quantity Selector -->
+                        <!-- Quantity Selector -->
                         <div class="mb-5">
                             <label class="block text-xs uppercase tracking-wider font-bold mb-1.5" data-i18n="modal_qty">3. Quantity:</label>
                             <div class="flex items-center gap-3">
@@ -557,9 +533,9 @@
                         <a href="https://t.me/mame15" target="_blank" class="w-full border border-gold/40 hover:border-gold text-charcoal py-2 text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 transition-colors">
                             <i class="fa-brands fa-telegram text-[#229ED9]"></i> <span data-i18n="btn_ask_admin">Ask Admin About Colors/Sizes</span>
                         </a>
-                        <!-- Delete button ONLY visible to muhamedaminosman0@gmail.com -->
+                        <!-- Delete button (Visible ONLY to Super Admin or the Vendor who uploaded this specific item) -->
                         <button id="modal-delete-product" class="hidden w-full border border-red-300 text-red-600 hover:bg-red-50 py-1.5 text-[11px] uppercase tracking-wider font-semibold transition-colors">
-                            <i class="fa-solid fa-trash-can mr-1"></i> Delete This Product (Admin)
+                            <i class="fa-solid fa-trash-can mr-1"></i> Delete This Product
                         </button>
                     </div>
                 </div>
@@ -672,9 +648,6 @@
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // =========================================================================
-        // YOUR EXACT FIREBASE CONFIG (Successfully Integrated!)
-        // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyD-tH2Oo_LTgzGn0qW3sEsz8sT6bt8dUsM",
             authDomain: "miran-abaya.firebaseapp.com",
@@ -685,21 +658,22 @@
             measurementId: "G-3FN5X46186"
         };
 
-        // ONLY THIS EMAIL CAN ADD OR DELETE ABAYAS
-        const ADMIN_EMAIL = "muhamedaminosman0@gmail.com";
+        // SUPER ADMIN & APPROVED VENDORS LIST
+        // Add approved vendor emails here so they can upload their own items!
+        const SUPER_ADMIN_EMAIL = "muhamedaminosman0@gmail.com";
+        const APPROVED_VENDORS = [
+            "muhamedaminosman0@gmail.com"
+            // እዚህ ጋር ሌላ የፈቀድከውን ሻጭ ኢሜል ማስገባት ትችላለህ (ለምሳሌ: "vendor2@gmail.com")
+        ];
 
-        const isFirebaseConfigured = true;
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
         let currentUser = null;
-        let isAdmin = false;
+        let isVendor = false;
 
-        // ==========================================
-        // 2. LANGUAGE DICTIONARY (EN / AM)
-        // ==========================================
         let currentLang = 'en';
         const translations = {
             en: {
@@ -762,9 +736,7 @@
         }
         langToggleBtn.addEventListener('click', () => applyLanguage(currentLang === 'en' ? 'am' : 'en'));
 
-        // ==========================================
-        // 3. GOOGLE AUTHENTICATION & ADMIN CHECK
-        // ==========================================
+        // GOOGLE AUTH & VENDOR PERMISSION CHECK
         const googleLoginBtn = document.getElementById('google-login-btn');
         const googleLogoutBtn = document.getElementById('google-logout-btn');
         const userProfilePill = document.getElementById('user-profile-pill');
@@ -781,17 +753,18 @@
                 const nameInput = document.getElementById('customer-name');
                 if (nameInput && !nameInput.value) nameInput.value = user.displayName || "";
 
-                if (user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-                    isAdmin = true;
+                const userEmail = user.email ? user.email.toLowerCase() : "";
+                if (APPROVED_VENDORS.map(e => e.toLowerCase()).includes(userEmail)) {
+                    isVendor = true;
                     openAdminBtn.classList.remove('hidden');
-                    showToast(`Welcome Admin (${user.email})! Store controls unlocked.`);
+                    showToast(`Welcome Vendor (${user.email})! Upload unlocked.`);
                 } else {
-                    isAdmin = false;
+                    isVendor = false;
                     openAdminBtn.classList.add('hidden');
                     showToast(`Welcome, ${user.displayName || user.email}!`);
                 }
             } else {
-                isAdmin = false;
+                isVendor = false;
                 googleLoginBtn.classList.remove('hidden');
                 userProfilePill.classList.add('hidden');
                 openAdminBtn.classList.add('hidden');
@@ -813,16 +786,14 @@
             showToast("Signed out.");
         });
 
-        // ==========================================
-        // 4. PRODUCTS & CLOUD FIRESTORE SYNC
-        // ==========================================
+        // PRODUCTS & CLOUD FIRESTORE SYNC
         const defaultProducts = [
             {
                 id: "default-1",
                 name: "The Midnight Royal Nidah",
                 category: "classic",
                 categoryLabel: "Classic Black",
-                price: 4800,
+                price: 4800, // Includes 10% hidden markup
                 fabric: "Korean Zoom Nidah",
                 colorVariants: [
                     { name: "Royal Black", hex: "#1A1A1A", img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop" },
@@ -830,6 +801,7 @@
                 ],
                 desc: "Crafted from ultra-soft Korean Nidah with subtle satin trimmings on the cuffs. Includes a matching luxury shayla.",
                 img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop",
+                vendorEmail: "admin",
                 isDefault: true
             },
             {
@@ -845,6 +817,7 @@
                 ],
                 desc: "Intricate hand-stitched gold floral embroidery along the sleeves and front lapel. Ideal for Eid and formal events.",
                 img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop",
+                vendorEmail: "admin",
                 isDefault: true
             },
             {
@@ -860,6 +833,7 @@
                 ],
                 desc: "Relaxed open-front kimono abaya in warm desert beige with a matching waist belt and wide flowy sleeves.",
                 img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop",
+                vendorEmail: "admin",
                 isDefault: true
             },
             {
@@ -875,6 +849,7 @@
                 ],
                 desc: "Graceful pastel abaya with a modest butterfly cut for effortless movement and all-day comfort.",
                 img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop",
+                vendorEmail: "admin",
                 isDefault: true
             }
         ];
@@ -992,7 +967,7 @@
             });
         }
 
-        // ADMIN PHOTO & COLOR VARIANTS UPLOADER
+        // VENDOR UPLOADER WITH AUTOMATIC 10% HIDDEN MARKUP
         const adminModal = document.getElementById('admin-modal');
         const photoInput = document.getElementById('new-product-photo');
         const photoPreview = document.getElementById('photo-preview');
@@ -1038,7 +1013,7 @@
         document.getElementById('add-color-variant-btn').addEventListener('click', () => addColorVariantRow("", "#5C1A26"));
 
         openAdminBtn.addEventListener('click', () => {
-            if (!isAdmin) return;
+            if (!isVendor) return;
             if (variantsContainer.children.length === 0) addColorVariantRow("Black", "#1A1A1A");
             adminModal.classList.remove('hidden');
         });
@@ -1059,8 +1034,8 @@
 
         document.getElementById('add-product-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (!isAdmin) {
-                showToast("Unauthorized! Only muhamedaminosman0@gmail.com can publish.");
+            if (!isVendor) {
+                showToast("Unauthorized! Only approved vendors can publish.");
                 return;
             }
             if (!uploadedImageBase64) {
@@ -1084,16 +1059,21 @@
                 collectedVariants.push({ name: "Standard", hex: "#1A1A1A", img: uploadedImageBase64 });
             }
 
+            const rawPrice = Number(document.getElementById('new-product-price').value);
+            // AUTOMATIC 10% HIDDEN MARKUP ADDED TO PRICE
+            const finalMarkedUpPrice = Math.round(rawPrice * 1.10);
+
             const catValue = document.getElementById('new-product-category').value;
             const newAbayaData = {
                 name: document.getElementById('new-product-name').value.trim(),
                 category: catValue,
                 categoryLabel: categoryLabels[catValue],
-                price: Number(document.getElementById('new-product-price').value),
+                price: finalMarkedUpPrice,
                 colorVariants: collectedVariants,
                 fabric: document.getElementById('new-product-fabric').value.trim() || "Premium Fabric",
                 desc: document.getElementById('new-product-desc').value.trim() || "Handcrafted luxury abaya with matching shayla.",
                 img: uploadedImageBase64,
+                vendorEmail: currentUser.email.toLowerCase(),
                 createdAt: Date.now()
             };
 
@@ -1108,7 +1088,7 @@
                 photoPreview.classList.add('hidden');
                 uploadPlaceholder.classList.remove('hidden');
                 adminModal.classList.add('hidden');
-                showToast(`"${newAbayaData.name}" published successfully online!`);
+                showToast(`"${newAbayaData.name}" published successfully!`);
             } catch (err) {
                 showToast("Upload failed: " + err.message);
             } finally {
@@ -1153,7 +1133,7 @@
         document.getElementById('mobile-menu-btn').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
         document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden')));
 
-        // Product Modal Logic
+        // Product Modal Logic & Strict Ownership Delete Control
         const modal = document.getElementById('product-modal');
         const deleteProductBtn = document.getElementById('modal-delete-product');
         const modalQtyInput = document.getElementById('modal-qty');
@@ -1230,7 +1210,12 @@
             modalQtyInput.value = 1;
             updateModalBulkHint();
 
-            if (isAdmin) {
+            // STRICT OWNERSHIP CONTROL: Delete button is shown ONLY if Super Admin OR the vendor who uploaded this specific item
+            const userEmail = currentUser ? currentUser.email.toLowerCase() : "";
+            const isSuperAdmin = userEmail === SUPER_ADMIN_EMAIL.toLowerCase();
+            const isOwner = selectedProduct.vendorEmail && selectedProduct.vendorEmail.toLowerCase() === userEmail;
+
+            if (isSuperAdmin || isOwner) {
                 deleteProductBtn.classList.remove('hidden');
             } else {
                 deleteProductBtn.classList.add('hidden');
@@ -1239,7 +1224,16 @@
         }
 
         deleteProductBtn.addEventListener('click', async () => {
-            if (!selectedProduct || !isAdmin) return;
+            if (!selectedProduct) return;
+            const userEmail = currentUser ? currentUser.email.toLowerCase() : "";
+            const isSuperAdmin = userEmail === SUPER_ADMIN_EMAIL.toLowerCase();
+            const isOwner = selectedProduct.vendorEmail && selectedProduct.vendorEmail.toLowerCase() === userEmail;
+
+            if (!isSuperAdmin && !isOwner) {
+                showToast("You can only delete your own products!");
+                return;
+            }
+
             if (!confirm(`Are you sure you want to delete "${selectedProduct.name}"?`)) return;
 
             try {
@@ -1249,7 +1243,7 @@
                 products = products.filter(p => String(p.id) !== String(selectedProduct.id));
                 renderProducts(products);
                 closeModal();
-                showToast("Abaya deleted successfully.");
+                showToast("Product deleted successfully.");
             } catch (err) {
                 showToast("Delete failed: " + err.message);
             }
@@ -1496,7 +1490,7 @@
                             discountText +
                             `💰 *Grand Total:* ${grandTotal.toLocaleString()} ETB\n` +
                             `💳 *Payment Plan:* ${paymentRuleText}\n` +
-                            `🏦 *Paid Via:* ${selectedPaymentMethod}\n` +
+                            `🏦 *Paid Via:* **${selectedPaymentMethod}**\n` +
                             `🧾 *Transaction ID:* ${txRef}\n\n` +
                             `I am attaching my payment receipt screenshot below.`;
 
@@ -1507,6 +1501,7 @@
             const toast = document.getElementById('toast');
             toast.textContent = msg;
             toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('end', () => toast.classList.add('hidden')), 3500);
             setTimeout(() => toast.classList.add('hidden'), 3500);
         }
     </script>
