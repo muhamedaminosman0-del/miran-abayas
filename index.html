@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miran | Luxury Modern Abayas</title>
-    <!-- Tailwind CSS CDN -->
+    <meta name="description" content="Miran Luxury Abayas: modern, modest abayas in Nidah, embroidered, pastel and kimono styles. Retail and wholesale delivery across Addis Ababa, Ethiopia and worldwide.">
+    <meta property="og:title" content="Miran | Luxury Modern Abayas">
+    <meta property="og:description" content="Luxury modest fashion. Bulk discounts up to 20%. Pay a 50% deposit in Addis Ababa and the rest on delivery.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1A1A1A">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        cream: '#FAF8F5',
-                        creamDark: '#F0ECE1',
-                        charcoal: '#1A1A1A',
-                        gold: '#C5A059',
-                        goldLight: '#D4B87C',
-                        goldDark: '#A3813F'
+                        cream: '#FAF8F5', creamDark: '#F0ECE1', charcoal: '#1A1A1A',
+                        gold: '#C5A059', goldLight: '#D4B87C', goldDark: '#A3813F'
                     },
                     fontFamily: {
                         serif: ['Playfair Display', 'serif'],
@@ -26,69 +27,45 @@
             }
         }
     </script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #FAF8F5;
-            color: #1A1A1A;
-        }
-        h1, h2, h3, h4, .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #1A1A1A; }
+        h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #FAF8F5; }
         ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 4px; }
+        .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .skeleton { background: linear-gradient(90deg, #F0ECE1 25%, #FAF8F5 50%, #F0ECE1 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } * { scroll-behavior: auto !important; } }
+        button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #C5A059; outline-offset: 2px; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body class="bg-cream text-charcoal antialiased selection:bg-gold selection:text-white">
 
-    <!-- FORCED LOGIN OVERLAY (Appears until user logs in with Google) -->
-    <div id="auth-gate-overlay" class="fixed inset-0 z-50 bg-charcoal/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-cream max-w-md w-full border border-gold/50 shadow-2xl p-8 text-center relative">
-            <a href="#" class="font-serif text-4xl tracking-widest font-bold text-charcoal uppercase block mb-1">
-                Miran<span class="text-gold">.</span>
-            </a>
-            <span class="text-[10px] uppercase tracking-[0.3em] text-gold font-bold block mb-4">Luxury Abayas</span>
-            
-            <p class="text-xs text-charcoal/70 leading-relaxed mb-8">
-                ሱቁን ለመጠቀም እና አባያዎችን ለማየት እባክዎ መጀመሪያ በ Google መለያዎ ይግቡ (Sign In)።
-            </p>
-
-            <button id="gate-google-login-btn" class="w-full bg-white hover:bg-creamDark border border-gold/50 py-3.5 px-4 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-sm">
-                <i class="fa-brands fa-google text-[#DB4437] text-base"></i> Continue with Google
-            </button>
-        </div>
-    </div>
-
     <!-- Top Announcement Bar -->
-    <div class="bg-charcoal text-cream text-[11px] sm:text-xs py-2.5 px-4 text-center tracking-wider uppercase font-medium">
+    <div class="bg-charcoal text-cream text-[11px] sm:text-xs py-2.5 px-4 text-center tracking-wider uppercase font-medium" data-i18n="top_bar">
         Bulk Discount: 3+ pcs (10% OFF) | 5+ pcs (15% OFF) | 10+ pcs (20% OFF) • Addis: 50% Deposit | Outside: 100%
     </div>
 
     <!-- Navbar -->
-    <header id="navbar" class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-gold/20 transition-all duration-300">
+    <header id="navbar" class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-gold/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-charcoal hover:text-gold text-xl focus:outline-none">
+            <button id="mobile-menu-btn" class="md:hidden text-charcoal hover:text-gold text-xl" aria-label="Menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <!-- Brand Logo (Refined Luxury Typography) -->
-            <a href="#" class="flex flex-col items-start select-none group">
+            <a href="#" class="flex flex-col items-start select-none group" aria-label="Miran Luxury Abayas">
                 <span class="font-serif text-2xl md:text-3xl tracking-[0.2em] font-bold text-charcoal uppercase group-hover:text-gold transition-colors">
                     Miran<span class="text-gold">.</span>
                 </span>
                 <span class="text-[9px] uppercase tracking-[0.25em] text-goldDark font-semibold -mt-1">Luxury Abayas</span>
             </a>
 
-            <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center space-x-6 text-xs uppercase tracking-widest font-semibold">
                 <a href="#collection" class="hover:text-gold transition-colors" data-i18n="nav_collection">Collection</a>
                 <a href="#protection" class="hover:text-gold transition-colors" data-i18n="nav_guarantee">Guarantee</a>
@@ -96,68 +73,58 @@
                 <a href="#size-guide" class="hover:text-gold transition-colors" data-i18n="nav_size">Size Guide</a>
             </nav>
 
-            <!-- Right Icons -->
             <div class="flex items-center space-x-2 sm:space-x-3">
-                <!-- Language Toggle -->
-                <button id="lang-toggle-btn" class="border border-gold/50 hover:border-gold bg-white px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-charcoal hover:text-gold transition-colors">
-                    አማርኛ
-                </button>
+                <button id="lang-toggle-btn" class="border border-gold/50 hover:border-gold bg-white px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-charcoal hover:text-gold transition-colors">አማርኛ</button>
 
-                <!-- Vendor Add Abaya Button -->
-                <button id="open-admin-btn" class="hidden bg-gold text-white hover:bg-goldDark px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1 shadow-xs">
+                <!-- Vendor only: add abaya -->
+                <button id="open-admin-btn" class="hidden bg-gold text-white hover:bg-goldDark px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1">
                     <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline" data-i18n="btn_add_abaya">Add Abaya</span>
                 </button>
 
-                <!-- Logged-in User Pill -->
-                <div id="user-profile-pill" class="flex items-center gap-1.5 bg-white border border-gold/40 px-2 py-1">
-                    <img id="user-avatar" src="" alt="User" class="w-5 h-5 rounded-full object-cover">
+                <!-- Vendor only: signed-in pill -->
+                <div id="user-profile-pill" class="hidden flex items-center gap-1.5 bg-white border border-gold/40 px-2 py-1">
+                    <img id="user-avatar" src="" alt="" class="w-5 h-5 rounded-full object-cover">
                     <span id="user-first-name" class="text-[11px] font-bold max-w-[70px] truncate"></span>
-                    <button id="google-logout-btn" class="text-charcoal/50 hover:text-red-600 text-xs pl-1" title="Sign Out">
+                    <button id="google-logout-btn" class="text-charcoal/50 hover:text-red-600 text-xs pl-1" title="Sign Out" aria-label="Sign out">
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </button>
                 </div>
 
-                <!-- Search -->
-                <button id="search-toggle-btn" class="text-charcoal hover:text-gold transition-colors" title="Search">
+                <button id="search-toggle-btn" class="text-charcoal hover:text-gold transition-colors" title="Search" aria-label="Search">
                     <i class="fa-solid fa-magnifying-glass text-base sm:text-lg"></i>
                 </button>
 
-                <!-- Cart -->
-                <button id="cart-btn" class="relative text-charcoal hover:text-gold transition-colors focus:outline-none" title="Shopping Bag">
+                <button id="cart-btn" class="relative text-charcoal hover:text-gold transition-colors" title="Shopping Bag" aria-label="Shopping bag">
                     <i class="fa-solid fa-bag-shopping text-lg sm:text-xl"></i>
                     <span id="cart-badge" class="absolute -top-2 -right-2 bg-gold text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm">0</span>
                 </button>
             </div>
         </div>
 
-        <!-- Search Bar Dropdown -->
         <div id="search-bar" class="hidden bg-creamDark/80 border-b border-gold/20 px-4 py-3">
             <div class="max-w-2xl mx-auto flex items-center gap-2">
-                <input type="text" id="search-input" placeholder="Search abayas (e.g. Black, Navy, Nidah, Embroidered, Kimono)..." class="w-full bg-white border border-gold/30 px-4 py-2 text-sm focus:outline-none focus:border-gold">
-                <button id="close-search-btn" class="text-charcoal/60 hover:text-charcoal px-2"><i class="fa-solid fa-xmark"></i></button>
+                <input type="text" id="search-input" data-i18n-ph="search_ph" placeholder="Search abayas (e.g. Black, Navy, Nidah, Embroidered, Kimono)..." class="w-full bg-white border border-gold/30 px-4 py-2 text-sm focus:outline-none focus:border-gold">
+                <button id="close-search-btn" class="text-charcoal/60 hover:text-charcoal px-2" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
 
-        <!-- Mobile Nav Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-cream border-b border-gold/20 shadow-xl px-6 py-6 space-y-4 text-center uppercase tracking-widest text-sm">
-            <a href="#collection" class="block py-2 hover:text-gold transition-colors mobile-link" data-i18n="nav_collection">Collection</a>
-            <a href="#protection" class="block py-2 hover:text-gold transition-colors mobile-link" data-i18n="nav_guarantee">Buyer Guarantee</a>
-            <a href="#reviews" class="block py-2 hover:text-gold transition-colors mobile-link" data-i18n="nav_reviews">Customer Reviews</a>
-            <a href="#size-guide" class="block py-2 hover:text-gold transition-colors mobile-link" data-i18n="nav_size">Size Guide</a>
+            <a href="#collection" class="block py-2 hover:text-gold mobile-link" data-i18n="nav_collection">Collection</a>
+            <a href="#protection" class="block py-2 hover:text-gold mobile-link" data-i18n="nav_guarantee">Guarantee</a>
+            <a href="#reviews" class="block py-2 hover:text-gold mobile-link" data-i18n="nav_reviews">Reviews</a>
+            <a href="#size-guide" class="block py-2 hover:text-gold mobile-link" data-i18n="nav_size">Size Guide</a>
         </div>
     </header>
 
-    <!-- ABAYA GALLERY / CATALOG -->
+    <!-- CATALOG -->
     <section id="collection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-gold/20 pb-6">
             <div>
                 <span class="text-gold uppercase tracking-[0.25em] text-xs font-bold block mb-1" data-i18n="catalog_subtitle">Miran Luxury Collection 2026</span>
                 <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal" data-i18n="catalog_title">Abaya Catalog</h1>
             </div>
-
-            <!-- Filter Buttons -->
-            <div class="flex flex-wrap items-center gap-2">
-                <button class="filter-btn active-filter px-4 py-2 text-xs uppercase tracking-wider font-semibold border border-gold bg-gold text-white transition-all" data-filter="all" data-i18n="filter_all">All</button>
+            <div class="flex flex-wrap items-center gap-2" id="filter-bar">
+                <button class="filter-btn px-4 py-2 text-xs uppercase tracking-wider font-semibold border border-gold bg-gold text-white transition-all" data-filter="all" data-i18n="filter_all">All</button>
                 <button class="filter-btn px-4 py-2 text-xs uppercase tracking-wider font-semibold border border-gold/40 hover:border-gold hover:text-gold transition-all" data-filter="classic" data-i18n="filter_classic">Classic Black</button>
                 <button class="filter-btn px-4 py-2 text-xs uppercase tracking-wider font-semibold border border-gold/40 hover:border-gold hover:text-gold transition-all" data-filter="embroidered" data-i18n="filter_embroidered">Embroidered</button>
                 <button class="filter-btn px-4 py-2 text-xs uppercase tracking-wider font-semibold border border-gold/40 hover:border-gold hover:text-gold transition-all" data-filter="pastel" data-i18n="filter_pastel">Pastel</button>
@@ -165,20 +132,15 @@
             </div>
         </div>
 
-        <!-- Product Grid -->
-        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-t border-l border-gold/30 bg-white shadow-sm">
-            <!-- Products loaded dynamically -->
-        </div>
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-t border-l border-gold/30 bg-white shadow-sm"></div>
     </section>
 
-    <!-- Wholesale / Bulk Discount Banner -->
+    <!-- Bulk banner -->
     <section class="bg-charcoal text-cream border-y border-gold/30 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
                 <div class="flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-full bg-gold/20 text-gold flex items-center justify-center text-lg shrink-0">
-                        <i class="fa-solid fa-tags"></i>
-                    </span>
+                    <span class="w-10 h-10 rounded-full bg-gold/20 text-gold flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-tags"></i></span>
                     <div>
                         <h3 class="font-serif font-bold text-base sm:text-lg text-gold" data-i18n="bulk_title">Automatic Bulk & Wholesale Discounts</h3>
                         <p class="text-xs text-cream/75" data-i18n="bulk_desc">Discounts apply automatically in your shopping bag based on quantity:</p>
@@ -202,53 +164,41 @@
         </div>
     </section>
 
-    <!-- BUYER PROTECTION SECTION -->
+    <!-- BUYER PROTECTION -->
     <section id="protection" class="bg-creamDark/60 border-b border-gold/20 py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-14">
                 <span class="text-gold uppercase tracking-[0.2em] text-xs font-bold block mb-2" data-i18n="bp_sub">Shop With Confidence</span>
                 <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-4" data-i18n="bp_title">Buyer Protection Guarantee</h2>
                 <div class="w-16 h-0.5 bg-gold mx-auto mb-4"></div>
-                <p class="text-charcoal/70 text-sm" data-i18n="bp_desc">Your payment and garment quality are 100% protected when you order from Miran Abayas.</p>
+                <p class="text-charcoal/70 text-sm" data-i18n="bp_desc">Your payment and garment quality are protected when you order from Miran Abayas.</p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
-                    <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-rotate-left"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp1_title">100% Return Guarantee</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp1_desc">If the delivered abaya differs from the photo or has any defect, your deposit is refunded or exchanged immediately.</p>
+                    <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-rotate-left"></i></div>
+                    <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp1_title">Return Guarantee</h3>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp1_desc"></p>
                 </div>
-
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
-                    <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-hand-holding-dollar"></i>
-                    </div>
+                    <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-hand-holding-dollar"></i></div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp2_title">Inspect Before Final Pay</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp2_desc">Addis Ababa customers pay only 50% deposit upfront and pay the remaining 50% after inspecting the abaya upon delivery.</p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp2_desc"></p>
                 </div>
-
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
-                    <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-video"></i>
-                    </div>
+                    <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-video"></i></div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp3_title">Live Video Verification</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp3_desc">Want to check fabric texture before paying? Message Admin (@mame15) on Telegram for a live close-up video.</p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp3_desc"></p>
                 </div>
-
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
-                    <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-user-shield"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp4_title">Verified Delivery</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp4_desc">Every order is personally supervised by Miran Admin and delivered safely on schedule.</p>
+                    <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp4_title">Supervised Delivery</h3>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp4_desc"></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CUSTOMER REVIEWS -->
+    <!-- REVIEWS (rendered from REVIEWS array in the script) -->
     <section id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="text-center max-w-2xl mx-auto mb-14">
             <span class="text-gold uppercase tracking-[0.2em] text-xs font-bold block mb-2" data-i18n="rev_sub">Testimonials</span>
@@ -256,50 +206,7 @@
             <div class="w-16 h-0.5 bg-gold mx-auto mb-4"></div>
             <p class="text-charcoal/70 text-sm" data-i18n="rev_desc">What our retail and wholesale buyers say about Miran fabric quality and service.</p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-7 border border-gold/20 shadow-sm">
-                <div class="flex text-gold text-xs mb-3">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">"ጨርቁ በጣም ልስልስ ያለ ኦሪጅናል ኒዳ ነው። ፎቶው ላይ ካየሁት በላይ ሲለበስ በጣም ያምራል! ቦሌ ድረስ በሰዓቱ ስላደረሳችሁልኝ አመሰግናለሁ።"</p>
-                <div class="flex items-center justify-between border-t border-gold/10 pt-4">
-                    <div>
-                        <h4 class="font-serif font-bold text-sm">ሰሚራ አህመድ (Semira A.)</h4>
-                        <span class="text-[11px] text-charcoal/50">Bole, Addis Ababa</span>
-                    </div>
-                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full"><i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer</span>
-                </div>
-            </div>
-
-            <div class="bg-white p-7 border border-gold/20 shadow-sm">
-                <div class="flex text-gold text-xs mb-3">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">"ለሱቄ 6 አባያዎችን በብዛት አዝዤ 15% ቅናሽ አግኝቻለሁ። ጥልፉ እና ስፌቱ እጅግ በጣም ጥራት ያለው ነው፤ ደንበኞቼ በጣም ወደውታል።"</p>
-                <div class="flex items-center justify-between border-t border-gold/10 pt-4">
-                    <div>
-                        <h4 class="font-serif font-bold text-sm">ሀናን መሀመድ (Hanan M.)</h4>
-                        <span class="text-[11px] text-charcoal/50">Adama (Wholesale Buyer)</span>
-                    </div>
-                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full"><i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer</span>
-                </div>
-            </div>
-
-            <div class="bg-white p-7 border border-gold/20 shadow-sm">
-                <div class="flex text-gold text-xs mb-3">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">"በቴሌግራም አናግሬያቸው ቪዲዮ አሳይተውኝ ነው ያዘዝኩት። 50% ቀብድ ከፍዬ ሲደርሰኝ ቀሪውን ከፈልኩ—በጣም ታማኝ እና ፈጣን ናችሁ!"</p>
-                <div class="flex items-center justify-between border-t border-gold/10 pt-4">
-                    <div>
-                        <h4 class="font-serif font-bold text-sm">መርየም ዩሱፍ (Meryem Y.)</h4>
-                        <span class="text-[11px] text-charcoal/50">CMC, Addis Ababa</span>
-                    </div>
-                    <span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full"><i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer</span>
-                </div>
-            </div>
-        </div>
+        <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
     </section>
 
     <!-- SIZE GUIDE -->
@@ -309,50 +216,24 @@
                 <span class="text-gold uppercase tracking-[0.2em] text-xs font-bold block mb-2" data-i18n="sg_sub">Perfect Fit</span>
                 <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-4" data-i18n="sg_title">Size & Length Guide</h2>
                 <div class="w-16 h-0.5 bg-gold mx-auto mb-6"></div>
-                <p class="text-charcoal/70 text-sm" data-i18n="sg_desc">All Miran abayas are cut with a relaxed, modest silhouette. Use your height to determine your ideal length.</p>
+                <p class="text-charcoal/70 text-sm" data-i18n="sg_desc"></p>
             </div>
-
             <div class="overflow-x-auto shadow-xl bg-cream border border-gold/20">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-charcoal text-cream uppercase text-xs tracking-wider">
-                            <th class="py-4 px-6 font-semibold" data-i18n="sg_col1">Size Designation</th>
+                            <th class="py-4 px-6 font-semibold" data-i18n="sg_col1">Size</th>
                             <th class="py-4 px-6 font-semibold" data-i18n="sg_col2">Recommended Height</th>
                             <th class="py-4 px-6 font-semibold" data-i18n="sg_col3">Chest / Bust Width</th>
                             <th class="py-4 px-6 font-semibold" data-i18n="sg_col4">Abaya Length</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gold/10 text-sm">
-                        <tr class="hover:bg-gold/5">
-                            <td class="py-4 px-6 font-bold font-serif text-gold">52 (Small)</td>
-                            <td class="py-4 px-6">150 cm - 155 cm (4'11" - 5'1")</td>
-                            <td class="py-4 px-6">20 inches (50 cm)</td>
-                            <td class="py-4 px-6">52 inches (132 cm)</td>
-                        </tr>
-                        <tr class="hover:bg-gold/5">
-                            <td class="py-4 px-6 font-bold font-serif text-gold">54 (Medium)</td>
-                            <td class="py-4 px-6">156 cm - 162 cm (5'2" - 5'4")</td>
-                            <td class="py-4 px-6">22 inches (56 cm)</td>
-                            <td class="py-4 px-6">54 inches (137 cm)</td>
-                        </tr>
-                        <tr class="hover:bg-gold/5">
-                            <td class="py-4 px-6 font-bold font-serif text-gold">56 (Large)</td>
-                            <td class="py-4 px-6">163 cm - 168 cm (5'5" - 5'6")</td>
-                            <td class="py-4 px-6">24 inches (61 cm)</td>
-                            <td class="py-4 px-6">56 inches (142 cm)</td>
-                        </tr>
-                        <tr class="hover:bg-gold/5">
-                            <td class="py-4 px-6 font-bold font-serif text-gold">58 (X-Large)</td>
-                            <td class="py-4 px-6">169 cm - 175 cm (5'7" - 5'9")</td>
-                            <td class="py-4 px-6">26 inches (66 cm)</td>
-                            <td class="py-4 px-6">58 inches (147 cm)</td>
-                        </tr>
-                        <tr class="hover:bg-gold/5">
-                            <td class="py-4 px-6 font-bold font-serif text-gold">60 (XX-Large)</td>
-                            <td class="py-4 px-6">176 cm + (5'10" and above)</td>
-                            <td class="py-4 px-6">28 inches (71 cm)</td>
-                            <td class="py-4 px-6">60 inches (152 cm)</td>
-                        </tr>
+                        <tr class="hover:bg-gold/5"><td class="py-4 px-6 font-bold font-serif text-gold">52 (Small)</td><td class="py-4 px-6">150 cm - 155 cm (4'11" - 5'1")</td><td class="py-4 px-6">20 in (50 cm)</td><td class="py-4 px-6">52 in (132 cm)</td></tr>
+                        <tr class="hover:bg-gold/5"><td class="py-4 px-6 font-bold font-serif text-gold">54 (Medium)</td><td class="py-4 px-6">156 cm - 162 cm (5'2" - 5'4")</td><td class="py-4 px-6">22 in (56 cm)</td><td class="py-4 px-6">54 in (137 cm)</td></tr>
+                        <tr class="hover:bg-gold/5"><td class="py-4 px-6 font-bold font-serif text-gold">56 (Large)</td><td class="py-4 px-6">163 cm - 168 cm (5'5" - 5'6")</td><td class="py-4 px-6">24 in (61 cm)</td><td class="py-4 px-6">56 in (142 cm)</td></tr>
+                        <tr class="hover:bg-gold/5"><td class="py-4 px-6 font-bold font-serif text-gold">58 (X-Large)</td><td class="py-4 px-6">169 cm - 175 cm (5'7" - 5'9")</td><td class="py-4 px-6">26 in (66 cm)</td><td class="py-4 px-6">58 in (147 cm)</td></tr>
+                        <tr class="hover:bg-gold/5"><td class="py-4 px-6 font-bold font-serif text-gold">60 (XX-Large)</td><td class="py-4 px-6">176 cm + (5'10"+)</td><td class="py-4 px-6">28 in (71 cm)</td><td class="py-4 px-6">60 in (152 cm)</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -364,29 +245,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-cream/10">
             <div class="md:col-span-2 space-y-4">
                 <a href="#" class="flex flex-col items-start select-none">
-                    <span class="font-serif text-3xl tracking-[0.2em] font-bold text-cream uppercase">
-                        Miran<span class="text-gold">.</span>
-                    </span>
+                    <span class="font-serif text-3xl tracking-[0.2em] font-bold text-cream uppercase">Miran<span class="text-gold">.</span></span>
                     <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-semibold -mt-1">Luxury Abayas</span>
                 </a>
-                <p class="text-cream/70 text-sm max-w-md leading-relaxed" data-i18n="footer_desc">Luxury modest fashion curated for elegance and comfort. Retail & Wholesale orders delivered across Addis Ababa, regional Ethiopia, and worldwide.</p>
+                <p class="text-cream/70 text-sm max-w-md leading-relaxed" data-i18n="footer_desc"></p>
                 <div class="flex space-x-4 pt-2">
-                    <a href="https://t.me/mame15" target="_blank" class="px-4 py-2 rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-white transition-colors text-xs font-bold flex items-center gap-2">
+                    <a href="https://t.me/mame15" target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-white transition-colors text-xs font-bold flex items-center gap-2">
                         <i class="fa-brands fa-telegram text-base"></i> @mame15
                     </a>
                 </div>
             </div>
-
             <div>
                 <h4 class="font-serif text-lg font-bold text-gold mb-4" data-i18n="footer_links">Quick Links</h4>
                 <ul class="space-y-2.5 text-sm text-cream/70">
-                    <li><a href="#collection" class="hover:text-gold transition-colors" data-i18n="nav_collection">Abaya Collection</a></li>
-                    <li><a href="#protection" class="hover:text-gold transition-colors" data-i18n="nav_guarantee">Buyer Protection</a></li>
-                    <li><a href="#reviews" class="hover:text-gold transition-colors" data-i18n="nav_reviews">Customer Reviews</a></li>
+                    <li><a href="#collection" class="hover:text-gold transition-colors" data-i18n="fl_collection">Abaya Collection</a></li>
+                    <li><a href="#protection" class="hover:text-gold transition-colors" data-i18n="fl_protection">Buyer Protection</a></li>
+                    <li><a href="#reviews" class="hover:text-gold transition-colors" data-i18n="fl_reviews">Customer Reviews</a></li>
                     <li><a href="#size-guide" class="hover:text-gold transition-colors" data-i18n="nav_size">Size Guide</a></li>
                 </ul>
             </div>
-
             <div>
                 <h4 class="font-serif text-lg font-bold text-gold mb-4" data-i18n="footer_pay">Payment Accounts</h4>
                 <ul class="space-y-2.5 text-sm text-cream/70">
@@ -396,16 +273,18 @@
                 </ul>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 text-center text-xs text-cream/50">
-            &copy; 2026 Miran Luxury Abayas. All Rights Reserved.
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-cream/50">
+            <span>&copy; 2026 Miran Luxury Abayas. All Rights Reserved.</span>
+            <!-- Vendor login lives here, not in front of customers -->
+            <button id="vendor-login-btn" class="text-cream/30 hover:text-gold transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-lock text-[10px]"></i> <span data-i18n="vendor_login">Vendor login</span>
+            </button>
         </div>
     </footer>
 
-    <!-- Floating Contact Admin Button -->
-    <a href="https://t.me/mame15" target="_blank" class="fixed bottom-5 right-5 z-40 bg-charcoal hover:bg-gold text-cream border border-gold/50 px-4 py-3 rounded-full shadow-2xl flex items-center gap-2.5 transition-all duration-300">
-        <span class="w-8 h-8 rounded-full bg-[#229ED9] flex items-center justify-center text-white">
-            <i class="fa-brands fa-telegram text-lg"></i>
-        </span>
+    <!-- Floating Contact -->
+    <a href="https://t.me/mame15" target="_blank" rel="noopener" class="fixed bottom-5 right-5 z-30 bg-charcoal hover:bg-gold text-cream border border-gold/50 px-4 py-3 rounded-full shadow-2xl flex items-center gap-2.5 transition-all duration-300">
+        <span class="w-8 h-8 rounded-full bg-[#229ED9] flex items-center justify-center text-white"><i class="fa-brands fa-telegram text-lg"></i></span>
         <div class="text-left pr-1">
             <span class="block text-[10px] uppercase tracking-wider text-gold font-bold leading-none" data-i18n="chat_help">Need Help?</span>
             <span class="block text-xs font-semibold" data-i18n="chat_admin">Chat with Admin</span>
@@ -415,36 +294,36 @@
     <!-- VENDOR / ADMIN MODAL -->
     <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-charcoal/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-cream max-w-xl w-full border border-gold/40 shadow-2xl p-6 sm:p-8 relative my-8 max-h-[92vh] overflow-y-auto">
-            <button id="close-admin-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center text-charcoal hover:bg-gold hover:text-white transition-colors">
+            <button id="close-admin-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition-colors" aria-label="Close">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="mb-5">
-                <span id="vendor-email-badge" class="text-xs uppercase tracking-widest text-gold font-bold">Verified Vendor</span>
-                <h3 class="font-serif text-2xl font-bold mt-1">አዲስ አባያ እና ከለሮቹን መጫኛ</h3>
-                <p class="text-xs text-charcoal/60 mt-1">የሚጭኑት አባያ ለሁሉም ደንበኞች በስልካቸው ላይ ወዲያውኑ ይታያል።</p>
+                <span class="text-xs uppercase tracking-widest text-gold font-bold">Verified Vendor</span>
+                <h3 class="font-serif text-2xl font-bold mt-1" data-i18n="adm_title">Add a new abaya</h3>
+                <p class="text-xs text-charcoal/60 mt-1" data-i18n="adm_sub">Everything you publish is visible to all customers right away.</p>
             </div>
 
             <form id="add-product-form" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1.5">1. ዋና የአባያ ፎቶ (Main Photo) *</label>
-                    <label for="new-product-photo" class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-gold/50 hover:border-gold bg-white cursor-pointer transition-colors overflow-hidden relative">
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1.5" data-i18n="adm_photo">1. Main photo *</label>
+                    <label for="new-product-photo" class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-gold/50 hover:border-gold bg-white cursor-pointer overflow-hidden relative">
                         <div id="upload-placeholder" class="flex flex-col items-center justify-center pt-4 pb-5 text-center px-4">
                             <i class="fa-solid fa-cloud-arrow-up text-2xl text-gold mb-1.5"></i>
-                            <p class="text-xs font-semibold text-charcoal">ዋናውን ፎቶ ለመምረጥ እዚህ ይጫኑ (Tap to Upload)</p>
+                            <p class="text-xs font-semibold" data-i18n="adm_tap">Tap to upload</p>
                         </div>
                         <img id="photo-preview" src="" alt="Preview" class="hidden w-full h-full object-contain bg-creamDark">
-                        <input id="new-product-photo" type="file" accept="image/*" class="hidden" required>
+                        <input id="new-product-photo" type="file" accept="image/*" class="hidden">
                     </label>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1">2. የአባያው ስም (Abaya Name) *</label>
-                    <input type="text" id="new-product-name" placeholder="ለምሳሌ: Royal Nidah Abaya" required class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1" data-i18n="adm_name">2. Abaya name *</label>
+                    <input type="text" id="new-product-name" maxlength="80" required class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider mb-1">3. ምድብ (Category) *</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-1" data-i18n="adm_cat">3. Category *</label>
                         <select id="new-product-category" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
                             <option value="classic">Classic Black</option>
                             <option value="embroidered">Embroidered</option>
@@ -453,73 +332,70 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider mb-1">4. የሰጡት ዋጋ (ETB) *</label>
-                        <input type="number" id="new-product-price" placeholder="ለምሳሌ: 4000" required class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-1" data-i18n="adm_price">4. Your price (ETB) *</label>
+                        <input type="number" id="new-product-price" min="1" required class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
                     </div>
                 </div>
+                <p id="price-preview" class="text-[11px] text-goldDark font-semibold -mt-2"></p>
 
-                <!-- Color Variants Uploader -->
                 <div class="bg-white p-3.5 border border-gold/40 space-y-3">
                     <div class="flex items-center justify-between">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-charcoal">5. የከለር አይነቶችን ይጫኑ (Color Variants)</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider" data-i18n="adm_colors">5. Color variants</label>
                         <button type="button" id="add-color-variant-btn" class="bg-charcoal hover:bg-gold text-white px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider transition-colors">
-                            <i class="fa-solid fa-plus mr-1"></i> ከለር ጨምር
+                            <i class="fa-solid fa-plus mr-1"></i> <span data-i18n="adm_add_color">Add color</span>
                         </button>
                     </div>
-                    <p class="text-[11px] text-charcoal/60">የእያንዳንዱን ከለር ስም ይጻፉ፣ ቀለሙን ይምረጡ እና የዛን ከለር ፎቶ አብረው ይጫኑ።</p>
+                    <p class="text-[11px] text-charcoal/60" data-i18n="adm_colors_hint">Name each color, pick its shade and upload that color's photo.</p>
                     <div id="color-variants-container" class="space-y-2.5"></div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1">6. የጨርቅ አይነት (Fabric)</label>
-                    <input type="text" id="new-product-fabric" placeholder="ለምሳሌ: Korean Zoom Nidah" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1" data-i18n="adm_fabric">6. Fabric</label>
+                    <input type="text" id="new-product-fabric" maxlength="80" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold">
                 </div>
-
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1">7. ተጨማሪ መግለጫ (Description)</label>
-                    <textarea id="new-product-desc" rows="2" placeholder="ስለ አባያው አጭር መግለጫ..." class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold"></textarea>
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1" data-i18n="adm_desc">7. Description</label>
+                    <textarea id="new-product-desc" rows="2" maxlength="400" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm focus:outline-none focus:border-gold"></textarea>
                 </div>
 
-                <div class="pt-2 flex gap-2">
-                    <button type="submit" id="save-abaya-submit-btn" class="flex-1 bg-gold hover:bg-goldDark text-white py-3 text-xs uppercase tracking-widest font-bold transition-colors shadow-md">
-                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish Abaya Online
+                <div class="pt-2">
+                    <button type="submit" id="save-abaya-submit-btn" class="w-full bg-gold hover:bg-goldDark disabled:opacity-60 text-white py-3 text-xs uppercase tracking-widest font-bold transition-colors shadow-md">
+                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> <span data-i18n="adm_publish">Publish abaya</span>
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Quick View / Modal -->
+    <!-- Product modal -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden bg-charcoal/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-cream max-w-2xl w-full border border-gold/30 shadow-2xl overflow-hidden relative my-8">
-            <button id="close-modal-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center text-charcoal hover:bg-gold hover:text-white transition-colors z-10">
+            <button id="close-modal-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition-colors z-10" aria-label="Close">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class="bg-creamDark flex items-center justify-center p-4 min-h-[320px] max-h-[480px] relative">
-                    <img id="modal-img" src="" alt="Abaya" class="max-h-[440px] w-auto object-contain shadow-sm transition-all duration-300">
+                    <img id="modal-img" src="" alt="" class="max-h-[440px] w-auto object-contain shadow-sm">
                     <span id="modal-img-color-badge" class="absolute bottom-3 left-3 bg-charcoal/85 text-cream text-[10px] uppercase tracking-wider px-2.5 py-1"></span>
                 </div>
                 <div class="p-6 sm:p-7 flex flex-col justify-between">
                     <div>
                         <span id="modal-category" class="text-xs uppercase tracking-widest text-gold font-bold"></span>
                         <h3 id="modal-title" class="font-serif text-2xl font-bold mt-1 mb-1"></h3>
-                        <p id="modal-price" class="text-lg font-semibold text-charcoal mb-2"></p>
+                        <p id="modal-price" class="text-lg font-semibold mb-2"></p>
                         <p id="modal-desc" class="text-xs text-charcoal/70 leading-relaxed mb-4"></p>
 
-                        <!-- Color Selector -->
                         <div class="mb-4">
                             <label class="block text-xs uppercase tracking-wider font-bold mb-1.5">
-                                <span data-i18n="modal_color">1. Select Color:</span> <span id="selected-color-label" class="text-goldDark normal-case font-semibold">Default</span>
+                                <span data-i18n="modal_color">1. Select Color:</span> <span id="selected-color-label" class="text-goldDark normal-case font-semibold"></span>
                             </label>
                             <div id="modal-color-options" class="flex flex-wrap gap-2"></div>
                         </div>
 
-                        <!-- Size Selector -->
                         <div class="mb-4">
                             <div class="flex justify-between items-center mb-1.5">
                                 <label class="text-xs uppercase tracking-wider font-bold" data-i18n="modal_size">2. Select Length (Size):</label>
-                                <a href="#size-guide" onclick="closeModal()" class="text-[11px] text-gold underline" data-i18n="nav_size">Size Guide</a>
+                                <a href="#size-guide" id="modal-size-guide-link" class="text-[11px] text-gold underline" data-i18n="nav_size">Size Guide</a>
                             </div>
                             <div class="grid grid-cols-5 gap-2" id="size-options">
                                 <button type="button" class="size-btn border border-gold bg-gold text-white py-2 text-xs font-bold" data-size="52">52</button>
@@ -530,30 +406,26 @@
                             </div>
                         </div>
 
-                        <!-- Quantity Selector -->
                         <div class="mb-5">
-                            <label class="block text-xs uppercase tracking-wider font-bold mb-1.5" data-i18n="modal_qty">3. Quantity:</label>
+                            <label class="block text-xs uppercase tracking-wider font-bold mb-1.5" for="modal-qty" data-i18n="modal_qty">3. Quantity:</label>
                             <div class="flex items-center gap-3">
                                 <div class="flex items-center border border-gold/40 bg-white">
-                                    <button type="button" id="qty-minus" class="px-3 py-1.5 text-sm font-bold hover:bg-gold hover:text-white transition-colors">-</button>
+                                    <button type="button" id="qty-minus" class="px-3 py-1.5 text-sm font-bold hover:bg-gold hover:text-white transition-colors" aria-label="Decrease">-</button>
                                     <input type="number" id="modal-qty" value="1" min="1" max="100" class="w-12 text-center text-xs font-bold focus:outline-none">
-                                    <button type="button" id="qty-plus" class="px-3 py-1.5 text-sm font-bold hover:bg-gold hover:text-white transition-colors">+</button>
+                                    <button type="button" id="qty-plus" class="px-3 py-1.5 text-sm font-bold hover:bg-gold hover:text-white transition-colors" aria-label="Increase">+</button>
                                 </div>
-                                <span id="modal-bulk-hint" class="text-[11px] text-goldDark font-semibold">3+ pcs = 10% OFF!</span>
+                                <span id="modal-bulk-hint" class="text-[11px] text-goldDark font-semibold"></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="space-y-2">
-                        <button id="modal-add-to-cart" class="w-full bg-charcoal hover:bg-gold text-white py-3.5 text-xs uppercase tracking-widest font-bold transition-colors" data-i18n="btn_order_now">
-                            Order Now / Add to Bag
-                        </button>
-                        <a href="https://t.me/mame15" target="_blank" class="w-full border border-gold/40 hover:border-gold text-charcoal py-2 text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 transition-colors">
+                        <button id="modal-add-to-cart" class="w-full bg-charcoal hover:bg-gold text-white py-3.5 text-xs uppercase tracking-widest font-bold transition-colors" data-i18n="btn_order_now">Order Now / Add to Bag</button>
+                        <a href="https://t.me/mame15" target="_blank" rel="noopener" class="w-full border border-gold/40 hover:border-gold py-2 text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 transition-colors">
                             <i class="fa-brands fa-telegram text-[#229ED9]"></i> <span data-i18n="btn_ask_admin">Ask Admin About Colors/Sizes</span>
                         </a>
-                        <!-- Delete button -->
                         <button id="modal-delete-product" class="hidden w-full border border-red-300 text-red-600 hover:bg-red-50 py-1.5 text-[11px] uppercase tracking-wider font-semibold transition-colors">
-                            <i class="fa-solid fa-trash-can mr-1"></i> Delete This Product
+                            <i class="fa-solid fa-trash-can mr-1"></i> <span data-i18n="btn_delete">Delete This Product</span>
                         </button>
                     </div>
                 </div>
@@ -561,54 +433,37 @@
         </div>
     </div>
 
-    <!-- Slide-Out Shopping Cart & Payment Drawer -->
+    <!-- Cart drawer -->
     <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
-        <div id="cart-overlay" class="absolute inset-0 bg-charcoal/60 backdrop-blur-xs"></div>
+        <div id="cart-overlay" class="absolute inset-0 bg-charcoal/60 backdrop-blur-sm"></div>
         <div class="absolute top-0 right-0 w-full max-w-md h-full bg-cream shadow-2xl flex flex-col justify-between border-l border-gold/20 overflow-y-auto">
             <div class="p-5 border-b border-gold/20 flex items-center justify-between bg-creamDark/40 sticky top-0 z-10">
                 <div>
                     <h3 class="font-serif text-xl font-bold" data-i18n="cart_title">Shopping Bag & Payment</h3>
-                    <span id="bulk-tier-badge" class="text-[11px] text-goldDark font-bold">Add 3+ items for 10% bulk discount</span>
+                    <span id="bulk-tier-badge" class="text-[11px] text-goldDark font-bold"></span>
                 </div>
-                <button id="close-cart-btn" class="text-charcoal hover:text-gold text-lg">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <button id="close-cart-btn" class="hover:text-gold text-lg" aria-label="Close bag"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <div id="cart-items" class="p-5 space-y-3 border-b border-gold/15">
-                <p class="text-center text-charcoal/50 text-sm py-8" data-i18n="cart_empty">Your shopping bag is currently empty.</p>
-            </div>
+            <div id="cart-items" class="p-5 space-y-3 border-b border-gold/15"></div>
 
             <div class="p-5 bg-creamDark/25 space-y-4">
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1.5" data-i18n="cart_loc_label">1. Delivery Location *</label>
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1.5" for="location-type" data-i18n="cart_loc_label">1. Delivery Location *</label>
                     <select id="location-type" class="w-full bg-white border border-gold/40 px-3 py-2.5 text-xs font-semibold focus:outline-none focus:border-gold">
-                        <option value="addis">አዲስ አበባ ውስጥ (Addis Ababa) — 50% ቀብድ (Deposit)</option>
-                        <option value="outside">ከአዲስ አበባ ውጪ / ሌላ ሀገር (Regional / Abroad) — 100% ሙሉ ክፍያ</option>
+                        <option value="addis" data-i18n="loc_addis">Addis Ababa — 50% deposit</option>
+                        <option value="outside" data-i18n="loc_outside">Outside Addis / Abroad — 100% payment</option>
                     </select>
                 </div>
 
                 <div class="bg-white p-3.5 border border-gold/25 space-y-2 text-xs">
-                    <div class="flex justify-between">
-                        <span class="text-charcoal/70" data-i18n="cart_sub">Subtotal:</span>
-                        <span id="cart-subtotal" class="font-semibold">0 ETB</span>
-                    </div>
-                    <div id="discount-row" class="hidden flex justify-between text-green-700 font-bold">
-                        <span id="discount-label">Bulk Discount:</span>
-                        <span id="discount-amount">- 0 ETB</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-charcoal/70" data-i18n="cart_del">Delivery Fee:</span>
-                        <span id="delivery-fee" class="font-semibold">200 ETB</span>
-                    </div>
-                    <div class="flex justify-between font-bold text-sm border-t border-gold/15 pt-2">
-                        <span data-i18n="cart_grand">Grand Total:</span>
-                        <span id="cart-total">0 ETB</span>
-                    </div>
-                    
-                    <div class="bg-gold/15 border border-gold/40 p-2.5 mt-2 rounded-xs">
-                        <div class="flex justify-between items-center font-bold text-charcoal">
-                            <span id="pay-now-label">Required Deposit (50%):</span>
+                    <div class="flex justify-between"><span class="text-charcoal/70" data-i18n="cart_sub">Subtotal:</span><span id="cart-subtotal" class="font-semibold">0 ETB</span></div>
+                    <div id="discount-row" class="hidden flex justify-between text-green-700 font-bold"><span id="discount-label"></span><span id="discount-amount"></span></div>
+                    <div class="flex justify-between"><span class="text-charcoal/70" data-i18n="cart_del">Delivery Fee:</span><span id="delivery-fee" class="font-semibold">0 ETB</span></div>
+                    <div class="flex justify-between font-bold text-sm border-t border-gold/15 pt-2"><span data-i18n="cart_grand">Grand Total:</span><span id="cart-total">0 ETB</span></div>
+                    <div class="bg-gold/15 border border-gold/40 p-2.5 mt-2">
+                        <div class="flex justify-between items-center font-bold">
+                            <span id="pay-now-label"></span>
                             <span id="pay-now-amount" class="text-base font-serif text-goldDark">0 ETB</span>
                         </div>
                         <div id="balance-row" class="flex justify-between items-center text-[11px] text-charcoal/70 mt-1">
@@ -621,31 +476,27 @@
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider mb-1.5" data-i18n="cart_pay_method">2. Payment Method</label>
                     <div class="grid grid-cols-2 gap-2 mb-2">
-                        <button type="button" id="pay-telebirr-btn" class="pay-method-btn border border-gold bg-gold text-white py-2 text-xs font-bold flex items-center justify-center gap-1.5">
-                            <i class="fa-solid fa-mobile-screen"></i> Telebirr
-                        </button>
-                        <button type="button" id="pay-cbe-btn" class="pay-method-btn border border-gold/40 bg-white text-charcoal py-2 text-xs font-bold flex items-center justify-center gap-1.5">
-                            <i class="fa-solid fa-building-columns"></i> CBE Bank
-                        </button>
+                        <button type="button" id="pay-telebirr-btn" class="border border-gold bg-gold text-white py-2 text-xs font-bold flex items-center justify-center gap-1.5"><i class="fa-solid fa-mobile-screen"></i> Telebirr</button>
+                        <button type="button" id="pay-cbe-btn" class="border border-gold/40 bg-white text-charcoal py-2 text-xs font-bold flex items-center justify-center gap-1.5"><i class="fa-solid fa-building-columns"></i> CBE Bank</button>
                     </div>
-
                     <div class="bg-charcoal text-cream p-3 text-xs flex items-center justify-between">
                         <div>
-                            <span id="account-label" class="block text-[10px] uppercase tracking-wider text-gold">Telebirr Number:</span>
-                            <span id="account-number" class="font-mono text-sm font-bold tracking-wider">0993001097</span>
+                            <span id="account-label" class="block text-[10px] uppercase tracking-wider text-gold"></span>
+                            <span id="account-number" class="font-mono text-sm font-bold tracking-wider"></span>
                         </div>
                         <button type="button" id="copy-account-btn" class="bg-gold/20 hover:bg-gold text-gold hover:text-white border border-gold/40 px-2.5 py-1.5 text-[11px] font-bold transition-colors">
-                            <i class="fa-regular fa-copy mr-1"></i> Copy
+                            <i class="fa-regular fa-copy mr-1"></i> <span data-i18n="btn_copy">Copy</span>
                         </button>
                     </div>
+                    <p class="text-[11px] text-charcoal/60 mt-2" data-i18n="pay_name_hint">Before paying, check that the account name shown in your banking app matches our admin.</p>
                 </div>
 
                 <div class="space-y-2">
                     <label class="block text-xs font-bold uppercase tracking-wider" data-i18n="cart_cust_info">3. Your Details & Receipt Ref</label>
-                    <input type="text" id="customer-name" placeholder="Full Name / ሙሉ ስምዎ *" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs focus:outline-none focus:border-gold">
-                    <input type="tel" id="customer-phone" placeholder="Phone Number / ስልክ ቁጥርዎ *" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs focus:outline-none focus:border-gold">
-                    <input type="text" id="customer-address" placeholder="Exact Address / ትክክለኛ አድራሻ *" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs focus:outline-none focus:border-gold">
-                    <input type="text" id="transaction-ref" placeholder="Transaction ID / የክፍያ ደረሰኝ ቁጥር" class="w-full bg-white border border-gold/50 px-3 py-2 text-xs focus:outline-none focus:border-gold">
+                    <input type="text" id="customer-name" data-i18n-ph="ph_name" maxlength="80" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs focus:outline-none focus:border-gold">
+                    <input type="tel" id="customer-phone" data-i18n-ph="ph_phone" maxlength="20" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs focus:outline-none focus:border-gold">
+                    <input type="text" id="customer-address" data-i18n-ph="ph_address" maxlength="160" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs focus:outline-none focus:border-gold">
+                    <input type="text" id="transaction-ref" data-i18n-ph="ph_tx" maxlength="60" class="w-full bg-white border border-gold/50 px-3 py-2 text-xs focus:outline-none focus:border-gold">
                 </div>
 
                 <button id="telegram-checkout-btn" class="w-full bg-[#229ED9] hover:bg-[#1b86b8] text-white py-3.5 text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-colors shadow-md">
@@ -655,17 +506,17 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-20 right-5 z-50 hidden bg-charcoal text-cream border-l-4 border-gold px-5 py-3 shadow-xl text-xs tracking-wide">
-        Notification
-    </div>
+    <div id="toast" class="fixed bottom-20 right-5 z-[60] hidden bg-charcoal text-cream border-l-4 border-gold px-5 py-3 shadow-xl text-xs tracking-wide max-w-[85vw]" role="status"></div>
 
-    <!-- Firebase SDKs & Store Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref as sRef, uploadString, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
+        /* ------------------------------------------------------------------
+           CONFIG
+        ------------------------------------------------------------------ */
         const firebaseConfig = {
             apiKey: "AIzaSyD-tH2Oo_LTgzGn0qW3sEsz8sT6bt8dUsM",
             authDomain: "miran-abaya.firebaseapp.com",
@@ -676,523 +527,609 @@
             measurementId: "G-3FN5X46186"
         };
 
+        // NOTE: this list only controls what the UI shows. The real protection
+        // is in firestore.rules / storage.rules (see rules file). Keep them in sync.
         const SUPER_ADMIN_EMAIL = "muhamedaminosman0@gmail.com";
-        const APPROVED_VENDORS = [
-            "muhamedaminosman0@gmail.com"
+        const APPROVED_VENDORS = ["muhamedaminosman0@gmail.com"].map(e => e.toLowerCase());
+
+        const TELEGRAM_USERNAME = "mame15";
+        const TELEBIRR_NUMBER = "0993001097";
+        const CBE_ACCOUNT = "1000704450568";
+        const VENDOR_MARKUP = 1.10;
+
+        // Replace these with REAL customer reviews. Only entries with verified:true
+        // show the "Verified Buyer" badge. Remove any review that is not genuine.
+        const REVIEWS = [
+            { name: "ሰሚራ አህመድ (Semira A.)", place: "Bole, Addis Ababa", verified: true,
+              text: "ጨርቁ በጣም ልስልስ ያለ ኦሪጅናል ኒዳ ነው። ፎቶው ላይ ካየሁት በላይ ሲለበስ በጣም ያምራል! ቦሌ ድረስ በሰዓቱ ስላደረሳችሁልኝ አመሰግናለሁ።" },
+            { name: "ሀናን መሀመድ (Hanan M.)", place: "Adama (Wholesale Buyer)", verified: true,
+              text: "ለሱቄ 6 አባያዎችን በብዛት አዝዤ 15% ቅናሽ አግኝቻለሁ። ጥልፉ እና ስፌቱ እጅግ በጣም ጥራት ያለው ነው፤ ደንበኞቼ በጣም ወደውታል።" },
+            { name: "መርየም ዩሱፍ (Meryem Y.)", place: "CMC, Addis Ababa", verified: true,
+              text: "በቴሌግራም አናግሬያቸው ቪዲዮ አሳይተውኝ ነው ያዘዝኩት። 50% ቀብድ ከፍዬ ሲደርሰኝ ቀሪውን ከፈልኩ—በጣም ታማኝ እና ፈጣን ናችሁ!" }
         ];
 
+        /* ------------------------------------------------------------------
+           HELPERS
+        ------------------------------------------------------------------ */
+        const $ = id => document.getElementById(id);
+        const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const safeHex = h => /^#[0-9a-f]{6}$/i.test(h || '') ? h : '#1A1A1A';
+        const safeUrl = u => /^(https:\/\/|data:image\/)/i.test(u || '') ? u : '';
+        const money = n => `${Number(n).toLocaleString()} ETB`;
+        const store = {
+            get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+            set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* quota / private mode */ } }
+        };
+
+        let toastTimer;
+        function showToast(msg) {
+            const toast = $('toast');
+            toast.textContent = msg;
+            toast.classList.remove('hidden');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.add('hidden'), 3500);
+        }
+
+        /* ------------------------------------------------------------------
+           TRANSLATIONS
+        ------------------------------------------------------------------ */
+        const translations = {
+            en: {
+                top_bar: "Bulk Discount: 3+ pcs (10% OFF) | 5+ pcs (15% OFF) | 10+ pcs (20% OFF) • Addis: 50% Deposit | Outside: 100%",
+                nav_collection: "Collection", nav_guarantee: "Guarantee", nav_reviews: "Reviews", nav_size: "Size Guide",
+                btn_add_abaya: "Add Abaya", catalog_subtitle: "Miran Luxury Collection 2026", catalog_title: "Abaya Catalog",
+                filter_all: "All", filter_classic: "Classic Black", filter_embroidered: "Embroidered", filter_pastel: "Pastel", filter_kimono: "Kimono",
+                search_ph: "Search abayas (e.g. Black, Navy, Nidah, Embroidered, Kimono)...",
+                bulk_title: "Automatic Bulk & Wholesale Discounts", bulk_desc: "Discounts apply automatically in your shopping bag based on quantity:",
+                bulk_tier1: "3 - 4 pcs", bulk_tier2: "5 - 9 pcs", bulk_tier3: "10+ pcs",
+                bp_sub: "Shop With Confidence", bp_title: "Buyer Protection Guarantee", bp_desc: "Your payment and garment quality are protected when you order from Miran Abayas.",
+                bp1_title: "Return Guarantee", bp1_desc: "If the delivered abaya differs from the photo or has any defect, your deposit is refunded or the abaya is exchanged.",
+                bp2_title: "Inspect Before Final Pay", bp2_desc: "Addis Ababa customers pay only a 50% deposit upfront and pay the remaining 50% after inspecting the abaya on delivery.",
+                bp3_title: "Live Video Verification", bp3_desc: "Want to check the fabric before paying? Message Admin (@mame15) on Telegram for a live close-up video.",
+                bp4_title: "Supervised Delivery", bp4_desc: "Every order is personally supervised by the Miran admin and delivered on schedule.",
+                rev_sub: "Testimonials", rev_title: "Customer Reviews", rev_desc: "What our retail and wholesale buyers say about Miran fabric quality and service.",
+                verified_buyer: "Verified Buyer",
+                sg_sub: "Perfect Fit", sg_title: "Size & Length Guide", sg_desc: "All Miran abayas are cut with a relaxed, modest silhouette. Use your height to find your length.",
+                sg_col1: "Size", sg_col2: "Recommended Height", sg_col3: "Chest / Bust Width", sg_col4: "Abaya Length",
+                footer_desc: "Luxury modest fashion for elegance and comfort. Retail & wholesale orders delivered across Addis Ababa, regional Ethiopia and worldwide.",
+                footer_links: "Quick Links", fl_collection: "Abaya Collection", fl_protection: "Buyer Protection", fl_reviews: "Customer Reviews",
+                footer_pay: "Payment Accounts", chat_help: "Need Help?", chat_admin: "Chat with Admin", vendor_login: "Vendor login",
+                modal_color: "1. Select Color:", modal_size: "2. Select Length (Size):", modal_qty: "3. Quantity:",
+                btn_order_now: "Order Now / Add to Bag", btn_ask_admin: "Ask Admin About Colors/Sizes", btn_delete: "Delete This Product",
+                cart_title: "Shopping Bag & Payment", cart_empty: "Your shopping bag is empty.", cart_loc_label: "1. Delivery Location *",
+                loc_addis: "Addis Ababa — 50% deposit", loc_outside: "Outside Addis / Abroad — 100% payment",
+                cart_sub: "Subtotal:", cart_del: "Delivery Fee:", cart_grand: "Grand Total:", cart_bal: "Balance on Delivery:",
+                cart_pay_method: "2. Payment Method", cart_cust_info: "3. Your Details & Receipt Ref", btn_send_order: "Send Order & Receipt (@mame15)",
+                btn_copy: "Copy", pay_name_hint: "Before paying, check that the account name in your banking app matches our admin.",
+                ph_name: "Full name *", ph_phone: "Phone number *", ph_address: "Exact address *", ph_tx: "Transaction ID",
+                card_order_btn: "Order", colors_n: "{n} Colors", no_results: "No abayas match your search.",
+                color_label: "Color: {c}", per_pc: "/ pc",
+                hint0: "3+ pcs = 10% OFF | 5+ = 15% | 10+ = 20%", hint10: "20% wholesale discount applied!", hint15: "15% bulk discount applied!", hint10p: "10% bulk discount applied!",
+                badge_more: "Add {n} more item(s) to get 10% OFF!", badge_unlocked: "🎉 {p}% bulk discount unlocked!",
+                disc_label: "Bulk Discount ({p}% - {q} pcs):", free: "FREE",
+                dep_label: "Required Deposit (50%):", full_label: "Full Payment Required (100%):",
+                acc_tele: "Telebirr Number:", acc_cbe: "CBE Account Number:", copied: "Copied: {v}",
+                added: "Added {q}x \"{n}\" ({c}, Size {s})",
+                err_cart_empty: "Please add an abaya to your bag first.", err_details: "Please enter your name, phone and address.",
+                err_phone: "Please enter a valid phone number.", order_copied: "Your order was copied. Paste it into the Telegram chat.",
+                adm_title: "Add a new abaya", adm_sub: "Everything you publish is visible to all customers right away.",
+                adm_photo: "1. Main photo *", adm_tap: "Tap to upload", adm_name: "2. Abaya name *", adm_cat: "3. Category *",
+                adm_price: "4. Your price (ETB) *", adm_colors: "5. Color variants", adm_add_color: "Add color",
+                adm_colors_hint: "Name each color, pick its shade and upload that color's photo.",
+                adm_fabric: "6. Fabric", adm_desc: "7. Description", adm_publish: "Publish abaya", publishing: "Publishing...",
+                price_final: "Customers will see: {p} ETB (your price + 10%)", need_photo: "Please choose the main photo first.",
+                published: "\"{n}\" published!", deleted: "Product deleted.", confirm_del: "Delete \"{n}\"?",
+                color_ph: "Color name (e.g. Navy)", photo_btn: "Upload photo", photo_done: "Uploaded ✓"
+            },
+            am: {
+                top_bar: "የብዛት ቅናሽ: 3+ ፍሬ (10%) | 5+ ፍሬ (15%) | 10+ ፍሬ (20%) • አዲስ አበባ: 50% ቀብድ | ከአዲስ አበባ ውጪ: 100%",
+                nav_collection: "አባያዎች", nav_guarantee: "ዋስትና", nav_reviews: "አስተያየቶች", nav_size: "የመጠን መለኪያ",
+                btn_add_abaya: "አባያ ጨምር", catalog_subtitle: "ሚራን ዘመናዊ የአባያ ስብስብ 2026", catalog_title: "የአባያ ዝርዝር",
+                filter_all: "ሁሉም", filter_classic: "ጥቁር አባያ", filter_embroidered: "ጥልፍ ያለው", filter_pastel: "ባለቀለም", filter_kimono: "ኪሞኖ",
+                search_ph: "አባያ ይፈልጉ (ለምሳሌ: Black, Navy, Nidah, Kimono)...",
+                bulk_title: "የብዛት እና የጅምላ ቅናሽ", bulk_desc: "ብዛት ሲያዙ ሲስተሙ ራሱ ዋጋ ይቀንስልዎታል፦",
+                bulk_tier1: "3 - 4 ፍሬ", bulk_tier2: "5 - 9 ፍሬ", bulk_tier3: "10+ ፍሬ",
+                bp_sub: "ያለ ስጋት ይሸምቱ", bp_title: "የገዢዎች ዋስትና", bp_desc: "በ Miran Abayas ሲያዙ ገንዘብዎም ሆነ የልብሱ ጥራት ዋስትና አለው።",
+                bp1_title: "የመመለሻ ዋስትና", bp1_desc: "የደረስዎት አባያ ፎቶው ላይ ከታየው የተለየ ወይም እንከን ያለበት ከሆነ ቀብድዎ ይመለሳል ወይም ይቀየራል።",
+                bp2_title: "አይተው ቀሪውን ይክፈሉ", bp2_desc: "አዲስ አበባ ውስጥ 50% ቀብድ ብቻ ከፍለው ልብሱ እጅዎ ሲደርስ አይተው ቀሪውን 50% ይከፍላሉ።",
+                bp3_title: "በቀጥታ ቪዲዮ ማረጋገጫ", bp3_desc: "ከመክፈልዎ በፊት የጨርቁን ጥራት ለማየት በቴሌግራም (@mame15) ቀጥታ ቪዲዮ እንልክልዎታለን።",
+                bp4_title: "በቁጥጥር የሚደርስ አቅርቦት", bp4_desc: "ሁሉም ትዕዛዞች በሚራን አድሚን ቁጥጥር ስር ሆነው በሰዓቱ ይደርሳሉ።",
+                rev_sub: "የደንበኞች ድምጽ", rev_title: "የደንበኞች ምስክርነት", rev_desc: "ከእኛ የገዙ ደንበኞቻችን ስለ ጨርቁ ጥራት እና አገልግሎታችን የሰጡት አስተያየት።",
+                verified_buyer: "የተረጋገጠ ገዢ",
+                sg_sub: "ትክክለኛ ልኬት", sg_title: "የመጠን እና የቁመት መለኪያ", sg_desc: "ቁመትዎን መሰረት በማድረግ የሚስማማዎትን የአባያ ቁጥር (52 - 60) ይምረጡ።",
+                sg_col1: "የአባያ ቁጥር", sg_col2: "የእርስዎ ቁመት", sg_col3: "የደረት ስፋት", sg_col4: "የአባያው ርዝመት",
+                footer_desc: "ጥራት ያላቸው ዘመናዊ አባያዎች በችርቻሮ እና በጅምላ። አዲስ አበባ፣ ክልል ከተሞች እና ውጭ ሀገር እንልካለን።",
+                footer_links: "ፈጣን ሊንኮች", fl_collection: "የአባያ ስብስብ", fl_protection: "የገዢ ዋስትና", fl_reviews: "የደንበኞች አስተያየት",
+                footer_pay: "የክፍያ አካውንቶች", chat_help: "እገዛ ይፈልጋሉ?", chat_admin: "አድሚኑን ያናግሩ", vendor_login: "የቬንደር መግቢያ",
+                modal_color: "1. ከለር ይምረጡ:", modal_size: "2. ቁመት / መጠን ይምረጡ:", modal_qty: "3. ብዛት ይምረጡ:",
+                btn_order_now: "አሁን ይዘዙ", btn_ask_admin: "ስለ ከለር/መጠን አድሚኑን ይጠይቁ", btn_delete: "ይህን ምርት ሰርዝ",
+                cart_title: "የግዢ ቦርሳ እና ክፍያ", cart_empty: "እስካሁን ምንም አባያ አልመረጡም።", cart_loc_label: "1. የት ነው የሚላክልዎት? *",
+                loc_addis: "አዲስ አበባ ውስጥ — 50% ቀብድ", loc_outside: "ከአዲስ አበባ ውጪ / ሌላ ሀገር — 100% ሙሉ ክፍያ",
+                cart_sub: "የልብሶች ዋጋ:", cart_del: "የማድረሻ ዋጋ:", cart_grand: "ጠቅላላ ዋጋ:", cart_bal: "ልብሱ ሲደርስዎ የሚከፈል ቀሪ:",
+                cart_pay_method: "2. የክፍያ አማራጭ ይምረጡ", cart_cust_info: "3. የእርስዎ መረጃ እና የደረሰኝ ቁጥር", btn_send_order: "ትዕዛዙን እና ደረሰኙን ላክ (@mame15)",
+                btn_copy: "ቅዳ", pay_name_hint: "ከመክፈልዎ በፊት በባንክ አፕዎ ላይ የሚታየው የአካውንት ስም ከአድሚኑ ጋር መመሳሰሉን ያረጋግጡ።",
+                ph_name: "ሙሉ ስምዎ *", ph_phone: "ስልክ ቁጥርዎ *", ph_address: "ትክክለኛ አድራሻ *", ph_tx: "የክፍያ ደረሰኝ ቁጥር",
+                card_order_btn: "ይዘዙ", colors_n: "{n} ከለሮች", no_results: "ከፍለጋዎ ጋር የሚመሳሰል አባያ አልተገኘም።",
+                color_label: "ከለር: {c}", per_pc: "/ ፍሬ",
+                hint0: "3+ ፍሬ = 10% ቅናሽ | 5+ = 15% | 10+ = 20%", hint10: "የ20% የጅምላ ቅናሽ ተተግብሯል!", hint15: "የ15% ቅናሽ ተተግብሯል!", hint10p: "የ10% ቅናሽ ተተግብሯል!",
+                badge_more: "10% ቅናሽ ለማግኘት ተጨማሪ {n} ፍሬ ይጨምሩ!", badge_unlocked: "🎉 የ{p}% የብዛት ቅናሽ አግኝተዋል!",
+                disc_label: "የብዛት ቅናሽ ({p}% - {q} ፍሬ):", free: "ነፃ",
+                dep_label: "አሁን የሚከፈል ቀብድ (50%):", full_label: "አሁን የሚከፈል ሙሉ ክፍያ (100%):",
+                acc_tele: "የቴሌብር ቁጥር:", acc_cbe: "የCBE አካውንት ቁጥር:", copied: "ተቀድቷል: {v}",
+                added: "{q}x \"{n}\" ({c}, መጠን {s}) ወደ ቦርሳ ተጨምሯል",
+                err_cart_empty: "እባክዎ መጀመሪያ አባያ ይምረጡ!", err_details: "እባክዎ ስምዎን፣ ስልክ ቁጥርዎን እና አድራሻዎን ያስገቡ!",
+                err_phone: "እባክዎ ትክክለኛ ስልክ ቁጥር ያስገቡ።", order_copied: "ትዕዛዝዎ ተቀድቷል። በቴሌግራም ቻቱ ውስጥ ለጥፈው ይላኩ።",
+                adm_title: "አዲስ አባያ መጫኛ", adm_sub: "የሚጭኑት አባያ ለሁሉም ደንበኞች ወዲያውኑ ይታያል።",
+                adm_photo: "1. ዋና የአባያ ፎቶ *", adm_tap: "ፎቶ ለመምረጥ እዚህ ይጫኑ", adm_name: "2. የአባያው ስም *", adm_cat: "3. ምድብ *",
+                adm_price: "4. የሰጡት ዋጋ (ETB) *", adm_colors: "5. የከለር አይነቶች", adm_add_color: "ከለር ጨምር",
+                adm_colors_hint: "የእያንዳንዱን ከለር ስም ይጻፉ፣ ቀለሙን ይምረጡ እና የዛን ከለር ፎቶ ይጫኑ።",
+                adm_fabric: "6. የጨርቅ አይነት", adm_desc: "7. ተጨማሪ መግለጫ", adm_publish: "አባያውን አትም", publishing: "በመጫን ላይ...",
+                price_final: "ደንበኞች የሚያዩት ዋጋ: {p} ETB (ዋጋዎ + 10%)", need_photo: "እባክዎ መጀመሪያ ዋናውን የአባያ ፎቶ ይምረጡ!",
+                published: "\"{n}\" ተጭኗል!", deleted: "ምርቱ ተሰርዟል።", confirm_del: "\"{n}\" ይሰረዝ?",
+                color_ph: "የከለር ስም (ለምሳሌ: Navy)", photo_btn: "ፎቶ ጫን", photo_done: "ተጭኗል ✓"
+            }
+        };
+
+        let currentLang = store.get('miran_lang', 'en');
+        const t = (key, vars = {}) => {
+            let s = (translations[currentLang] && translations[currentLang][key]) ?? translations.en[key] ?? key;
+            for (const k in vars) s = s.replace(`{${k}}`, vars[k]);
+            return s;
+        };
+
+        function applyStaticLanguage() {
+            document.documentElement.lang = currentLang === 'am' ? 'am' : 'en';
+            $('lang-toggle-btn').textContent = currentLang === 'en' ? 'አማርኛ' : 'English';
+            document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+            $('selected-color-label').textContent = selectedColorVariant ? selectedColorVariant.name : '';
+        }
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            store.set('miran_lang', lang);
+            applyStaticLanguage();
+            applyFilters();          // keeps current filter + search
+            renderReviews();
+            updateCartUI();
+            updateAccountBox();
+            updateModalBulkHint();
+            updatePricePreview();
+            document.querySelectorAll('.variant-name').forEach(i => i.placeholder = t('color_ph'));
+            document.querySelectorAll('.variant-photo-label').forEach(s => { s.textContent = s.closest('.color-variant-row')._img ? t('photo_done') : t('photo_btn'); });
+            if (selectedProduct && !$('product-modal').classList.contains('hidden')) {
+                $('modal-price').textContent = `${money(selectedProduct.price)} ${t('per_pc')}`;
+                $('modal-img-color-badge').textContent = t('color_label', { c: selectedColorVariant.name });
+            }
+        }
+
+        /* ------------------------------------------------------------------
+           FIREBASE + AUTH (vendors only)
+        ------------------------------------------------------------------ */
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const storage = getStorage(app);
         const provider = new GoogleAuthProvider();
 
         let currentUser = null;
         let isVendor = false;
+        const openAdminBtn = $('open-admin-btn');
+        const userProfilePill = $('user-profile-pill');
 
-        const authGateOverlay = document.getElementById('auth-gate-overlay');
-        const gateGoogleLoginBtn = document.getElementById('gate-google-login-btn');
-        const userProfilePill = document.getElementById('user-profile-pill');
-        const openAdminBtn = document.getElementById('open-admin-btn');
+        const emailOf = u => (u && u.email ? u.email.toLowerCase() : '');
+        const isSuperAdmin = () => emailOf(currentUser) === SUPER_ADMIN_EMAIL.toLowerCase();
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const referralPartner = urlParams.get('ref') || "";
-
-        let currentLang = 'en';
-        const translations = {
-            en: {
-                nav_collection: "Collection", nav_guarantee: "Guarantee", nav_reviews: "Reviews", nav_size: "Size Guide",
-                btn_add_abaya: "Add Abaya", catalog_subtitle: "Miran Luxury Collection 2026", catalog_title: "Abaya Catalog",
-                filter_all: "All", filter_classic: "Classic Black", filter_embroidered: "Embroidered", filter_pastel: "Pastel", filter_kimono: "Kimono",
-                bulk_title: "Automatic Bulk & Wholesale Discounts", bulk_desc: "Discounts apply automatically in your shopping bag based on quantity:",
-                bulk_tier1: "3 - 4 pcs", bulk_tier2: "5 - 9 pcs", bulk_tier3: "10+ pcs",
-                bp_sub: "Shop With Confidence", bp_title: "Buyer Protection Guarantee", bp_desc: "Your payment and garment quality are 100% protected when you order from Miran Abayas.",
-                bp1_title: "100% Return Guarantee", bp1_desc: "If the delivered abaya differs from the photo or has any defect, your deposit is refunded or exchanged immediately.",
-                bp2_title: "Inspect Before Final Pay", bp2_desc: "Addis Ababa customers pay only 50% deposit upfront and pay the remaining 50% after inspecting the abaya upon delivery.",
-                bp3_title: "Live Video Verification", bp3_desc: "Want to check fabric texture before paying? Message Admin (@mame15) on Telegram for a live close-up video.",
-                bp4_title: "Verified Delivery", bp4_desc: "Every order is personally supervised by Miran Admin and delivered safely on schedule.",
-                rev_sub: "Testimonials", rev_title: "Customer Reviews", rev_desc: "What our retail and wholesale buyers say about Miran fabric quality and service.",
-                sg_sub: "Perfect Fit", sg_title: "Size & Length Guide", sg_desc: "All Miran abayas are cut with a relaxed, modest silhouette. Use your height to determine your ideal length.",
-                sg_col1: "Size Designation", sg_col2: "Recommended Height", sg_col3: "Chest / Bust Width", sg_col4: "Abaya Length",
-                footer_desc: "Luxury modest fashion curated for elegance and comfort. Retail & Wholesale orders delivered across Addis Ababa, regional Ethiopia, and worldwide.",
-                footer_links: "Quick Links", footer_pay: "Payment Accounts", chat_help: "Need Help?", chat_admin: "Chat with Admin",
-                modal_color: "1. Select Color:", modal_size: "2. Select Length (Size):", modal_qty: "3. Quantity:",
-                btn_order_now: "Order Now / Add to Bag", btn_ask_admin: "Ask Admin About Colors/Sizes",
-                cart_title: "Shopping Bag & Payment", cart_empty: "Your shopping bag is currently empty.", cart_loc_label: "1. Delivery Location *",
-                cart_sub: "Subtotal:", cart_del: "Delivery Fee:", cart_grand: "Grand Total:", cart_bal: "Balance on Delivery:",
-                cart_pay_method: "2. Payment Method", cart_cust_info: "3. Your Details & Receipt Ref", btn_send_order: "Send Order & Receipt (@mame15)",
-                card_order_btn: "Order"
-            },
-            am: {
-                nav_collection: "አባያዎች", nav_guarantee: "ዋስትና", nav_reviews: "አስተያየቶች", nav_size: "የመጠን መለኪያ",
-                btn_add_abaya: "አባያ ጨምር", catalog_subtitle: "ሚራን ዘመናዊ የአባያ ስብስብ 2026", catalog_title: "የአባያ ዝርዝር",
-                filter_all: "ሁሉም", filter_classic: "ጥቁር አባያ", filter_embroidered: "ጥልፍ ያለው", filter_pastel: "ባለቀለም", filter_kimono: "ኪሞኖ",
-                bulk_title: "የብዛት እና የጅምላ ቅናሽ (Bulk Discounts)", bulk_desc: "ብዛት ሲያዙ ሲስተሙ ራሱ ዋጋ ይቀንስልዎታል፦",
-                bulk_tier1: "3 - 4 ፍሬ", bulk_tier2: "5 - 9 ፍሬ", bulk_tier3: "10+ ፍሬ",
-                bp_sub: "ያለ ስጋት ይሸምቱ", bp_title: "የገዢዎች ዋስትና (Buyer Protection)", bp_desc: "በ Miran Abayas ሲያዙ ገንዘብዎም ሆነ የሚያዙት ልብስ ጥራት 100% ዋስትና አለው።",
-                bp1_title: "100% የመመለሻ ዋስትና", bp1_desc: "የደረስዎት አባያ ፎቶው ላይ ከታየው የተለየ ከሆነ ወይም እንከን ካለበት ቀብድዎ ሙሉ በሙሉ ይመለሳል።",
-                bp2_title: "አይተው ቀሪውን ይክፈሉ", bp2_desc: "አዲስ አበባ ውስጥ 50% ቀብድ ብቻ ከፍለው ልብሱ እጅዎ ሲደርስ አይተው ቀሪውን 50% ይከፍላሉ።",
-                bp3_title: "በቀጥታ ቪዲዮ ማረጋገጫ", bp3_desc: "ከመክፈልዎ በፊት የጨርቁን ጥራት ለማየት በቴሌግራም (@mame15) ቀጥታ ቪዲዮ እንልክልዎታለን።",
-                bp4_title: "የተረጋገጠ አቅርቦት", bp4_desc: "ሁሉም ትዕዛዞች በአድሚን ቁጥጥር ስር ሆነው በታማኝ ዴሊቨሪ በሰዓቱ ይደርሳሉ።",
-                rev_sub: "የደንበኞች ድምጽ", rev_title: "የደንበኞች ምስክርነት", rev_desc: "ከእኛ የገዙ ደንበኞቻችን ስለ ጨርቁ ጥራት እና አገልግሎታችን የሰጡት አስተያየት።",
-                sg_sub: "ትክክለኛ ልኬት", sg_title: "የመጠን እና የቁመት መለኪያ", sg_desc: "ቁመትዎን መሰረት በማድረግ የሚስማማዎትን የአባያ ቁጥር (52 - 60) ይምረጡ።",
-                sg_col1: "የአባያ ቁጥር (Size)", sg_col2: "የእርስዎ ቁመት", sg_col3: "የደረት ስፋት", sg_col4: "የአባያው ርዝመት",
-                footer_desc: "ጥራት ያላቸው ዘመናዊ አባያዎች በችርቻሮ እና በጅምላ። አዲስ አበባ፣ ክልል ከተሞች እና ውጭ ሀገር እንልካለን።",
-                footer_links: "ፈጣን ሊንኮች", footer_pay: "የክፍያ አካውንቶች", chat_help: "እገዛ ይፈልጋሉ?", chat_admin: "አድሚኑን ያናግሩ",
-                modal_color: "1. ከለር ይምረጡ:", modal_size: "2. ቁመት / መጠን ይምረጡ:", modal_qty: "3. ብዛት ይምረጡ:",
-                btn_order_now: "አሁን ይዘዙ (Order Now)", btn_ask_admin: "ስለ ከለር/መጠን አድሚኑን ይጠይቁ",
-                cart_title: "የግዢ ቦርሳ እና ክፍያ", cart_empty: "እስካሁን ምንም አባያ አልመረጡም።", cart_loc_label: "1. የት ነው የሚላክልዎት? *",
-                cart_sub: "የልብሶች ዋጋ:", cart_del: "የማድረሻ ዋጋ:", cart_grand: "ጠቅላላ ዋጋ:", cart_bal: "ልብሱ ሲደርስዎ የሚከፈል ቀሪ:",
-                cart_pay_method: "2. የክፍያ አማራጭ ይምረጡ", cart_cust_info: "3. የእርስዎ መረጃ እና የደረሰኝ ቁጥር", btn_send_order: "ትዕዛዙን እና ደረሰኙን ላክ (@mame15)",
-                card_order_btn: "ይዘዙ (Order)"
+        onAuthStateChanged(auth, async (user) => {
+            if (user && !APPROVED_VENDORS.includes(emailOf(user))) {
+                // A normal Google user is not a vendor; sign out silently.
+                await signOut(auth);
+                showToast("This Google account is not an approved vendor.");
+                return;
             }
-        };
-
-        const langToggleBtn = document.getElementById('lang-toggle-btn');
-        function applyLanguage(lang) {
-            currentLang = lang;
-            langToggleBtn.textContent = lang === 'en' ? 'አማርኛ' : 'English';
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) el.innerHTML = translations[lang][key];
-            });
-            renderProducts(products);
-        }
-        langToggleBtn.addEventListener('click', () => applyLanguage(currentLang === 'en' ? 'am' : 'en'));
-
-        function handleUserState(user) {
             currentUser = user;
+            isVendor = !!user;
+            $('vendor-login-btn').classList.toggle('hidden', isVendor);
+            openAdminBtn.classList.toggle('hidden', !isVendor);
+            userProfilePill.classList.toggle('hidden', !isVendor);
             if (user) {
-                authGateOverlay.classList.add('hidden');
-                
-                userProfilePill.classList.remove('hidden');
-                document.getElementById('user-avatar').src = user.photoURL || "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.displayName || "User");
-                document.getElementById('user-first-name').textContent = (user.displayName || "User").split(' ')[0];
-
-                const nameInput = document.getElementById('customer-name');
-                if (nameInput && !nameInput.value) nameInput.value = user.displayName || "";
-
-                const userEmail = user.email ? user.email.toLowerCase() : "";
-                if (APPROVED_VENDORS.map(e => e.toLowerCase()).includes(userEmail)) {
-                    isVendor = true;
-                    openAdminBtn.classList.remove('hidden');
-                    showToast(`Welcome Vendor (${user.email})! Upload unlocked.`);
-                } else {
-                    isVendor = false;
-                    openAdminBtn.classList.add('hidden');
-                    showToast(`Welcome, ${user.displayName || user.email}!`);
-                }
-            } else {
-                authGateOverlay.classList.remove('hidden');
-                isVendor = false;
-                userProfilePill.classList.add('hidden');
-                openAdminBtn.classList.add('hidden');
-            }
-        }
-
-        onAuthStateChanged(auth, (user) => handleUserState(user));
-
-        gateGoogleLoginBtn.addEventListener('click', async () => {
-            try {
-                await signInWithPopup(auth, provider);
-            } catch (err) {
-                showToast("Login cancelled or failed: " + err.message);
+                $('user-avatar').src = user.photoURL || "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.displayName || "V");
+                $('user-first-name').textContent = (user.displayName || "Vendor").split(' ')[0];
+                showToast(`Welcome Vendor (${user.email})! Upload unlocked.`);
             }
         });
 
-        document.getElementById('google-logout-btn').addEventListener('click', async () => {
-            if (auth) await signOut(auth);
-            showToast("Signed out.");
+        $('vendor-login-btn').addEventListener('click', async () => {
+            try { await signInWithPopup(auth, provider); }
+            catch (err) { showToast("Login cancelled or failed."); }
         });
+        $('google-logout-btn').addEventListener('click', async () => { await signOut(auth); showToast("Signed out."); });
 
+        /* ------------------------------------------------------------------
+           PRODUCTS
+        ------------------------------------------------------------------ */
         const defaultProducts = [
             {
-                id: "default-1",
-                name: "The Midnight Royal Nidah",
-                category: "classic",
-                categoryLabel: "Classic Black",
-                price: 4800,
-                fabric: "Korean Zoom Nidah",
+                id: "default-1", name: "The Midnight Royal Nidah", category: "classic", categoryLabel: "Classic Black", price: 4800, fabric: "Korean Zoom Nidah",
                 colorVariants: [
                     { name: "Royal Black", hex: "#1A1A1A", img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop" },
                     { name: "Deep Maroon", hex: "#5C1A26", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" }
                 ],
                 desc: "Crafted from ultra-soft Korean Nidah with subtle satin trimmings on the cuffs. Includes a matching luxury shayla.",
-                img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop",
-                vendorEmail: "admin",
-                isDefault: true
+                img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop", vendorEmail: "admin", isDefault: true
             },
             {
-                id: "default-2",
-                name: "Zahara Gold Embroidered Abaya",
-                category: "embroidered",
-                categoryLabel: "Embroidered",
-                price: 6500,
-                fabric: "Premium Crepe & Gold Thread",
+                id: "default-2", name: "Zahara Gold Embroidered Abaya", category: "embroidered", categoryLabel: "Embroidered", price: 6500, fabric: "Premium Crepe & Gold Thread",
                 colorVariants: [
                     { name: "Black & Gold", hex: "#1A1A1A", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" },
                     { name: "Emerald Green", hex: "#1E4D3B", img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" }
                 ],
                 desc: "Intricate hand-stitched gold floral embroidery along the sleeves and front lapel. Ideal for Eid and formal events.",
-                img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop",
-                vendorEmail: "admin",
-                isDefault: true
+                img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop", vendorEmail: "admin", isDefault: true
             },
             {
-                id: "default-3",
-                name: "Desert Sand Linen Kimono",
-                category: "kimono",
-                categoryLabel: "Kimono Style",
-                price: 5200,
-                fabric: "Breathable Pure Linen Blend",
+                id: "default-3", name: "Desert Sand Linen Kimono", category: "kimono", categoryLabel: "Kimono Style", price: 5200, fabric: "Breathable Pure Linen Blend",
                 colorVariants: [
                     { name: "Desert Beige", hex: "#D8C7B0", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" },
                     { name: "Mocha Brown", hex: "#5A3E36", img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop" }
                 ],
                 desc: "Relaxed open-front kimono abaya in warm desert beige with a matching waist belt and wide flowy sleeves.",
-                img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop",
-                vendorEmail: "admin",
-                isDefault: true
+                img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop", vendorEmail: "admin", isDefault: true
             },
             {
-                id: "default-4",
-                name: "Sage Mist Butterfly Abaya",
-                category: "pastel",
-                categoryLabel: "Pastel & Colored",
-                price: 4900,
-                fabric: "Soft Silk Chiffon",
+                id: "default-4", name: "Sage Mist Butterfly Abaya", category: "pastel", categoryLabel: "Pastel & Colored", price: 4900, fabric: "Soft Silk Chiffon",
                 colorVariants: [
                     { name: "Sage Green", hex: "#9CAF88", img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" },
                     { name: "Dusty Rose", hex: "#C99A9E", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" }
                 ],
                 desc: "Graceful pastel abaya with a modest butterfly cut for effortless movement and all-day comfort.",
-                img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop",
-                vendorEmail: "admin",
-                isDefault: true
+                img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop", vendorEmail: "admin", isDefault: true
             }
         ];
 
         let products = [...defaultProducts];
+        const productGrid = $('product-grid');
+
+        function renderSkeleton() {
+            productGrid.innerHTML = Array.from({ length: 8 }).map(() => `
+                <div class="border-b border-r border-gold/30 bg-white">
+                    <div class="skeleton aspect-[3/4] w-full"></div>
+                    <div class="p-4 space-y-2"><div class="skeleton h-3 w-1/2 mx-auto"></div><div class="skeleton h-4 w-3/4 mx-auto"></div><div class="skeleton h-3 w-1/3 mx-auto"></div></div>
+                </div>`).join('');
+        }
 
         async function loadProductsFromCloud() {
+            renderSkeleton();
             try {
                 const q = query(collection(db, "abayas"), orderBy("createdAt", "desc"));
                 const snapshot = await getDocs(q);
                 const cloudItems = [];
-                snapshot.forEach(docSnap => {
-                    cloudItems.push({ id: docSnap.id, ...docSnap.data(), isDefault: false });
-                });
-                products = cloudItems.length > 0 ? [...cloudItems, ...defaultProducts] : [...defaultProducts];
-                renderProducts(products);
+                snapshot.forEach(d => cloudItems.push({ id: d.id, ...d.data(), isDefault: false }));
+                products = [...cloudItems, ...defaultProducts];
             } catch (e) {
                 console.error("Error loading cloud abayas:", e);
-                renderProducts(products);
+                products = [...defaultProducts];
             }
-        }
-        loadProductsFromCloud();
-
-        const TELEGRAM_USERNAME = "mame15";
-        const TELEBIRR_NUMBER = "0993001097";
-        const CBE_ACCOUNT = "1000704450568";
-
-        let cart = [];
-        let selectedProduct = null;
-        let selectedColorVariant = { name: "Black", hex: "#1A1A1A", img: "" };
-        let selectedSize = "52";
-        let uploadedImageBase64 = "";
-        let selectedPaymentMethod = "Telebirr";
-
-        const productGrid = document.getElementById('product-grid');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const searchInput = document.getElementById('search-input');
-
-        function getBulkDiscountRate(totalPieces) {
-            if (totalPieces >= 10) return 0.20;
-            if (totalPieces >= 5) return 0.15;
-            if (totalPieces >= 3) return 0.10;
-            return 0;
+            applyFilters();
         }
 
-        function compressImage(file, maxWidth, quality, callback) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = event => {
-                const img = new Image();
-                img.src = event.target.result;
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    let width = img.width;
-                    let height = img.height;
-                    if (width > maxWidth) {
-                        height = Math.round((height * maxWidth) / width);
-                        width = maxWidth;
-                    }
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-                    callback(canvas.toDataURL('image/jpeg', quality));
-                };
-            };
+        /* ---- Filter + search live in one place so they cooperate ---- */
+        const filterState = { category: 'all', term: '' };
+
+        function applyFilters() {
+            const term = filterState.term.trim().toLowerCase();
+            const list = products.filter(p => {
+                if (filterState.category !== 'all' && p.category !== filterState.category) return false;
+                if (!term) return true;
+                return (p.name || '').toLowerCase().includes(term) ||
+                       (p.fabric || '').toLowerCase().includes(term) ||
+                       (p.categoryLabel || '').toLowerCase().includes(term) ||
+                       (p.colorVariants || []).some(v => (v.name || '').toLowerCase().includes(term));
+            });
+            renderProducts(list);
         }
 
         function renderProducts(items) {
             productGrid.innerHTML = '';
             if (items.length === 0) {
-                productGrid.innerHTML = `<p class="col-span-full text-center text-charcoal/60 py-10 border-b border-r border-gold/30">No abayas found matching your selection.</p>`;
+                productGrid.innerHTML = `<p class="col-span-full text-center text-charcoal/60 py-10 border-b border-r border-gold/30">${esc(t('no_results'))}</p>`;
                 return;
             }
-
-            const orderBtnText = translations[currentLang].card_order_btn;
+            const orderBtnText = t('card_order_btn');
 
             items.forEach(product => {
-                const variants = product.colorVariants && product.colorVariants.length 
-                    ? product.colorVariants 
-                    : [{ name: "Standard", hex: "#1A1A1A", img: product.img }];
-
-                const colorDotsHtml = variants.map(v => {
-                    return `<span class="w-3.5 h-3.5 rounded-full border border-charcoal/30 inline-block shadow-2xs" style="background-color: ${v.hex};" title="${v.name}"></span>`;
-                }).join('');
+                const variants = product.colorVariants && product.colorVariants.length
+                    ? product.colorVariants : [{ name: "Standard", hex: "#1A1A1A", img: product.img }];
+                const dots = variants.map(v =>
+                    `<span class="w-3.5 h-3.5 rounded-full border border-charcoal/30 inline-block" style="background-color:${safeHex(v.hex)};" title="${esc(v.name)}"></span>`).join('');
 
                 const cell = document.createElement('div');
                 cell.className = "group border-b border-r border-gold/30 flex flex-col justify-between bg-white hover:bg-cream/50 transition-colors";
                 cell.innerHTML = `
                     <div>
-                        <div class="relative aspect-[3/4] w-full overflow-hidden bg-creamDark/60 cursor-pointer border-b border-gold/20" data-open-id="${product.id}">
-                            <img src="${product.img}" alt="${product.name}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
-                            <span class="absolute top-2 left-2 bg-charcoal/85 text-cream text-[9px] sm:text-[10px] uppercase tracking-wider px-2 py-0.5">
-                                ${product.categoryLabel}
-                            </span>
-                            ${variants.length > 1 ? `<span class="absolute top-2 right-2 bg-white/90 text-charcoal text-[9px] font-bold px-2 py-0.5 border border-gold/30">${variants.length} Colors</span>` : ''}
+                        <div class="relative aspect-[3/4] w-full overflow-hidden bg-creamDark/60 cursor-pointer border-b border-gold/20" data-open-id="${esc(product.id)}">
+                            <img src="${esc(safeUrl(product.img))}" alt="${esc(product.name)} - ${esc(product.categoryLabel)} abaya" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-charcoal/85 text-cream text-[9px] sm:text-[10px] uppercase tracking-wider px-2 py-0.5">${esc(product.categoryLabel)}</span>
+                            ${variants.length > 1 ? `<span class="absolute top-2 right-2 bg-white/90 text-charcoal text-[9px] font-bold px-2 py-0.5 border border-gold/30">${esc(t('colors_n', { n: variants.length }))}</span>` : ''}
                         </div>
                         <div class="p-3 sm:p-4 text-center">
-                            <p class="text-[10px] text-charcoal/50 uppercase tracking-wider mb-0.5 line-clamp-1">${product.fabric}</p>
-                            <h3 class="font-serif text-sm sm:text-base font-bold text-charcoal group-hover:text-gold transition-colors cursor-pointer line-clamp-1" data-open-id="${product.id}">${product.name}</h3>
-                            <div class="flex items-center justify-center gap-1.5 mt-1.5" title="Available Colors">${colorDotsHtml}</div>
-                            <p class="text-gold font-bold mt-1.5 text-xs sm:text-sm">${Number(product.price).toLocaleString()} ETB</p>
+                            <p class="text-[10px] text-charcoal/50 uppercase tracking-wider mb-0.5 line-clamp-1">${esc(product.fabric)}</p>
+                            <h3 class="font-serif text-sm sm:text-base font-bold group-hover:text-gold transition-colors cursor-pointer line-clamp-1" data-open-id="${esc(product.id)}">${esc(product.name)}</h3>
+                            <div class="flex items-center justify-center gap-1.5 mt-1.5">${dots}</div>
+                            <p class="text-gold font-bold mt-1.5 text-xs sm:text-sm">${esc(money(product.price))}</p>
                         </div>
                     </div>
                     <div class="px-3 pb-3 sm:px-4 sm:pb-4">
-                        <button data-open-id="${product.id}" class="w-full bg-charcoal hover:bg-gold text-white py-2.5 text-xs uppercase tracking-widest font-bold transition-colors flex items-center justify-center gap-1.5 shadow-xs">
-                            <i class="fa-solid fa-bag-shopping text-[11px]"></i> ${orderBtnText}
+                        <button data-open-id="${esc(product.id)}" class="w-full bg-charcoal hover:bg-gold text-white py-2.5 text-xs uppercase tracking-widest font-bold transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-bag-shopping text-[11px]"></i> ${esc(orderBtnText)}
                         </button>
-                    </div>
-                `;
-                cell.querySelectorAll('[data-open-id]').forEach(el => {
-                    el.addEventListener('click', () => openModal(product.id));
-                });
+                    </div>`;
                 productGrid.appendChild(cell);
             });
         }
 
-        const adminModal = document.getElementById('admin-modal');
-        const photoInput = document.getElementById('new-product-photo');
-        const photoPreview = document.getElementById('photo-preview');
-        const uploadPlaceholder = document.getElementById('upload-placeholder');
-        const variantsContainer = document.getElementById('color-variants-container');
+        productGrid.addEventListener('click', e => {
+            const el = e.target.closest('[data-open-id]');
+            if (el) openModal(el.dataset.openId);
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-gold', 'text-white', 'border-gold');
+                    b.classList.add('border-gold/40');
+                });
+                btn.classList.add('bg-gold', 'text-white', 'border-gold');
+                btn.classList.remove('border-gold/40');
+                filterState.category = btn.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        const searchInput = $('search-input');
+        $('search-toggle-btn').addEventListener('click', () => {
+            $('search-bar').classList.toggle('hidden');
+            searchInput.focus();
+        });
+        $('close-search-btn').addEventListener('click', () => {
+            $('search-bar').classList.add('hidden');
+            searchInput.value = '';
+            filterState.term = '';
+            applyFilters();
+        });
+        searchInput.addEventListener('input', e => { filterState.term = e.target.value; applyFilters(); });
+
+        $('mobile-menu-btn').addEventListener('click', () => $('mobile-menu').classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => $('mobile-menu').classList.add('hidden')));
+
+        /* ------------------------------------------------------------------
+           REVIEWS
+        ------------------------------------------------------------------ */
+        function renderReviews() {
+            $('reviews-grid').innerHTML = REVIEWS.map(r => `
+                <div class="bg-white p-7 border border-gold/20 shadow-sm">
+                    <div class="flex text-gold text-xs mb-3" aria-label="5 stars">${'<i class="fa-solid fa-star"></i>'.repeat(5)}</div>
+                    <p class="text-sm text-charcoal/80 italic leading-relaxed mb-5">"${esc(r.text)}"</p>
+                    <div class="flex items-center justify-between border-t border-gold/10 pt-4 gap-2">
+                        <div>
+                            <h4 class="font-serif font-bold text-sm">${esc(r.name)}</h4>
+                            <span class="text-[11px] text-charcoal/50">${esc(r.place)}</span>
+                        </div>
+                        ${r.verified ? `<span class="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 font-semibold rounded-full shrink-0"><i class="fa-solid fa-circle-check mr-1"></i>${esc(t('verified_buyer'))}</span>` : ''}
+                    </div>
+                </div>`).join('');
+        }
+
+        /* ------------------------------------------------------------------
+           IMAGES: compress -> upload to Firebase Storage -> save URL only
+        ------------------------------------------------------------------ */
+        function compressImage(file, maxWidth, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onerror = () => reject(new Error("Could not read file"));
+                reader.onload = ev => {
+                    const img = new Image();
+                    img.onerror = () => reject(new Error("Invalid image"));
+                    img.onload = () => {
+                        let { width, height } = img;
+                        if (width > maxWidth) { height = Math.round(height * maxWidth / width); width = maxWidth; }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width; canvas.height = height;
+                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function uploadImage(dataUrl) {
+            const path = `abayas/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.jpg`;
+            const r = sRef(storage, path);
+            await uploadString(r, dataUrl, 'data_url');
+            return await getDownloadURL(r);
+        }
+
+        async function deleteStoredImage(url) {
+            if (!/^https:\/\/firebasestorage\.googleapis\.com|\.firebasestorage\.app/.test(url || '')) return;
+            try { await deleteObject(sRef(storage, url)); } catch { /* already gone or no permission */ }
+        }
+
+        /* ------------------------------------------------------------------
+           ADMIN: add product
+        ------------------------------------------------------------------ */
+        const adminModal = $('admin-modal');
+        const photoInput = $('new-product-photo');
+        const photoPreview = $('photo-preview');
+        const uploadPlaceholder = $('upload-placeholder');
+        const variantsContainer = $('color-variants-container');
+        let mainPhotoDataUrl = "";
 
         function addColorVariantRow(defaultName = "", defaultHex = "#1A1A1A") {
             const row = document.createElement('div');
             row.className = "color-variant-row bg-cream/70 p-2.5 border border-gold/30 flex flex-wrap sm:flex-nowrap items-center gap-2";
+            row._img = "";
             row.innerHTML = `
-                <input type="color" value="${defaultHex}" class="variant-hex w-8 h-8 border border-gold/40 cursor-pointer bg-transparent shrink-0">
-                <input type="text" value="${defaultName}" placeholder="የከለር ስም (ለምሳሌ: Navy, Maroon)" required class="variant-name flex-1 min-w-[110px] bg-white border border-gold/30 px-2.5 py-1.5 text-xs focus:outline-none focus:border-gold">
-                <label class="cursor-pointer bg-white hover:bg-gold/15 border border-gold/40 px-2.5 py-1.5 text-[11px] font-semibold text-charcoal flex items-center gap-1 shrink-0">
+                <input type="color" value="${safeHex(defaultHex)}" class="variant-hex w-8 h-8 border border-gold/40 cursor-pointer bg-transparent shrink-0" aria-label="Color shade">
+                <input type="text" value="${esc(defaultName)}" maxlength="40" placeholder="${esc(t('color_ph'))}" class="variant-name flex-1 min-w-[110px] bg-white border border-gold/30 px-2.5 py-1.5 text-xs focus:outline-none focus:border-gold">
+                <label class="cursor-pointer bg-white hover:bg-gold/15 border border-gold/40 px-2.5 py-1.5 text-[11px] font-semibold flex items-center gap-1 shrink-0">
                     <i class="fa-solid fa-camera text-gold"></i>
-                    <span class="variant-photo-label">ፎቶ ጫን</span>
+                    <span class="variant-photo-label">${esc(t('photo_btn'))}</span>
                     <input type="file" accept="image/*" class="variant-photo-input hidden">
                 </label>
-                <img src="" class="variant-thumb hidden w-8 h-8 object-cover border border-gold/40 shrink-0">
-                <button type="button" class="remove-variant-btn text-red-500 hover:text-red-700 px-1.5 text-xs">
-                    <i class="fa-solid fa-trash-can"></i>
-                </button>
-            `;
+                <img src="" alt="" class="variant-thumb hidden w-8 h-8 object-cover border border-gold/40 shrink-0">
+                <button type="button" class="remove-variant-btn text-red-500 hover:text-red-700 px-1.5 text-xs" aria-label="Remove color"><i class="fa-solid fa-trash-can"></i></button>`;
 
-            const fileInp = row.querySelector('.variant-photo-input');
             const thumb = row.querySelector('.variant-thumb');
             const labelSpan = row.querySelector('.variant-photo-label');
-
-            fileInp.addEventListener('change', (e) => {
+            row.querySelector('.variant-photo-input').addEventListener('change', async e => {
                 const f = e.target.files[0];
                 if (!f) return;
-                compressImage(f, 500, 0.7, (base64) => {
-                    row.dataset.variantImg = base64;
-                    thumb.src = base64;
+                try {
+                    row._img = await compressImage(f, 700, 0.75);
+                    thumb.src = row._img;
                     thumb.classList.remove('hidden');
-                    labelSpan.textContent = "ተጭኗል ✓";
-                });
+                    labelSpan.textContent = t('photo_done');
+                } catch { showToast("Could not read that image."); }
             });
-
             row.querySelector('.remove-variant-btn').addEventListener('click', () => row.remove());
             variantsContainer.appendChild(row);
         }
 
-        document.getElementById('add-color-variant-btn').addEventListener('click', () => addColorVariantRow("", "#5C1A26"));
+        $('add-color-variant-btn').addEventListener('click', () => addColorVariantRow("", "#5C1A26"));
 
         openAdminBtn.addEventListener('click', () => {
             if (!isVendor) return;
             if (variantsContainer.children.length === 0) addColorVariantRow("Black", "#1A1A1A");
             adminModal.classList.remove('hidden');
         });
-        document.getElementById('close-admin-btn').addEventListener('click', () => adminModal.classList.add('hidden'));
+        $('close-admin-btn').addEventListener('click', () => adminModal.classList.add('hidden'));
 
-        photoInput.addEventListener('change', (e) => {
+        photoInput.addEventListener('change', async e => {
             const file = e.target.files[0];
             if (!file) return;
-            compressImage(file, 600, 0.72, (compressedDataUrl) => {
-                uploadedImageBase64 = compressedDataUrl;
-                photoPreview.src = compressedDataUrl;
+            try {
+                mainPhotoDataUrl = await compressImage(file, 800, 0.78);
+                photoPreview.src = mainPhotoDataUrl;
                 photoPreview.classList.remove('hidden');
                 uploadPlaceholder.classList.add('hidden');
-            });
+            } catch { showToast("Could not read that image."); }
         });
+
+        function updatePricePreview() {
+            const v = Number($('new-product-price').value);
+            $('price-preview').textContent = v > 0 ? t('price_final', { p: Math.round(v * VENDOR_MARKUP).toLocaleString() }) : '';
+        }
+        $('new-product-price').addEventListener('input', updatePricePreview);
 
         const categoryLabels = { classic: "Classic Black", embroidered: "Embroidered", pastel: "Pastel & Colored", kimono: "Kimono Style" };
 
-        document.getElementById('add-product-form').addEventListener('submit', async (e) => {
+        $('add-product-form').addEventListener('submit', async e => {
             e.preventDefault();
-            if (!isVendor) {
-                showToast("Unauthorized! Only approved vendors can publish.");
-                return;
-            }
-            if (!uploadedImageBase64) {
-                showToast("እባክዎ መጀመሪያ ዋናውን የአባያ ፎቶ ይምረጡ!");
-                return;
-            }
+            if (!isVendor) { showToast("Unauthorized! Only approved vendors can publish."); return; }
+            if (!mainPhotoDataUrl) { showToast(t('need_photo')); return; }
 
-            const submitBtn = document.getElementById('save-abaya-submit-btn');
+            const rawPrice = Number($('new-product-price').value);
+            if (!(rawPrice > 0)) { showToast("Enter a valid price."); return; }
+
+            const submitBtn = $('save-abaya-submit-btn');
+            const btnLabel = submitBtn.querySelector('span');
             submitBtn.disabled = true;
-            submitBtn.textContent = "Publishing...";
-
-            const variantRows = document.querySelectorAll('.color-variant-row');
-            let collectedVariants = [];
-            variantRows.forEach(row => {
-                const cName = row.querySelector('.variant-name').value.trim();
-                const cHex = row.querySelector('.variant-hex').value;
-                const cImg = row.dataset.variantImg || uploadedImageBase64;
-                if (cName) collectedVariants.push({ name: cName, hex: cHex, img: cImg });
-            });
-            if (collectedVariants.length === 0) {
-                collectedVariants.push({ name: "Standard", hex: "#1A1A1A", img: uploadedImageBase64 });
-            }
-
-            const rawPrice = Number(document.getElementById('new-product-price').value);
-            const finalMarkedUpPrice = Math.round(rawPrice * 1.10);
-
-            const catValue = document.getElementById('new-product-category').value;
-            const newAbayaData = {
-                name: document.getElementById('new-product-name').value.trim(),
-                category: catValue,
-                categoryLabel: categoryLabels[catValue],
-                price: finalMarkedUpPrice,
-                colorVariants: collectedVariants,
-                fabric: document.getElementById('new-product-fabric').value.trim() || "Premium Fabric",
-                desc: document.getElementById('new-product-desc').value.trim() || "Handcrafted luxury abaya with matching shayla.",
-                img: uploadedImageBase64,
-                vendorEmail: currentUser.email.toLowerCase(),
-                createdAt: Date.now()
-            };
+            btnLabel.textContent = t('publishing');
 
             try {
-                const docRef = await addDoc(collection(db, "abayas"), newAbayaData);
-                products.unshift({ id: docRef.id, ...newAbayaData, isDefault: false });
+                // 1) upload main image + every variant image in parallel; only URLs are stored
+                const mainUrlPromise = uploadImage(mainPhotoDataUrl);
+                const rows = [...document.querySelectorAll('.color-variant-row')]
+                    .map(r => ({ name: r.querySelector('.variant-name').value.trim(), hex: safeHex(r.querySelector('.variant-hex').value), data: r._img }))
+                    .filter(r => r.name);
 
-                renderProducts(products);
-                document.getElementById('add-product-form').reset();
+                const mainUrl = await mainUrlPromise;
+                const variants = await Promise.all(rows.map(async r => ({
+                    name: r.name, hex: r.hex, img: r.data ? await uploadImage(r.data) : mainUrl
+                })));
+                if (variants.length === 0) variants.push({ name: "Standard", hex: "#1A1A1A", img: mainUrl });
+
+                const catValue = $('new-product-category').value;
+                const newAbaya = {
+                    name: $('new-product-name').value.trim(),
+                    category: catValue,
+                    categoryLabel: categoryLabels[catValue],
+                    price: Math.round(rawPrice * VENDOR_MARKUP),
+                    colorVariants: variants,
+                    fabric: $('new-product-fabric').value.trim() || "Premium Fabric",
+                    desc: $('new-product-desc').value.trim() || "Handcrafted luxury abaya with matching shayla.",
+                    img: mainUrl,
+                    vendorEmail: emailOf(currentUser),
+                    createdAt: Date.now()
+                };
+
+                const docRef = await addDoc(collection(db, "abayas"), newAbaya);
+                products.unshift({ id: docRef.id, ...newAbaya, isDefault: false });
+                applyFilters();
+
+                $('add-product-form').reset();
                 variantsContainer.innerHTML = '';
-                uploadedImageBase64 = "";
+                mainPhotoDataUrl = "";
                 photoPreview.classList.add('hidden');
                 uploadPlaceholder.classList.remove('hidden');
+                $('price-preview').textContent = '';
                 adminModal.classList.add('hidden');
-                showToast(`"${newAbayaData.name}" published successfully!`);
+                showToast(t('published', { n: newAbaya.name }));
             } catch (err) {
                 showToast("Upload failed: " + err.message);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish Abaya Online`;
+                btnLabel.textContent = t('adm_publish');
             }
         });
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-gold', 'text-white', 'border-gold');
-                    b.classList.add('border-gold/40');
-                });
-                btn.classList.add('bg-gold', 'text-white', 'border-gold');
-                btn.classList.remove('border-gold/40');
-                const filter = btn.getAttribute('data-filter');
-                renderProducts(filter === 'all' ? products : products.filter(p => p.category === filter));
-            });
-        });
+        /* ------------------------------------------------------------------
+           PRODUCT MODAL
+        ------------------------------------------------------------------ */
+        const modal = $('product-modal');
+        const deleteProductBtn = $('modal-delete-product');
+        const modalQtyInput = $('modal-qty');
+        const modalBulkHint = $('modal-bulk-hint');
+        const modalColorOptions = $('modal-color-options');
+        const selectedColorLabel = $('selected-color-label');
+        const modalImg = $('modal-img');
+        const modalImgColorBadge = $('modal-img-color-badge');
 
-        document.getElementById('search-toggle-btn').addEventListener('click', () => {
-            document.getElementById('search-bar').classList.toggle('hidden');
-            searchInput.focus();
-        });
-        document.getElementById('close-search-btn').addEventListener('click', () => {
-            document.getElementById('search-bar').classList.add('hidden');
-            searchInput.value = '';
-            renderProducts(products);
-        });
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            renderProducts(products.filter(p => 
-                p.name.toLowerCase().includes(term) || 
-                p.fabric.toLowerCase().includes(term) || 
-                p.categoryLabel.toLowerCase().includes(term) ||
-                (p.colorVariants && p.colorVariants.some(v => v.name.toLowerCase().includes(term)))
-            ));
-        });
+        let selectedProduct = null;
+        let selectedColorVariant = null;
+        let selectedSize = "52";
 
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
-        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden')));
-
-        const modal = document.getElementById('product-modal');
-        const deleteProductBtn = document.getElementById('modal-delete-product');
-        const modalQtyInput = document.getElementById('modal-qty');
-        const modalBulkHint = document.getElementById('modal-bulk-hint');
-        const modalColorOptions = document.getElementById('modal-color-options');
-        const selectedColorLabel = document.getElementById('selected-color-label');
-        const modalImg = document.getElementById('modal-img');
-        const modalImgColorBadge = document.getElementById('modal-img-color-badge');
+        function getBulkDiscountRate(n) { return n >= 10 ? 0.20 : n >= 5 ? 0.15 : n >= 3 ? 0.10 : 0; }
 
         function updateModalBulkHint() {
             const q = parseInt(modalQtyInput.value) || 1;
-            if (q >= 10) modalBulkHint.textContent = "20% Wholesale Discount Applied!";
-            else if (q >= 5) modalBulkHint.textContent = "15% Bulk Discount Applied!";
-            else if (q >= 3) modalBulkHint.textContent = "10% Bulk Discount Applied!";
-            else modalBulkHint.textContent = "3+ pcs = 10% OFF | 5+ = 15% | 10+ = 20%";
+            modalBulkHint.textContent = q >= 10 ? t('hint10') : q >= 5 ? t('hint15') : q >= 3 ? t('hint10p') : t('hint0');
         }
-
-        document.getElementById('qty-minus').addEventListener('click', () => {
-            let val = parseInt(modalQtyInput.value) || 1;
-            if (val > 1) modalQtyInput.value = val - 1;
-            updateModalBulkHint();
-        });
-        document.getElementById('qty-plus').addEventListener('click', () => {
-            let val = parseInt(modalQtyInput.value) || 1;
-            modalQtyInput.value = val + 1;
-            updateModalBulkHint();
-        });
+        $('qty-minus').addEventListener('click', () => { const v = parseInt(modalQtyInput.value) || 1; if (v > 1) modalQtyInput.value = v - 1; updateModalBulkHint(); });
+        $('qty-plus').addEventListener('click', () => { const v = parseInt(modalQtyInput.value) || 1; if (v < 100) modalQtyInput.value = v + 1; updateModalBulkHint(); });
         modalQtyInput.addEventListener('input', updateModalBulkHint);
+
+        function setModalVariant(variant, product) {
+            selectedColorVariant = variant;
+            selectedColorLabel.textContent = variant.name;
+            modalImg.src = safeUrl(variant.img || product.img);
+            modalImg.alt = `${product.name} - ${variant.name}`;
+            modalImgColorBadge.textContent = t('color_label', { c: variant.name });
+        }
 
         function renderModalColors(product) {
             modalColorOptions.innerHTML = '';
-            const list = product.colorVariants && product.colorVariants.length 
-                ? product.colorVariants 
-                : [{ name: "Standard", hex: "#1A1A1A", img: product.img }];
-
-            selectedColorVariant = list[0];
-            selectedColorLabel.textContent = selectedColorVariant.name;
-            modalImg.src = selectedColorVariant.img || product.img;
-            modalImgColorBadge.textContent = `Color: ${selectedColorVariant.name}`;
+            const list = product.colorVariants && product.colorVariants.length
+                ? product.colorVariants : [{ name: "Standard", hex: "#1A1A1A", img: product.img }];
+            setModalVariant(list[0], product);
 
             list.forEach((variant, idx) => {
                 const btn = document.createElement('button');
                 btn.type = "button";
                 btn.className = `color-choice-btn flex items-center gap-1.5 px-2.5 py-1.5 border text-xs font-medium transition-all ${idx === 0 ? 'border-gold bg-gold/15 font-bold ring-1 ring-gold' : 'border-gold/30 bg-white hover:border-gold'}`;
-                btn.innerHTML = `<span class="w-3.5 h-3.5 rounded-full border border-charcoal/30 inline-block" style="background-color: ${variant.hex};"></span><span>${variant.name}</span>`;
-                
+                btn.innerHTML = `<span class="w-3.5 h-3.5 rounded-full border border-charcoal/30 inline-block" style="background-color:${safeHex(variant.hex)};"></span><span>${esc(variant.name)}</span>`;
                 btn.addEventListener('click', () => {
                     document.querySelectorAll('.color-choice-btn').forEach(b => {
                         b.classList.remove('border-gold', 'bg-gold/15', 'font-bold', 'ring-1', 'ring-gold');
@@ -1200,69 +1137,55 @@
                     });
                     btn.classList.add('border-gold', 'bg-gold/15', 'font-bold', 'ring-1', 'ring-gold');
                     btn.classList.remove('border-gold/30', 'bg-white');
-
-                    selectedColorVariant = variant;
-                    selectedColorLabel.textContent = variant.name;
-                    modalImg.src = variant.img || product.img;
-                    modalImgColorBadge.textContent = `Color: ${variant.name}`;
+                    setModalVariant(variant, product);
                 });
                 modalColorOptions.appendChild(btn);
             });
         }
 
+        function canDelete(p) {
+            if (!currentUser || !p) return false;
+            return isSuperAdmin() || (p.vendorEmail && p.vendorEmail.toLowerCase() === emailOf(currentUser));
+        }
+
         function openModal(productId) {
             selectedProduct = products.find(p => String(p.id) === String(productId));
             if (!selectedProduct) return;
-
-            document.getElementById('modal-category').textContent = selectedProduct.categoryLabel;
-            document.getElementById('modal-title').textContent = selectedProduct.name;
-            document.getElementById('modal-price').textContent = `${Number(selectedProduct.price).toLocaleString()} ETB / pc`;
-            document.getElementById('modal-desc').textContent = selectedProduct.desc;
-
+            $('modal-category').textContent = selectedProduct.categoryLabel;
+            $('modal-title').textContent = selectedProduct.name;
+            $('modal-price').textContent = `${money(selectedProduct.price)} ${t('per_pc')}`;
+            $('modal-desc').textContent = selectedProduct.desc;
             renderModalColors(selectedProduct);
             modalQtyInput.value = 1;
             updateModalBulkHint();
-
-            const userEmail = currentUser ? currentUser.email.toLowerCase() : "";
-            const isSuperAdmin = userEmail === SUPER_ADMIN_EMAIL.toLowerCase();
-            const isOwner = selectedProduct.vendorEmail && selectedProduct.vendorEmail.toLowerCase() === userEmail;
-
-            if (isSuperAdmin || isOwner) {
-                deleteProductBtn.classList.remove('hidden');
-            } else {
-                deleteProductBtn.classList.add('hidden');
-            }
+            deleteProductBtn.classList.toggle('hidden', !canDelete(selectedProduct));
             modal.classList.remove('hidden');
         }
 
+        window.closeModal = () => modal.classList.add('hidden');
+        $('close-modal-btn').addEventListener('click', window.closeModal);
+        $('modal-size-guide-link').addEventListener('click', window.closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) window.closeModal(); });
+
         deleteProductBtn.addEventListener('click', async () => {
-            if (!selectedProduct) return;
-            const userEmail = currentUser ? currentUser.email.toLowerCase() : "";
-            const isSuperAdmin = userEmail === SUPER_ADMIN_EMAIL.toLowerCase();
-            const isOwner = selectedProduct.vendorEmail && selectedProduct.vendorEmail.toLowerCase() === userEmail;
-
-            if (!isSuperAdmin && !isOwner) {
-                showToast("You can only delete your own products!");
-                return;
-            }
-
-            if (!confirm(`Are you sure you want to delete "${selectedProduct.name}"?`)) return;
-
+            if (!selectedProduct || !canDelete(selectedProduct)) { showToast("You can only delete your own products!"); return; }
+            if (!confirm(t('confirm_del', { n: selectedProduct.name }))) return;
+            const target = selectedProduct;
             try {
-                if (!selectedProduct.isDefault) {
-                    await deleteDoc(doc(db, "abayas", String(selectedProduct.id)));
+                if (!target.isDefault) {
+                    await deleteDoc(doc(db, "abayas", String(target.id)));
+                    // best-effort cleanup of stored images
+                    const urls = new Set([target.img, ...(target.colorVariants || []).map(v => v.img)]);
+                    urls.forEach(u => deleteStoredImage(u));
                 }
-                products = products.filter(p => String(p.id) !== String(selectedProduct.id));
-                renderProducts(products);
-                closeModal();
-                showToast("Product deleted successfully.");
+                products = products.filter(p => String(p.id) !== String(target.id));
+                applyFilters();
+                window.closeModal();
+                showToast(t('deleted'));
             } catch (err) {
                 showToast("Delete failed: " + err.message);
             }
         });
-
-        window.closeModal = function() { modal.classList.add('hidden'); };
-        document.getElementById('close-modal-btn').addEventListener('click', window.closeModal);
 
         document.querySelectorAll('.size-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1272,251 +1195,218 @@
                 });
                 btn.classList.add('bg-gold', 'text-white', 'border-gold');
                 btn.classList.remove('border-gold/30');
-                selectedSize = btn.getAttribute('data-size');
+                selectedSize = btn.dataset.size;
             });
         });
 
-        document.getElementById('modal-add-to-cart').addEventListener('click', () => {
-            if (!selectedProduct) return;
-            const qtyToAdd = Math.max(1, parseInt(modalQtyInput.value) || 1);
+        /* ------------------------------------------------------------------
+           CART (saved in localStorage so a page refresh keeps it)
+        ------------------------------------------------------------------ */
+        let cart = store.get('miran_cart', []);
+        if (!Array.isArray(cart)) cart = [];
+        let selectedPaymentMethod = "Telebirr";
 
-            const existingIndex = cart.findIndex(item => 
-                String(item.id) === String(selectedProduct.id) && 
-                item.size === selectedSize && 
-                item.color === selectedColorVariant.name
-            );
+        const cartDrawer = $('cart-drawer');
+        const locationSelect = $('location-type');
+        const telebirrBtn = $('pay-telebirr-btn');
+        const cbeBtn = $('pay-cbe-btn');
 
-            if (existingIndex > -1) {
-                cart[existingIndex].qty += qtyToAdd;
-            } else {
-                cart.push({
-                    ...selectedProduct,
-                    img: selectedColorVariant.img || selectedProduct.img,
-                    color: selectedColorVariant.name,
-                    colorHex: selectedColorVariant.hex,
-                    size: selectedSize,
-                    qty: qtyToAdd
-                });
-            }
+        const saveCart = () => store.set('miran_cart', cart);
 
+        $('modal-add-to-cart').addEventListener('click', () => {
+            if (!selectedProduct || !selectedColorVariant) return;
+            const qty = Math.min(100, Math.max(1, parseInt(modalQtyInput.value) || 1));
+            const idx = cart.findIndex(i => String(i.id) === String(selectedProduct.id) && i.size === selectedSize && i.color === selectedColorVariant.name);
+            if (idx > -1) cart[idx].qty += qty;
+            else cart.push({
+                id: selectedProduct.id, name: selectedProduct.name, price: selectedProduct.price,
+                img: selectedColorVariant.img || selectedProduct.img,
+                color: selectedColorVariant.name, colorHex: selectedColorVariant.hex, size: selectedSize, qty
+            });
             updateCartUI();
             window.closeModal();
             cartDrawer.classList.remove('hidden');
-            showToast(`Added ${qtyToAdd}x "${selectedProduct.name}" (${selectedColorVariant.name}, Size ${selectedSize})`);
+            showToast(t('added', { q: qty, n: selectedProduct.name, c: selectedColorVariant.name, s: selectedSize }));
         });
 
-        const cartDrawer = document.getElementById('cart-drawer');
-        const locationSelect = document.getElementById('location-type');
-        const telebirrBtn = document.getElementById('pay-telebirr-btn');
-        const cbeBtn = document.getElementById('pay-cbe-btn');
-        const accountLabel = document.getElementById('account-label');
-        const accountNumber = document.getElementById('account-number');
+        $('cart-btn').addEventListener('click', () => cartDrawer.classList.remove('hidden'));
+        $('close-cart-btn').addEventListener('click', () => cartDrawer.classList.add('hidden'));
+        $('cart-overlay').addEventListener('click', () => cartDrawer.classList.add('hidden'));
 
-        document.getElementById('cart-btn').addEventListener('click', () => cartDrawer.classList.remove('hidden'));
-        document.getElementById('close-cart-btn').addEventListener('click', () => cartDrawer.classList.add('hidden'));
-        document.getElementById('cart-overlay').addEventListener('click', () => cartDrawer.classList.add('hidden'));
+        function updateAccountBox() {
+            const isTele = selectedPaymentMethod === "Telebirr";
+            $('account-label').textContent = t(isTele ? 'acc_tele' : 'acc_cbe');
+            $('account-number').textContent = isTele ? TELEBIRR_NUMBER : CBE_ACCOUNT;
+        }
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+            const on = method === "Telebirr" ? telebirrBtn : cbeBtn;
+            const off = method === "Telebirr" ? cbeBtn : telebirrBtn;
+            on.classList.add('bg-gold', 'text-white', 'border-gold');
+            on.classList.remove('bg-white', 'text-charcoal', 'border-gold/40');
+            off.classList.remove('bg-gold', 'text-white', 'border-gold');
+            off.classList.add('bg-white', 'text-charcoal', 'border-gold/40');
+            updateAccountBox();
+        }
+        telebirrBtn.addEventListener('click', () => selectPayment("Telebirr"));
+        cbeBtn.addEventListener('click', () => selectPayment("CBE Bank"));
 
-        telebirrBtn.addEventListener('click', () => {
-            selectedPaymentMethod = "Telebirr";
-            telebirrBtn.classList.add('bg-gold', 'text-white', 'border-gold');
-            telebirrBtn.classList.remove('bg-white', 'text-charcoal', 'border-gold/40');
-            cbeBtn.classList.remove('bg-gold', 'text-white', 'border-gold');
-            cbeBtn.classList.add('bg-white', 'text-charcoal', 'border-gold/40');
-            accountLabel.textContent = "Telebirr Number:";
-            accountNumber.textContent = TELEBIRR_NUMBER;
-        });
-
-        cbeBtn.addEventListener('click', () => {
-            selectedPaymentMethod = "CBE Bank";
-            cbeBtn.classList.add('bg-gold', 'text-white', 'border-gold');
-            cbeBtn.classList.remove('bg-white', 'text-charcoal', 'border-gold/40');
-            telebirrBtn.classList.remove('bg-gold', 'text-white', 'border-gold');
-            telebirrBtn.classList.add('bg-white', 'text-charcoal', 'border-gold/40');
-            accountLabel.textContent = "CBE Account Number:";
-            accountNumber.textContent = CBE_ACCOUNT;
-        });
-
-        document.getElementById('copy-account-btn').addEventListener('click', () => {
-            navigator.clipboard.writeText(accountNumber.textContent);
-            showToast(`Copied: ${accountNumber.textContent}`);
+        $('copy-account-btn').addEventListener('click', async () => {
+            const v = $('account-number').textContent;
+            try { await navigator.clipboard.writeText(v); showToast(t('copied', { v })); }
+            catch { showToast(v); }
         });
 
         locationSelect.addEventListener('change', updateCartUI);
 
-        window.changeCartQty = function(index, delta) {
-            cart[index].qty += delta;
-            if (cart[index].qty <= 0) cart.splice(index, 1);
+        // Cart item buttons use event delegation (no inline onclick)
+        $('cart-items').addEventListener('click', e => {
+            const btn = e.target.closest('[data-cart-action]');
+            if (!btn) return;
+            const i = Number(btn.dataset.idx);
+            if (!cart[i]) return;
+            const a = btn.dataset.cartAction;
+            if (a === 'inc') cart[i].qty = Math.min(100, cart[i].qty + 1);
+            else if (a === 'dec') { cart[i].qty -= 1; if (cart[i].qty <= 0) cart.splice(i, 1); }
+            else if (a === 'remove') cart.splice(i, 1);
             updateCartUI();
-        };
-
-        window.removeFromCart = function(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        };
-
-        function updateCartUI() {
-            const badge = document.getElementById('cart-badge');
-            const cartItemsEl = document.getElementById('cart-items');
-            const subtotalEl = document.getElementById('cart-subtotal');
-            const discountRow = document.getElementById('discount-row');
-            const discountLabel = document.getElementById('discount-label');
-            const discountAmountEl = document.getElementById('discount-amount');
-            const deliveryFeeEl = document.getElementById('delivery-fee');
-            const cartTotalEl = document.getElementById('cart-total');
-            const payNowLabel = document.getElementById('pay-now-label');
-            const payNowAmount = document.getElementById('pay-now-amount');
-            const balanceRow = document.getElementById('balance-row');
-            const balanceAmount = document.getElementById('balance-amount');
-            const bulkTierBadge = document.getElementById('bulk-tier-badge');
-
-            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-            badge.textContent = totalQty;
-
-            if (cart.length === 0) {
-                cartItemsEl.innerHTML = `<p class="text-center text-charcoal/50 text-sm py-8">${translations[currentLang].cart_empty}</p>`;
-                subtotalEl.textContent = "0 ETB";
-                discountRow.classList.add('hidden');
-                deliveryFeeEl.textContent = "0 ETB";
-                cartTotalEl.textContent = "0 ETB";
-                payNowAmount.textContent = "0 ETB";
-                balanceAmount.textContent = "0 ETB";
-                bulkTierBadge.textContent = "Add 3+ items for 10% bulk discount";
-                return;
-            }
-
-            let subtotal = 0;
-            cartItemsEl.innerHTML = '';
-
-            cart.forEach((item, idx) => {
-                subtotal += item.price * item.qty;
-                const div = document.createElement('div');
-                div.className = "flex gap-3 bg-white p-2.5 border border-gold/15 items-center";
-                div.innerHTML = `
-                    <img src="${item.img}" alt="${item.name}" class="w-14 h-16 object-cover object-top bg-creamDark">
-                    <div class="flex-1">
-                        <h4 class="font-serif font-bold text-xs">${item.name}</h4>
-                        <p class="text-[11px] text-charcoal/70 flex items-center gap-1 mt-0.5">
-                            <span class="w-2.5 h-2.5 rounded-full border border-charcoal/30 inline-block" style="background-color: ${item.colorHex || '#1A1A1A'};"></span>
-                            <strong>${item.color}</strong> • Size: <strong>${item.size}</strong>
-                        </p>
-                        <div class="flex items-center gap-2 mt-1.5">
-                            <button onclick="changeCartQty(${idx}, -1)" class="w-5 h-5 bg-creamDark text-xs font-bold hover:bg-gold hover:text-white">-</button>
-                            <span class="text-xs font-bold">${item.qty}</span>
-                            <button onclick="changeCartQty(${idx}, 1)" class="w-5 h-5 bg-creamDark text-xs font-bold hover:bg-gold hover:text-white">+</button>
-                            <span class="text-xs font-bold text-gold ml-auto">${(item.price * item.qty).toLocaleString()} ETB</span>
-                        </div>
-                    </div>
-                    <button onclick="removeFromCart(${idx})" class="text-charcoal/40 hover:text-red-600 px-1.5">
-                        <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
-                `;
-                cartItemsEl.appendChild(div);
-            });
-
-            const discountRate = getBulkDiscountRate(totalQty);
-            const discountValue = Math.round(subtotal * discountRate);
-            const discountedSubtotal = subtotal - discountValue;
-
-            if (discountRate > 0) {
-                const percent = Math.round(discountRate * 100);
-                discountRow.classList.remove('hidden');
-                discountLabel.textContent = `Bulk Discount (${percent}% - ${totalQty} pcs):`;
-                discountAmountEl.textContent = `- ${discountValue.toLocaleString()} ETB`;
-                bulkTierBadge.textContent = `🎉 ${percent}% Wholesale Discount Unlocked!`;
-            } else {
-                discountRow.classList.add('hidden');
-                bulkTierBadge.textContent = `Add ${3 - totalQty} more item(s) to get 10% OFF!`;
-            }
-
-            const isAddis = locationSelect.value === "addis";
-            const delivery = isAddis ? (discountedSubtotal >= 5000 ? 0 : 200) : 350;
-            const grandTotal = discountedSubtotal + delivery;
-
-            subtotalEl.textContent = `${subtotal.toLocaleString()} ETB`;
-            deliveryFeeEl.textContent = delivery === 0 ? "FREE" : `${delivery} ETB`;
-            cartTotalEl.textContent = `${grandTotal.toLocaleString()} ETB`;
-
-            if (isAddis) {
-                const deposit = Math.round(grandTotal * 0.5);
-                const balance = grandTotal - deposit;
-                payNowLabel.textContent = currentLang === 'am' ? "አሁን የሚከፈል ቀብድ (50%):" : "Required Deposit (50%):";
-                payNowAmount.textContent = `${deposit.toLocaleString()} ETB`;
-                balanceRow.classList.remove('hidden');
-                balanceAmount.textContent = `${balance.toLocaleString()} ETB`;
-            } else {
-                payNowLabel.textContent = currentLang === 'am' ? "አሁን የሚከፈል ሙሉ ክፍያ (100%):" : "Full Payment Required (100%):";
-                payNowAmount.textContent = `${grandTotal.toLocaleString()} ETB`;
-                balanceRow.classList.add('hidden');
-            }
-        }
-
-        document.getElementById('telegram-checkout-btn').addEventListener('click', () => {
-            if (cart.length === 0) {
-                showToast("እባክዎ መጀመሪያ አባያ ይምረጡ!");
-                return;
-            }
-
-            const name = document.getElementById('customer-name').value.trim();
-            const phone = document.getElementById('customer-phone').value.trim();
-            const address = document.getElementById('customer-address').value.trim();
-            const txRef = document.getElementById('transaction-ref').value.trim() || "Screenshot will be attached";
-            const userEmailText = currentUser ? `\n📧 *Verified Gmail:* ${currentUser.email}` : "";
-
-            if (!name || !phone || !address) {
-                showToast("እባክዎ ስምዎን፣ ስልክ ቁጥርዎን እና አድራሻዎን ያስገቡ!");
-                return;
-            }
-
-            const isAddis = locationSelect.value === "addis";
-            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-            let subtotal = 0;
-            let orderLines = cart.map((item, i) => {
-                const itemTotal = item.price * item.qty;
-                subtotal += itemTotal;
-                return `${i + 1}. ${item.name} [Color: ${item.color} | Size: ${item.size}] x${item.qty} = ${itemTotal.toLocaleString()} ETB`;
-            }).join('\n');
-
-            const discountRate = getBulkDiscountRate(totalQty);
-            const discountValue = Math.round(subtotal * discountRate);
-            const discountedSubtotal = subtotal - discountValue;
-            const delivery = isAddis ? (discountedSubtotal >= 5000 ? 0 : 200) : 350;
-            const grandTotal = discountedSubtotal + delivery;
-            const paidNow = isAddis ? Math.round(grandTotal * 0.5) : grandTotal;
-            const balanceDue = grandTotal - paidNow;
-
-            const discountText = discountRate > 0 
-                ? `🏷️ *Bulk Discount (${Math.round(discountRate * 100)}%):* -${discountValue.toLocaleString()} ETB\n` 
-                : "";
-
-            const referralText = referralPartner ? `🤝 *Referred By (Partner):* ${referralPartner}\n` : "";
-
-            const paymentRuleText = isAddis 
-                ? `Addis Ababa (50% Deposit Paid: ${paidNow.toLocaleString()} ETB | Balance on Delivery: ${balanceDue.toLocaleString()} ETB)`
-                : `Outside Addis / International (100% Full Payment: ${paidNow.toLocaleString()} ETB)`;
-
-            const message = `✨ *NEW ORDER - MIRAN ABAYAS* ✨\n\n` +
-                            `👤 *Customer:* ${name}${userEmailText}\n` +
-                            `📞 *Phone:* ${phone}\n` +
-                            `📍 *Location:* ${address}\n` +
-                            referralText + `\n` +
-                            `🛍️ *Ordered Items (${totalQty} pcs):*\n${orderLines}\n\n` +
-                            `💵 *Original Subtotal:* ${subtotal.toLocaleString()} ETB\n` +
-                            discountText +
-                            `💰 *Grand Total:* ${grandTotal.toLocaleString()} ETB\n` +
-                            `💳 *Payment Plan:* ${paymentRuleText}\n` +
-                            `🏦 *Paid Via:* ${selectedPaymentMethod}\n` +
-                            `🧾 *Transaction ID:* ${txRef}\n\n` +
-                            `I am attaching my payment receipt screenshot below.`;
-
-            window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(message)}`, '_blank');
         });
 
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 3500);
+        // One place that calculates every number (used by UI and by the Telegram message)
+        function computeTotals() {
+            const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+            const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            const rate = getBulkDiscountRate(totalQty);
+            const discount = Math.round(subtotal * rate);
+            const discounted = subtotal - discount;
+            const isAddis = locationSelect.value === "addis";
+            const delivery = isAddis ? (discounted >= 5000 ? 0 : 200) : 350;
+            const grand = discounted + delivery;
+            const payNow = isAddis ? Math.round(grand * 0.5) : grand;
+            return { totalQty, subtotal, rate, discount, isAddis, delivery, grand, payNow, balance: grand - payNow };
         }
+
+        function updateCartUI() {
+            saveCart();
+            const c = computeTotals();
+            $('cart-badge').textContent = c.totalQty;
+            const itemsEl = $('cart-items');
+
+            if (cart.length === 0) {
+                itemsEl.innerHTML = `<p class="text-center text-charcoal/50 text-sm py-8">${esc(t('cart_empty'))}</p>`;
+                $('cart-subtotal').textContent = money(0);
+                $('discount-row').classList.add('hidden');
+                $('delivery-fee').textContent = money(0);
+                $('cart-total').textContent = money(0);
+                $('pay-now-label').textContent = t(c.isAddis ? 'dep_label' : 'full_label');
+                $('pay-now-amount').textContent = money(0);
+                $('balance-amount').textContent = money(0);
+                $('balance-row').classList.toggle('hidden', !c.isAddis);
+                $('bulk-tier-badge').textContent = t('badge_more', { n: 3 });
+                return;
+            }
+
+            itemsEl.innerHTML = cart.map((item, idx) => `
+                <div class="flex gap-3 bg-white p-2.5 border border-gold/15 items-center">
+                    <img src="${esc(safeUrl(item.img))}" alt="${esc(item.name)}" loading="lazy" class="w-14 h-16 object-cover object-top bg-creamDark">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-serif font-bold text-xs">${esc(item.name)}</h4>
+                        <p class="text-[11px] text-charcoal/70 flex items-center gap-1 mt-0.5">
+                            <span class="w-2.5 h-2.5 rounded-full border border-charcoal/30 inline-block" style="background-color:${safeHex(item.colorHex)};"></span>
+                            <strong>${esc(item.color)}</strong> • <strong>${esc(item.size)}</strong>
+                        </p>
+                        <div class="flex items-center gap-2 mt-1.5">
+                            <button data-cart-action="dec" data-idx="${idx}" class="w-5 h-5 bg-creamDark text-xs font-bold hover:bg-gold hover:text-white" aria-label="Decrease">-</button>
+                            <span class="text-xs font-bold">${item.qty}</span>
+                            <button data-cart-action="inc" data-idx="${idx}" class="w-5 h-5 bg-creamDark text-xs font-bold hover:bg-gold hover:text-white" aria-label="Increase">+</button>
+                            <span class="text-xs font-bold text-gold ml-auto">${esc(money(item.price * item.qty))}</span>
+                        </div>
+                    </div>
+                    <button data-cart-action="remove" data-idx="${idx}" class="text-charcoal/40 hover:text-red-600 px-1.5" aria-label="Remove"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                </div>`).join('');
+
+            if (c.rate > 0) {
+                const p = Math.round(c.rate * 100);
+                $('discount-row').classList.remove('hidden');
+                $('discount-label').textContent = t('disc_label', { p, q: c.totalQty });
+                $('discount-amount').textContent = `- ${money(c.discount)}`;
+                $('bulk-tier-badge').textContent = t('badge_unlocked', { p });
+            } else {
+                $('discount-row').classList.add('hidden');
+                $('bulk-tier-badge').textContent = t('badge_more', { n: 3 - c.totalQty });
+            }
+
+            $('cart-subtotal').textContent = money(c.subtotal);
+            $('delivery-fee').textContent = c.delivery === 0 ? t('free') : money(c.delivery);
+            $('cart-total').textContent = money(c.grand);
+            $('pay-now-label').textContent = t(c.isAddis ? 'dep_label' : 'full_label');
+            $('pay-now-amount').textContent = money(c.payNow);
+            $('balance-row').classList.toggle('hidden', !c.isAddis);
+            $('balance-amount').textContent = money(c.balance);
+        }
+
+        /* ------------------------------------------------------------------
+           CHECKOUT -> Telegram
+           Prices are calculated in the browser, so ALWAYS re-check the total
+           against your own price list before accepting a payment.
+        ------------------------------------------------------------------ */
+        const referralPartner = (new URLSearchParams(location.search).get('ref') || "").slice(0, 40);
+
+        $('telegram-checkout-btn').addEventListener('click', async () => {
+            if (cart.length === 0) { showToast(t('err_cart_empty')); return; }
+
+            const name = $('customer-name').value.trim();
+            const phone = $('customer-phone').value.trim();
+            const address = $('customer-address').value.trim();
+            const txRef = $('transaction-ref').value.trim() || "Screenshot will be attached";
+            if (!name || !phone || !address) { showToast(t('err_details')); return; }
+            if (phone.replace(/\D/g, '').length < 9) { showToast(t('err_phone')); return; }
+
+            const c = computeTotals();
+            const lines = cart.map((item, i) =>
+                `${i + 1}. ${item.name} [Color: ${item.color} | Size: ${item.size}] x${item.qty} = ${(item.price * item.qty).toLocaleString()} ETB`).join('\n');
+
+            const discountText = c.rate > 0 ? `🏷️ Bulk Discount (${Math.round(c.rate * 100)}%): -${c.discount.toLocaleString()} ETB\n` : "";
+            const referralText = referralPartner ? `🤝 Referred By: ${referralPartner}\n` : "";
+            const planText = c.isAddis
+                ? `Addis Ababa (50% Deposit: ${c.payNow.toLocaleString()} ETB | Balance on Delivery: ${c.balance.toLocaleString()} ETB)`
+                : `Outside Addis / International (100% Full Payment: ${c.payNow.toLocaleString()} ETB)`;
+
+            const message = `✨ NEW ORDER - MIRAN ABAYAS ✨\n\n` +
+                `👤 Customer: ${name}\n📞 Phone: ${phone}\n📍 Location: ${address}\n` +
+                referralText + `\n` +
+                `🛍️ Ordered Items (${c.totalQty} pcs):\n${lines}\n\n` +
+                `💵 Subtotal: ${c.subtotal.toLocaleString()} ETB\n` + discountText +
+                `🚚 Delivery: ${c.delivery.toLocaleString()} ETB\n` +
+                `💰 Grand Total: ${c.grand.toLocaleString()} ETB\n` +
+                `💳 Payment Plan: ${planText}\n🏦 Paid Via: ${selectedPaymentMethod}\n🧾 Transaction ID: ${txRef}\n\n` +
+                `I am attaching my payment receipt screenshot below.`;
+
+            let url = `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(message)}`;
+            // Telegram links break when too long: copy the order instead and open a plain chat.
+            if (url.length > 1800) {
+                try { await navigator.clipboard.writeText(message); showToast(t('order_copied')); } catch { /* ignore */ }
+                url = `https://t.me/${TELEGRAM_USERNAME}`;
+            }
+            window.open(url, '_blank', 'noopener');
+        });
+
+        /* ------------------------------------------------------------------
+           KEYBOARD + INIT
+        ------------------------------------------------------------------ */
+        document.addEventListener('keydown', e => {
+            if (e.key !== 'Escape') return;
+            window.closeModal();
+            adminModal.classList.add('hidden');
+            cartDrawer.classList.add('hidden');
+        });
+
+        applyStaticLanguage();
+        renderReviews();
+        selectPayment("Telebirr");
+        updateCartUI();
+        updateModalBulkHint();
+        loadProductsFromCloud();
     </script>
 </body>
 </html>
