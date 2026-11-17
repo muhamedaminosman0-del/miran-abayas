@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <!-- Categories -->
+        <!-- Categories Navigation -->
         <div class="bg-creamDark/60 border-t border-gold/15 overflow-x-auto">
             <div class="max-w-7xl mx-auto px-4 flex items-center space-x-6 text-xs uppercase tracking-wider font-semibold py-2.5 whitespace-nowrap">
                 <button class="filter-btn text-aliexpressOrange font-bold border-b-2 border-aliexpressOrange pb-0.5" data-filter="all">All Products</button>
@@ -180,26 +180,20 @@
         </div>
     </div>
 
-    <!-- PRODUCT DETAIL MODAL (ALIEXPRESS GALLERY STYLE) -->
+    <!-- PRODUCT DETAIL MODAL -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden bg-charcoal/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-cream max-w-4xl w-full border border-gold/30 shadow-2xl overflow-hidden relative my-8 rounded-xl flex flex-col md:flex-row">
             <button id="close-modal-btn" class="absolute top-4 right-4 w-9 h-9 bg-white/50 backdrop-blur rounded-full flex items-center justify-center hover:bg-aliexpressOrange hover:text-white transition-colors z-20 shadow">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
-            <!-- Left Side: AliExpress Image Gallery -->
             <div class="bg-white md:w-1/2 flex flex-col border-r border-gold/20">
-                <!-- Main Image -->
                 <div class="relative w-full aspect-[4/5] bg-creamDark flex items-center justify-center p-2">
                     <img id="modal-img" src="" class="w-full h-full object-cover rounded shadow-sm">
                 </div>
-                <!-- Small Thumbnails Row -->
-                <div id="modal-thumbnails" class="flex gap-2 p-3 overflow-x-auto bg-white border-t border-gold/10">
-                    <!-- Thumbnails generated here -->
-                </div>
+                <div id="modal-thumbnails" class="flex gap-2 p-3 overflow-x-auto bg-white border-t border-gold/10"></div>
             </div>
             
-            <!-- Right Side: Details & Cart -->
             <div class="p-6 md:w-1/2 flex flex-col justify-between bg-cream">
                 <div>
                     <span id="modal-category" class="text-xs uppercase tracking-widest text-aliexpressOrange font-extrabold"></span>
@@ -209,18 +203,13 @@
                         <span class="text-xs bg-red-100 text-aliexpressOrange px-2 py-0.5 rounded font-bold">10% OFF 3+ items</span>
                     </div>
 
-                    <!-- Color Select (Using small images like AliExpress) -->
                     <div class="mb-5">
                         <label class="block text-xs uppercase tracking-wider font-bold mb-2">Color: <span id="selected-color-label" class="text-aliexpressOrange font-semibold"></span></label>
                         <div id="modal-color-options" class="flex flex-wrap gap-2"></div>
                     </div>
 
-                    <!-- Size Select -->
                     <div class="mb-5">
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="text-xs uppercase tracking-wider font-bold">Size (Length):</label>
-                            <span class="text-[10px] text-gray-500 underline cursor-pointer">Size Guide</span>
-                        </div>
+                        <label class="block text-xs uppercase tracking-wider font-bold mb-2">Size (Length):</label>
                         <div class="grid grid-cols-5 gap-2" id="size-options">
                             <button class="size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white py-2 text-xs font-bold rounded" data-size="52">52</button>
                             <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="54">54</button>
@@ -230,7 +219,6 @@
                         </div>
                     </div>
 
-                    <!-- Quantity -->
                     <div class="mb-6">
                         <label class="block text-xs uppercase tracking-wider font-bold mb-2">Quantity:</label>
                         <div class="flex items-center gap-3">
@@ -287,6 +275,7 @@
     </div>
 
     <script>
+        // Fixing Javascript String Syntax Error
         const VENDOR_MARKUP = 1.10; 
         
         const defaultProducts = [
@@ -356,7 +345,7 @@
             });
         }
 
-        // --- ADMIN: Upload Product with Colors ---
+        // --- ADMIN: Upload Product ---
         let mainPhotoData = "";
         $('admin-panel-btn').addEventListener('click', () => {
             $('admin-modal').classList.remove('hidden');
@@ -442,7 +431,7 @@
             renderGrid();
         });
 
-        // --- MARKETPLACE GRID (ALIEXPRESS HOVER ZOOM) ---
+        // --- MARKETPLACE GRID ---
         let currentFilter = 'all';
         let currentSearch = '';
 
@@ -465,7 +454,6 @@
                 grid.innerHTML += `
                     <div class="bg-white rounded-lg border border-gold/30 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between overflow-hidden cursor-pointer group" onclick="openProduct('${p.id}')">
                         <div class="relative aspect-[3/4] w-full bg-creamDark overflow-hidden">
-                            <!-- AliExpress Image Hover Zoom Effect -->
                             <img src="${p.img}" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 ease-out">
                             <span class="absolute top-2 left-2 bg-aliexpressOrange text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded shadow">Wholesale Deal</span>
                             <div class="absolute bottom-2 left-2 bg-charcoal/80 text-cream text-[9px] px-2 py-0.5 rounded">⭐ ${p.rating} | ${p.sold}</div>
@@ -497,7 +485,7 @@
         $('search-input').addEventListener('input', e => applySearch(e.target.value));
         $('mobile-search-input').addEventListener('input', e => applySearch(e.target.value));
 
-        // --- PRODUCT MODAL (ALIEXPRESS THUMBNAIL GALLERY) ---
+        // --- PRODUCT MODAL ---
         let selectedProduct = null;
         let selectedColor = null;
         let selectedSize = '54';
@@ -509,7 +497,6 @@
             $('modal-title').textContent = selectedProduct.name;
             $('modal-price').textContent = formatMoney(selectedProduct.price);
             
-            // Setup AliExpress Style Thumbnail & Color Variants
             const colorOpts = $('modal-color-options');
             const thumbnailsOpts = $('modal-thumbnails');
             colorOpts.innerHTML = '';
@@ -517,11 +504,9 @@
             
             const vars = selectedProduct.colorVariants && selectedProduct.colorVariants.length ? selectedProduct.colorVariants : [{name: "Standard", hex: "#1A1A1A", img: selectedProduct.img}];
             
-            // Add Main Image to Thumbnails
             addThumbnail(selectedProduct.img, true);
 
             vars.forEach((v, idx) => {
-                // Color Selectors (Tiny Photos like AliExpress)
                 const cBtn = document.createElement('button');
                 cBtn.className = `p-0.5 border-2 rounded ${idx===0 ? 'border-aliexpressOrange' : 'border-transparent hover:border-gold/50'} transition-all`;
                 cBtn.innerHTML = `<img src="${v.img}" class="w-9 h-9 object-cover rounded-sm">`;
@@ -531,14 +516,12 @@
                     cBtn.className = 'p-0.5 border-2 border-aliexpressOrange rounded transition-all';
                     selectColor(v);
                     
-                    // Highlight matching thumbnail
                     document.querySelectorAll('#modal-thumbnails img').forEach(t => t.classList.remove('border-aliexpressOrange', 'border-2'));
                     const matchingThumb = [...document.querySelectorAll('#modal-thumbnails img')].find(img => img.src === v.img);
                     if(matchingThumb) matchingThumb.classList.add('border-aliexpressOrange', 'border-2');
                 });
                 colorOpts.appendChild(cBtn);
 
-                // Thumbnail Gallery (Below Main Image)
                 if(v.img !== selectedProduct.img) {
                     addThumbnail(v.img, false);
                 }
@@ -677,23 +660,10 @@
             const discount = subtotal * rate;
             const final = subtotal - discount;
 
-            const lines = cart.map((i, idx) => `${idx+1}. ${i.name} [Color: ${i.color} | Size: ${i.size}] x${i.qty} = ${formatMoney(i.price * i.qty)}`).join('
-');
-            let msg = `✨ MIRAN EXPRESS ORDER ✨
-
-👤 Customer: ${name}
-📞 Phone: ${phone}
-
-🛍️ Items (${totalQty} pcs):
-${lines}
-
-💵 Subtotal: ${formatMoney(subtotal)}`;
-            if(rate > 0) msg += `
-🏷️ Wholesale Discount (${rate*100}%): -${formatMoney(discount)}`;
-            msg += `
-💰 GRAND TOTAL: ${formatMoney(final)}
-
-Please confirm my order.`;
+            const lines = cart.map((i, idx) => `${idx+1}. ${i.name} [Color: ${i.color} | Size: ${i.size}] x${i.qty} = ${formatMoney(i.price * i.qty)}`).join('\n');
+            let msg = `✨ MIRAN EXPRESS ORDER ✨\n\n👤 Customer: ${name}\n📞 Phone: ${phone}\n\n🛍️ Items (${totalQty} pcs):\n${lines}\n\n💵 Subtotal: ${formatMoney(subtotal)}`;
+            if(rate > 0) msg += `\n🏷️ Wholesale Discount (${rate*100}%): -${formatMoney(discount)}`;
+            msg += `\n💰 GRAND TOTAL: ${formatMoney(final)}\n\nPlease confirm my order.`;
 
             window.open(`https://t.me/mame15?text=${encodeURIComponent(msg)}`, '_blank');
         });
