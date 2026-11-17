@@ -177,28 +177,28 @@
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
                     <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-rotate-left"></i></div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp1_title">Return Guarantee</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp1_desc"></p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp1_desc">If the delivered abaya differs from the photo or has any defect, your deposit is refunded or the abaya is exchanged.</p>
                 </div>
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
                     <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-hand-holding-dollar"></i></div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp2_title">Inspect Before Final Pay</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp2_desc"></p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp2_desc">Addis Ababa customers pay only a 50% deposit upfront and pay the remaining 50% after inspecting the abaya on delivery.</p>
                 </div>
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
                     <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-video"></i></div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp3_title">Live Video Verification</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp3_desc"></p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp3_desc">Want to check the fabric before paying? Message Admin (@mame15) on Telegram for a live close-up video.</p>
                 </div>
                 <div class="bg-white p-6 border border-gold/20 shadow-sm">
                     <div class="w-12 h-12 rounded-full bg-gold/15 text-gold flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-user-shield"></i></div>
                     <h3 class="font-serif font-bold text-lg mb-2" data-i18n="bp4_title">Supervised Delivery</h3>
-                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp4_desc"></p>
+                    <p class="text-xs text-charcoal/75 leading-relaxed" data-i18n="bp4_desc">Every order is personally supervised by the Miran admin and delivered on schedule.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- REVIEWS (rendered from REVIEWS array in the script) -->
+    <!-- REVIEWS -->
     <section id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="text-center max-w-2xl mx-auto mb-14">
             <span class="text-gold uppercase tracking-[0.2em] text-xs font-bold block mb-2" data-i18n="rev_sub">Testimonials</span>
@@ -216,7 +216,7 @@
                 <span class="text-gold uppercase tracking-[0.2em] text-xs font-bold block mb-2" data-i18n="sg_sub">Perfect Fit</span>
                 <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-4" data-i18n="sg_title">Size & Length Guide</h2>
                 <div class="w-16 h-0.5 bg-gold mx-auto mb-6"></div>
-                <p class="text-charcoal/70 text-sm" data-i18n="sg_desc"></p>
+                <p class="text-charcoal/70 text-sm" data-i18n="sg_desc">All Miran abayas are cut with a relaxed, modest silhouette. Use your height to find your length.</p>
             </div>
             <div class="overflow-x-auto shadow-xl bg-cream border border-gold/20">
                 <table class="w-full text-left border-collapse">
@@ -248,7 +248,7 @@
                     <span class="font-serif text-3xl tracking-[0.2em] font-bold text-cream uppercase">Miran<span class="text-gold">.</span></span>
                     <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-semibold -mt-1">Luxury Abayas</span>
                 </a>
-                <p class="text-cream/70 text-sm max-w-md leading-relaxed" data-i18n="footer_desc"></p>
+                <p class="text-cream/70 text-sm max-w-md leading-relaxed" data-i18n="footer_desc">Luxury modest fashion for elegance and comfort. Retail & wholesale orders delivered across Addis Ababa, regional Ethiopia and worldwide.</p>
                 <div class="flex space-x-4 pt-2">
                     <a href="https://t.me/mame15" target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-white transition-colors text-xs font-bold flex items-center gap-2">
                         <i class="fa-brands fa-telegram text-base"></i> @mame15
@@ -275,7 +275,6 @@
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-cream/50">
             <span>&copy; 2026 Miran Luxury Abayas. All Rights Reserved.</span>
-            <!-- Vendor login lives here, not in front of customers -->
             <button id="vendor-login-btn" class="text-cream/30 hover:text-gold transition-colors flex items-center gap-1.5">
                 <i class="fa-solid fa-lock text-[10px]"></i> <span data-i18n="vendor_login">Vendor login</span>
             </button>
@@ -512,7 +511,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getStorage, ref as sRef, uploadString, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
         /* ------------------------------------------------------------------
            CONFIG
@@ -527,8 +525,6 @@
             measurementId: "G-3FN5X46186"
         };
 
-        // NOTE: this list only controls what the UI shows. The real protection
-        // is in firestore.rules / storage.rules (see rules file). Keep them in sync.
         const SUPER_ADMIN_EMAIL = "muhamedaminosman0@gmail.com";
         const APPROVED_VENDORS = ["muhamedaminosman0@gmail.com"].map(e => e.toLowerCase());
 
@@ -537,8 +533,6 @@
         const CBE_ACCOUNT = "1000704450568";
         const VENDOR_MARKUP = 1.10;
 
-        // Replace these with REAL customer reviews. Only entries with verified:true
-        // show the "Verified Buyer" badge. Remove any review that is not genuine.
         const REVIEWS = [
             { name: "ሰሚራ አህመድ (Semira A.)", place: "Bole, Addis Ababa", verified: true,
               text: "ጨርቁ በጣም ልስልስ ያለ ኦሪጅናል ኒዳ ነው። ፎቶው ላይ ካየሁት በላይ ሲለበስ በጣም ያምራል! ቦሌ ድረስ በሰዓቱ ስላደረሳችሁልኝ አመሰግናለሁ።" },
@@ -689,7 +683,7 @@
             currentLang = lang;
             store.set('miran_lang', lang);
             applyStaticLanguage();
-            applyFilters();          // keeps current filter + search
+            applyFilters();
             renderReviews();
             updateCartUI();
             updateAccountBox();
@@ -709,7 +703,6 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const storage = getStorage(app);
         const provider = new GoogleAuthProvider();
 
         let currentUser = null;
@@ -722,7 +715,6 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user && !APPROVED_VENDORS.includes(emailOf(user))) {
-                // A normal Google user is not a vendor; sign out silently.
                 await signOut(auth);
                 showToast("This Google account is not an approved vendor.");
                 return;
@@ -813,7 +805,6 @@
             applyFilters();
         }
 
-        /* ---- Filter + search live in one place so they cooperate ---- */
         const filterState = { category: 'all', term: '' };
 
         function applyFilters() {
@@ -921,7 +912,7 @@
         }
 
         /* ------------------------------------------------------------------
-           IMAGES: compress -> upload to Firebase Storage -> save URL only
+           IMAGES: Base64 direct compression (No Storage needed)
         ------------------------------------------------------------------ */
         function compressImage(file, maxWidth, quality) {
             return new Promise((resolve, reject) => {
@@ -942,18 +933,6 @@
                 };
                 reader.readAsDataURL(file);
             });
-        }
-
-        async function uploadImage(dataUrl) {
-            const path = `abayas/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.jpg`;
-            const r = sRef(storage, path);
-            await uploadString(r, dataUrl, 'data_url');
-            return await getDownloadURL(r);
-        }
-
-        async function deleteStoredImage(url) {
-            if (!/^https:\/\/firebasestorage\.googleapis\.com|\.firebasestorage\.app/.test(url || '')) return;
-            try { await deleteObject(sRef(storage, url)); } catch { /* already gone or no permission */ }
         }
 
         /* ------------------------------------------------------------------
@@ -987,7 +966,7 @@
                 const f = e.target.files[0];
                 if (!f) return;
                 try {
-                    row._img = await compressImage(f, 700, 0.75);
+                    row._img = await compressImage(f, 600, 0.70);
                     thumb.src = row._img;
                     thumb.classList.remove('hidden');
                     labelSpan.textContent = t('photo_done');
@@ -1010,7 +989,7 @@
             const file = e.target.files[0];
             if (!file) return;
             try {
-                mainPhotoDataUrl = await compressImage(file, 800, 0.78);
+                mainPhotoDataUrl = await compressImage(file, 700, 0.72);
                 photoPreview.src = mainPhotoDataUrl;
                 photoPreview.classList.remove('hidden');
                 uploadPlaceholder.classList.add('hidden');
@@ -1039,17 +1018,14 @@
             btnLabel.textContent = t('publishing');
 
             try {
-                // 1) upload main image + every variant image in parallel; only URLs are stored
-                const mainUrlPromise = uploadImage(mainPhotoDataUrl);
                 const rows = [...document.querySelectorAll('.color-variant-row')]
                     .map(r => ({ name: r.querySelector('.variant-name').value.trim(), hex: safeHex(r.querySelector('.variant-hex').value), data: r._img }))
                     .filter(r => r.name);
 
-                const mainUrl = await mainUrlPromise;
-                const variants = await Promise.all(rows.map(async r => ({
-                    name: r.name, hex: r.hex, img: r.data ? await uploadImage(r.data) : mainUrl
-                })));
-                if (variants.length === 0) variants.push({ name: "Standard", hex: "#1A1A1A", img: mainUrl });
+                const variants = rows.map(r => ({
+                    name: r.name, hex: r.hex, img: r.data || mainPhotoDataUrl
+                }));
+                if (variants.length === 0) variants.push({ name: "Standard", hex: "#1A1A1A", img: mainPhotoDataUrl });
 
                 const catValue = $('new-product-category').value;
                 const newAbaya = {
@@ -1060,7 +1036,7 @@
                     colorVariants: variants,
                     fabric: $('new-product-fabric').value.trim() || "Premium Fabric",
                     desc: $('new-product-desc').value.trim() || "Handcrafted luxury abaya with matching shayla.",
-                    img: mainUrl,
+                    img: mainPhotoDataUrl,
                     vendorEmail: emailOf(currentUser),
                     createdAt: Date.now()
                 };
@@ -1174,9 +1150,6 @@
             try {
                 if (!target.isDefault) {
                     await deleteDoc(doc(db, "abayas", String(target.id)));
-                    // best-effort cleanup of stored images
-                    const urls = new Set([target.img, ...(target.colorVariants || []).map(v => v.img)]);
-                    urls.forEach(u => deleteStoredImage(u));
                 }
                 products = products.filter(p => String(p.id) !== String(target.id));
                 applyFilters();
@@ -1200,7 +1173,7 @@
         });
 
         /* ------------------------------------------------------------------
-           CART (saved in localStorage so a page refresh keeps it)
+           CART
         ------------------------------------------------------------------ */
         let cart = store.get('miran_cart', []);
         if (!Array.isArray(cart)) cart = [];
@@ -1259,7 +1232,6 @@
 
         locationSelect.addEventListener('change', updateCartUI);
 
-        // Cart item buttons use event delegation (no inline onclick)
         $('cart-items').addEventListener('click', e => {
             const btn = e.target.closest('[data-cart-action]');
             if (!btn) return;
@@ -1272,7 +1244,6 @@
             updateCartUI();
         });
 
-        // One place that calculates every number (used by UI and by the Telegram message)
         function computeTotals() {
             const totalQty = cart.reduce((s, i) => s + i.qty, 0);
             const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -1345,11 +1316,6 @@
             $('balance-amount').textContent = money(c.balance);
         }
 
-        /* ------------------------------------------------------------------
-           CHECKOUT -> Telegram
-           Prices are calculated in the browser, so ALWAYS re-check the total
-           against your own price list before accepting a payment.
-        ------------------------------------------------------------------ */
         const referralPartner = (new URLSearchParams(location.search).get('ref') || "").slice(0, 40);
 
         $('telegram-checkout-btn').addEventListener('click', async () => {
@@ -1383,7 +1349,6 @@
                 `I am attaching my payment receipt screenshot below.`;
 
             let url = `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(message)}`;
-            // Telegram links break when too long: copy the order instead and open a plain chat.
             if (url.length > 1800) {
                 try { await navigator.clipboard.writeText(message); showToast(t('order_copied')); } catch { /* ignore */ }
                 url = `https://t.me/${TELEGRAM_USERNAME}`;
@@ -1391,9 +1356,6 @@
             window.open(url, '_blank', 'noopener');
         });
 
-        /* ------------------------------------------------------------------
-           KEYBOARD + INIT
-        ------------------------------------------------------------------ */
         document.addEventListener('keydown', e => {
             if (e.key !== 'Escape') return;
             window.closeModal();
