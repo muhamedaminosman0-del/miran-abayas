@@ -48,6 +48,24 @@
 </head>
 <body class="bg-cream text-charcoal antialiased selection:bg-gold selection:text-white">
 
+    <!-- FORCED LOGIN OVERLAY (Appears until user logs in with Google) -->
+    <div id="auth-gate-overlay" class="fixed inset-0 z-50 bg-charcoal/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-cream max-w-md w-full border border-gold/50 shadow-2xl p-8 text-center relative">
+            <a href="#" class="font-serif text-4xl tracking-widest font-bold text-charcoal uppercase block mb-1">
+                Miran<span class="text-gold">.</span>
+            </a>
+            <span class="text-[10px] uppercase tracking-[0.3em] text-gold font-bold block mb-4">Luxury Abayas</span>
+            
+            <p class="text-xs text-charcoal/70 leading-relaxed mb-8">
+                ሱቁን ለመጠቀም እና አባያዎችን ለማየት እባክዎ መጀመሪያ በ Google መለያዎ ይግቡ (Sign In)።
+            </p>
+
+            <button id="gate-google-login-btn" class="w-full bg-white hover:bg-creamDark border border-gold/50 py-3.5 px-4 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-sm">
+                <i class="fa-brands fa-google text-[#DB4437] text-base"></i> Continue with Google
+            </button>
+        </div>
+    </div>
+
     <!-- Top Announcement Bar -->
     <div class="bg-charcoal text-cream text-[11px] sm:text-xs py-2.5 px-4 text-center tracking-wider uppercase font-medium">
         Bulk Discount: 3+ pcs (10% OFF) | 5+ pcs (15% OFF) | 10+ pcs (20% OFF) • Addis: 50% Deposit | Outside: 100%
@@ -62,9 +80,12 @@
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <!-- Brand Logo -->
-            <a href="#" class="font-serif text-3xl md:text-4xl tracking-widest font-bold text-charcoal uppercase select-none">
-                Miran<span class="text-gold">.</span>
+            <!-- Brand Logo (Refined Luxury Typography) -->
+            <a href="#" class="flex flex-col items-start select-none group">
+                <span class="font-serif text-2xl md:text-3xl tracking-[0.2em] font-bold text-charcoal uppercase group-hover:text-gold transition-colors">
+                    Miran<span class="text-gold">.</span>
+                </span>
+                <span class="text-[9px] uppercase tracking-[0.25em] text-goldDark font-semibold -mt-1">Luxury Abayas</span>
             </a>
 
             <!-- Desktop Nav Links -->
@@ -87,14 +108,8 @@
                     <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline" data-i18n="btn_add_abaya">Add Abaya</span>
                 </button>
 
-                <!-- Google Sign-In / User Profile Button -->
-                <button id="google-login-btn" class="bg-white hover:bg-creamDark border border-gold/40 px-2.5 py-1.5 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs" title="Sign in with Google">
-                    <i class="fa-brands fa-google text-[#DB4437]"></i>
-                    <span id="auth-btn-text" class="hidden sm:inline">Sign In</span>
-                </button>
-
                 <!-- Logged-in User Pill -->
-                <div id="user-profile-pill" class="hidden flex items-center gap-1.5 bg-white border border-gold/40 px-2 py-1">
+                <div id="user-profile-pill" class="flex items-center gap-1.5 bg-white border border-gold/40 px-2 py-1">
                     <img id="user-avatar" src="" alt="User" class="w-5 h-5 rounded-full object-cover">
                     <span id="user-first-name" class="text-[11px] font-bold max-w-[70px] truncate"></span>
                     <button id="google-logout-btn" class="text-charcoal/50 hover:text-red-600 text-xs pl-1" title="Sign Out">
@@ -348,8 +363,11 @@
     <footer id="footer" class="bg-charcoal text-cream pt-16 pb-8 border-t border-gold/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-cream/10">
             <div class="md:col-span-2 space-y-4">
-                <a href="#" class="font-serif text-3xl tracking-widest font-bold text-charcoal uppercase">
-                    Miran<span class="text-gold">.</span>
+                <a href="#" class="flex flex-col items-start select-none">
+                    <span class="font-serif text-3xl tracking-[0.2em] font-bold text-cream uppercase">
+                        Miran<span class="text-gold">.</span>
+                    </span>
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-semibold -mt-1">Luxury Abayas</span>
                 </a>
                 <p class="text-cream/70 text-sm max-w-md leading-relaxed" data-i18n="footer_desc">Luxury modest fashion curated for elegance and comfort. Retail & Wholesale orders delivered across Addis Ababa, regional Ethiopia, and worldwide.</p>
                 <div class="flex space-x-4 pt-2">
@@ -671,7 +689,11 @@
         let currentUser = null;
         let isVendor = false;
 
-        // Capture Referral Parameter from URL (e.g. ?ref=hanna)
+        const authGateOverlay = document.getElementById('auth-gate-overlay');
+        const gateGoogleLoginBtn = document.getElementById('gate-google-login-btn');
+        const userProfilePill = document.getElementById('user-profile-pill');
+        const openAdminBtn = document.getElementById('open-admin-btn');
+
         const urlParams = new URLSearchParams(window.location.search);
         const referralPartner = urlParams.get('ref') || "";
 
@@ -737,15 +759,11 @@
         }
         langToggleBtn.addEventListener('click', () => applyLanguage(currentLang === 'en' ? 'am' : 'en'));
 
-        const googleLoginBtn = document.getElementById('google-login-btn');
-        const googleLogoutBtn = document.getElementById('google-logout-btn');
-        const userProfilePill = document.getElementById('user-profile-pill');
-        const openAdminBtn = document.getElementById('open-admin-btn');
-
         function handleUserState(user) {
             currentUser = user;
             if (user) {
-                googleLoginBtn.classList.add('hidden');
+                authGateOverlay.classList.add('hidden');
+                
                 userProfilePill.classList.remove('hidden');
                 document.getElementById('user-avatar').src = user.photoURL || "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.displayName || "User");
                 document.getElementById('user-first-name').textContent = (user.displayName || "User").split(' ')[0];
@@ -764,8 +782,8 @@
                     showToast(`Welcome, ${user.displayName || user.email}!`);
                 }
             } else {
+                authGateOverlay.classList.remove('hidden');
                 isVendor = false;
-                googleLoginBtn.classList.remove('hidden');
                 userProfilePill.classList.add('hidden');
                 openAdminBtn.classList.add('hidden');
             }
@@ -773,7 +791,7 @@
 
         onAuthStateChanged(auth, (user) => handleUserState(user));
 
-        googleLoginBtn.addEventListener('click', async () => {
+        gateGoogleLoginBtn.addEventListener('click', async () => {
             try {
                 await signInWithPopup(auth, provider);
             } catch (err) {
@@ -781,7 +799,7 @@
             }
         });
 
-        googleLogoutBtn.addEventListener('click', async () => {
+        document.getElementById('google-logout-btn').addEventListener('click', async () => {
             if (auth) await signOut(auth);
             showToast("Signed out.");
         });
@@ -1501,4 +1519,4 @@
         }
     </script>
 </body>
-    </html>
+</html>
