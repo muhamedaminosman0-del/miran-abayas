@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miran Express | Production Environment</title>
+    <title>Miran Express | Luxury Abayas Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brandOrange: '#FF6A00', brandDark: '#1A1A1A', brandCream: '#FAF8F5', brandGold: '#C5A059'
+                        aliexpressOrange: '#FF6A00', cream: '#FAF8F5', creamDark: '#F0ECE1', 
+                        charcoal: '#1A1A1A', gold: '#C5A059'
                     },
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'], serif: ['Playfair Display', 'serif']
+                    }
                 }
             }
         }
@@ -22,348 +25,311 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #1A1A1A; }
         .font-serif { font-family: 'Playfair Display', serif; }
-        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #FF6A00; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
-<body class="bg-brandCream text-brandDark">
+<body class="bg-cream text-charcoal">
 
-    <!-- Top Bar: Language & Currency -->
-    <div class="bg-brandDark text-brandCream text-xs py-2 px-4 flex justify-between items-center z-50 relative">
+    <!-- Top Utility Bar -->
+    <div class="bg-charcoal text-cream text-[11px] py-2 px-4 flex justify-between items-center">
         <div class="flex items-center gap-4">
-            <span><i class="fa-solid fa-truck-fast text-brandOrange"></i> Global & Local Delivery</span>
+            <span><i class="fa-solid fa-tags text-aliexpressOrange"></i> Wholesale Discounts: 3+ (10%) | 5+ (15%)</span>
         </div>
         <div class="flex items-center gap-3">
-            <select id="currency-selector" class="bg-transparent border border-gray-600 rounded px-1 outline-none text-[10px] font-bold">
-                <option value="ETB">ETB (Br)</option>
-                <option value="USD">USD ($)</option>
-                <option value="SAR">SAR (ر.س)</option>
-            </select>
-            <select id="lang-selector" class="bg-transparent border border-gray-600 rounded px-1 outline-none text-[10px] font-bold">
-                <option value="en">English</option>
-                <option value="am">አማርኛ</option>
-                <option value="ar">العربية</option>
-            </select>
-            <button id="auth-btn" class="text-brandOrange hover:text-white font-bold"><i class="fa-solid fa-lock"></i> Vendor Portal</button>
+            <button id="auth-btn" class="text-aliexpressOrange font-bold flex items-center gap-1">
+                <i class="fa-solid fa-lock"></i> Vendor Portal
+            </button>
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="bg-white border-b border-brandGold/20 sticky top-0 z-40 shadow-sm p-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <h1 class="font-serif text-2xl font-bold">Miran <span class="bg-brandOrange text-white px-1.5 py-0.5 text-xs rounded uppercase">Express</span></h1>
+    <!-- Header & Search -->
+    <header class="sticky top-0 z-40 bg-white border-b border-gold/20 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-4">
+            <a href="#" class="flex flex-col items-start shrink-0">
+                <div class="flex items-center gap-1">
+                    <span class="font-serif text-2xl font-extrabold text-charcoal">Miran</span>
+                    <span class="bg-aliexpressOrange text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase">Express</span>
+                </div>
+                <span class="text-[9px] uppercase tracking-[0.2em] text-gold font-bold">Global Marketplace</span>
+            </a>
+
+            <div class="flex-1 max-w-xl hidden md:flex">
+                <div class="flex w-full border-2 border-aliexpressOrange rounded-full overflow-hidden bg-cream/30">
+                    <input type="text" id="search-input" placeholder="Search luxury abayas..." class="w-full px-5 py-2 text-sm bg-transparent outline-none">
+                    <button id="search-btn" class="bg-aliexpressOrange text-white px-6 py-2 text-xs font-bold uppercase"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                </div>
             </div>
-            <div class="flex items-center gap-4">
-                <button id="admin-panel-btn" class="hidden bg-brandDark text-white px-3 py-1.5 text-xs rounded font-bold">Admin Dashboard</button>
-                <button id="cart-btn" class="relative text-lg"><i class="fa-solid fa-bag-shopping"></i><span id="cart-count" class="absolute -top-1 -right-2 bg-brandOrange text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span></button>
+
+            <div class="flex items-center gap-3">
+                <button id="admin-panel-btn" class="hidden bg-aliexpressOrange text-white px-3 py-2 text-xs font-bold rounded uppercase"><i class="fa-solid fa-plus"></i> Add Abaya</button>
+                <button id="cart-btn" class="relative bg-charcoal text-cream px-3 py-2 rounded text-lg">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-aliexpressOrange text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Categories -->
+        <div class="bg-creamDark/60 border-t border-gold/15 overflow-x-auto">
+            <div class="max-w-7xl mx-auto px-4 flex items-center space-x-6 text-xs uppercase tracking-wider font-semibold py-2.5">
+                <button class="filter-btn text-aliexpressOrange font-bold border-b-2 border-aliexpressOrange" data-filter="all">All Products</button>
+                <button class="filter-btn text-charcoal/80" data-filter="classic">Classic Black</button>
+                <button class="filter-btn text-charcoal/80" data-filter="embroidered">Embroidered</button>
+                <button class="filter-btn text-charcoal/80" data-filter="pastel">Pastel & Colored</button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto p-4 sm:p-6 min-h-screen">
-        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- Products injected here -->
+    <!-- Products Grid -->
+    <main class="max-w-7xl mx-auto px-4 py-8 min-h-[60vh]">
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-gold/20">
+            <h1 class="font-serif text-2xl font-bold text-charcoal">Featured Abayas</h1>
+            <span class="text-xs font-semibold text-aliexpressOrange bg-white px-3 py-1.5 border border-gold/30 rounded">Fast Delivery</span>
         </div>
+        
+        <!-- Products will be generated here -->
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
     </main>
 
-    <!-- Admin Dashboard Modal -->
-    <div id="admin-modal" class="fixed inset-0 bg-black/80 hidden z-50 overflow-y-auto p-4">
-        <div class="bg-white max-w-4xl mx-auto rounded-lg shadow-2xl mt-10 overflow-hidden">
-            <div class="bg-brandDark text-white p-4 flex justify-between items-center">
-                <h2 class="font-bold font-serif text-xl">Vendor Dashboard</h2>
-                <button id="close-admin-btn" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="p-4 border-b flex gap-4 bg-gray-50">
-                <button id="tab-products" class="font-bold text-brandOrange border-b-2 border-brandOrange pb-1">Manage Products</button>
-                <button id="tab-orders" class="font-bold text-gray-500 hover:text-brandOrange pb-1">Manage Orders</button>
-            </div>
-            
-            <div id="admin-content" class="p-6">
-                <!-- Upload Form -->
-                <form id="upload-form" class="space-y-4 max-w-lg">
-                    <h3 class="font-bold text-sm uppercase tracking-wide border-b pb-2">Add New Product</h3>
-                    <input type="file" id="prod-image" accept="image/*" class="w-full text-sm" required>
-                    <div id="upload-progress" class="hidden h-2 w-full bg-gray-200 rounded overflow-hidden"><div class="h-full bg-brandOrange w-0 transition-all duration-300"></div></div>
-                    <input type="text" id="prod-name" placeholder="Product Name" class="w-full border p-2 text-sm rounded" required>
-                    <input type="number" id="prod-price" placeholder="Base Price (ETB)" class="w-full border p-2 text-sm rounded" required>
-                    <button type="submit" class="bg-brandOrange text-white px-4 py-2 text-sm font-bold rounded w-full flex justify-center items-center gap-2">
-                        <span id="upload-text">Upload to Cloud Storage</span>
-                        <div id="upload-spinner" class="loader hidden"></div>
-                    </button>
-                </form>
+    <!-- Admin Upload Modal -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/80 hidden z-50 overflow-y-auto p-4 flex items-center justify-center">
+        <div class="bg-white max-w-lg w-full rounded-lg shadow-2xl overflow-hidden p-6 relative">
+            <button id="close-admin-btn" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="font-bold font-serif text-2xl mb-4 text-aliexpressOrange">Vendor Portal</h2>
+            <form id="upload-form" class="space-y-4">
+                <input type="text" id="prod-name" placeholder="Abaya Name" class="w-full border border-gold/40 p-2 text-sm rounded focus:outline-none" required>
+                <input type="number" id="prod-price" placeholder="Wholesale Price (ETB)" class="w-full border border-gold/40 p-2 text-sm rounded focus:outline-none" required>
+                <select id="prod-cat" class="w-full border border-gold/40 p-2 text-sm rounded focus:outline-none">
+                    <option value="classic">Classic Black</option>
+                    <option value="embroidered">Embroidered</option>
+                    <option value="pastel">Pastel & Colored</option>
+                </select>
+                <input type="file" id="prod-image" accept="image/*" class="w-full text-sm border border-gold/40 p-2 rounded" required>
+                <button type="submit" class="bg-aliexpressOrange text-white px-4 py-3 text-sm font-bold uppercase rounded w-full">Publish Abaya</button>
+            </form>
+        </div>
+    </div>
 
-                <!-- Order Management (Hidden by default) -->
-                <div id="order-management" class="hidden">
-                    <h3 class="font-bold text-sm uppercase tracking-wide border-b pb-2 mb-4">Customer Orders</h3>
-                    <div id="orders-list" class="space-y-3"></div>
+    <!-- Product Detail / Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/80 hidden z-50 overflow-y-auto p-4 flex items-center justify-center">
+        <div class="bg-white max-w-2xl w-full rounded-lg shadow-2xl overflow-hidden relative grid grid-cols-1 md:grid-cols-2">
+            <button id="close-checkout-btn" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow"><i class="fa-solid fa-xmark"></i></button>
+            <div class="bg-creamDark/50 p-4 flex justify-center items-center">
+                <img id="modal-img" src="" class="max-h-[300px] object-contain rounded shadow">
+            </div>
+            <div class="p-6">
+                <h3 id="modal-title" class="font-serif text-xl font-bold mb-2"></h3>
+                <p id="modal-price" class="text-2xl font-extrabold text-aliexpressOrange mb-4"></p>
+                
+                <label class="block text-xs font-bold uppercase mb-1">Select Size:</label>
+                <div class="flex gap-2 mb-4">
+                    <button class="size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white px-3 py-1 text-xs font-bold rounded">54</button>
+                    <button class="size-btn border border-gold/40 px-3 py-1 text-xs font-bold rounded">56</button>
+                    <button class="size-btn border border-gold/40 px-3 py-1 text-xs font-bold rounded">58</button>
+                </div>
+
+                <label class="block text-xs font-bold uppercase mb-1">Quantity:</label>
+                <input type="number" id="modal-qty" value="1" min="1" class="border border-gold/40 px-3 py-1 w-20 text-center text-sm font-bold rounded mb-4">
+                
+                <div class="space-y-2 mt-4 border-t pt-4">
+                    <input type="text" id="cust-name" placeholder="Your Full Name" class="w-full border p-2 text-sm rounded">
+                    <input type="text" id="cust-phone" placeholder="Phone Number" class="w-full border p-2 text-sm rounded">
+                    <button id="buy-telegram-btn" class="w-full bg-[#229ED9] text-white py-3 text-sm font-bold rounded flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-telegram text-lg"></i> Send Order to Admin
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Firebase SDK (Production Implementation) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+    <!-- Scripts -->
+    <script>
+        // Fallback Default Products
+        const defaultProducts = [
+            { id: 1, name: "Midnight Royal Nidah Abaya", category: "classic", price: 4800, img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop" },
+            { id: 2, name: "Zahara Gold Embroidered", category: "embroidered", price: 6500, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" },
+            { id: 3, name: "Sage Mist Butterfly Abaya", category: "pastel", price: 4900, img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" },
+            { id: 4, name: "Desert Sand Linen Kimono", category: "classic", price: 5200, img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" }
+        ];
 
-        // Firebase Configuration (Requires User's actual credentials for production)
-        const firebaseConfig = {
-            apiKey: "AIzaSyD-tH2Oo_LTgzGn0qW3sEsz8sT6bt8dUsM",
-            authDomain: "miran-abaya.firebaseapp.com",
-            projectId: "miran-abaya",
-            storageBucket: "miran-abaya.appspot.com", // Updated to standard storage bucket format
-            messagingSenderId: "128447825243",
-            appId: "1:128447825243:web:727b49508d2fbfe2ef067e"
-        };
+        let products = JSON.parse(localStorage.getItem('miran_products')) || defaultProducts;
+        let selectedProduct = null;
+        let selectedSize = '54';
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
-
-        // Core State
-        let currentCurrency = 'ETB';
-        const rates = { ETB: 1, USD: 0.008, SAR: 0.03 };
-        const currencySymbols = { ETB: 'Br', USD: '$', SAR: 'ر.س' };
-        
-        let currentLang = 'en';
-        let isVendor = false;
-
-        // Elements
-        const curSelect = document.getElementById('currency-selector');
-        const authBtn = document.getElementById('auth-btn');
-        const adminPanelBtn = document.getElementById('admin-panel-btn');
-        const adminModal = document.getElementById('admin-modal');
-        const uploadForm = document.getElementById('upload-form');
-
-        // Currency Formatting
-        function formatMoney(amountETB) {
-            const converted = amountETB * rates[currentCurrency];
-            return `${currencySymbols[currentCurrency]} ${converted.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-        }
-
-        curSelect.addEventListener('change', (e) => {
-            currentCurrency = e.target.value;
-            loadProducts(); // Re-render with new currency
-        });
-
-        // Authentication & Role Management
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                // In production, verify role via Firebase Custom Claims or a protected 'vendors' collection
-                isVendor = true; 
-                authBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Logout`;
-                adminPanelBtn.classList.remove('hidden');
-            } else {
-                isVendor = false;
-                authBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Vendor Portal`;
-                adminPanelBtn.classList.add('hidden');
-                adminModal.classList.add('hidden');
-            }
-        });
-
-        authBtn.addEventListener('click', () => {
-            if (isVendor) signOut(auth);
-            else signInWithPopup(auth, new GoogleAuthProvider());
-        });
-
-        adminPanelBtn.addEventListener('click', () => adminModal.classList.remove('hidden'));
-        document.getElementById('close-admin-btn').addEventListener('click', () => adminModal.classList.add('hidden'));
-
-        // Tab Switching
-        const tabProducts = document.getElementById('tab-products');
-        const tabOrders = document.getElementById('tab-orders');
-        const uploadFormEl = document.getElementById('upload-form');
-        const orderMgmtEl = document.getElementById('order-management');
-
-        tabProducts.addEventListener('click', () => {
-            uploadFormEl.classList.remove('hidden');
-            orderMgmtEl.classList.add('hidden');
-            tabProducts.classList.add('text-brandOrange', 'border-b-2', 'border-brandOrange');
-            tabProducts.classList.remove('text-gray-500');
-            tabOrders.classList.add('text-gray-500');
-            tabOrders.classList.remove('text-brandOrange', 'border-b-2', 'border-brandOrange');
-        });
-
-        tabOrders.addEventListener('click', () => {
-            uploadFormEl.classList.add('hidden');
-            orderMgmtEl.classList.remove('hidden');
-            tabOrders.classList.add('text-brandOrange', 'border-b-2', 'border-brandOrange');
-            tabOrders.classList.remove('text-gray-500');
-            tabProducts.classList.add('text-gray-500');
-            tabProducts.classList.remove('text-brandOrange', 'border-b-2', 'border-brandOrange');
-            loadOrders();
-        });
-
-        // Product Upload to Firebase Storage (Production Standard)
-        uploadForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const file = document.getElementById('prod-image').files[0];
-            if (!file) return;
-
-            const name = document.getElementById('prod-name').value;
-            const price = Number(document.getElementById('prod-price').value);
-
-            document.getElementById('upload-text').classList.add('hidden');
-            document.getElementById('upload-spinner').classList.remove('hidden');
-            const progressContainer = document.getElementById('upload-progress');
-            const progressBar = progressContainer.firstElementChild;
-            progressContainer.classList.remove('hidden');
-
-            try {
-                // 1. Upload Image to Storage
-                const storageRef = ref(storage, `products/${Date.now()}_${file.name}`);
-                const uploadTask = uploadBytesResumable(storageRef, file);
-
-                uploadTask.on('state_changed', 
-                    (snapshot) => {
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        progressBar.style.width = progress + '%';
-                    }, 
-                    (error) => { throw error; }, 
-                    async () => {
-                        // 2. Get Secure Download URL
-                        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                        
-                        // 3. Save to Firestore
-                        await addDoc(collection(db, 'abayas'), {
-                            name,
-                            price,
-                            imgUrl: downloadURL,
-                            vendorId: auth.currentUser.uid,
-                            createdAt: serverTimestamp(),
-                            status: 'active'
-                        });
-
-                        uploadForm.reset();
-                        progressBar.style.width = '0%';
-                        progressContainer.classList.add('hidden');
-                        alert("Product published successfully!");
-                        loadProducts();
-                    }
-                );
-            } catch (err) {
-                alert("Upload failed: " + err.message);
-            } finally {
-                document.getElementById('upload-text').classList.remove('hidden');
-                document.getElementById('upload-spinner').classList.add('hidden');
-            }
-        });
-
-        // Load Products
-        async function loadProducts() {
+        function renderProducts(filterCat = 'all', searchQuery = '') {
             const grid = document.getElementById('product-grid');
-            grid.innerHTML = '<div class="col-span-full flex justify-center py-10"><div class="loader"></div></div>';
+            grid.innerHTML = '';
             
-            try {
-                const q = query(collection(db, "abayas"), orderBy("createdAt", "desc"));
-                const snapshot = await getDocs(q);
-                grid.innerHTML = '';
-                
-                snapshot.forEach(doc => {
-                    const p = doc.data();
-                    grid.innerHTML += `
-                        <div class="bg-white border rounded overflow-hidden shadow-sm hover:shadow-md transition">
-                            <img src="${p.imgUrl}" alt="${p.name}" class="w-full h-48 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-bold truncate">${p.name}</h3>
-                                <p class="text-brandOrange font-bold mt-1">${formatMoney(p.price)}</p>
-                                <button onclick="checkoutMock('${doc.id}', '${p.name}', ${p.price})" class="w-full mt-2 bg-brandDark text-white text-xs py-1.5 rounded uppercase font-bold hover:bg-brandOrange transition">Buy Now</button>
-                            </div>
+            let filtered = products.filter(p => {
+                const matchCat = filterCat === 'all' || p.category === filterCat;
+                const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchCat && matchSearch;
+            });
+
+            if(filtered.length === 0) {
+                grid.innerHTML = '<p class="col-span-full text-center py-10 text-gray-500">No abayas found.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-lg border border-gold/30 shadow-sm hover:shadow-lg transition-all overflow-hidden">
+                        <div class="relative h-[250px] bg-creamDark">
+                            <img src="${p.img}" class="w-full h-full object-cover object-top">
                         </div>
-                    `;
-                });
-            } catch (err) {
-                grid.innerHTML = `<p class="col-span-full text-center text-red-500">Failed to load products. Check Firebase rules.</p>`;
-            }
-        }
-
-        // Secure Order Processing
-        window.checkoutMock = async function(prodId, prodName, priceETB) {
-            const qty = prompt(`How many "${prodName}" would you like to order?`, "1");
-            if (!qty || isNaN(qty) || qty < 1) return;
-            
-            const totalETB = priceETB * qty;
-            const customerName = prompt("Enter your full name for delivery:");
-            if(!customerName) return;
-
-            try {
-                // 1. Save securely to Firestore FIRST
-                const orderRef = await addDoc(collection(db, 'orders'), {
-                    productId: prodId,
-                    productName: prodName,
-                    quantity: Number(qty),
-                    totalETB: totalETB,
-                    customerName: customerName,
-                    status: 'pending',
-                    createdAt: serverTimestamp()
-                });
-
-                // 2. Generate Telegram notification with secure Order ID
-                const telegramMsg = `✨ NEW SECURE ORDER ✨%0A%0A📦 Order ID: ${orderRef.id}%0A👤 Customer: ${customerName}%0A🛍️ Item: ${prodName}%0A🔢 Qty: ${qty}%0A💰 Total: ${totalETB.toLocaleString()} ETB%0A%0AStatus: Pending Verification`;
-                
-                alert("Order saved to database successfully! Redirecting to Telegram to confirm payment...");
-                window.open(`https://t.me/mame15?text=${telegramMsg}`, '_blank');
-
-            } catch (err) {
-                alert("Checkout failed. Error saving order: " + err.message);
-            }
-        }
-
-        // Admin: Load Orders
-        async function loadOrders() {
-            const list = document.getElementById('orders-list');
-            list.innerHTML = '<div class="flex justify-center py-5"><div class="loader"></div></div>';
-            
-            try {
-                const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
-                const snapshot = await getDocs(q);
-                list.innerHTML = '';
-                
-                snapshot.forEach(docSnap => {
-                    const o = docSnap.data();
-                    const statusColors = { pending: 'bg-yellow-100 text-yellow-800', confirmed: 'bg-blue-100 text-blue-800', shipped: 'bg-purple-100 text-purple-800', delivered: 'bg-green-100 text-green-800' };
-                    
-                    list.innerHTML += `
-                        <div class="border rounded p-3 text-sm flex justify-between items-center bg-white shadow-sm">
-                            <div>
-                                <p class="font-bold text-xs text-gray-500">ID: ${docSnap.id}</p>
-                                <p class="font-bold">${o.customerName} - ${o.quantity}x ${o.productName}</p>
-                                <p class="text-brandOrange font-bold">${formatMoney(o.totalETB)}</p>
+                        <div class="p-3">
+                            <h3 class="font-serif text-sm font-bold line-clamp-2 h-10">${p.name}</h3>
+                            <div class="mt-2 flex justify-between items-end">
+                                <span class="text-base font-extrabold text-aliexpressOrange">${Number(p.price).toLocaleString()} ETB</span>
                             </div>
-                            <div class="flex flex-col items-end gap-2">
-                                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase ${statusColors[o.status] || 'bg-gray-100'}">${o.status}</span>
-                                <select onchange="updateOrderStatus('${docSnap.id}', this.value)" class="text-xs border rounded p-1">
-                                    <option value="pending" ${o.status==='pending'?'selected':''}>Pending</option>
-                                    <option value="confirmed" ${o.status==='confirmed'?'selected':''}>Confirmed</option>
-                                    <option value="shipped" ${o.status==='shipped'?'selected':''}>Shipped</option>
-                                    <option value="delivered" ${o.status==='delivered'?'selected':''}>Delivered</option>
-                                </select>
-                            </div>
+                            <button onclick="openCheckout(${p.id})" class="w-full mt-3 bg-charcoal hover:bg-aliexpressOrange text-white py-2 text-xs font-bold rounded uppercase">
+                                Buy Now
+                            </button>
                         </div>
-                    `;
-                });
-            } catch (err) {
-                list.innerHTML = `<p class="text-red-500">Failed to load orders.</p>`;
-            }
+                    </div>
+                `;
+            });
         }
 
-        window.updateOrderStatus = async function(orderId, newStatus) {
-            try {
-                await updateDoc(doc(db, "orders", orderId), { status: newStatus });
-                alert("Order status updated!");
-                loadOrders();
-            } catch (err) {
-                alert("Update failed: " + err.message);
-            }
+        // Filters
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('border-b-2', 'text-aliexpressOrange'));
+                e.target.classList.add('border-b-2', 'text-aliexpressOrange');
+                renderProducts(e.target.dataset.filter);
+            });
+        });
+
+        // Search
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            renderProducts('all', e.target.value);
+        });
+
+        // Image Compression
+        function compressImage(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = ev => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 600; canvas.height = Math.round(img.height * (600/img.width));
+                        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                        resolve(canvas.toDataURL('image/jpeg', 0.7));
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
         }
 
-        // Init
-        loadProducts();
+        // Admin Upload
+        let isVendor = localStorage.getItem('miran_vendor') === 'true';
+        function updateVendorUI() {
+            document.getElementById('admin-panel-btn').classList.toggle('hidden', !isVendor);
+            document.getElementById('auth-btn').innerHTML = isVendor ? '<i class="fa-solid fa-right-from-bracket"></i> Logout' : '<i class="fa-solid fa-lock"></i> Vendor Portal';
+        }
+        
+        document.getElementById('auth-btn').addEventListener('click', () => {
+            if(isVendor) {
+                isVendor = false; localStorage.setItem('miran_vendor', 'false');
+            } else {
+                if(prompt("Enter Vendor Password:") === "miran2026") {
+                    isVendor = true; localStorage.setItem('miran_vendor', 'true');
+                } else {
+                    alert("Incorrect Password");
+                }
+            }
+            updateVendorUI();
+        });
+
+        document.getElementById('admin-panel-btn').addEventListener('click', () => {
+            document.getElementById('admin-modal').classList.remove('hidden');
+        });
+        document.getElementById('close-admin-btn').addEventListener('click', () => {
+            document.getElementById('admin-modal').classList.add('hidden');
+        });
+
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.textContent = "Publishing...";
+            
+            const file = document.getElementById('prod-image').files[0];
+            const base64Img = await compressImage(file);
+            
+            const newProduct = {
+                id: Date.now(),
+                name: document.getElementById('prod-name').value,
+                price: Number(document.getElementById('prod-price').value),
+                category: document.getElementById('prod-cat').value,
+                img: base64Img
+            };
+
+            products.unshift(newProduct);
+            localStorage.setItem('miran_products', JSON.stringify(products));
+            
+            e.target.reset();
+            document.getElementById('admin-modal').classList.add('hidden');
+            btn.textContent = "Publish Abaya";
+            renderProducts();
+            alert("Product Added Successfully!");
+        });
+
+        // Checkout Modal
+        window.openCheckout = function(id) {
+            selectedProduct = products.find(p => p.id === id);
+            document.getElementById('modal-img').src = selectedProduct.img;
+            document.getElementById('modal-title').textContent = selectedProduct.name;
+            document.getElementById('modal-price').textContent = `${Number(selectedProduct.price).toLocaleString()} ETB`;
+            document.getElementById('modal-qty').value = 1;
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        document.getElementById('close-checkout-btn').addEventListener('click', () => {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        });
+
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.size-btn').forEach(b => b.className = 'size-btn border border-gold/40 px-3 py-1 text-xs font-bold rounded');
+                e.target.className = 'size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white px-3 py-1 text-xs font-bold rounded';
+                selectedSize = e.target.textContent;
+            });
+        });
+
+        document.getElementById('buy-telegram-btn').addEventListener('click', () => {
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const qty = document.getElementById('modal-qty').value;
+            
+            if(!name || !phone) return alert("Please enter name and phone number");
+            
+            const total = selectedProduct.price * qty;
+            let discountTxt = "";
+            let finalTotal = total;
+            
+            if(qty >= 5) { finalTotal = total * 0.85; discountTxt = "(15% OFF)"; }
+            else if(qty >= 3) { finalTotal = total * 0.90; discountTxt = "(10% OFF)"; }
+
+            const msg = `🛍️ MIRAN ORDER
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+👗 Item: ${selectedProduct.name}
+📏 Size: ${selectedSize}
+🔢 Qty: ${qty}
+💰 Total: ${finalTotal.toLocaleString()} ETB ${discountTxt}
+
+Please confirm my order.`;
+            
+            window.open(`https://t.me/mame15?text=${encodeURIComponent(msg)}`, '_blank');
+            document.getElementById('checkout-modal').classList.add('hidden');
+        });
+
+        // Initialize
+        updateVendorUI();
+        renderProducts();
     </script>
 </body>
 </html>
