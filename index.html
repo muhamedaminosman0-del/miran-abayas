@@ -26,196 +26,329 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #1A1A1A; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #FF6A00; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
     </style>
 </head>
 <body class="bg-cream text-charcoal">
 
     <!-- Top Utility Bar -->
-    <div class="bg-charcoal text-cream text-[11px] py-2 px-4 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-            <span><i class="fa-solid fa-tags text-aliexpressOrange"></i> Wholesale Discounts: 3+ (10%) | 5+ (15%)</span>
-        </div>
-        <div class="flex items-center gap-3">
-            <button id="auth-btn" class="text-aliexpressOrange font-bold flex items-center gap-1">
-                <i class="fa-solid fa-lock"></i> Vendor Portal
-            </button>
+    <div class="bg-charcoal text-cream text-[11px] py-2 px-4 flex justify-between items-center z-50 relative">
+        <div class="max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span><i class="fa-solid fa-tags text-aliexpressOrange mr-1"></i> Wholesale Discounts: 3+ pcs (10%) | 5+ pcs (15%) | 10+ pcs (20%)</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="auth-btn" class="text-aliexpressOrange font-bold flex items-center gap-1 hover:underline">
+                    <i class="fa-solid fa-lock text-[10px]"></i> Vendor Portal
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Header & Search -->
     <header class="sticky top-0 z-40 bg-white border-b border-gold/20 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-4">
+            <!-- Logo -->
             <a href="#" class="flex flex-col items-start shrink-0">
                 <div class="flex items-center gap-1">
-                    <span class="font-serif text-2xl font-extrabold text-charcoal">Miran</span>
-                    <span class="bg-aliexpressOrange text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase">Express</span>
+                    <span class="font-serif text-2xl sm:text-3xl font-extrabold text-charcoal">Miran</span>
+                    <span class="bg-aliexpressOrange text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider">Express</span>
                 </div>
                 <span class="text-[9px] uppercase tracking-[0.2em] text-gold font-bold">Global Marketplace</span>
             </a>
 
-            <div class="flex-1 max-w-xl hidden md:flex">
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-2xl hidden md:flex items-center">
                 <div class="flex w-full border-2 border-aliexpressOrange rounded-full overflow-hidden bg-cream/30">
-                    <input type="text" id="search-input" placeholder="Search luxury abayas..." class="w-full px-5 py-2 text-sm bg-transparent outline-none">
-                    <button id="search-btn" class="bg-aliexpressOrange text-white px-6 py-2 text-xs font-bold uppercase"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                    <input type="text" id="search-input" placeholder="🔍 Search luxury abayas, colors, kimono..." class="w-full px-5 py-2.5 text-sm bg-transparent outline-none">
+                    <button id="search-btn" class="bg-aliexpressOrange hover:bg-orange-600 text-white px-6 py-2.5 text-xs font-bold uppercase flex items-center gap-1.5">
+                        <i class="fa-solid fa-magnifying-glass"></i> Search
+                    </button>
                 </div>
             </div>
 
+            <!-- Actions -->
             <div class="flex items-center gap-3">
-                <button id="admin-panel-btn" class="hidden bg-aliexpressOrange text-white px-3 py-2 text-xs font-bold rounded uppercase"><i class="fa-solid fa-plus"></i> Add Abaya</button>
-                <button id="cart-btn" class="relative bg-charcoal text-cream px-3 py-2 rounded text-lg">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-aliexpressOrange text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                <button id="admin-panel-btn" class="hidden bg-aliexpressOrange hover:bg-orange-600 text-white px-3 py-2 text-xs font-bold rounded flex items-center gap-1.5 shadow uppercase">
+                    <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Add Abaya</span>
+                </button>
+                <button id="cart-btn" class="relative flex items-center gap-2 bg-charcoal hover:bg-gold text-cream px-3 py-2 rounded transition-colors">
+                    <i class="fa-solid fa-bag-shopping text-base"></i>
+                    <span class="hidden sm:inline text-xs font-bold">Bag</span>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-aliexpressOrange text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
                 </button>
             </div>
         </div>
-        
+
+        <!-- Mobile Search -->
+        <div class="md:hidden px-4 pb-3 bg-white">
+            <div class="flex w-full border-2 border-aliexpressOrange rounded-full overflow-hidden bg-cream/30">
+                <input type="text" id="mobile-search-input" placeholder="Search abayas..." class="w-full px-4 py-2 text-xs bg-transparent outline-none">
+            </div>
+        </div>
+
         <!-- Categories -->
         <div class="bg-creamDark/60 border-t border-gold/15 overflow-x-auto">
-            <div class="max-w-7xl mx-auto px-4 flex items-center space-x-6 text-xs uppercase tracking-wider font-semibold py-2.5">
-                <button class="filter-btn text-aliexpressOrange font-bold border-b-2 border-aliexpressOrange" data-filter="all">All Products</button>
-                <button class="filter-btn text-charcoal/80" data-filter="classic">Classic Black</button>
-                <button class="filter-btn text-charcoal/80" data-filter="embroidered">Embroidered</button>
-                <button class="filter-btn text-charcoal/80" data-filter="pastel">Pastel & Colored</button>
+            <div class="max-w-7xl mx-auto px-4 flex items-center space-x-6 text-xs uppercase tracking-wider font-semibold py-2.5 whitespace-nowrap">
+                <button class="filter-btn text-aliexpressOrange font-bold border-b-2 border-aliexpressOrange pb-0.5" data-filter="all">All Products</button>
+                <button class="filter-btn text-charcoal/80 hover:text-aliexpressOrange transition-colors" data-filter="classic">Classic Black</button>
+                <button class="filter-btn text-charcoal/80 hover:text-aliexpressOrange transition-colors" data-filter="embroidered">Embroidered</button>
+                <button class="filter-btn text-charcoal/80 hover:text-aliexpressOrange transition-colors" data-filter="pastel">Pastel & Colored</button>
+                <button class="filter-btn text-charcoal/80 hover:text-aliexpressOrange transition-colors" data-filter="kimono">Kimono Style</button>
             </div>
         </div>
     </header>
 
     <!-- Products Grid -->
-    <main class="max-w-7xl mx-auto px-4 py-8 min-h-[60vh]">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[50vh]">
         <div class="flex items-center justify-between mb-6 pb-4 border-b border-gold/20">
-            <h1 class="font-serif text-2xl font-bold text-charcoal">Featured Abayas</h1>
-            <span class="text-xs font-semibold text-aliexpressOrange bg-white px-3 py-1.5 border border-gold/30 rounded">Fast Delivery</span>
+            <div>
+                <h1 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal">Featured Abayas</h1>
+                <p class="text-xs text-charcoal/60 mt-0.5">Showing verified direct-from-atelier luxury abayas</p>
+            </div>
         </div>
-        
-        <!-- Products will be generated here -->
-        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
     </main>
 
-    <!-- Admin Upload Modal -->
-    <div id="admin-modal" class="fixed inset-0 bg-black/80 hidden z-50 overflow-y-auto p-4 flex items-center justify-center">
-        <div class="bg-white max-w-lg w-full rounded-lg shadow-2xl overflow-hidden p-6 relative">
-            <button id="close-admin-btn" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl"><i class="fa-solid fa-xmark"></i></button>
-            <h2 class="font-bold font-serif text-2xl mb-4 text-aliexpressOrange">Vendor Portal</h2>
-            <form id="upload-form" class="space-y-4">
-                <input type="text" id="prod-name" placeholder="Abaya Name" class="w-full border border-gold/40 p-2 text-sm rounded focus:outline-none" required>
-                <input type="number" id="prod-price" placeholder="Wholesale Price (ETB)" class="w-full border border-gold/40 p-2 text-sm rounded focus:outline-none" required>
-                <select id="prod-cat" class="w-full border border-gold/40 p-2 text-sm rounded focus:outline-none">
-                    <option value="classic">Classic Black</option>
-                    <option value="embroidered">Embroidered</option>
-                    <option value="pastel">Pastel & Colored</option>
-                </select>
-                <input type="file" id="prod-image" accept="image/*" class="w-full text-sm border border-gold/40 p-2 rounded" required>
-                <button type="submit" class="bg-aliexpressOrange text-white px-4 py-3 text-sm font-bold uppercase rounded w-full">Publish Abaya</button>
+    <!-- VENDOR ADD ABAYA MODAL -->
+    <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-charcoal/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-cream max-w-xl w-full border border-gold/40 shadow-2xl p-6 sm:p-8 relative my-8 max-h-[92vh] overflow-y-auto rounded-lg">
+            <button id="close-admin-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center hover:bg-aliexpressOrange hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="mb-5">
+                <span class="text-xs uppercase tracking-widest text-aliexpressOrange font-bold">Verified Vendor Portal</span>
+                <h3 class="font-serif text-2xl font-bold mt-1">Publish New Abaya</h3>
+            </div>
+
+            <form id="add-product-form" class="space-y-4">
+                <!-- Image Upload -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1.5">1. Main Abaya Photo *</label>
+                    <label class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-aliexpressOrange/50 hover:border-aliexpressOrange bg-white cursor-pointer overflow-hidden rounded relative">
+                        <div id="upload-placeholder" class="flex flex-col items-center justify-center pt-4 pb-5 text-center">
+                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-aliexpressOrange mb-1.5"></i>
+                            <p class="text-xs font-semibold">Tap to upload photo</p>
+                        </div>
+                        <img id="photo-preview" src="" class="hidden w-full h-full object-contain bg-creamDark">
+                        <input id="new-product-photo" type="file" accept="image/*" class="hidden" required>
+                    </label>
+                </div>
+
+                <!-- Basic Info -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1">2. Abaya Title *</label>
+                    <input type="text" id="new-product-name" required placeholder="e.g. Royal Gold Embroidered Nidah" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm rounded outline-none focus:border-aliexpressOrange">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-1">3. Category *</label>
+                        <select id="new-product-category" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm rounded outline-none">
+                            <option value="classic">Classic Black</option>
+                            <option value="embroidered">Embroidered</option>
+                            <option value="pastel">Pastel & Colored</option>
+                            <option value="kimono">Kimono Style</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-1">4. Base Price (ETB) *</label>
+                        <input type="number" id="new-product-price" required placeholder="e.g. 4500" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm rounded outline-none focus:border-aliexpressOrange">
+                    </div>
+                </div>
+                <p id="price-preview" class="text-[11px] text-aliexpressOrange font-semibold -mt-2"></p>
+
+                <!-- Color Variants -->
+                <div class="bg-white p-3.5 border border-gold/40 rounded space-y-3">
+                    <div class="flex items-center justify-between">
+                        <label class="block text-xs font-bold uppercase tracking-wider">5. Color Variants & Photos</label>
+                        <button type="button" id="add-color-variant-btn" class="bg-charcoal hover:bg-aliexpressOrange text-white px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Color
+                        </button>
+                    </div>
+                    <div id="color-variants-container" class="space-y-2.5"></div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="save-submit-btn" class="w-full bg-aliexpressOrange hover:bg-orange-600 text-white py-3 text-xs uppercase tracking-widest font-bold rounded shadow transition-colors">
+                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to Marketplace
+                    </button>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- Product Detail / Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 bg-black/80 hidden z-50 overflow-y-auto p-4 flex items-center justify-center">
-        <div class="bg-white max-w-2xl w-full rounded-lg shadow-2xl overflow-hidden relative grid grid-cols-1 md:grid-cols-2">
-            <button id="close-checkout-btn" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow"><i class="fa-solid fa-xmark"></i></button>
-            <div class="bg-creamDark/50 p-4 flex justify-center items-center">
-                <img id="modal-img" src="" class="max-h-[300px] object-contain rounded shadow">
+    <!-- PRODUCT DETAIL MODAL (ALIEXPRESS GALLERY STYLE) -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden bg-charcoal/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-cream max-w-4xl w-full border border-gold/30 shadow-2xl overflow-hidden relative my-8 rounded-xl flex flex-col md:flex-row">
+            <button id="close-modal-btn" class="absolute top-4 right-4 w-9 h-9 bg-white/50 backdrop-blur rounded-full flex items-center justify-center hover:bg-aliexpressOrange hover:text-white transition-colors z-20 shadow">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <!-- Left Side: AliExpress Image Gallery -->
+            <div class="bg-white md:w-1/2 flex flex-col border-r border-gold/20">
+                <!-- Main Image -->
+                <div class="relative w-full aspect-[4/5] bg-creamDark flex items-center justify-center p-2">
+                    <img id="modal-img" src="" class="w-full h-full object-cover rounded shadow-sm">
+                </div>
+                <!-- Small Thumbnails Row -->
+                <div id="modal-thumbnails" class="flex gap-2 p-3 overflow-x-auto bg-white border-t border-gold/10">
+                    <!-- Thumbnails generated here -->
+                </div>
             </div>
-            <div class="p-6">
-                <h3 id="modal-title" class="font-serif text-xl font-bold mb-2"></h3>
-                <p id="modal-price" class="text-2xl font-extrabold text-aliexpressOrange mb-4"></p>
-                
-                <label class="block text-xs font-bold uppercase mb-1">Select Size:</label>
-                <div class="flex gap-2 mb-4">
-                    <button class="size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white px-3 py-1 text-xs font-bold rounded">54</button>
-                    <button class="size-btn border border-gold/40 px-3 py-1 text-xs font-bold rounded">56</button>
-                    <button class="size-btn border border-gold/40 px-3 py-1 text-xs font-bold rounded">58</button>
+            
+            <!-- Right Side: Details & Cart -->
+            <div class="p-6 md:w-1/2 flex flex-col justify-between bg-cream">
+                <div>
+                    <span id="modal-category" class="text-xs uppercase tracking-widest text-aliexpressOrange font-extrabold"></span>
+                    <h3 id="modal-title" class="font-serif text-2xl font-bold mt-1 mb-2"></h3>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span id="modal-price" class="text-2xl font-extrabold text-aliexpressOrange"></span>
+                        <span class="text-xs bg-red-100 text-aliexpressOrange px-2 py-0.5 rounded font-bold">10% OFF 3+ items</span>
+                    </div>
+
+                    <!-- Color Select (Using small images like AliExpress) -->
+                    <div class="mb-5">
+                        <label class="block text-xs uppercase tracking-wider font-bold mb-2">Color: <span id="selected-color-label" class="text-aliexpressOrange font-semibold"></span></label>
+                        <div id="modal-color-options" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Size Select -->
+                    <div class="mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs uppercase tracking-wider font-bold">Size (Length):</label>
+                            <span class="text-[10px] text-gray-500 underline cursor-pointer">Size Guide</span>
+                        </div>
+                        <div class="grid grid-cols-5 gap-2" id="size-options">
+                            <button class="size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white py-2 text-xs font-bold rounded" data-size="52">52</button>
+                            <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="54">54</button>
+                            <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="56">56</button>
+                            <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="58">58</button>
+                            <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="60">60</button>
+                        </div>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="mb-6">
+                        <label class="block text-xs uppercase tracking-wider font-bold mb-2">Quantity:</label>
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center border border-gold/40 bg-white rounded">
+                                <button id="qty-minus" class="px-3 py-1.5 text-sm font-bold hover:bg-aliexpressOrange hover:text-white">-</button>
+                                <input type="number" id="modal-qty" value="1" min="1" class="w-12 text-center text-xs font-bold outline-none border-x border-gold/20">
+                                <button id="qty-plus" class="px-3 py-1.5 text-sm font-bold hover:bg-aliexpressOrange hover:text-white">+</button>
+                            </div>
+                            <span id="modal-bulk-hint" class="text-[11px] text-aliexpressOrange font-bold bg-orange-50 px-2 py-1 rounded border border-orange-100"></span>
+                        </div>
+                    </div>
                 </div>
 
-                <label class="block text-xs font-bold uppercase mb-1">Quantity:</label>
-                <input type="number" id="modal-qty" value="1" min="1" class="border border-gold/40 px-3 py-1 w-20 text-center text-sm font-bold rounded mb-4">
-                
-                <div class="space-y-2 mt-4 border-t pt-4">
-                    <input type="text" id="cust-name" placeholder="Your Full Name" class="w-full border p-2 text-sm rounded">
-                    <input type="text" id="cust-phone" placeholder="Phone Number" class="w-full border p-2 text-sm rounded">
-                    <button id="buy-telegram-btn" class="w-full bg-[#229ED9] text-white py-3 text-sm font-bold rounded flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-telegram text-lg"></i> Send Order to Admin
+                <div class="space-y-2 pt-4 border-t border-gold/20">
+                    <button id="modal-add-to-cart" class="w-full bg-aliexpressOrange hover:bg-orange-600 text-white py-3.5 text-xs uppercase tracking-widest font-bold rounded shadow-md transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus text-base"></i> Add to Bag
+                    </button>
+                    <button id="modal-delete-product" class="hidden w-full border border-red-300 text-red-600 hover:bg-red-50 py-2 text-[11px] uppercase tracking-wider font-semibold rounded mt-2">
+                        <i class="fa-solid fa-trash-can mr-1"></i> Delete Product (Admin Only)
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- CART DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+        <div id="cart-overlay" class="absolute inset-0 bg-charcoal/60 backdrop-blur-sm"></div>
+        <div class="absolute top-0 right-0 w-full max-w-md h-full bg-cream shadow-2xl flex flex-col justify-between overflow-y-auto">
+            <div class="p-5 border-b border-gold/20 flex items-center justify-between bg-creamDark sticky top-0 z-10">
+                <h3 class="font-serif text-xl font-bold">Shopping Bag</h3>
+                <button id="close-cart-btn" class="hover:text-aliexpressOrange text-lg font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div id="cart-items" class="p-5 space-y-3 flex-1"></div>
+
+            <div class="p-5 bg-creamDark/25 border-t border-gold/20 space-y-4">
+                <div class="bg-white p-3.5 border border-gold/25 rounded space-y-2 text-xs">
+                    <div class="flex justify-between"><span class="text-charcoal/70">Subtotal:</span><span id="cart-subtotal" class="font-semibold">0 ETB</span></div>
+                    <div id="discount-row" class="hidden flex justify-between text-green-700 font-bold"><span id="discount-label"></span><span id="discount-amount"></span></div>
+                    <div class="flex justify-between font-bold text-sm border-t border-gold/15 pt-2"><span>Grand Total:</span><span id="cart-total" class="text-aliexpressOrange">0 ETB</span></div>
+                </div>
+
+                <div class="space-y-2">
+                    <input type="text" id="cust-name" placeholder="Full name *" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs rounded outline-none">
+                    <input type="tel" id="cust-phone" placeholder="Phone number *" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs rounded outline-none">
+                </div>
+
+                <button id="telegram-checkout-btn" class="w-full bg-[#229ED9] hover:bg-[#1b86b8] text-white py-3.5 text-xs uppercase font-bold rounded flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-brands fa-telegram text-base"></i> Send Order to Admin
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Fallback Default Products
+        const VENDOR_MARKUP = 1.10; 
+        
         const defaultProducts = [
-            { id: 1, name: "Midnight Royal Nidah Abaya", category: "classic", price: 4800, img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop" },
-            { id: 2, name: "Zahara Gold Embroidered", category: "embroidered", price: 6500, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" },
-            { id: 3, name: "Sage Mist Butterfly Abaya", category: "pastel", price: 4900, img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" },
-            { id: 4, name: "Desert Sand Linen Kimono", category: "classic", price: 5200, img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" }
+            {
+                id: "def-1", name: "Midnight Royal Nidah Abaya", category: "classic", categoryLabel: "Classic Black", price: 4800, rating: "4.9", sold: "1.4k+",
+                colorVariants: [
+                    { name: "Royal Black", hex: "#1A1A1A", img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop" },
+                    { name: "Deep Maroon", hex: "#5C1A26", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" }
+                ],
+                img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: "def-2", name: "Sage Mist Butterfly Abaya", category: "pastel", categoryLabel: "Pastel & Colored", price: 4900, rating: "5.0", sold: "900+",
+                colorVariants: [
+                    { name: "Sage Green", hex: "#9CAF88", img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" },
+                    { name: "Dusty Rose", hex: "#C99A9E", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" }
+                ],
+                img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: "def-3", name: "Desert Sand Linen Kimono", category: "kimono", categoryLabel: "Kimono Style", price: 5200, rating: "4.8", sold: "2.1k+",
+                colorVariants: [
+                    { name: "Beige", hex: "#D8C7B0", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" }
+                ],
+                img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
+            }
         ];
 
-        let products = JSON.parse(localStorage.getItem('miran_products')) || defaultProducts;
-        let selectedProduct = null;
-        let selectedSize = '54';
+        let products = JSON.parse(localStorage.getItem('miran_full_db')) || defaultProducts;
+        let cart = JSON.parse(localStorage.getItem('miran_cart')) || [];
+        let isVendor = localStorage.getItem('miran_is_vendor') === 'true';
 
-        function renderProducts(filterCat = 'all', searchQuery = '') {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-            
-            let filtered = products.filter(p => {
-                const matchCat = filterCat === 'all' || p.category === filterCat;
-                const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchCat && matchSearch;
-            });
+        const $ = id => document.getElementById(id);
+        const formatMoney = num => `${Math.round(num).toLocaleString()} ETB`;
 
-            if(filtered.length === 0) {
-                grid.innerHTML = '<p class="col-span-full text-center py-10 text-gray-500">No abayas found.</p>';
-                return;
-            }
-
-            filtered.forEach(p => {
-                grid.innerHTML += `
-                    <div class="bg-white rounded-lg border border-gold/30 shadow-sm hover:shadow-lg transition-all overflow-hidden">
-                        <div class="relative h-[250px] bg-creamDark">
-                            <img src="${p.img}" class="w-full h-full object-cover object-top">
-                        </div>
-                        <div class="p-3">
-                            <h3 class="font-serif text-sm font-bold line-clamp-2 h-10">${p.name}</h3>
-                            <div class="mt-2 flex justify-between items-end">
-                                <span class="text-base font-extrabold text-aliexpressOrange">${Number(p.price).toLocaleString()} ETB</span>
-                            </div>
-                            <button onclick="openCheckout(${p.id})" class="w-full mt-3 bg-charcoal hover:bg-aliexpressOrange text-white py-2 text-xs font-bold rounded uppercase">
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
+        function updateVendorUI() {
+            $('admin-panel-btn').classList.toggle('hidden', !isVendor);
+            $('auth-btn').innerHTML = isVendor ? '<i class="fa-solid fa-right-from-bracket text-[10px]"></i> Logout' : '<i class="fa-solid fa-lock text-[10px]"></i> Vendor Portal';
         }
 
-        // Filters
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('border-b-2', 'text-aliexpressOrange'));
-                e.target.classList.add('border-b-2', 'text-aliexpressOrange');
-                renderProducts(e.target.dataset.filter);
-            });
+        $('auth-btn').addEventListener('click', () => {
+            if (isVendor) {
+                isVendor = false; localStorage.setItem('miran_is_vendor', 'false');
+            } else {
+                if (prompt("Enter Admin Password:") === "miran2026") {
+                    isVendor = true; localStorage.setItem('miran_is_vendor', 'true');
+                } else alert("Access Denied");
+            }
+            updateVendorUI();
+            renderGrid();
         });
 
-        // Search
-        document.getElementById('search-input').addEventListener('input', (e) => {
-            renderProducts('all', e.target.value);
-        });
-
-        // Image Compression
         function compressImage(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onload = ev => {
                     const img = new Image();
                     img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = 600; canvas.height = Math.round(img.height * (600/img.width));
-                        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-                        resolve(canvas.toDataURL('image/jpeg', 0.7));
+                        const cvs = document.createElement('canvas');
+                        cvs.width = 600; cvs.height = Math.round(img.height * (600/img.width));
+                        cvs.getContext('2d').drawImage(img, 0, 0, cvs.width, cvs.height);
+                        resolve(cvs.toDataURL('image/jpeg', 0.7));
                     };
                     img.src = ev.target.result;
                 };
@@ -223,113 +356,352 @@
             });
         }
 
-        // Admin Upload
-        let isVendor = localStorage.getItem('miran_vendor') === 'true';
-        function updateVendorUI() {
-            document.getElementById('admin-panel-btn').classList.toggle('hidden', !isVendor);
-            document.getElementById('auth-btn').innerHTML = isVendor ? '<i class="fa-solid fa-right-from-bracket"></i> Logout' : '<i class="fa-solid fa-lock"></i> Vendor Portal';
-        }
-        
-        document.getElementById('auth-btn').addEventListener('click', () => {
-            if(isVendor) {
-                isVendor = false; localStorage.setItem('miran_vendor', 'false');
-            } else {
-                if(prompt("Enter Vendor Password:") === "miran2026") {
-                    isVendor = true; localStorage.setItem('miran_vendor', 'true');
-                } else {
-                    alert("Incorrect Password");
-                }
+        // --- ADMIN: Upload Product with Colors ---
+        let mainPhotoData = "";
+        $('admin-panel-btn').addEventListener('click', () => {
+            $('admin-modal').classList.remove('hidden');
+            $('color-variants-container').innerHTML = '';
+            addColorVariantRow("Standard Black", "#1A1A1A"); 
+        });
+        $('close-admin-btn').addEventListener('click', () => $('admin-modal').classList.add('hidden'));
+
+        $('new-product-photo').addEventListener('change', async e => {
+            if(e.target.files[0]) {
+                mainPhotoData = await compressImage(e.target.files[0]);
+                $('photo-preview').src = mainPhotoData;
+                $('photo-preview').classList.remove('hidden');
+                $('upload-placeholder').classList.add('hidden');
             }
-            updateVendorUI();
         });
 
-        document.getElementById('admin-panel-btn').addEventListener('click', () => {
-            document.getElementById('admin-modal').classList.remove('hidden');
-        });
-        document.getElementById('close-admin-btn').addEventListener('click', () => {
-            document.getElementById('admin-modal').classList.add('hidden');
+        $('new-product-price').addEventListener('input', e => {
+            const val = Number(e.target.value);
+            if(val > 0) $('price-preview').textContent = `Customer sees: ${Math.round(val * VENDOR_MARKUP).toLocaleString()} ETB (Includes 10% Markup)`;
+            else $('price-preview').textContent = '';
         });
 
-        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+        function addColorVariantRow(defName = "", defHex = "#1A1A1A") {
+            const div = document.createElement('div');
+            div.className = "variant-row bg-cream/70 p-2 border border-gold/30 rounded flex items-center gap-2";
+            div._img = "";
+            div.innerHTML = `
+                <input type="color" value="${defHex}" class="var-hex w-7 h-7 border border-gold/40 cursor-pointer bg-transparent">
+                <input type="text" value="${defName}" placeholder="Color Name" class="var-name flex-1 bg-white border border-gold/30 px-2 py-1 text-xs rounded outline-none">
+                <label class="cursor-pointer bg-white border border-gold/40 px-2 py-1 text-[11px] font-bold rounded">
+                    <i class="fa-solid fa-camera text-aliexpressOrange"></i> Photo
+                    <input type="file" accept="image/*" class="var-photo hidden">
+                </label>
+                <img src="" class="var-thumb hidden w-7 h-7 object-cover border rounded">
+                <button type="button" class="text-red-500 hover:text-red-700 px-1" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash-can"></i></button>
+            `;
+            div.querySelector('.var-photo').addEventListener('change', async e => {
+                if(e.target.files[0]) {
+                    div._img = await compressImage(e.target.files[0]);
+                    const thumb = div.querySelector('.var-thumb');
+                    thumb.src = div._img;
+                    thumb.classList.remove('hidden');
+                }
+            });
+            $('color-variants-container').appendChild(div);
+        }
+        $('add-color-variant-btn').addEventListener('click', () => addColorVariantRow());
+
+        $('add-product-form').addEventListener('submit', e => {
             e.preventDefault();
-            const btn = e.target.querySelector('button');
-            btn.textContent = "Publishing...";
+            if(!mainPhotoData) return alert("Upload main photo first!");
+            $('save-submit-btn').textContent = "Publishing...";
             
-            const file = document.getElementById('prod-image').files[0];
-            const base64Img = await compressImage(file);
-            
-            const newProduct = {
-                id: Date.now(),
-                name: document.getElementById('prod-name').value,
-                price: Number(document.getElementById('prod-price').value),
-                category: document.getElementById('prod-cat').value,
-                img: base64Img
+            const variants = [...document.querySelectorAll('.variant-row')].map(r => ({
+                name: r.querySelector('.var-name').value.trim() || "Standard",
+                hex: r.querySelector('.var-hex').value,
+                img: r._img || mainPhotoData 
+            }));
+
+            const cat = $('new-product-category');
+            const newAbaya = {
+                id: 'prod_' + Date.now(),
+                name: $('new-product-name').value.trim(),
+                category: cat.value,
+                categoryLabel: cat.options[cat.selectedIndex].text,
+                price: Math.round(Number($('new-product-price').value) * VENDOR_MARKUP), 
+                img: mainPhotoData,
+                colorVariants: variants,
+                rating: "5.0", sold: "New!"
             };
 
-            products.unshift(newProduct);
-            localStorage.setItem('miran_products', JSON.stringify(products));
+            products.unshift(newAbaya);
+            localStorage.setItem('miran_full_db', JSON.stringify(products));
             
             e.target.reset();
-            document.getElementById('admin-modal').classList.add('hidden');
-            btn.textContent = "Publish Abaya";
-            renderProducts();
-            alert("Product Added Successfully!");
+            $('photo-preview').classList.add('hidden');
+            $('upload-placeholder').classList.remove('hidden');
+            mainPhotoData = "";
+            $('admin-modal').classList.add('hidden');
+            $('save-submit-btn').innerHTML = `<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to Marketplace`;
+            
+            renderGrid();
         });
 
-        // Checkout Modal
-        window.openCheckout = function(id) {
-            selectedProduct = products.find(p => p.id === id);
-            document.getElementById('modal-img').src = selectedProduct.img;
-            document.getElementById('modal-title').textContent = selectedProduct.name;
-            document.getElementById('modal-price').textContent = `${Number(selectedProduct.price).toLocaleString()} ETB`;
-            document.getElementById('modal-qty').value = 1;
-            document.getElementById('checkout-modal').classList.remove('hidden');
+        // --- MARKETPLACE GRID (ALIEXPRESS HOVER ZOOM) ---
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        function renderGrid() {
+            const grid = $('product-grid');
+            grid.innerHTML = '';
+            
+            const filtered = products.filter(p => {
+                return (currentFilter === 'all' || p.category === currentFilter) && p.name.toLowerCase().includes(currentSearch.toLowerCase());
+            });
+
+            if(filtered.length === 0) {
+                grid.innerHTML = '<p class="col-span-full text-center py-12 text-gray-500">No products match your search.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                const dots = (p.colorVariants || []).map(v => `<span class="w-3 h-3 rounded-full border border-charcoal/30 inline-block" style="background-color:${v.hex}"></span>`).join('');
+                
+                grid.innerHTML += `
+                    <div class="bg-white rounded-lg border border-gold/30 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between overflow-hidden cursor-pointer group" onclick="openProduct('${p.id}')">
+                        <div class="relative aspect-[3/4] w-full bg-creamDark overflow-hidden">
+                            <!-- AliExpress Image Hover Zoom Effect -->
+                            <img src="${p.img}" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 ease-out">
+                            <span class="absolute top-2 left-2 bg-aliexpressOrange text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded shadow">Wholesale Deal</span>
+                            <div class="absolute bottom-2 left-2 bg-charcoal/80 text-cream text-[9px] px-2 py-0.5 rounded">⭐ ${p.rating} | ${p.sold}</div>
+                        </div>
+                        <div class="p-3.5 flex flex-col justify-between flex-1">
+                            <div>
+                                <h3 class="font-serif text-sm font-bold line-clamp-2 mb-1.5 group-hover:text-aliexpressOrange transition-colors">${p.name}</h3>
+                                <div class="flex gap-1.5 mb-2">${dots}</div>
+                            </div>
+                            <div class="mt-2 flex justify-between items-baseline">
+                                <span class="text-lg font-extrabold text-aliexpressOrange">${formatMoney(p.price)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
         }
 
-        document.getElementById('close-checkout-btn').addEventListener('click', () => {
-            document.getElementById('checkout-modal').classList.add('hidden');
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('border-b-2', 'text-aliexpressOrange'));
+                e.target.classList.add('border-b-2', 'text-aliexpressOrange');
+                currentFilter = e.target.dataset.filter;
+                renderGrid();
+            });
         });
+        
+        const applySearch = val => { currentSearch = val; renderGrid(); };
+        $('search-input').addEventListener('input', e => applySearch(e.target.value));
+        $('mobile-search-input').addEventListener('input', e => applySearch(e.target.value));
 
+        // --- PRODUCT MODAL (ALIEXPRESS THUMBNAIL GALLERY) ---
+        let selectedProduct = null;
+        let selectedColor = null;
+        let selectedSize = '54';
+
+        function openProduct(id) {
+            selectedProduct = products.find(p => p.id === id);
+            
+            $('modal-category').textContent = selectedProduct.categoryLabel || 'Modest Fashion';
+            $('modal-title').textContent = selectedProduct.name;
+            $('modal-price').textContent = formatMoney(selectedProduct.price);
+            
+            // Setup AliExpress Style Thumbnail & Color Variants
+            const colorOpts = $('modal-color-options');
+            const thumbnailsOpts = $('modal-thumbnails');
+            colorOpts.innerHTML = '';
+            thumbnailsOpts.innerHTML = '';
+            
+            const vars = selectedProduct.colorVariants && selectedProduct.colorVariants.length ? selectedProduct.colorVariants : [{name: "Standard", hex: "#1A1A1A", img: selectedProduct.img}];
+            
+            // Add Main Image to Thumbnails
+            addThumbnail(selectedProduct.img, true);
+
+            vars.forEach((v, idx) => {
+                // Color Selectors (Tiny Photos like AliExpress)
+                const cBtn = document.createElement('button');
+                cBtn.className = `p-0.5 border-2 rounded ${idx===0 ? 'border-aliexpressOrange' : 'border-transparent hover:border-gold/50'} transition-all`;
+                cBtn.innerHTML = `<img src="${v.img}" class="w-9 h-9 object-cover rounded-sm">`;
+                
+                cBtn.addEventListener('click', () => {
+                    document.querySelectorAll('#modal-color-options button').forEach(b => b.className = 'p-0.5 border-2 border-transparent hover:border-gold/50 rounded transition-all');
+                    cBtn.className = 'p-0.5 border-2 border-aliexpressOrange rounded transition-all';
+                    selectColor(v);
+                    
+                    // Highlight matching thumbnail
+                    document.querySelectorAll('#modal-thumbnails img').forEach(t => t.classList.remove('border-aliexpressOrange', 'border-2'));
+                    const matchingThumb = [...document.querySelectorAll('#modal-thumbnails img')].find(img => img.src === v.img);
+                    if(matchingThumb) matchingThumb.classList.add('border-aliexpressOrange', 'border-2');
+                });
+                colorOpts.appendChild(cBtn);
+
+                // Thumbnail Gallery (Below Main Image)
+                if(v.img !== selectedProduct.img) {
+                    addThumbnail(v.img, false);
+                }
+            });
+            
+            selectColor(vars[0]); 
+            $('modal-qty').value = 1;
+            updateModalBulkHint();
+
+            const delBtn = $('modal-delete-product');
+            delBtn.classList.toggle('hidden', !isVendor);
+            delBtn.onclick = () => {
+                if(confirm("Are you sure you want to delete this product?")) {
+                    products = products.filter(p => p.id !== id);
+                    localStorage.setItem('miran_full_db', JSON.stringify(products));
+                    $('product-modal').classList.add('hidden');
+                    renderGrid();
+                }
+            };
+
+            $('product-modal').classList.remove('hidden');
+        }
+
+        function addThumbnail(imgSrc, isMain) {
+            const thumb = document.createElement('img');
+            thumb.src = imgSrc;
+            thumb.className = `w-14 h-14 object-cover rounded cursor-pointer border ${isMain ? 'border-2 border-aliexpressOrange' : 'border-gold/30 hover:border-aliexpressOrange'}`;
+            thumb.addEventListener('click', () => {
+                document.querySelectorAll('#modal-thumbnails img').forEach(t => t.className = 'w-14 h-14 object-cover rounded cursor-pointer border border-gold/30 hover:border-aliexpressOrange');
+                thumb.className = 'w-14 h-14 object-cover rounded cursor-pointer border-2 border-aliexpressOrange';
+                $('modal-img').src = imgSrc;
+            });
+            $('modal-thumbnails').appendChild(thumb);
+        }
+
+        function selectColor(variant) {
+            selectedColor = variant;
+            $('selected-color-label').textContent = variant.name;
+            $('modal-img').src = variant.img;
+        }
+
+        $('close-modal-btn').addEventListener('click', () => $('product-modal').classList.add('hidden'));
+        
         document.querySelectorAll('.size-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.size-btn').forEach(b => b.className = 'size-btn border border-gold/40 px-3 py-1 text-xs font-bold rounded');
-                e.target.className = 'size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white px-3 py-1 text-xs font-bold rounded';
-                selectedSize = e.target.textContent;
+                document.querySelectorAll('.size-btn').forEach(b => b.className = 'size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded');
+                e.target.className = 'size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white py-2 text-xs font-bold rounded';
+                selectedSize = e.target.dataset.size;
             });
         });
 
-        document.getElementById('buy-telegram-btn').addEventListener('click', () => {
-            const name = document.getElementById('cust-name').value;
-            const phone = document.getElementById('cust-phone').value;
-            const qty = document.getElementById('modal-qty').value;
-            
-            if(!name || !phone) return alert("Please enter name and phone number");
-            
-            const total = selectedProduct.price * qty;
-            let discountTxt = "";
-            let finalTotal = total;
-            
-            if(qty >= 5) { finalTotal = total * 0.85; discountTxt = "(15% OFF)"; }
-            else if(qty >= 3) { finalTotal = total * 0.90; discountTxt = "(10% OFF)"; }
+        function updateModalBulkHint() {
+            const q = parseInt($('modal-qty').value) || 1;
+            const hint = $('modal-bulk-hint');
+            if(q >= 10) hint.innerHTML = "🔥 <b>20%</b> wholesale discount applied!";
+            else if(q >= 5) hint.innerHTML = "🔥 <b>15%</b> bulk discount applied!";
+            else if(q >= 3) hint.innerHTML = "🔥 <b>10%</b> bulk discount applied!";
+            else hint.innerHTML = "Add 3+ for 10% OFF";
+        }
+        $('qty-minus').addEventListener('click', () => { let v = parseInt($('modal-qty').value); if(v > 1) $('modal-qty').value = v - 1; updateModalBulkHint(); });
+        $('qty-plus').addEventListener('click', () => { $('modal-qty').value = parseInt($('modal-qty').value) + 1; updateModalBulkHint(); });
+        $('modal-qty').addEventListener('input', updateModalBulkHint);
 
-            const msg = `🛍️ MIRAN ORDER
-
-👤 Name: ${name}
-📞 Phone: ${phone}
-👗 Item: ${selectedProduct.name}
-📏 Size: ${selectedSize}
-🔢 Qty: ${qty}
-💰 Total: ${finalTotal.toLocaleString()} ETB ${discountTxt}
-
-Please confirm my order.`;
-            
-            window.open(`https://t.me/mame15?text=${encodeURIComponent(msg)}`, '_blank');
-            document.getElementById('checkout-modal').classList.add('hidden');
+        // --- CART & CHECKOUT ---
+        $('modal-add-to-cart').addEventListener('click', () => {
+            const qty = parseInt($('modal-qty').value) || 1;
+            const exists = cart.find(i => i.id === selectedProduct.id && i.size === selectedSize && i.color === selectedColor.name);
+            if(exists) exists.qty += qty;
+            else {
+                cart.push({
+                    id: selectedProduct.id, name: selectedProduct.name, price: selectedProduct.price,
+                    img: selectedColor.img, color: selectedColor.name, hex: selectedColor.hex, size: selectedSize, qty: qty
+                });
+            }
+            $('product-modal').classList.add('hidden');
+            updateCartUI();
+            $('cart-drawer').classList.remove('hidden');
         });
 
-        // Initialize
+        $('cart-btn').addEventListener('click', () => $('cart-drawer').classList.remove('hidden'));
+        $('close-cart-btn').addEventListener('click', () => $('cart-drawer').classList.add('hidden'));
+
+        function updateCartUI() {
+            localStorage.setItem('miran_cart', JSON.stringify(cart));
+            const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+            $('cart-badge').textContent = totalQty;
+            const itemsCont = $('cart-items');
+            if(cart.length === 0) {
+                itemsCont.innerHTML = '<p class="text-center text-gray-400 mt-10">Your bag is empty.</p>';
+                $('cart-subtotal').textContent = "0 ETB";
+                $('cart-total').textContent = "0 ETB";
+                $('discount-row').classList.add('hidden');
+                return;
+            }
+
+            itemsCont.innerHTML = cart.map((item, idx) => `
+                <div class="flex gap-3 bg-white p-2.5 border border-gold/15 rounded items-center">
+                    <img src="${item.img}" class="w-14 h-16 object-cover rounded bg-creamDark">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-serif font-bold text-xs truncate">${item.name}</h4>
+                        <p class="text-[11px] text-gray-500 mt-1">Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong></p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="text-xs font-bold bg-gray-100 px-2 rounded">Qty: ${item.qty}</span>
+                            <span class="text-xs font-bold text-aliexpressOrange ml-auto">${formatMoney(item.price * item.qty)}</span>
+                        </div>
+                    </div>
+                    <button class="text-red-400 hover:text-red-600 px-2" onclick="removeFromCart(${idx})"><i class="fa-solid fa-trash-can text-sm"></i></button>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            let discountRate = totalQty >= 10 ? 0.20 : totalQty >= 5 ? 0.15 : totalQty >= 3 ? 0.10 : 0;
+            const discountAmt = subtotal * discountRate;
+            const grandTotal = subtotal - discountAmt;
+
+            $('cart-subtotal').textContent = formatMoney(subtotal);
+            $('cart-total').textContent = formatMoney(grandTotal);
+            if(discountRate > 0) {
+                $('discount-row').classList.remove('hidden');
+                $('discount-label').textContent = `Bulk Discount (${discountRate*100}%):`;
+                $('discount-amount').textContent = `- ${formatMoney(discountAmt)}`;
+            } else $('discount-row').classList.add('hidden');
+        }
+        
+        window.removeFromCart = (idx) => { cart.splice(idx, 1); updateCartUI(); };
+
+        $('telegram-checkout-btn').addEventListener('click', () => {
+            if(cart.length === 0) return alert("Bag is empty!");
+            const name = $('cust-name').value;
+            const phone = $('cust-phone').value;
+            if(!name || !phone) return alert("Please enter name and phone number!");
+
+            const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+            const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            let rate = totalQty >= 10 ? 0.2 : totalQty >= 5 ? 0.15 : totalQty >= 3 ? 0.1 : 0;
+            const discount = subtotal * rate;
+            const final = subtotal - discount;
+
+            const lines = cart.map((i, idx) => `${idx+1}. ${i.name} [Color: ${i.color} | Size: ${i.size}] x${i.qty} = ${formatMoney(i.price * i.qty)}`).join('
+');
+            let msg = `✨ MIRAN EXPRESS ORDER ✨
+
+👤 Customer: ${name}
+📞 Phone: ${phone}
+
+🛍️ Items (${totalQty} pcs):
+${lines}
+
+💵 Subtotal: ${formatMoney(subtotal)}`;
+            if(rate > 0) msg += `
+🏷️ Wholesale Discount (${rate*100}%): -${formatMoney(discount)}`;
+            msg += `
+💰 GRAND TOTAL: ${formatMoney(final)}
+
+Please confirm my order.`;
+
+            window.open(`https://t.me/mame15?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+
+        // INIT
         updateVendorUI();
-        renderProducts();
+        renderGrid();
+        updateCartUI();
     </script>
 </body>
 </html>
