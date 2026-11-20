@@ -5,16 +5,10 @@ window.MIRAN_CONFIG = {
 };
 
 window.initMiranSupabase = function () {
-  const cfg = window.MIRAN_CONFIG || {};
-  const configured =
-    cfg.SUPABASE_URL &&
-    cfg.SUPABASE_ANON_KEY &&
-    !cfg.SUPABASE_URL.includes("YOUR_PROJECT_ID") &&
-    !cfg.SUPABASE_ANON_KEY.includes("YOUR_SUPABASE_ANON_PUBLIC_KEY");
-
-  if (!configured) {
+  const { SUPABASE_URL, SUPABASE_ANON_KEY } = window.MIRAN_CONFIG || {};
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_URL.includes("YOUR_PROJECT_ID")) {
     return { client: null, configured: false };
   }
-  const client = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   return { client, configured: true };
 };
