@@ -1,678 +1,1039 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miran Express | Luxury Abayas Marketplace</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        aliexpressOrange: '#FF6A00', cream: '#FAF8F5', creamDark: '#F0ECE1', 
-                        charcoal: '#1A1A1A', gold: '#C5A059'
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'], serif: ['Playfair Display', 'serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #1A1A1A; }
-        .font-serif { font-family: 'Playfair Display', serif; }
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-thumb { background: #FF6A00; border-radius: 3px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIRAN ABAYA | Modest Fashion</title>
+<meta name="description" content="Abayas, hijabs, jilbabs, dresses and accessories from MIRAN ABAYA.">
+<style>
+  :root {
+    --black: #000000;
+    --ivory: #FBF8F0;
+    --gold: #C9A96E;
+    --gold-deep: #8F7440;
+    --beige: #E7DAC5;
+    --text: #1B1712;
+    --paper: var(--ivory);
+    --paper-alt: var(--beige);
+    --card: #FFFFFF;
+    --ink: var(--text);
+    --muted: #5E5648;
+    --line: rgba(27, 23, 18, .20);
+    --danger: #9B2C2C;
+    --ok: #276749;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0C0A08;
+      --paper-alt: #17130F;
+      --card: #14110D;
+      --ink: #F3ECDD;
+      --muted: #B3A78F;
+      --line: rgba(243, 236, 221, .20);
+      --gold-deep: #C9A96E;
+      --danger: #E08A8A;
+      --ok: #68D391;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .sans { font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  .announce {
+    background: var(--gold); color: var(--black); text-align: center;
+    padding: 8px 16px; font-size: .84rem; font-weight: 600; letter-spacing: .04em;
+  }
+
+  /* Header + hero share the black field */
+  .stage { background: var(--black); color: #F3ECDD; }
+  header .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 20px; padding-bottom: 20px; gap: 16px;
+  }
+  .brand { font-size: 1.05rem; letter-spacing: .32em; color: var(--gold); white-space: nowrap; }
+  nav { display: flex; gap: 24px; font-size: .92rem; }
+  nav a { padding: 4px 0; border-bottom: 1px solid transparent; }
+  nav a:hover { border-color: var(--gold); }
+  .head-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .pill-btn {
+    background: none; border: 1px solid rgba(243,236,221,.35); color: #F3ECDD; cursor: pointer;
+    padding: 6px 14px; border-radius: 999px; font-size: .86rem; transition: .2s;
+  }
+  .pill-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .pill-btn.gold { border-color: var(--gold); color: var(--gold); }
+  .pill-btn.gold:hover { background: var(--gold); color: var(--black); }
+
+  .hero .wrap {
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center;
+    padding-top: 36px; padding-bottom: 68px; min-height: 580px;
+  }
+  .hero h1 {
+    font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 1.05;
+    letter-spacing: -.01em; max-width: 12ch;
+  }
+  .hero p { margin-top: 22px; max-width: 42ch; color: #CFC5B1; font-size: 1.08rem; }
+  .actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 26px; border-radius: 2px; font-size: .95rem; cursor: pointer;
+    border: 1px solid var(--gold); background: none; transition: background .2s, color .2s;
+  }
+  .btn.solid { background: var(--gold); color: var(--black); font-weight: 500; }
+  .btn.solid:hover { background: #DDBF86; }
+  .btn.line { color: var(--gold); }
+  .btn.line:hover { background: rgba(201, 169, 110, .14); }
+  .btn.dark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn.dark:hover { background: var(--gold); border-color: var(--gold); color: var(--black); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+  .figure { justify-self: center; width: min(100%, 340px); }
+  .figure svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .figure path { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .figure .fold { stroke-width: .9; opacity: .7; }
+  .figure .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 3.2s ease-out forwards; }
+  .figure .draw.d2 { animation-delay: .5s; }
+  .figure .draw.d3 { animation-delay: 1.1s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* Sections */
+  section { padding: 80px 0; }
+  h2 { font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); line-height: 1.15; max-width: 22ch; }
+  .lede { color: var(--muted); max-width: 54ch; margin-top: 12px; }
+
+  .collections { background: var(--paper); }
+  .rows { margin-top: 40px; border-top: 1px solid var(--line); }
+  .row {
+    display: grid; grid-template-columns: 1fr 1.2fr auto; gap: 24px; align-items: baseline;
+    padding: 24px 0; border-bottom: 1px solid var(--line); cursor: pointer;
+    transition: padding-left .25s, border-color .25s; width: 100%; text-align: left; background: none; border-left: 0; border-right: 0; border-top: 0;
+  }
+  .row:hover { padding-left: 14px; border-bottom-color: var(--gold); }
+  .row strong { font-weight: 400; font-size: clamp(1.45rem, 2.8vw, 2rem); }
+  .row span { color: var(--muted); }
+  .row .go { color: var(--gold-deep); font-size: .92rem; }
+
+  /* Catalog section */
+  .newin { background: var(--paper-alt); }
+  .shop-bar {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+    margin-top: 28px; margin-bottom: 28px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1px solid var(--line); padding: 7px 16px; border-radius: 999px;
+    background: transparent; cursor: pointer; font-size: .88rem; transition: .2s;
+  }
+  .chip.on, .chip:hover { border-color: var(--gold); background: var(--gold); color: var(--black); }
+  .search-box {
+    border: 1px solid var(--line); background: var(--card); padding: 9px 14px;
+    border-radius: 999px; min-width: 220px; font-size: .9rem;
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 18px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column;
+    overflow: hidden; transition: border-color .2s;
+  }
+  .card:hover { border-color: var(--gold); }
+  .card-img { aspect-ratio: 3/4; background: var(--paper); overflow: hidden; position: relative; cursor: pointer; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+  .card:hover .card-img img { transform: scale(1.04); }
+  .card-img .no-img {
+    width: 100%; height: 100%; display: grid; place-items: center; color: var(--muted); font-size: .85rem;
+  }
+  .stock-tag {
+    position: absolute; top: 10px; left: 10px; background: var(--black); color: var(--gold);
+    font-size: .72rem; padding: 3px 8px; letter-spacing: .05em;
+  }
+  .card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .card-cat { font-size: .75rem; color: var(--gold-deep); text-transform: uppercase; letter-spacing: .08em; }
+  .card-title { font-size: 1rem; font-weight: 500; cursor: pointer; }
+  .card-price { font-size: 1.05rem; font-weight: 600; margin-top: auto; padding-top: 6px; }
+  .card-btn {
+    margin-top: 10px; width: 100%; padding: 10px; border: 1px solid var(--ink);
+    background: none; cursor: pointer; font-size: .85rem; transition: .2s;
+  }
+  .card-btn:hover { background: var(--ink); color: var(--paper); }
+
+  .empty {
+    margin-top: 24px; border: 1px dashed var(--gold-deep); padding: 48px 24px;
+    display: grid; justify-items: center; text-align: center; gap: 10px;
+  }
+  .empty h3 { font-weight: 400; font-size: 1.35rem; }
+  .empty p { color: var(--muted); max-width: 48ch; font-size: .95rem; }
+
+  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .about p { color: var(--muted); }
+  .about p + p { margin-top: 14px; }
+  .tg-btn { margin-top: 24px; }
+
+  footer { background: var(--black); color: #CFC5B1; padding: 56px 0 40px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  footer .brand { display: block; margin-bottom: 10px; }
+  footer ul { list-style: none; display: grid; gap: 6px; font-size: .95rem; }
+  footer small { display: block; margin-top: 32px; color: #8A806D; }
+  footer a.tg { color: var(--gold); border-bottom: 1px solid var(--gold); }
+
+  /* Drawer (Cart) */
+  .scrim {
+    position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 60;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .scrim.on { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; bottom: 0; right: 0; width: min(440px, 100%);
+    background: var(--paper); z-index: 70; display: flex; flex-direction: column;
+    transform: translateX(105%); transition: transform .3s; border-left: 1px solid var(--line);
+  }
+  .drawer.on { transform: none; }
+  .dh {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 22px; border-bottom: 1px solid var(--line);
+  }
+  .dh h2 { font-size: 1.35rem; }
+  .close-x { background: none; border: 0; font-size: 1.4rem; cursor: pointer; padding: 4px 8px; }
+  .db { flex: 1; overflow-y: auto; padding: 14px 22px; }
+  .df { border-top: 1px solid var(--line); padding: 18px 22px; background: var(--card); }
+  .cart-item {
+    display: grid; grid-template-columns: 64px 1fr auto; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--line); align-items: start;
+  }
+  .cart-item img { width: 64px; height: 84px; object-fit: cover; border: 1px solid var(--line); }
+  .cart-item small { color: var(--muted); display: block; font-size: .82rem; }
+  .qty-ctrl { display: inline-flex; align-items: center; border: 1px solid var(--line); margin-top: 6px; }
+  .qty-ctrl button { width: 28px; height: 28px; background: none; border: 0; cursor: pointer; }
+  .qty-ctrl span { min-width: 26px; text-align: center; font-size: .88rem; }
+  .rm-btn { background: none; border: 0; color: var(--danger); font-size: .78rem; cursor: pointer; text-decoration: underline; margin-top: 6px; }
+  .tot-row { display: flex; justify-content: space-between; font-size: .9rem; margin-bottom: 5px; }
+  .tot-row.disc { color: var(--ok); font-weight: 600; }
+  .tot-row.grand { font-size: 1.08rem; font-weight: 700; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; margin-bottom: 12px; }
+  .field { width: 100%; border: 1px solid var(--line); background: var(--paper); padding: 10px 12px; border-radius: 3px; font-size: .9rem; margin-bottom: 8px; }
+
+  /* Dialogs (Product Detail & Account) */
+  dialog {
+    margin: auto; border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    width: min(820px, 94vw); max-height: 92vh; overflow-y: auto; border-radius: 4px; padding: 0;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.65); }
+  .pd-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .pd-gallery { background: var(--paper-alt); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .pd-main-img { aspect-ratio: 3/4; width: 100%; object-fit: cover; border: 1px solid var(--line); }
+  .pd-thumbs { display: flex; gap: 8px; overflow-x: auto; }
+  .pd-thumbs img { width: 56px; height: 72px; object-fit: cover; cursor: pointer; border: 2px solid transparent; opacity: .75; }
+  .pd-thumbs img.on { border-color: var(--gold); opacity: 1; }
+  .pd-info { padding: 26px; position: relative; display: flex; flex-direction: column; gap: 12px; }
+  .pd-info .close-x { position: absolute; top: 12px; right: 12px; }
+  .opt-label { font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; display: block; }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opt-btn {
+    border: 1px solid var(--line); padding: 7px 14px; background: none; cursor: pointer; font-size: .86rem;
+  }
+  .opt-btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .err-msg { color: var(--danger); font-size: .86rem; min-height: 20px; }
+  .ok-msg { color: var(--ok); font-size: .88rem; }
+
+  .acct-box { padding: 26px; position: relative; max-width: 560px; margin: 0 auto; }
+  .acct-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .acct-tabs button { background: none; border: 0; padding: 8px 4px; cursor: pointer; border-bottom: 2px solid transparent; font-size: .92rem; }
+  .acct-tabs button.on { border-bottom-color: var(--gold); font-weight: 600; }
+  .ord-card { border: 1px solid var(--line); background: var(--card); padding: 14px; margin-bottom: 12px; font-size: .88rem; }
+  .ord-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 8px; }
+  .status-pill { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold-deep); text-transform: uppercase; }
+
+  /* Toast */
+  .toasts { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 95; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+  .toast { background: var(--black); color: #F3ECDD; padding: 11px 20px; border-left: 3px solid var(--gold); font-size: .9rem; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .toast.bad { border-left-color: var(--danger); }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 800px) {
+    nav { display: none; }
+    .hero .wrap { grid-template-columns: 1fr; min-height: 0; padding-bottom: 48px; }
+    .figure { width: min(68%, 240px); order: -1; }
+    .row { grid-template-columns: 1fr; gap: 4px; }
+    .row .go { display: none; }
+    .about .wrap { grid-template-columns: 1fr; gap: 20px; }
+    .pd-grid { grid-template-columns: 1fr; }
+    section { padding: 56px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .figure .draw { animation: none; stroke-dashoffset: 0; }
+    .row { transition: none; }
+  }
+
+  html[lang="am"] body, html[lang="am"] .sans {
+    font-family: "Noto Serif Ethiopic", "Noto Sans Ethiopic", "Nyala", "Abyssinica SIL", serif;
+    line-height: 1.8;
+  }
+  html[lang="am"] .brand { letter-spacing: .2em; }
+  html[lang="am"] .hero h1 { max-width: 14ch; font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.25; }
+</style>
 </head>
-<body class="bg-cream text-charcoal">
+<body>
 
-    <!-- Top Utility Bar -->
-    <div class="bg-charcoal text-cream text-[11px] py-2 px-4 flex justify-between items-center z-50 relative">
-        <div class="max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div class="flex items-center gap-4">
-                <span><i class="fa-solid fa-tags text-aliexpressOrange mr-1"></i> Wholesale Discounts: 3+ pcs (10%) | 5+ pcs (15%) | 10+ pcs (20%)</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <button id="auth-btn" class="text-aliexpressOrange font-bold flex items-center gap-1 hover:underline">
-                    <i class="fa-solid fa-lock text-[10px]"></i> Vendor Portal
-                </button>
-            </div>
-        </div>
+<div class="announce sans" data-t="announce">Wholesale Discounts: 3–4 pcs (10% OFF) · 5–9 pcs (15% OFF) · 10+ pcs (20% OFF)</div>
+
+<div class="stage">
+  <header class="sans">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="MIRAN ABAYA">MIRAN ABAYA</a>
+      <nav aria-label="Main">
+        <a href="#collections" data-t="nav_shop">Collections</a>
+        <a href="#new" data-t="nav_new">Products</a>
+        <a href="#about" data-t="nav_about">About</a>
+        <a href="#contact" data-t="nav_contact">Contact</a>
+      </nav>
+      <div class="head-right">
+        <button class="pill-btn" id="langBtn" type="button">አማርኛ</button>
+        <button class="pill-btn" id="acctBtn" type="button" data-t="account">Account</button>
+        <button class="pill-btn gold" id="cartBtn" type="button"><span data-t="cart">Cart</span> (<span id="cartCount">0</span>)</button>
+      </div>
     </div>
+  </header>
 
-    <!-- Header & Search -->
-    <header class="sticky top-0 z-40 bg-white border-b border-gold/20 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-4">
-            <!-- Logo -->
-            <a href="#" class="flex flex-col items-start shrink-0">
-                <div class="flex items-center gap-1">
-                    <span class="font-serif text-2xl sm:text-3xl font-extrabold text-charcoal">Miran</span>
-                    <span class="bg-aliexpressOrange text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider">Express</span>
-                </div>
-                <span class="text-[9px] uppercase tracking-[0.2em] text-gold font-bold">Global Marketplace</span>
-            </a>
-
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-2xl hidden md:flex items-center">
-                <div class="flex w-full border-2 border-aliexpressOrange rounded-full overflow-hidden bg-cream/30">
-                    <input type="text" id="search-input" placeholder="🔍 Search luxury abayas, colors, kimono..." class="w-full px-5 py-2.5 text-sm bg-transparent outline-none">
-                    <button id="search-btn" class="bg-aliexpressOrange hover:bg-orange-600 text-white px-6 py-2.5 text-xs font-bold uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-magnifying-glass"></i> Search
-                    </button>
-                </div>
-            </div>
-
-            <!-- Actions -->
-            <div class="flex items-center gap-3">
-                <button id="admin-panel-btn" class="hidden bg-aliexpressOrange hover:bg-orange-600 text-white px-3 py-2 text-xs font-bold rounded flex items-center gap-1.5 shadow uppercase">
-                    <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Add Abaya</span>
-                </button>
-                <button id="cart-btn" class="relative flex items-center gap-2 bg-charcoal hover:bg-gold text-cream px-3 py-2 rounded transition-colors">
-                    <i class="fa-solid fa-bag-shopping text-base"></i>
-                    <span class="hidden sm:inline text-xs font-bold">Bag</span>
-                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-aliexpressOrange text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
-                </button>
-            </div>
+  <div class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <h1 data-t="h1">Modest dress, cut to flow.</h1>
+        <p data-t="hero_p">Abayas, hijabs, jilbabs and dresses, chosen and sold directly by MIRAN ABAYA.</p>
+        <div class="actions sans">
+          <a class="btn solid" href="#new" data-t="cta1">Shop products</a>
+          <a class="btn line" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
         </div>
+      </div>
+      <div class="figure" aria-hidden="true">
+        <svg viewBox="0 0 400 700">
+          <path class="draw" pathLength="1" d="M200 40 C165 40 150 70 152 105 C154 140 140 160 128 185 C100 260 90 420 70 640 C130 665 270 665 330 640 C310 420 300 260 272 185 C260 160 246 140 248 105 C250 70 235 40 200 40 Z"/>
+          <path class="draw d2" pathLength="1" d="M128 185 C112 300 98 420 88 540"/>
+          <path class="draw d2" pathLength="1" d="M272 185 C288 300 302 420 312 540"/>
+          <path class="draw d2" pathLength="1" d="M200 150 L200 200"/>
+          <path class="fold draw d3" pathLength="1" d="M200 200 C195 330 185 500 160 652"/>
+          <path class="fold draw d3" pathLength="1" d="M200 200 C205 330 215 500 240 652"/>
+          <path class="fold draw d3" pathLength="1" d="M180 190 C160 330 130 500 108 646"/>
+          <path class="fold draw d3" pathLength="1" d="M220 190 C240 330 270 500 292 646"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <!-- Mobile Search -->
-        <div class="md:hidden px-4 pb-3 bg-white">
-            <div class="flex w-full border-2 border-aliexpressOrange rounded-full overflow-hidden bg-cream/30">
-                <input type="text" id="mobile-search-input" placeholder="Search abayas..." class="w-full px-4 py-2 text-xs bg-transparent outline-none">
-            </div>
+<main>
+  <section class="collections" id="collections">
+    <div class="wrap">
+      <h2 data-t="h_col">Shop by collection</h2>
+      <p class="lede" data-t="col_lede">Everything in the shop, grouped the way you look for it.</p>
+      <div class="rows">
+        <button class="row" data-cat-jump="abayas"><strong data-t="c1">Abayas</strong><span data-t="c1d">Open and closed styles for everyday and occasions.</span><span class="go sans" data-t="c1g">View abayas</span></button>
+        <button class="row" data-cat-jump="hijabs"><strong data-t="c2">Hijabs</strong><span data-t="c2d">Scarves and wraps in a range of fabrics and colors.</span><span class="go sans" data-t="c2g">View hijabs</span></button>
+        <button class="row" data-cat-jump="jilbabs"><strong data-t="c3">Jilbabs</strong><span data-t="c3d">Full-length outer garments with easy fit.</span><span class="go sans" data-t="c3g">View jilbabs</span></button>
+        <button class="row" data-cat-jump="dresses"><strong data-t="c4">Dresses</strong><span data-t="c4d">Modest dresses for work, family and celebrations.</span><span class="go sans" data-t="c4g">View dresses</span></button>
+        <button class="row" data-cat-jump="accessories"><strong data-t="c5">Accessories</strong><span data-t="c5d">Finishing pieces to go with your outfit.</span><span class="go sans" data-t="c5g">View accessories</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="newin" id="new">
+    <div class="wrap">
+      <h2 data-t="h_new">Products</h2>
+      <div class="shop-bar sans">
+        <div class="chips" id="catChips">
+          <button class="chip on" data-slug="all" data-t="all">All</button>
+          <button class="chip" data-slug="abayas" data-t="c1">Abayas</button>
+          <button class="chip" data-slug="hijabs" data-t="c2">Hijabs</button>
+          <button class="chip" data-slug="jilbabs" data-t="c3">Jilbabs</button>
+          <button class="chip" data-slug="dresses" data-t="c4">Dresses</button>
+          <button class="chip" data-slug="accessories" data-t="c5">Accessories</button>
         </div>
+        <input type="search" id="searchInput" class="search-box" placeholder="Search products...">
+      </div>
+      <div id="catalogRoot">
+        <div class="empty"><p class="sans">Loading products...</p></div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Categories Navigation -->
-        <div class="bg-creamDark/60 border-t border-gold/15 overflow-x-auto">
-            <div class="max-w-7xl mx-auto px-4 flex items-center space-x-6 text-xs uppercase tracking-wider font-semibold py-2.5 whitespace-nowrap">
-                <button class="filter-btn text-aliexpressOrange font-bold border-b-2 border-aliexpressOrange pb-0.5" data-filter="all">All Products</button>
-                <button class="filter-btn text-charcoal/80 hover:text-aliexpressOrange transition-colors" data-filter="classic">Classic Black</button>
-                <button class="filter-btn text-charcoal/80 hover:text-aliexpressOrange transition-colors" data-filter="embroidered">Embroidered</button>
-                <button class="filter-btn text-charcoal/80 hover:text-aliexpressOrange transition-colors" data-filter="pastel">Pastel & Colored</button>
-                <button class="filter-btn text-charcoal/80 hover:text-aliexpressOrange transition-colors" data-filter="kimono">Kimono Style</button>
-            </div>
+  <section class="about" id="about">
+    <div class="wrap">
+      <h2 data-t="h_about">One shop, one owner, one standard.</h2>
+      <div>
+        <p data-t="about1">MIRAN ABAYA is a modest fashion shop. Only the owner lists and sells products here, so every piece in the shop has been chosen by the same person.</p>
+        <p data-t="about2">Browse by collection, pick your size and color, and place your order. Orders are saved to your account and confirmed via Telegram.</p>
+        <a class="btn solid sans tg-btn" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sans" id="contact">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top">MIRAN ABAYA</a>
+      <p data-t="f_tag">Modest fashion.</p>
+    </div>
+    <ul>
+      <li><a href="#new" data-cat-jump="abayas" data-t="c1">Abayas</a></li>
+      <li><a href="#new" data-cat-jump="hijabs" data-t="c2">Hijabs</a></li>
+      <li><a href="#new" data-cat-jump="jilbabs" data-t="c3">Jilbabs</a></li>
+      <li><a href="#new" data-cat-jump="dresses" data-t="c4">Dresses</a></li>
+    </ul>
+    <ul>
+      <li>Telegram: <a class="tg" href="https://t.me/mame15" target="_blank" rel="noopener">@mame15</a></li>
+      <li><a href="admin.html" style="color:var(--gold); font-size:.86rem;" data-t="owner_portal">Owner Dashboard</a></li>
+    </ul>
+  </div>
+  <div class="wrap"><small>&copy; 2026 MIRAN ABAYA</small></div>
+</footer>
+
+<!-- Cart Drawer -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer sans" id="cartDrawer" aria-label="Shopping Cart">
+  <div class="dh">
+    <h2 data-t="cart">Cart</h2>
+    <button class="close-x" id="closeCart" aria-label="Close">&times;</button>
+  </div>
+  <div class="db" id="cartItems"></div>
+  <div class="df" id="cartFooter"></div>
+</aside>
+
+<!-- Product Detail Modal -->
+<dialog id="pdModal" class="sans"></dialog>
+
+<!-- Customer Account Modal -->
+<dialog id="acctModal" class="sans">
+  <div class="acct-box">
+    <button class="close-x" id="closeAcct" style="position:absolute;top:12px;right:12px;">&times;</button>
+    <div id="acctGuest">
+      <div class="acct-tabs">
+        <button id="tabSignIn" class="on" data-t="signin">Sign In</button>
+        <button id="tabSignUp" data-t="signup">Create Account</button>
+      </div>
+      <form id="authForm">
+        <input id="authName" class="field" placeholder="Full Name" style="display:none;">
+        <input id="authPhone" class="field" placeholder="Phone Number" style="display:none;">
+        <input id="authEmail" class="field" type="email" placeholder="Email" required>
+        <input id="authPass" class="field" type="password" placeholder="Password (min 6 chars)" minlength="6" required>
+        <div class="err-msg" id="authErr"></div>
+        <button type="submit" class="btn solid" style="width:100%;margin-top:8px;" id="authSubmitBtn">Sign In</button>
+      </form>
+    </div>
+    <div id="acctLoggedIn" style="display:none;">
+      <h2 style="font-size:1.35rem;margin-bottom:4px;" id="userGreeting">Account</h2>
+      <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px;" id="userEmailLabel"></p>
+      <div style="display:flex;gap:10px;margin-bottom:20px;">
+        <button class="btn line" id="refreshOrdersBtn" style="padding:8px 16px;font-size:.84rem;">Refresh Orders</button>
+        <button class="btn line" id="signOutBtn" style="padding:8px 16px;font-size:.84rem;border-color:var(--danger);color:var(--danger);">Sign Out</button>
+      </div>
+      <h3 style="font-size:1.05rem;margin-bottom:10px;" data-t="my_orders">My Orders</h3>
+      <div id="myOrdersList"></div>
+    </div>
+  </div>
+</dialog>
+
+<div class="toasts sans" id="toasts" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+  const { client: sb, configured } = window.initMiranSupabase();
+  const TG_USER = (window.MIRAN_CONFIG && window.MIRAN_CONFIG.TELEGRAM_USERNAME) || "mame15";
+
+  // --- Translations ---
+  const am = {
+    announce: "የጅምላ ቅናሽ፦ 3–4 ቁርጥራጭ (10% ቅናሽ) · 5–9 ቁርጥራጭ (15% ቅናሽ) · 10+ ቁርጥራጭ (20% ቅናሽ)",
+    nav_shop: "ምድቦች", nav_new: "ምርቶች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
+    cart: "ጋሪ", account: "አካውንት", all: "ሁሉም",
+    h1: "በውበት የሚፈስ ልከኛ ልብስ።",
+    hero_p: "አባያ፣ ሂጃብ፣ ጅልባብ እና ቀሚሶች፤ በMIRAN ABAYA በቀጥታ የሚሸጡ።",
+    cta1: "ምርቶችን ይመልከቱ", cta2: "በቴሌግራም ይዘዙ",
+    h_col: "በምድብ ይግዙ", col_lede: "በሱቁ ውስጥ ያለው ሁሉ፣ እርስዎ በሚፈልጉት መንገድ ተከፋፍሎ።",
+    c1: "አባያ", c1d: "ለዕለት ተዕለትና ለበዓል የሚሆኑ ክፍት እና ዝግ ዲዛይኖች።", c1g: "አባያዎችን ይመልከቱ",
+    c2: "ሂጃብ", c2d: "በተለያዩ ጨርቆችና ቀለማት የተዘጋጁ ስካርፍና ሻሽ።", c2g: "ሂጃቦችን ይመልከቱ",
+    c3: "ጅልባብ", c3d: "ለሰውነት የሚመች ሙሉ ርዝመት ያለው የላይ ልብስ።", c3g: "ጅልባቦችን ይመልከቱ",
+    c4: "ቀሚሶች", c4d: "ለሥራ፣ ለቤተሰብና ለበዓላት የሚሆኑ ልከኛ ቀሚሶች።", c4g: "ቀሚሶችን ይመልከቱ",
+    c5: "ማስዋቢያዎች", c5d: "አለባበስዎን የሚያሟሉ ተጨማሪ ነገሮች።", c5g: "ማስዋቢያዎችን ይመልከቱ",
+    h_new: "ምርቶች",
+    h_about: "አንድ ሱቅ፣ አንድ ባለቤት፣ አንድ ደረጃ።",
+    about1: "MIRAN ABAYA የልከኛ አልባሳት ሱቅ ነው። እዚህ ምርት የሚዘረዝርና የሚሸጥ ባለቤቱ ብቻ ነው፤ ስለዚህ በሱቁ ውስጥ ያለው ሁሉ በአንድ ሰው የተመረጠ ነው።",
+    about2: "በምድብ ይመልከቱ፣ መጠንና ቀለም ይምረጡ፣ ትዕዛዝዎን ያስገቡ። ትዕዛዝዎ አካውንትዎ ላይ ይቀመጣል እንዲሁም በቴሌግራም ይረጋገጣል።",
+    f_tag: "ልከኛ አልባሳት።", owner_portal: "የባለቤት ዳሽቦርድ",
+    signin: "ግባ", signup: "አካውንት ክፈት", my_orders: "የእኔ ትዕዛዞች"
+  };
+
+  let lang = "en";
+  const tEls = document.querySelectorAll("[data-t]");
+  tEls.forEach(e => e.dataset.en = e.innerHTML);
+
+  document.getElementById("langBtn").addEventListener("click", () => {
+    lang = lang === "en" ? "am" : "en";
+    document.documentElement.lang = lang;
+    tEls.forEach(e => { e.innerHTML = lang === "am" ? (am[e.dataset.t] || e.dataset.en) : e.dataset.en; });
+    document.getElementById("langBtn").textContent = lang === "am" ? "English" : "አማርኛ";
+    document.getElementById("searchInput").placeholder = lang === "am" ? "ምርት ይፈልጉ..." : "Search products...";
+    renderCatalog();
+    renderCart();
+  });
+
+  // --- State ---
+  let allProducts = [];
+  let activeSlug = "all";
+  let searchTerm = "";
+  let currentUser = null;
+  let authMode = "signin";
+  let cart = JSON.parse(localStorage.getItem("miran_sb_cart") || "[]");
+
+  const esc = s => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
+  const fmtETB = n => `${Math.round(Number(n) || 0).toLocaleString()} ETB`;
+
+  function toast(msg, bad = false) {
+    const el = document.createElement("div");
+    el.className = "toast" + (bad ? " bad" : "");
+    el.textContent = msg;
+    document.getElementById("toasts").appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+  }
+
+  function calcDiscountPct(totalQty) {
+    if (totalQty >= 10) return 20;
+    if (totalQty >= 5) return 15;
+    if (totalQty >= 3) return 10;
+    return 0;
+  }
+
+  // --- Load Products from Supabase ---
+  async function loadProducts() {
+    const root = document.getElementById("catalogRoot");
+    if (!configured) {
+      root.innerHTML = `
+        <div class="empty">
+          <h3>${lang === "am" ? "Supabase ገና አልተገናኘም" : "Supabase not configured yet"}</h3>
+          <p class="sans">${lang === "am"
+            ? "supabase-config.js ፋይል ውስጥ የራስዎን SUPABASE_URL እና SUPABASE_ANON_KEY ያስገቡ።"
+            : "Open supabase-config.js and add your SUPABASE_URL and SUPABASE_ANON_KEY to load live products."}</p>
+        </div>`;
+      return;
+    }
+
+    root.innerHTML = `<div class="empty"><p class="sans">${lang === "am" ? "ምርቶችን በመጫን ላይ..." : "Loading products..."}</p></div>`;
+
+    const { data, error } = await sb
+      .from("products")
+      .select("id, name, description, price, images, sizes, colors, stock, is_active, created_at, categories(slug, name_en, name_am)")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      root.innerHTML = `<div class="empty"><h3>Error loading products</h3><p class="sans">${esc(error.message)}</p></div>`;
+      return;
+    }
+
+    allProducts = data || [];
+    renderCatalog();
+  }
+
+  function renderCatalog() {
+    const root = document.getElementById("catalogRoot");
+    if (!configured) return;
+
+    const list = allProducts.filter(p => {
+      const slug = p.categories?.slug || "";
+      const matchCat = activeSlug === "all" || slug === activeSlug;
+      const matchQ = !searchTerm || (p.name + " " + (p.description || "")).toLowerCase().includes(searchTerm);
+      return matchCat && matchQ;
+    });
+
+    if (!list.length) {
+      root.innerHTML = `
+        <div class="empty">
+          <h3>${lang === "am" ? "ምንም ምርት አልተገኘም" : "No products listed yet"}</h3>
+          <p class="sans">${lang === "am"
+            ? "ባለቤቱ ከዳሽቦርድ ምርቶችን እንዳስገባ እዚህ ይታያሉ።"
+            : "Products will appear here as soon as the owner publishes them from the dashboard."}</p>
+        </div>`;
+      return;
+    }
+
+    root.innerHTML = `<div class="grid sans">` + list.map(p => {
+      const img = (p.images && p.images[0]) || "";
+      const catLabel = lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || "");
+      const outOfStock = p.stock <= 0;
+      return `
+        <article class="card">
+          <div class="card-img" data-open="${p.id}">
+            ${img ? `<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="no-img">No photo</div>`}
+            ${outOfStock ? `<span class="stock-tag">${lang === "am" ? "አልቋል" : "Out of stock"}</span>` : ""}
+          </div>
+          <div class="card-body">
+            <span class="card-cat">${esc(catLabel)}</span>
+            <h3 class="card-title" data-open="${p.id}">${esc(p.name)}</h3>
+            <div class="card-price">${fmtETB(p.price)}</div>
+            <button class="card-btn" data-open="${p.id}" ${outOfStock ? "disabled" : ""}>
+              ${outOfStock ? (lang === "am" ? "አልቋል" : "Out of stock") : (lang === "am" ? "ዝርዝር ይመልከቱ" : "Select options")}
+            </button>
+          </div>
+        </article>`;
+    }).join("") + `</div>`;
+  }
+
+  // Category filter & search
+  document.getElementById("catChips").addEventListener("click", e => {
+    const b = e.target.closest(".chip");
+    if (!b) return;
+    activeSlug = b.dataset.slug;
+    document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c === b));
+    renderCatalog();
+  });
+
+  document.querySelectorAll("[data-cat-jump]").forEach(el => {
+    el.addEventListener("click", () => {
+      activeSlug = el.dataset.catJump;
+      document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c.dataset.slug === activeSlug));
+      renderCatalog();
+      document.getElementById("new").scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  document.getElementById("searchInput").addEventListener("input", e => {
+    searchTerm = e.target.value.trim().toLowerCase();
+    renderCatalog();
+  });
+
+  // --- Product Detail Modal ---
+  const pdModal = document.getElementById("pdModal");
+  let pdState = null;
+
+  document.getElementById("catalogRoot").addEventListener("click", e => {
+    const t = e.target.closest("[data-open]");
+    if (!t) return;
+    const p = allProducts.find(x => x.id === t.dataset.open);
+    if (!p) return;
+    pdState = {
+      p,
+      imgIdx: 0,
+      size: p.sizes && p.sizes.length === 1 ? p.sizes[0] : "",
+      color: p.colors && p.colors.length === 1 ? p.colors[0] : "",
+      qty: 1
+    };
+    drawPD();
+    pdModal.showModal();
+  });
+
+  function drawPD() {
+    const { p, imgIdx, size, color, qty } = pdState;
+    const imgs = (p.images && p.images.length) ? p.images : [];
+    const mainImg = imgs[imgIdx] || "";
+    const discPct = calcDiscountPct(qty);
+
+    pdModal.innerHTML = `
+      <div class="pd-grid">
+        <div class="pd-gallery">
+          ${mainImg
+            ? `<img class="pd-main-img" src="${esc(mainImg)}" alt="${esc(p.name)}">`
+            : `<div class="pd-main-img" style="display:grid;place-items:center;color:var(--muted);">No photo</div>`}
+          ${imgs.length > 1 ? `<div class="pd-thumbs">${imgs.map((u, i) => `<img src="${esc(u)}" class="${i === imgIdx ? "on" : ""}" data-thumb="${i}" alt="">`).join("")}</div>` : ""}
         </div>
-    </header>
+        <div class="pd-info">
+          <button class="close-x" id="closePD" aria-label="Close">&times;</button>
+          <span class="card-cat">${esc(lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || ""))}</span>
+          <h2 style="font-size:1.5rem;">${esc(p.name)}</h2>
+          <div style="font-size:1.35rem;font-weight:700;color:var(--gold-deep);">${fmtETB(p.price)}</div>
+          ${p.description ? `<p style="color:var(--muted);font-size:.92rem;">${esc(p.description)}</p>` : ""}
 
-    <!-- Products Grid -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[50vh]">
-        <div class="flex items-center justify-between mb-6 pb-4 border-b border-gold/20">
+          ${p.sizes && p.sizes.length ? `
             <div>
-                <h1 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal">Featured Abayas</h1>
-                <p class="text-xs text-charcoal/60 mt-0.5">Showing verified direct-from-atelier luxury abayas</p>
+              <span class="opt-label">${lang === "am" ? "መጠን" : "Size"}</span>
+              <div class="opts">${p.sizes.map(s => `<button type="button" class="opt-btn ${size === s ? "on" : ""}" data-size="${esc(s)}">${esc(s)}</button>`).join("")}</div>
+            </div>` : ""}
+
+          ${p.colors && p.colors.length ? `
+            <div>
+              <span class="opt-label">${lang === "am" ? "ቀለም" : "Color"}</span>
+              <div class="opts">${p.colors.map(c => `<button type="button" class="opt-btn ${color === c ? "on" : ""}" data-color="${esc(c)}">${esc(c)}</button>`).join("")}</div>
+            </div>` : ""}
+
+          <div>
+            <span class="opt-label">${lang === "am" ? "ብዛት" : "Quantity"} (${lang === "am" ? "ክምችት" : "Stock"}: ${p.stock})</span>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <div class="qty-ctrl">
+                <button type="button" id="pdMinus">−</button>
+                <span>${qty}</span>
+                <button type="button" id="pdPlus">+</button>
+              </div>
+              <small style="color:var(--gold-deep);font-weight:600;">
+                ${discPct > 0 ? `${discPct}% OFF` : (lang === "am" ? "3+ ሲገዙ 10% ቅናሽ" : "3+ pcs: 10% OFF")}
+              </small>
             </div>
+          </div>
+
+          <div class="err-msg" id="pdErr"></div>
+          <button type="button" class="btn solid" id="pdAddBtn" ${p.stock <= 0 ? "disabled" : ""}>
+            ${p.stock <= 0 ? (lang === "am" ? "አልቋል" : "Out of Stock") : (lang === "am" ? "ወደ ጋሪ ጨምር" : "Add to Cart")}
+          </button>
         </div>
-        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
-    </main>
+      </div>`;
+  }
 
-    <!-- VENDOR ADD ABAYA MODAL -->
-    <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-charcoal/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-cream max-w-xl w-full border border-gold/40 shadow-2xl p-6 sm:p-8 relative my-8 max-h-[92vh] overflow-y-auto rounded-lg">
-            <button id="close-admin-btn" class="absolute top-4 right-4 w-9 h-9 bg-creamDark rounded-full flex items-center justify-center hover:bg-aliexpressOrange hover:text-white transition-colors">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="mb-5">
-                <span class="text-xs uppercase tracking-widest text-aliexpressOrange font-bold">Verified Vendor Portal</span>
-                <h3 class="font-serif text-2xl font-bold mt-1">Publish New Abaya</h3>
-            </div>
+  pdModal.addEventListener("click", e => {
+    if (e.target === pdModal || e.target.id === "closePD") { pdModal.close(); return; }
+    if (!pdState) return;
+    if (e.target.dataset.thumb !== undefined) { pdState.imgIdx = Number(e.target.dataset.thumb); drawPD(); }
+    else if (e.target.dataset.size !== undefined) { pdState.size = e.target.dataset.size; drawPD(); }
+    else if (e.target.dataset.color !== undefined) { pdState.color = e.target.dataset.color; drawPD(); }
+    else if (e.target.id === "pdMinus") { pdState.qty = Math.max(1, pdState.qty - 1); drawPD(); }
+    else if (e.target.id === "pdPlus") {
+      if (pdState.qty < pdState.p.stock) { pdState.qty++; drawPD(); }
+      else toast(lang === "am" ? "ከክምችት በላይ መጨመር አይቻልም" : "Reached available stock limit", true);
+    }
+    else if (e.target.id === "pdAddBtn") {
+      const { p, size, color, qty } = pdState;
+      const missing = [];
+      if (p.sizes && p.sizes.length && !size) missing.push(lang === "am" ? "መጠን" : "size");
+      if (p.colors && p.colors.length && !color) missing.push(lang === "am" ? "ቀለም" : "color");
+      if (missing.length) {
+        document.getElementById("pdErr").textContent = (lang === "am" ? "እባክዎ ይምረጡ፦ " : "Please select: ") + missing.join(", ");
+        return;
+      }
+      addToCart(p, size, color, qty);
+      pdModal.close();
+      openCart();
+    }
+  });
 
-            <form id="add-product-form" class="space-y-4">
-                <!-- Image Upload -->
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1.5">1. Main Abaya Photo *</label>
-                    <label class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-aliexpressOrange/50 hover:border-aliexpressOrange bg-white cursor-pointer overflow-hidden rounded relative">
-                        <div id="upload-placeholder" class="flex flex-col items-center justify-center pt-4 pb-5 text-center">
-                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-aliexpressOrange mb-1.5"></i>
-                            <p class="text-xs font-semibold">Tap to upload photo</p>
-                        </div>
-                        <img id="photo-preview" src="" class="hidden w-full h-full object-contain bg-creamDark">
-                        <input id="new-product-photo" type="file" accept="image/*" class="hidden" required>
-                    </label>
-                </div>
+  // --- Cart Logic ---
+  function saveCart() {
+    localStorage.setItem("miran_sb_cart", JSON.stringify(cart));
+    document.getElementById("cartCount").textContent = cart.reduce((s, i) => s + i.quantity, 0);
+  }
 
-                <!-- Basic Info -->
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1">2. Abaya Title *</label>
-                    <input type="text" id="new-product-name" required placeholder="e.g. Royal Gold Embroidered Nidah" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm rounded outline-none focus:border-aliexpressOrange">
-                </div>
+  function addToCart(p, size, color, qty) {
+    const existing = cart.find(i => i.product_id === p.id && i.size === size && i.color === color);
+    if (existing) {
+      existing.quantity = Math.min(p.stock, existing.quantity + qty);
+      existing.stock = p.stock;
+      existing.price = Number(p.price);
+    } else {
+      cart.push({
+        product_id: p.id,
+        name: p.name,
+        price: Number(p.price),
+        image: (p.images && p.images[0]) || "",
+        size: size || "",
+        color: color || "",
+        quantity: qty,
+        stock: p.stock
+      });
+    }
+    saveCart();
+    renderCart();
+    toast(lang === "am" ? "ወደ ጋሪ ገብቷል" : "Added to cart");
+  }
 
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider mb-1">3. Category *</label>
-                        <select id="new-product-category" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm rounded outline-none">
-                            <option value="classic">Classic Black</option>
-                            <option value="embroidered">Embroidered</option>
-                            <option value="pastel">Pastel & Colored</option>
-                            <option value="kimono">Kimono Style</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider mb-1">4. Base Price (ETB) *</label>
-                        <input type="number" id="new-product-price" required placeholder="e.g. 4500" class="w-full bg-white border border-gold/30 px-3 py-2 text-sm rounded outline-none focus:border-aliexpressOrange">
-                    </div>
-                </div>
-                <p id="price-preview" class="text-[11px] text-aliexpressOrange font-semibold -mt-2"></p>
+  function openCart() {
+    renderCart();
+    document.getElementById("cartDrawer").classList.add("on");
+    document.getElementById("scrim").classList.add("on");
+  }
+  function closeCart() {
+    document.getElementById("cartDrawer").classList.remove("on");
+    document.getElementById("scrim").classList.remove("on");
+  }
+  document.getElementById("cartBtn").addEventListener("click", openCart);
+  document.getElementById("closeCart").addEventListener("click", closeCart);
+  document.getElementById("scrim").addEventListener("click", closeCart);
 
-                <!-- Color Variants -->
-                <div class="bg-white p-3.5 border border-gold/40 rounded space-y-3">
-                    <div class="flex items-center justify-between">
-                        <label class="block text-xs font-bold uppercase tracking-wider">5. Color Variants & Photos</label>
-                        <button type="button" id="add-color-variant-btn" class="bg-charcoal hover:bg-aliexpressOrange text-white px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded transition-colors">
-                            <i class="fa-solid fa-plus mr-1"></i> Add Color
-                        </button>
-                    </div>
-                    <div id="color-variants-container" class="space-y-2.5"></div>
-                </div>
+  function renderCart() {
+    saveCart();
+    const itemsEl = document.getElementById("cartItems");
+    const footEl = document.getElementById("cartFooter");
 
-                <div class="pt-2">
-                    <button type="submit" id="save-submit-btn" class="w-full bg-aliexpressOrange hover:bg-orange-600 text-white py-3 text-xs uppercase tracking-widest font-bold rounded shadow transition-colors">
-                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to Marketplace
-                    </button>
-                </div>
-            </form>
+    if (!cart.length) {
+      itemsEl.innerHTML = `<div class="empty" style="margin-top:20px;"><p>${lang === "am" ? "ጋሪዎ ባዶ ነው።" : "Your cart is empty."}</p></div>`;
+      footEl.innerHTML = "";
+      return;
+    }
+
+    itemsEl.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        ${item.image ? `<img src="${esc(item.image)}" alt="">` : `<div style="width:64px;height:84px;background:var(--paper-alt);"></div>`}
+        <div>
+          <strong style="font-size:.92rem;">${esc(item.name)}</strong>
+          <small>${[item.color, item.size].filter(Boolean).join(" · ") || "Standard"}</small>
+          <div class="qty-ctrl">
+            <button data-cdec="${idx}">−</button>
+            <span>${item.quantity}</span>
+            <button data-cinc="${idx}">+</button>
+          </div>
         </div>
-    </div>
-
-    <!-- PRODUCT DETAIL MODAL -->
-    <div id="product-modal" class="fixed inset-0 z-50 hidden bg-charcoal/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-cream max-w-4xl w-full border border-gold/30 shadow-2xl overflow-hidden relative my-8 rounded-xl flex flex-col md:flex-row">
-            <button id="close-modal-btn" class="absolute top-4 right-4 w-9 h-9 bg-white/50 backdrop-blur rounded-full flex items-center justify-center hover:bg-aliexpressOrange hover:text-white transition-colors z-20 shadow">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            
-            <div class="bg-white md:w-1/2 flex flex-col border-r border-gold/20">
-                <div class="relative w-full aspect-[4/5] bg-creamDark flex items-center justify-center p-2">
-                    <img id="modal-img" src="" class="w-full h-full object-cover rounded shadow-sm">
-                </div>
-                <div id="modal-thumbnails" class="flex gap-2 p-3 overflow-x-auto bg-white border-t border-gold/10"></div>
-            </div>
-            
-            <div class="p-6 md:w-1/2 flex flex-col justify-between bg-cream">
-                <div>
-                    <span id="modal-category" class="text-xs uppercase tracking-widest text-aliexpressOrange font-extrabold"></span>
-                    <h3 id="modal-title" class="font-serif text-2xl font-bold mt-1 mb-2"></h3>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span id="modal-price" class="text-2xl font-extrabold text-aliexpressOrange"></span>
-                        <span class="text-xs bg-red-100 text-aliexpressOrange px-2 py-0.5 rounded font-bold">10% OFF 3+ items</span>
-                    </div>
-
-                    <div class="mb-5">
-                        <label class="block text-xs uppercase tracking-wider font-bold mb-2">Color: <span id="selected-color-label" class="text-aliexpressOrange font-semibold"></span></label>
-                        <div id="modal-color-options" class="flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <div class="mb-5">
-                        <label class="block text-xs uppercase tracking-wider font-bold mb-2">Size (Length):</label>
-                        <div class="grid grid-cols-5 gap-2" id="size-options">
-                            <button class="size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white py-2 text-xs font-bold rounded" data-size="52">52</button>
-                            <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="54">54</button>
-                            <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="56">56</button>
-                            <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="58">58</button>
-                            <button class="size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded" data-size="60">60</button>
-                        </div>
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-xs uppercase tracking-wider font-bold mb-2">Quantity:</label>
-                        <div class="flex items-center gap-3">
-                            <div class="flex items-center border border-gold/40 bg-white rounded">
-                                <button id="qty-minus" class="px-3 py-1.5 text-sm font-bold hover:bg-aliexpressOrange hover:text-white">-</button>
-                                <input type="number" id="modal-qty" value="1" min="1" class="w-12 text-center text-xs font-bold outline-none border-x border-gold/20">
-                                <button id="qty-plus" class="px-3 py-1.5 text-sm font-bold hover:bg-aliexpressOrange hover:text-white">+</button>
-                            </div>
-                            <span id="modal-bulk-hint" class="text-[11px] text-aliexpressOrange font-bold bg-orange-50 px-2 py-1 rounded border border-orange-100"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-2 pt-4 border-t border-gold/20">
-                    <button id="modal-add-to-cart" class="w-full bg-aliexpressOrange hover:bg-orange-600 text-white py-3.5 text-xs uppercase tracking-widest font-bold rounded shadow-md transition-colors flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-cart-plus text-base"></i> Add to Bag
-                    </button>
-                    <button id="modal-delete-product" class="hidden w-full border border-red-300 text-red-600 hover:bg-red-50 py-2 text-[11px] uppercase tracking-wider font-semibold rounded mt-2">
-                        <i class="fa-solid fa-trash-can mr-1"></i> Delete Product (Admin Only)
-                    </button>
-                </div>
-            </div>
+        <div style="text-align:right;">
+          <strong style="font-size:.92rem;">${fmtETB(item.price * item.quantity)}</strong><br>
+          <button class="rm-btn" data-crm="${idx}">${lang === "am" ? "አስወግድ" : "Remove"}</button>
         </div>
-    </div>
+      </div>`).join("");
 
-    <!-- CART DRAWER -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
-        <div id="cart-overlay" class="absolute inset-0 bg-charcoal/60 backdrop-blur-sm"></div>
-        <div class="absolute top-0 right-0 w-full max-w-md h-full bg-cream shadow-2xl flex flex-col justify-between overflow-y-auto">
-            <div class="p-5 border-b border-gold/20 flex items-center justify-between bg-creamDark sticky top-0 z-10">
-                <h3 class="font-serif text-xl font-bold">Shopping Bag</h3>
-                <button id="close-cart-btn" class="hover:text-aliexpressOrange text-lg font-bold"><i class="fa-solid fa-xmark"></i></button>
-            </div>
+    const totalQty = cart.reduce((s, i) => s + i.quantity, 0);
+    const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+    const discPct = calcDiscountPct(totalQty);
+    const discAmt = Math.round(subtotal * discPct / 100);
+    const total = subtotal - discAmt;
 
-            <div id="cart-items" class="p-5 space-y-3 flex-1"></div>
+    footEl.innerHTML = `
+      <div class="tot-row"><span>${lang === "am" ? "ንዑስ ድምር" : "Subtotal"}</span><span>${fmtETB(subtotal)}</span></div>
+      ${discPct > 0 ? `<div class="tot-row disc"><span>${lang === "am" ? `የጅምላ ቅናሽ (${discPct}%)` : `Wholesale Discount (${discPct}%)`}</span><span>−${fmtETB(discAmt)}</span></div>` : ""}
+      <div class="tot-row grand"><span>${lang === "am" ? "ጠቅላላ ድምር" : "Total"}</span><span>${fmtETB(total)}</span></div>
+      ${currentUser ? `
+        <input id="chkPhone" class="field" type="tel" placeholder="${lang === "am" ? "ስልክ ቁጥር *" : "Phone Number *"}" value="${esc(currentUser.user_metadata?.phone || "")}">
+        <input id="chkAddress" class="field" placeholder="${lang === "am" ? "የመድረሻ አድራሻ (ከተማ / ሰፈር) *" : "Delivery Address (City / Area) *"}">
+        <input id="chkNote" class="field" placeholder="${lang === "am" ? "ተጨማሪ ማስታወሻ (አማራጭ)" : "Note (optional)"}">
+        <button class="btn solid" id="placeOrderBtn" style="width:100%;">
+          ${lang === "am" ? "ትዕዛዝ አስቀምጥና በቴሌግራም አረጋግጥ" : "Place Order & Open Telegram"}
+        </button>
+      ` : `
+        <p style="font-size:.84rem;color:var(--muted);margin-bottom:10px;">
+          ${lang === "am" ? "ትዕዛዝ ለማስቀመጥ መጀመሪያ ወደ አካውንትዎ ይግቡ።" : "Sign in to save your order and track its status."}
+        </p>
+        <button class="btn solid" id="chkSignInBtn" style="width:100%;">${lang === "am" ? "ግባ / አካውንት ክፈት" : "Sign In to Checkout"}</button>
+      `}`;
+  }
 
-            <div class="p-5 bg-creamDark/25 border-t border-gold/20 space-y-4">
-                <div class="bg-white p-3.5 border border-gold/25 rounded space-y-2 text-xs">
-                    <div class="flex justify-between"><span class="text-charcoal/70">Subtotal:</span><span id="cart-subtotal" class="font-semibold">0 ETB</span></div>
-                    <div id="discount-row" class="hidden flex justify-between text-green-700 font-bold"><span id="discount-label"></span><span id="discount-amount"></span></div>
-                    <div class="flex justify-between font-bold text-sm border-t border-gold/15 pt-2"><span>Grand Total:</span><span id="cart-total" class="text-aliexpressOrange">0 ETB</span></div>
-                </div>
+  document.getElementById("cartDrawer").addEventListener("click", async e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    if (b.dataset.cdec !== undefined) {
+      const idx = Number(b.dataset.cdec);
+      cart[idx].quantity--;
+      if (cart[idx].quantity < 1) cart.splice(idx, 1);
+      renderCart();
+    } else if (b.dataset.cinc !== undefined) {
+      const idx = Number(b.dataset.cinc);
+      if (cart[idx].quantity < (cart[idx].stock || 99)) {
+        cart[idx].quantity++;
+        renderCart();
+      } else {
+        toast(lang === "am" ? "ከክምችት በላይ መጨመር አይቻልም" : "Stock limit reached", true);
+      }
+    } else if (b.dataset.crm !== undefined) {
+      cart.splice(Number(b.dataset.crm), 1);
+      renderCart();
+    } else if (b.id === "chkSignInBtn") {
+      closeCart();
+      openAccountModal();
+    } else if (b.id === "placeOrderBtn") {
+      await submitOrder(b);
+    }
+  });
 
-                <div class="space-y-2">
-                    <input type="text" id="cust-name" placeholder="Full name *" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs rounded outline-none">
-                    <input type="tel" id="cust-phone" placeholder="Phone number *" class="w-full bg-white border border-gold/30 px-3 py-2 text-xs rounded outline-none">
-                </div>
+  async function submitOrder(btn) {
+    if (!configured || !currentUser) return;
+    const phone = document.getElementById("chkPhone").value.trim();
+    const address = document.getElementById("chkAddress").value.trim();
+    const note = document.getElementById("chkNote").value.trim();
+    if (!phone || !address) {
+      toast(lang === "am" ? "ስልክ ቁጥር እና አድራሻ ያስገቡ" : "Please enter phone number and delivery address", true);
+      return;
+    }
 
-                <button id="telegram-checkout-btn" class="w-full bg-[#229ED9] hover:bg-[#1b86b8] text-white py-3.5 text-xs uppercase font-bold rounded flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-brands fa-telegram text-base"></i> Send Order to Admin
-                </button>
-            </div>
+    btn.disabled = true;
+    btn.textContent = lang === "am" ? "በመመዝገብ ላይ..." : "Saving order...";
+
+    const snapshot = [...cart];
+    const payload = snapshot.map(i => ({
+      product_id: i.product_id,
+      quantity: i.quantity,
+      size: i.size,
+      color: i.color
+    }));
+
+    const { data, error } = await sb.rpc("place_order", {
+      p_items: payload,
+      p_phone: phone,
+      p_address: address,
+      p_note: note || null
+    });
+
+    if (error) {
+      toast(error.message, true);
+      btn.disabled = false;
+      btn.textContent = lang === "am" ? "ትዕዛዝ አስቀምጥና በቴሌግራም አረጋግጥ" : "Place Order & Open Telegram";
+      return;
+    }
+
+    // Order saved securely in Supabase. Build formatted Telegram message.
+    const lines = snapshot.map((i, idx) =>
+      `${idx + 1}. ${i.name} [${[i.color, i.size].filter(Boolean).join(" / ") || "Standard"}] x${i.quantity} = ${fmtETB(i.price * i.quantity)}`
+    ).join("\n");
+
+    let msg = `MIRAN ABAYA ORDER\n`;
+    msg += `Order ID: ${data.order_id}\n`;
+    msg += `Phone: ${phone}\n`;
+    msg += `Address: ${address}\n`;
+    if (note) msg += `Note: ${note}\n`;
+    msg += `\nItems:\n${lines}\n\n`;
+    msg += `Subtotal: ${fmtETB(data.subtotal)}\n`;
+    if (data.discount_percent > 0) {
+      msg += `Wholesale Discount (${data.discount_percent}%): -${fmtETB(data.discount_amount)}\n`;
+    }
+    msg += `TOTAL: ${fmtETB(data.total)}\nStatus: Pending`;
+
+    const tgUrl = `https://t.me/${TG_USER}?text=${encodeURIComponent(msg)}`;
+
+    cart = [];
+    saveCart();
+    renderCart();
+    loadProducts();
+    closeCart();
+
+    toast(lang === "am" ? "ትዕዛዝዎ በተሳካ ሁኔታ ተመዝግቧል!" : "Order saved! Opening Telegram...");
+    window.open(tgUrl, "_blank", "noopener");
+  }
+
+  // --- Customer Auth & Order History ---
+  const acctModal = document.getElementById("acctModal");
+  function openAccountModal() {
+    updateAccountUI();
+    acctModal.showModal();
+  }
+  document.getElementById("acctBtn").addEventListener("click", openAccountModal);
+  document.getElementById("closeAcct").addEventListener("click", () => acctModal.close());
+  acctModal.addEventListener("click", e => { if (e.target === acctModal) acctModal.close(); });
+
+  document.getElementById("tabSignIn").addEventListener("click", () => setAuthMode("signin"));
+  document.getElementById("tabSignUp").addEventListener("click", () => setAuthMode("signup"));
+
+  function setAuthMode(m) {
+    authMode = m;
+    document.getElementById("tabSignIn").classList.toggle("on", m === "signin");
+    document.getElementById("tabSignUp").classList.toggle("on", m === "signup");
+    document.getElementById("authName").style.display = m === "signup" ? "block" : "none";
+    document.getElementById("authPhone").style.display = m === "signup" ? "block" : "none";
+    document.getElementById("authSubmitBtn").textContent = m === "signup"
+      ? (lang === "am" ? "አካውንት ክፈት" : "Create Account")
+      : (lang === "am" ? "ግባ" : "Sign In");
+    document.getElementById("authErr").textContent = "";
+  }
+
+  document.getElementById("authForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!configured) {
+      document.getElementById("authErr").textContent = "Supabase is not configured yet.";
+      return;
+    }
+    const email = document.getElementById("authEmail").value.trim();
+    const password = document.getElementById("authPass").value;
+    const errEl = document.getElementById("authErr");
+    const btn = document.getElementById("authSubmitBtn");
+    errEl.textContent = "";
+    btn.disabled = true;
+
+    let res;
+    if (authMode === "signup") {
+      const full_name = document.getElementById("authName").value.trim();
+      const phone = document.getElementById("authPhone").value.trim();
+      res = await sb.auth.signUp({ email, password, options: { data: { full_name, phone } } });
+      if (!res.error) {
+        toast(lang === "am" ? "አካውንት ተከፍቷል! ኢሜይልዎን ያረጋግጡ ወይም ይግቡ።" : "Account created! Check your email if confirmation is enabled.");
+      }
+    } else {
+      res = await sb.auth.signInWithPassword({ email, password });
+      if (!res.error) toast(lang === "am" ? "በተሳካ ሁኔታ ገብተዋል" : "Signed in");
+    }
+
+    btn.disabled = false;
+    if (res.error) {
+      errEl.textContent = res.error.message;
+    } else {
+      e.target.reset();
+    }
+  });
+
+  document.getElementById("signOutBtn").addEventListener("click", async () => {
+    if (sb) await sb.auth.signOut();
+    toast(lang === "am" ? "ወጥተዋል" : "Signed out");
+  });
+
+  document.getElementById("refreshOrdersBtn").addEventListener("click", loadMyOrders);
+
+  function updateAccountUI() {
+    document.getElementById("acctGuest").style.display = currentUser ? "none" : "block";
+    document.getElementById("acctLoggedIn").style.display = currentUser ? "block" : "none";
+    document.getElementById("acctBtn").textContent = currentUser
+      ? (currentUser.user_metadata?.full_name?.split(" ")[0] || (lang === "am" ? "አካውንት" : "Account"))
+      : (lang === "am" ? "ግባ" : "Account");
+
+    if (currentUser) {
+      document.getElementById("userGreeting").textContent = currentUser.user_metadata?.full_name || "My Account";
+      document.getElementById("userEmailLabel").textContent = currentUser.email;
+      loadMyOrders();
+    }
+  }
+
+  async function loadMyOrders() {
+    if (!sb || !currentUser) return;
+    const box = document.getElementById("myOrdersList");
+    box.innerHTML = `<p style="color:var(--muted);font-size:.88rem;">Loading...</p>`;
+
+    const { data, error } = await sb
+      .from("orders")
+      .select("id, status, subtotal, discount_percent, discount_amount, total, address, created_at, order_items(product_name, quantity, unit_price, size, color)")
+      .eq("customer_id", currentUser.id)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      box.innerHTML = `<p class="err-msg">${esc(error.message)}</p>`;
+      return;
+    }
+    if (!data || !data.length) {
+      box.innerHTML = `<p style="color:var(--muted);font-size:.88rem;">${lang === "am" ? "እስካሁን ትዕዛዝ የለም።" : "No orders yet."}</p>`;
+      return;
+    }
+
+    box.innerHTML = data.map(o => `
+      <div class="ord-card">
+        <div class="ord-head">
+          <strong>#${esc(o.id.slice(0, 8))}</strong>
+          <span class="status-pill">${esc(o.status)}</span>
         </div>
-    </div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:6px;">${new Date(o.created_at).toLocaleString()}</div>
+        ${(o.order_items || []).map(it => `
+          <div>${esc(it.product_name)} (${[it.color, it.size].filter(Boolean).join("/") || "Std"}) &times; ${it.quantity} — ${fmtETB(it.unit_price * it.quantity)}</div>
+        `).join("")}
+        <div style="margin-top:8px;font-weight:700;">
+          ${lang === "am" ? "ጠቅላላ" : "Total"}: ${fmtETB(o.total)}
+          ${o.discount_percent > 0 ? `<small style="color:var(--ok);">(${o.discount_percent}% OFF)</small>` : ""}
+        </div>
+      </div>`).join("");
+  }
 
-    <script>
-        // Fixing Javascript String Syntax Error
-        const VENDOR_MARKUP = 1.10; 
-        
-        const defaultProducts = [
-            {
-                id: "def-1", name: "Midnight Royal Nidah Abaya", category: "classic", categoryLabel: "Classic Black", price: 4800, rating: "4.9", sold: "1.4k+",
-                colorVariants: [
-                    { name: "Royal Black", hex: "#1A1A1A", img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop" },
-                    { name: "Deep Maroon", hex: "#5C1A26", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" }
-                ],
-                img: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                id: "def-2", name: "Sage Mist Butterfly Abaya", category: "pastel", categoryLabel: "Pastel & Colored", price: 4900, rating: "5.0", sold: "900+",
-                colorVariants: [
-                    { name: "Sage Green", hex: "#9CAF88", img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" },
-                    { name: "Dusty Rose", hex: "#C99A9E", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" }
-                ],
-                img: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                id: "def-3", name: "Desert Sand Linen Kimono", category: "kimono", categoryLabel: "Kimono Style", price: 5200, rating: "4.8", sold: "2.1k+",
-                colorVariants: [
-                    { name: "Beige", hex: "#D8C7B0", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" }
-                ],
-                img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
-            }
-        ];
-
-        let products = JSON.parse(localStorage.getItem('miran_full_db')) || defaultProducts;
-        let cart = JSON.parse(localStorage.getItem('miran_cart')) || [];
-        let isVendor = localStorage.getItem('miran_is_vendor') === 'true';
-
-        const $ = id => document.getElementById(id);
-        const formatMoney = num => `${Math.round(num).toLocaleString()} ETB`;
-
-        function updateVendorUI() {
-            $('admin-panel-btn').classList.toggle('hidden', !isVendor);
-            $('auth-btn').innerHTML = isVendor ? '<i class="fa-solid fa-right-from-bracket text-[10px]"></i> Logout' : '<i class="fa-solid fa-lock text-[10px]"></i> Vendor Portal';
-        }
-
-        $('auth-btn').addEventListener('click', () => {
-            if (isVendor) {
-                isVendor = false; localStorage.setItem('miran_is_vendor', 'false');
-            } else {
-                if (prompt("Enter Admin Password:") === "miran2026") {
-                    isVendor = true; localStorage.setItem('miran_is_vendor', 'true');
-                } else alert("Access Denied");
-            }
-            updateVendorUI();
-            renderGrid();
-        });
-
-        function compressImage(file) {
-            return new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onload = ev => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const cvs = document.createElement('canvas');
-                        cvs.width = 600; cvs.height = Math.round(img.height * (600/img.width));
-                        cvs.getContext('2d').drawImage(img, 0, 0, cvs.width, cvs.height);
-                        resolve(cvs.toDataURL('image/jpeg', 0.7));
-                    };
-                    img.src = ev.target.result;
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // --- ADMIN: Upload Product ---
-        let mainPhotoData = "";
-        $('admin-panel-btn').addEventListener('click', () => {
-            $('admin-modal').classList.remove('hidden');
-            $('color-variants-container').innerHTML = '';
-            addColorVariantRow("Standard Black", "#1A1A1A"); 
-        });
-        $('close-admin-btn').addEventListener('click', () => $('admin-modal').classList.add('hidden'));
-
-        $('new-product-photo').addEventListener('change', async e => {
-            if(e.target.files[0]) {
-                mainPhotoData = await compressImage(e.target.files[0]);
-                $('photo-preview').src = mainPhotoData;
-                $('photo-preview').classList.remove('hidden');
-                $('upload-placeholder').classList.add('hidden');
-            }
-        });
-
-        $('new-product-price').addEventListener('input', e => {
-            const val = Number(e.target.value);
-            if(val > 0) $('price-preview').textContent = `Customer sees: ${Math.round(val * VENDOR_MARKUP).toLocaleString()} ETB (Includes 10% Markup)`;
-            else $('price-preview').textContent = '';
-        });
-
-        function addColorVariantRow(defName = "", defHex = "#1A1A1A") {
-            const div = document.createElement('div');
-            div.className = "variant-row bg-cream/70 p-2 border border-gold/30 rounded flex items-center gap-2";
-            div._img = "";
-            div.innerHTML = `
-                <input type="color" value="${defHex}" class="var-hex w-7 h-7 border border-gold/40 cursor-pointer bg-transparent">
-                <input type="text" value="${defName}" placeholder="Color Name" class="var-name flex-1 bg-white border border-gold/30 px-2 py-1 text-xs rounded outline-none">
-                <label class="cursor-pointer bg-white border border-gold/40 px-2 py-1 text-[11px] font-bold rounded">
-                    <i class="fa-solid fa-camera text-aliexpressOrange"></i> Photo
-                    <input type="file" accept="image/*" class="var-photo hidden">
-                </label>
-                <img src="" class="var-thumb hidden w-7 h-7 object-cover border rounded">
-                <button type="button" class="text-red-500 hover:text-red-700 px-1" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash-can"></i></button>
-            `;
-            div.querySelector('.var-photo').addEventListener('change', async e => {
-                if(e.target.files[0]) {
-                    div._img = await compressImage(e.target.files[0]);
-                    const thumb = div.querySelector('.var-thumb');
-                    thumb.src = div._img;
-                    thumb.classList.remove('hidden');
-                }
-            });
-            $('color-variants-container').appendChild(div);
-        }
-        $('add-color-variant-btn').addEventListener('click', () => addColorVariantRow());
-
-        $('add-product-form').addEventListener('submit', e => {
-            e.preventDefault();
-            if(!mainPhotoData) return alert("Upload main photo first!");
-            $('save-submit-btn').textContent = "Publishing...";
-            
-            const variants = [...document.querySelectorAll('.variant-row')].map(r => ({
-                name: r.querySelector('.var-name').value.trim() || "Standard",
-                hex: r.querySelector('.var-hex').value,
-                img: r._img || mainPhotoData 
-            }));
-
-            const cat = $('new-product-category');
-            const newAbaya = {
-                id: 'prod_' + Date.now(),
-                name: $('new-product-name').value.trim(),
-                category: cat.value,
-                categoryLabel: cat.options[cat.selectedIndex].text,
-                price: Math.round(Number($('new-product-price').value) * VENDOR_MARKUP), 
-                img: mainPhotoData,
-                colorVariants: variants,
-                rating: "5.0", sold: "New!"
-            };
-
-            products.unshift(newAbaya);
-            localStorage.setItem('miran_full_db', JSON.stringify(products));
-            
-            e.target.reset();
-            $('photo-preview').classList.add('hidden');
-            $('upload-placeholder').classList.remove('hidden');
-            mainPhotoData = "";
-            $('admin-modal').classList.add('hidden');
-            $('save-submit-btn').innerHTML = `<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to Marketplace`;
-            
-            renderGrid();
-        });
-
-        // --- MARKETPLACE GRID ---
-        let currentFilter = 'all';
-        let currentSearch = '';
-
-        function renderGrid() {
-            const grid = $('product-grid');
-            grid.innerHTML = '';
-            
-            const filtered = products.filter(p => {
-                return (currentFilter === 'all' || p.category === currentFilter) && p.name.toLowerCase().includes(currentSearch.toLowerCase());
-            });
-
-            if(filtered.length === 0) {
-                grid.innerHTML = '<p class="col-span-full text-center py-12 text-gray-500">No products match your search.</p>';
-                return;
-            }
-
-            filtered.forEach(p => {
-                const dots = (p.colorVariants || []).map(v => `<span class="w-3 h-3 rounded-full border border-charcoal/30 inline-block" style="background-color:${v.hex}"></span>`).join('');
-                
-                grid.innerHTML += `
-                    <div class="bg-white rounded-lg border border-gold/30 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between overflow-hidden cursor-pointer group" onclick="openProduct('${p.id}')">
-                        <div class="relative aspect-[3/4] w-full bg-creamDark overflow-hidden">
-                            <img src="${p.img}" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 ease-out">
-                            <span class="absolute top-2 left-2 bg-aliexpressOrange text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded shadow">Wholesale Deal</span>
-                            <div class="absolute bottom-2 left-2 bg-charcoal/80 text-cream text-[9px] px-2 py-0.5 rounded">⭐ ${p.rating} | ${p.sold}</div>
-                        </div>
-                        <div class="p-3.5 flex flex-col justify-between flex-1">
-                            <div>
-                                <h3 class="font-serif text-sm font-bold line-clamp-2 mb-1.5 group-hover:text-aliexpressOrange transition-colors">${p.name}</h3>
-                                <div class="flex gap-1.5 mb-2">${dots}</div>
-                            </div>
-                            <div class="mt-2 flex justify-between items-baseline">
-                                <span class="text-lg font-extrabold text-aliexpressOrange">${formatMoney(p.price)}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('border-b-2', 'text-aliexpressOrange'));
-                e.target.classList.add('border-b-2', 'text-aliexpressOrange');
-                currentFilter = e.target.dataset.filter;
-                renderGrid();
-            });
-        });
-        
-        const applySearch = val => { currentSearch = val; renderGrid(); };
-        $('search-input').addEventListener('input', e => applySearch(e.target.value));
-        $('mobile-search-input').addEventListener('input', e => applySearch(e.target.value));
-
-        // --- PRODUCT MODAL ---
-        let selectedProduct = null;
-        let selectedColor = null;
-        let selectedSize = '54';
-
-        function openProduct(id) {
-            selectedProduct = products.find(p => p.id === id);
-            
-            $('modal-category').textContent = selectedProduct.categoryLabel || 'Modest Fashion';
-            $('modal-title').textContent = selectedProduct.name;
-            $('modal-price').textContent = formatMoney(selectedProduct.price);
-            
-            const colorOpts = $('modal-color-options');
-            const thumbnailsOpts = $('modal-thumbnails');
-            colorOpts.innerHTML = '';
-            thumbnailsOpts.innerHTML = '';
-            
-            const vars = selectedProduct.colorVariants && selectedProduct.colorVariants.length ? selectedProduct.colorVariants : [{name: "Standard", hex: "#1A1A1A", img: selectedProduct.img}];
-            
-            addThumbnail(selectedProduct.img, true);
-
-            vars.forEach((v, idx) => {
-                const cBtn = document.createElement('button');
-                cBtn.className = `p-0.5 border-2 rounded ${idx===0 ? 'border-aliexpressOrange' : 'border-transparent hover:border-gold/50'} transition-all`;
-                cBtn.innerHTML = `<img src="${v.img}" class="w-9 h-9 object-cover rounded-sm">`;
-                
-                cBtn.addEventListener('click', () => {
-                    document.querySelectorAll('#modal-color-options button').forEach(b => b.className = 'p-0.5 border-2 border-transparent hover:border-gold/50 rounded transition-all');
-                    cBtn.className = 'p-0.5 border-2 border-aliexpressOrange rounded transition-all';
-                    selectColor(v);
-                    
-                    document.querySelectorAll('#modal-thumbnails img').forEach(t => t.classList.remove('border-aliexpressOrange', 'border-2'));
-                    const matchingThumb = [...document.querySelectorAll('#modal-thumbnails img')].find(img => img.src === v.img);
-                    if(matchingThumb) matchingThumb.classList.add('border-aliexpressOrange', 'border-2');
-                });
-                colorOpts.appendChild(cBtn);
-
-                if(v.img !== selectedProduct.img) {
-                    addThumbnail(v.img, false);
-                }
-            });
-            
-            selectColor(vars[0]); 
-            $('modal-qty').value = 1;
-            updateModalBulkHint();
-
-            const delBtn = $('modal-delete-product');
-            delBtn.classList.toggle('hidden', !isVendor);
-            delBtn.onclick = () => {
-                if(confirm("Are you sure you want to delete this product?")) {
-                    products = products.filter(p => p.id !== id);
-                    localStorage.setItem('miran_full_db', JSON.stringify(products));
-                    $('product-modal').classList.add('hidden');
-                    renderGrid();
-                }
-            };
-
-            $('product-modal').classList.remove('hidden');
-        }
-
-        function addThumbnail(imgSrc, isMain) {
-            const thumb = document.createElement('img');
-            thumb.src = imgSrc;
-            thumb.className = `w-14 h-14 object-cover rounded cursor-pointer border ${isMain ? 'border-2 border-aliexpressOrange' : 'border-gold/30 hover:border-aliexpressOrange'}`;
-            thumb.addEventListener('click', () => {
-                document.querySelectorAll('#modal-thumbnails img').forEach(t => t.className = 'w-14 h-14 object-cover rounded cursor-pointer border border-gold/30 hover:border-aliexpressOrange');
-                thumb.className = 'w-14 h-14 object-cover rounded cursor-pointer border-2 border-aliexpressOrange';
-                $('modal-img').src = imgSrc;
-            });
-            $('modal-thumbnails').appendChild(thumb);
-        }
-
-        function selectColor(variant) {
-            selectedColor = variant;
-            $('selected-color-label').textContent = variant.name;
-            $('modal-img').src = variant.img;
-        }
-
-        $('close-modal-btn').addEventListener('click', () => $('product-modal').classList.add('hidden'));
-        
-        document.querySelectorAll('.size-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.size-btn').forEach(b => b.className = 'size-btn border border-gold/40 hover:border-aliexpressOrange py-2 text-xs font-bold rounded');
-                e.target.className = 'size-btn border-2 border-aliexpressOrange bg-aliexpressOrange text-white py-2 text-xs font-bold rounded';
-                selectedSize = e.target.dataset.size;
-            });
-        });
-
-        function updateModalBulkHint() {
-            const q = parseInt($('modal-qty').value) || 1;
-            const hint = $('modal-bulk-hint');
-            if(q >= 10) hint.innerHTML = "🔥 <b>20%</b> wholesale discount applied!";
-            else if(q >= 5) hint.innerHTML = "🔥 <b>15%</b> bulk discount applied!";
-            else if(q >= 3) hint.innerHTML = "🔥 <b>10%</b> bulk discount applied!";
-            else hint.innerHTML = "Add 3+ for 10% OFF";
-        }
-        $('qty-minus').addEventListener('click', () => { let v = parseInt($('modal-qty').value); if(v > 1) $('modal-qty').value = v - 1; updateModalBulkHint(); });
-        $('qty-plus').addEventListener('click', () => { $('modal-qty').value = parseInt($('modal-qty').value) + 1; updateModalBulkHint(); });
-        $('modal-qty').addEventListener('input', updateModalBulkHint);
-
-        // --- CART & CHECKOUT ---
-        $('modal-add-to-cart').addEventListener('click', () => {
-            const qty = parseInt($('modal-qty').value) || 1;
-            const exists = cart.find(i => i.id === selectedProduct.id && i.size === selectedSize && i.color === selectedColor.name);
-            if(exists) exists.qty += qty;
-            else {
-                cart.push({
-                    id: selectedProduct.id, name: selectedProduct.name, price: selectedProduct.price,
-                    img: selectedColor.img, color: selectedColor.name, hex: selectedColor.hex, size: selectedSize, qty: qty
-                });
-            }
-            $('product-modal').classList.add('hidden');
-            updateCartUI();
-            $('cart-drawer').classList.remove('hidden');
-        });
-
-        $('cart-btn').addEventListener('click', () => $('cart-drawer').classList.remove('hidden'));
-        $('close-cart-btn').addEventListener('click', () => $('cart-drawer').classList.add('hidden'));
-
-        function updateCartUI() {
-            localStorage.setItem('miran_cart', JSON.stringify(cart));
-            const totalQty = cart.reduce((s, i) => s + i.qty, 0);
-            $('cart-badge').textContent = totalQty;
-            const itemsCont = $('cart-items');
-            if(cart.length === 0) {
-                itemsCont.innerHTML = '<p class="text-center text-gray-400 mt-10">Your bag is empty.</p>';
-                $('cart-subtotal').textContent = "0 ETB";
-                $('cart-total').textContent = "0 ETB";
-                $('discount-row').classList.add('hidden');
-                return;
-            }
-
-            itemsCont.innerHTML = cart.map((item, idx) => `
-                <div class="flex gap-3 bg-white p-2.5 border border-gold/15 rounded items-center">
-                    <img src="${item.img}" class="w-14 h-16 object-cover rounded bg-creamDark">
-                    <div class="flex-1 min-w-0">
-                        <h4 class="font-serif font-bold text-xs truncate">${item.name}</h4>
-                        <p class="text-[11px] text-gray-500 mt-1">Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong></p>
-                        <div class="flex items-center gap-2 mt-1">
-                            <span class="text-xs font-bold bg-gray-100 px-2 rounded">Qty: ${item.qty}</span>
-                            <span class="text-xs font-bold text-aliexpressOrange ml-auto">${formatMoney(item.price * item.qty)}</span>
-                        </div>
-                    </div>
-                    <button class="text-red-400 hover:text-red-600 px-2" onclick="removeFromCart(${idx})"><i class="fa-solid fa-trash-can text-sm"></i></button>
-                </div>
-            `).join('');
-
-            const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-            let discountRate = totalQty >= 10 ? 0.20 : totalQty >= 5 ? 0.15 : totalQty >= 3 ? 0.10 : 0;
-            const discountAmt = subtotal * discountRate;
-            const grandTotal = subtotal - discountAmt;
-
-            $('cart-subtotal').textContent = formatMoney(subtotal);
-            $('cart-total').textContent = formatMoney(grandTotal);
-            if(discountRate > 0) {
-                $('discount-row').classList.remove('hidden');
-                $('discount-label').textContent = `Bulk Discount (${discountRate*100}%):`;
-                $('discount-amount').textContent = `- ${formatMoney(discountAmt)}`;
-            } else $('discount-row').classList.add('hidden');
-        }
-        
-        window.removeFromCart = (idx) => { cart.splice(idx, 1); updateCartUI(); };
-
-        $('telegram-checkout-btn').addEventListener('click', () => {
-            if(cart.length === 0) return alert("Bag is empty!");
-            const name = $('cust-name').value;
-            const phone = $('cust-phone').value;
-            if(!name || !phone) return alert("Please enter name and phone number!");
-
-            const totalQty = cart.reduce((s, i) => s + i.qty, 0);
-            const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-            let rate = totalQty >= 10 ? 0.2 : totalQty >= 5 ? 0.15 : totalQty >= 3 ? 0.1 : 0;
-            const discount = subtotal * rate;
-            const final = subtotal - discount;
-
-            const lines = cart.map((i, idx) => `${idx+1}. ${i.name} [Color: ${i.color} | Size: ${i.size}] x${i.qty} = ${formatMoney(i.price * i.qty)}`).join('\n');
-            let msg = `✨ MIRAN EXPRESS ORDER ✨\n\n👤 Customer: ${name}\n📞 Phone: ${phone}\n\n🛍️ Items (${totalQty} pcs):\n${lines}\n\n💵 Subtotal: ${formatMoney(subtotal)}`;
-            if(rate > 0) msg += `\n🏷️ Wholesale Discount (${rate*100}%): -${formatMoney(discount)}`;
-            msg += `\n💰 GRAND TOTAL: ${formatMoney(final)}\n\nPlease confirm my order.`;
-
-            window.open(`https://t.me/mame15?text=${encodeURIComponent(msg)}`, '_blank');
-        });
-
-        // INIT
-        updateVendorUI();
-        renderGrid();
-        updateCartUI();
-    </script>
+  // --- Init ---
+  saveCart();
+  if (configured && sb) {
+    sb.auth.getSession().then(({ data }) => {
+      currentUser = data.session?.user || null;
+      updateAccountUI();
+      renderCart();
+    });
+    sb.auth.onAuthStateChange((_event, session) => {
+      currentUser = session?.user || null;
+      updateAccountUI();
+      renderCart();
+    });
+  }
+  loadProducts();
+</script>
 </body>
 </html>
 
