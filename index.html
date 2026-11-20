@@ -57,7 +57,6 @@
     padding: 8px 16px; font-size: .84rem; font-weight: 600; letter-spacing: .04em;
   }
 
-  /* Header + hero share the black field */
   .stage { background: var(--black); color: #F3ECDD; }
   header .wrap {
     display: flex; align-items: center; justify-content: space-between;
@@ -95,8 +94,6 @@
   .btn.solid:hover { background: #DDBF86; }
   .btn.line { color: var(--gold); }
   .btn.line:hover { background: rgba(201, 169, 110, .14); }
-  .btn.dark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .btn.dark:hover { background: var(--gold); border-color: var(--gold); color: var(--black); }
   .btn:disabled { opacity: .5; cursor: not-allowed; }
 
   .figure { justify-self: center; width: min(100%, 340px); }
@@ -108,7 +105,6 @@
   .figure .draw.d3 { animation-delay: 1.1s; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
 
-  /* Sections */
   section { padding: 80px 0; }
   h2 { font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); line-height: 1.15; max-width: 22ch; }
   .lede { color: var(--muted); max-width: 54ch; margin-top: 12px; }
@@ -125,7 +121,6 @@
   .row span { color: var(--muted); }
   .row .go { color: var(--gold-deep); font-size: .92rem; }
 
-  /* Catalog section */
   .newin { background: var(--paper-alt); }
   .shop-bar {
     display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
@@ -187,7 +182,6 @@
   footer small { display: block; margin-top: 32px; color: #8A806D; }
   footer a.tg { color: var(--gold); border-bottom: 1px solid var(--gold); }
 
-  /* Drawer (Cart) */
   .scrim {
     position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 60;
     opacity: 0; pointer-events: none; transition: opacity .25s;
@@ -222,7 +216,6 @@
   .tot-row.grand { font-size: 1.08rem; font-weight: 700; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; margin-bottom: 12px; }
   .field { width: 100%; border: 1px solid var(--line); background: var(--paper); padding: 10px 12px; border-radius: 3px; font-size: .9rem; margin-bottom: 8px; }
 
-  /* Dialogs (Product Detail & Account) */
   dialog {
     margin: auto; border: 1px solid var(--line); background: var(--paper); color: var(--ink);
     width: min(820px, 94vw); max-height: 92vh; overflow-y: auto; border-radius: 4px; padding: 0;
@@ -243,7 +236,6 @@
   }
   .opt-btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .err-msg { color: var(--danger); font-size: .86rem; min-height: 20px; }
-  .ok-msg { color: var(--ok); font-size: .88rem; }
 
   .acct-box { padding: 26px; position: relative; max-width: 560px; margin: 0 auto; }
   .acct-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
@@ -253,7 +245,6 @@
   .ord-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 8px; }
   .status-pill { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold-deep); text-transform: uppercase; }
 
-  /* Toast */
   .toasts { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 95; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
   .toast { background: var(--black); color: #F3ECDD; padding: 11px 20px; border-left: 3px solid var(--gold); font-size: .9rem; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
   .toast.bad { border-left-color: var(--danger); }
@@ -400,7 +391,6 @@
   <div class="wrap"><small>&copy; 2026 MIRAN ABAYA</small></div>
 </footer>
 
-<!-- Cart Drawer -->
 <div class="scrim" id="scrim"></div>
 <aside class="drawer sans" id="cartDrawer" aria-label="Shopping Cart">
   <div class="dh">
@@ -411,10 +401,8 @@
   <div class="df" id="cartFooter"></div>
 </aside>
 
-<!-- Product Detail Modal -->
 <dialog id="pdModal" class="sans"></dialog>
 
-<!-- Customer Account Modal -->
 <dialog id="acctModal" class="sans">
   <div class="acct-box">
     <button class="close-x" id="closeAcct" style="position:absolute;top:12px;right:12px;">&times;</button>
@@ -450,10 +438,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script>
-  const { client: sb, configured } = window.initMiranSupabase();
   const TG_USER = (window.MIRAN_CONFIG && window.MIRAN_CONFIG.TELEGRAM_USERNAME) || "mame15";
+  const esc = s => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
+  const fmtETB = n => `${Math.round(Number(n) || 0).toLocaleString()} ETB`;
 
-  // --- Translations ---
+  function toast(msg, bad = false) {
+    const el = document.createElement("div");
+    el.className = "toast" + (bad ? " bad" : "");
+    el.textContent = msg;
+    document.getElementById("toasts").appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+  }
+
   const am = {
     announce: "የጅምላ ቅናሽ፦ 3–4 ቁርጥራጭ (10% ቅናሽ) · 5–9 ቁርጥራጭ (15% ቅናሽ) · 10+ ቁርጥራጭ (20% ቅናሽ)",
     nav_shop: "ምድቦች", nav_new: "ምርቶች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
@@ -479,6 +475,20 @@
   const tEls = document.querySelectorAll("[data-t]");
   tEls.forEach(e => e.dataset.en = e.innerHTML);
 
+  let allProducts = [];
+  let activeSlug = "all";
+  let searchTerm = "";
+  let currentUser = null;
+  let authMode = "signin";
+  let cart = JSON.parse(localStorage.getItem("miran_sb_cart") || "[]");
+
+  function calcDiscountPct(totalQty) {
+    if (totalQty >= 10) return 20;
+    if (totalQty >= 5) return 15;
+    if (totalQty >= 3) return 10;
+    return 0;
+  }
+
   document.getElementById("langBtn").addEventListener("click", () => {
     lang = lang === "en" ? "am" : "en";
     document.documentElement.lang = lang;
@@ -489,232 +499,6 @@
     renderCart();
   });
 
-  // --- State ---
-  let allProducts = [];
-  let activeSlug = "all";
-  let searchTerm = "";
-  let currentUser = null;
-  let authMode = "signin";
-  let cart = JSON.parse(localStorage.getItem("miran_sb_cart") || "[]");
-
-  const esc = s => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
-  const fmtETB = n => `${Math.round(Number(n) || 0).toLocaleString()} ETB`;
-
-  function toast(msg, bad = false) {
-    const el = document.createElement("div");
-    el.className = "toast" + (bad ? " bad" : "");
-    el.textContent = msg;
-    document.getElementById("toasts").appendChild(el);
-    setTimeout(() => el.remove(), 3500);
-  }
-
-  function calcDiscountPct(totalQty) {
-    if (totalQty >= 10) return 20;
-    if (totalQty >= 5) return 15;
-    if (totalQty >= 3) return 10;
-    return 0;
-  }
-
-  // --- Load Products from Supabase ---
-  async function loadProducts() {
-    const root = document.getElementById("catalogRoot");
-    if (!configured) {
-      root.innerHTML = `
-        <div class="empty">
-          <h3>${lang === "am" ? "Supabase ገና አልተገናኘም" : "Supabase not configured yet"}</h3>
-          <p class="sans">${lang === "am"
-            ? "supabase-config.js ፋይል ውስጥ የራስዎን SUPABASE_URL እና SUPABASE_ANON_KEY ያስገቡ።"
-            : "Open supabase-config.js and add your SUPABASE_URL and SUPABASE_ANON_KEY to load live products."}</p>
-        </div>`;
-      return;
-    }
-
-    root.innerHTML = `<div class="empty"><p class="sans">${lang === "am" ? "ምርቶችን በመጫን ላይ..." : "Loading products..."}</p></div>`;
-
-    const { data, error } = await sb
-      .from("products")
-      .select("id, name, description, price, images, sizes, colors, stock, is_active, created_at, categories(slug, name_en, name_am)")
-      .eq("is_active", true)
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      root.innerHTML = `<div class="empty"><h3>Error loading products</h3><p class="sans">${esc(error.message)}</p></div>`;
-      return;
-    }
-
-    allProducts = data || [];
-    renderCatalog();
-  }
-
-  function renderCatalog() {
-    const root = document.getElementById("catalogRoot");
-    if (!configured) return;
-
-    const list = allProducts.filter(p => {
-      const slug = p.categories?.slug || "";
-      const matchCat = activeSlug === "all" || slug === activeSlug;
-      const matchQ = !searchTerm || (p.name + " " + (p.description || "")).toLowerCase().includes(searchTerm);
-      return matchCat && matchQ;
-    });
-
-    if (!list.length) {
-      root.innerHTML = `
-        <div class="empty">
-          <h3>${lang === "am" ? "ምንም ምርት አልተገኘም" : "No products listed yet"}</h3>
-          <p class="sans">${lang === "am"
-            ? "ባለቤቱ ከዳሽቦርድ ምርቶችን እንዳስገባ እዚህ ይታያሉ።"
-            : "Products will appear here as soon as the owner publishes them from the dashboard."}</p>
-        </div>`;
-      return;
-    }
-
-    root.innerHTML = `<div class="grid sans">` + list.map(p => {
-      const img = (p.images && p.images[0]) || "";
-      const catLabel = lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || "");
-      const outOfStock = p.stock <= 0;
-      return `
-        <article class="card">
-          <div class="card-img" data-open="${p.id}">
-            ${img ? `<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="no-img">No photo</div>`}
-            ${outOfStock ? `<span class="stock-tag">${lang === "am" ? "አልቋል" : "Out of stock"}</span>` : ""}
-          </div>
-          <div class="card-body">
-            <span class="card-cat">${esc(catLabel)}</span>
-            <h3 class="card-title" data-open="${p.id}">${esc(p.name)}</h3>
-            <div class="card-price">${fmtETB(p.price)}</div>
-            <button class="card-btn" data-open="${p.id}" ${outOfStock ? "disabled" : ""}>
-              ${outOfStock ? (lang === "am" ? "አልቋል" : "Out of stock") : (lang === "am" ? "ዝርዝር ይመልከቱ" : "Select options")}
-            </button>
-          </div>
-        </article>`;
-    }).join("") + `</div>`;
-  }
-
-  // Category filter & search
-  document.getElementById("catChips").addEventListener("click", e => {
-    const b = e.target.closest(".chip");
-    if (!b) return;
-    activeSlug = b.dataset.slug;
-    document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c === b));
-    renderCatalog();
-  });
-
-  document.querySelectorAll("[data-cat-jump]").forEach(el => {
-    el.addEventListener("click", () => {
-      activeSlug = el.dataset.catJump;
-      document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c.dataset.slug === activeSlug));
-      renderCatalog();
-      document.getElementById("new").scrollIntoView({ behavior: "smooth" });
-    });
-  });
-
-  document.getElementById("searchInput").addEventListener("input", e => {
-    searchTerm = e.target.value.trim().toLowerCase();
-    renderCatalog();
-  });
-
-  // --- Product Detail Modal ---
-  const pdModal = document.getElementById("pdModal");
-  let pdState = null;
-
-  document.getElementById("catalogRoot").addEventListener("click", e => {
-    const t = e.target.closest("[data-open]");
-    if (!t) return;
-    const p = allProducts.find(x => x.id === t.dataset.open);
-    if (!p) return;
-    pdState = {
-      p,
-      imgIdx: 0,
-      size: p.sizes && p.sizes.length === 1 ? p.sizes[0] : "",
-      color: p.colors && p.colors.length === 1 ? p.colors[0] : "",
-      qty: 1
-    };
-    drawPD();
-    pdModal.showModal();
-  });
-
-  function drawPD() {
-    const { p, imgIdx, size, color, qty } = pdState;
-    const imgs = (p.images && p.images.length) ? p.images : [];
-    const mainImg = imgs[imgIdx] || "";
-    const discPct = calcDiscountPct(qty);
-
-    pdModal.innerHTML = `
-      <div class="pd-grid">
-        <div class="pd-gallery">
-          ${mainImg
-            ? `<img class="pd-main-img" src="${esc(mainImg)}" alt="${esc(p.name)}">`
-            : `<div class="pd-main-img" style="display:grid;place-items:center;color:var(--muted);">No photo</div>`}
-          ${imgs.length > 1 ? `<div class="pd-thumbs">${imgs.map((u, i) => `<img src="${esc(u)}" class="${i === imgIdx ? "on" : ""}" data-thumb="${i}" alt="">`).join("")}</div>` : ""}
-        </div>
-        <div class="pd-info">
-          <button class="close-x" id="closePD" aria-label="Close">&times;</button>
-          <span class="card-cat">${esc(lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || ""))}</span>
-          <h2 style="font-size:1.5rem;">${esc(p.name)}</h2>
-          <div style="font-size:1.35rem;font-weight:700;color:var(--gold-deep);">${fmtETB(p.price)}</div>
-          ${p.description ? `<p style="color:var(--muted);font-size:.92rem;">${esc(p.description)}</p>` : ""}
-
-          ${p.sizes && p.sizes.length ? `
-            <div>
-              <span class="opt-label">${lang === "am" ? "መጠን" : "Size"}</span>
-              <div class="opts">${p.sizes.map(s => `<button type="button" class="opt-btn ${size === s ? "on" : ""}" data-size="${esc(s)}">${esc(s)}</button>`).join("")}</div>
-            </div>` : ""}
-
-          ${p.colors && p.colors.length ? `
-            <div>
-              <span class="opt-label">${lang === "am" ? "ቀለም" : "Color"}</span>
-              <div class="opts">${p.colors.map(c => `<button type="button" class="opt-btn ${color === c ? "on" : ""}" data-color="${esc(c)}">${esc(c)}</button>`).join("")}</div>
-            </div>` : ""}
-
-          <div>
-            <span class="opt-label">${lang === "am" ? "ብዛት" : "Quantity"} (${lang === "am" ? "ክምችት" : "Stock"}: ${p.stock})</span>
-            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-              <div class="qty-ctrl">
-                <button type="button" id="pdMinus">−</button>
-                <span>${qty}</span>
-                <button type="button" id="pdPlus">+</button>
-              </div>
-              <small style="color:var(--gold-deep);font-weight:600;">
-                ${discPct > 0 ? `${discPct}% OFF` : (lang === "am" ? "3+ ሲገዙ 10% ቅናሽ" : "3+ pcs: 10% OFF")}
-              </small>
-            </div>
-          </div>
-
-          <div class="err-msg" id="pdErr"></div>
-          <button type="button" class="btn solid" id="pdAddBtn" ${p.stock <= 0 ? "disabled" : ""}>
-            ${p.stock <= 0 ? (lang === "am" ? "አልቋል" : "Out of Stock") : (lang === "am" ? "ወደ ጋሪ ጨምር" : "Add to Cart")}
-          </button>
-        </div>
-      </div>`;
-  }
-
-  pdModal.addEventListener("click", e => {
-    if (e.target === pdModal || e.target.id === "closePD") { pdModal.close(); return; }
-    if (!pdState) return;
-    if (e.target.dataset.thumb !== undefined) { pdState.imgIdx = Number(e.target.dataset.thumb); drawPD(); }
-    else if (e.target.dataset.size !== undefined) { pdState.size = e.target.dataset.size; drawPD(); }
-    else if (e.target.dataset.color !== undefined) { pdState.color = e.target.dataset.color; drawPD(); }
-    else if (e.target.id === "pdMinus") { pdState.qty = Math.max(1, pdState.qty - 1); drawPD(); }
-    else if (e.target.id === "pdPlus") {
-      if (pdState.qty < pdState.p.stock) { pdState.qty++; drawPD(); }
-      else toast(lang === "am" ? "ከክምችት በላይ መጨመር አይቻልም" : "Reached available stock limit", true);
-    }
-    else if (e.target.id === "pdAddBtn") {
-      const { p, size, color, qty } = pdState;
-      const missing = [];
-      if (p.sizes && p.sizes.length && !size) missing.push(lang === "am" ? "መጠን" : "size");
-      if (p.colors && p.colors.length && !color) missing.push(lang === "am" ? "ቀለም" : "color");
-      if (missing.length) {
-        document.getElementById("pdErr").textContent = (lang === "am" ? "እባክዎ ይምረጡ፦ " : "Please select: ") + missing.join(", ");
-        return;
-      }
-      addToCart(p, size, color, qty);
-      pdModal.close();
-      openCart();
-    }
-  });
-
-  // --- Cart Logic ---
   function saveCart() {
     localStorage.setItem("miran_sb_cart", JSON.stringify(cart));
     document.getElementById("cartCount").textContent = cart.reduce((s, i) => s + i.quantity, 0);
@@ -728,14 +512,9 @@
       existing.price = Number(p.price);
     } else {
       cart.push({
-        product_id: p.id,
-        name: p.name,
-        price: Number(p.price),
-        image: (p.images && p.images[0]) || "",
-        size: size || "",
-        color: color || "",
-        quantity: qty,
-        stock: p.stock
+        product_id: p.id, name: p.name, price: Number(p.price),
+        image: (p.images && p.images[0]) || "", size: size || "", color: color || "",
+        quantity: qty, stock: p.stock
       });
     }
     saveCart();
@@ -756,17 +535,51 @@
   document.getElementById("closeCart").addEventListener("click", closeCart);
   document.getElementById("scrim").addEventListener("click", closeCart);
 
+  const acctModal = document.getElementById("acctModal");
+  function openAccountModal() {
+    updateAccountUI();
+    acctModal.showModal();
+  }
+  document.getElementById("acctBtn").addEventListener("click", openAccountModal);
+  document.getElementById("closeAcct").addEventListener("click", () => acctModal.close());
+  acctModal.addEventListener("click", e => { if (e.target === acctModal) acctModal.close(); });
+
+  function setAuthMode(m) {
+    authMode = m;
+    document.getElementById("tabSignIn").classList.toggle("on", m === "signin");
+    document.getElementById("tabSignUp").classList.toggle("on", m === "signup");
+    document.getElementById("authName").style.display = m === "signup" ? "block" : "none";
+    document.getElementById("authPhone").style.display = m === "signup" ? "block" : "none";
+    document.getElementById("authSubmitBtn").textContent = m === "signup"
+      ? (lang === "am" ? "አካውንት ክፈት" : "Create Account")
+      : (lang === "am" ? "ግባ" : "Sign In");
+    document.getElementById("authErr").textContent = "";
+  }
+  document.getElementById("tabSignIn").addEventListener("click", () => setAuthMode("signin"));
+  document.getElementById("tabSignUp").addEventListener("click", () => setAuthMode("signup"));
+
+  function updateAccountUI() {
+    document.getElementById("acctGuest").style.display = currentUser ? "none" : "block";
+    document.getElementById("acctLoggedIn").style.display = currentUser ? "block" : "none";
+    document.getElementById("acctBtn").textContent = currentUser
+      ? (currentUser.user_metadata?.full_name?.split(" ")[0] || (lang === "am" ? "አካውንት" : "Account"))
+      : (lang === "am" ? "ግባ" : "Account");
+    if (currentUser) {
+      document.getElementById("userGreeting").textContent = currentUser.user_metadata?.full_name || "My Account";
+      document.getElementById("userEmailLabel").textContent = currentUser.email;
+      loadMyOrders();
+    }
+  }
+
   function renderCart() {
     saveCart();
     const itemsEl = document.getElementById("cartItems");
     const footEl = document.getElementById("cartFooter");
-
     if (!cart.length) {
       itemsEl.innerHTML = `<div class="empty" style="margin-top:20px;"><p>${lang === "am" ? "ጋሪዎ ባዶ ነው።" : "Your cart is empty."}</p></div>`;
       footEl.innerHTML = "";
       return;
     }
-
     itemsEl.innerHTML = cart.map((item, idx) => `
       <div class="cart-item">
         ${item.image ? `<img src="${esc(item.image)}" alt="">` : `<div style="width:64px;height:84px;background:var(--paper-alt);"></div>`}
@@ -810,229 +623,216 @@
       `}`;
   }
 
-  document.getElementById("cartDrawer").addEventListener("click", async e => {
-    const b = e.target.closest("button");
-    if (!b) return;
-    if (b.dataset.cdec !== undefined) {
-      const idx = Number(b.dataset.cdec);
-      cart[idx].quantity--;
-      if (cart[idx].quantity < 1) cart.splice(idx, 1);
-      renderCart();
-    } else if (b.dataset.cinc !== undefined) {
-      const idx = Number(b.dataset.cinc);
-      if (cart[idx].quantity < (cart[idx].stock || 99)) {
-        cart[idx].quantity++;
-        renderCart();
-      } else {
-        toast(lang === "am" ? "ከክምችት በላይ መጨመር አይቻልም" : "Stock limit reached", true);
-      }
-    } else if (b.dataset.crm !== undefined) {
-      cart.splice(Number(b.dataset.crm), 1);
-      renderCart();
-    } else if (b.id === "chkSignInBtn") {
-      closeCart();
-      openAccountModal();
-    } else if (b.id === "placeOrderBtn") {
-      await submitOrder(b);
-    }
-  });
-
-  async function submitOrder(btn) {
-    if (!configured || !currentUser) return;
-    const phone = document.getElementById("chkPhone").value.trim();
-    const address = document.getElementById("chkAddress").value.trim();
-    const note = document.getElementById("chkNote").value.trim();
-    if (!phone || !address) {
-      toast(lang === "am" ? "ስልክ ቁጥር እና አድራሻ ያስገቡ" : "Please enter phone number and delivery address", true);
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = lang === "am" ? "በመመዝገብ ላይ..." : "Saving order...";
-
-    const snapshot = [...cart];
-    const payload = snapshot.map(i => ({
-      product_id: i.product_id,
-      quantity: i.quantity,
-      size: i.size,
-      color: i.color
-    }));
-
-    const { data, error } = await sb.rpc("place_order", {
-      p_items: payload,
-      p_phone: phone,
-      p_address: address,
-      p_note: note || null
+  function renderCatalog() {
+    const root = document.getElementById("catalogRoot");
+    if (!sb) return;
+    const list = allProducts.filter(p => {
+      const slug = p.categories?.slug || "";
+      const matchCat = activeSlug === "all" || slug === activeSlug;
+      const matchQ = !searchTerm || (p.name + " " + (p.description || "")).toLowerCase().includes(searchTerm);
+      return matchCat && matchQ;
     });
+    if (!list.length) {
+      root.innerHTML = `
+        <div class="empty">
+          <h3>${lang === "am" ? "ምንም ምርት አልተገኘም" : "No products listed yet"}</h3>
+          <p class="sans">${lang === "am" ? "ባለቤቱ ከዳሽቦርድ ምርቶችን እንዳስገባ እዚህ ይታያሉ።" : "Products will appear here as soon as the owner publishes them from the dashboard."}</p>
+        </div>`;
+      return;
+    }
+    root.innerHTML = `<div class="grid sans">` + list.map(p => {
+      const img = (p.images && p.images[0]) || "";
+      const catLabel = lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || "");
+      const outOfStock = p.stock <= 0;
+      return `
+        <article class="card">
+          <div class="card-img" data-open="${p.id}">
+            ${img ? `<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="no-img">No photo</div>`}
+            ${outOfStock ? `<span class="stock-tag">${lang === "am" ? "አልቋል" : "Out of stock"}</span>` : ""}
+          </div>
+          <div class="card-body">
+            <span class="card-cat">${esc(catLabel)}</span>
+            <h3 class="card-title" data-open="${p.id}">${esc(p.name)}</h3>
+            <div class="card-price">${fmtETB(p.price)}</div>
+            <button class="card-btn" data-open="${p.id}" ${outOfStock ? "disabled" : ""}>
+              ${outOfStock ? (lang === "am" ? "አልቋል" : "Out of stock") : (lang === "am" ? "ዝርዝር ይመልከቱ" : "Select options")}
+            </button>
+          </div>
+        </article>`;
+    }).join("") + `</div>`;
+  }
 
+  const pdModal = document.getElementById("pdModal");
+  let pdState = null;
+  function drawPD() {
+    const { p, imgIdx, size, color, qty } = pdState;
+    const imgs = (p.images && p.images.length) ? p.images : [];
+    const mainImg = imgs[imgIdx] || "";
+    const discPct = calcDiscountPct(qty);
+    pdModal.innerHTML = `
+      <div class="pd-grid">
+        <div class="pd-gallery">
+          ${mainImg ? `<img class="pd-main-img" src="${esc(mainImg)}" alt="${esc(p.name)}">` : `<div class="pd-main-img" style="display:grid;place-items:center;color:var(--muted);">No photo</div>`}
+          ${imgs.length > 1 ? `<div class="pd-thumbs">${imgs.map((u, i) => `<img src="${esc(u)}" class="${i === imgIdx ? "on" : ""}" data-thumb="${i}" alt="">`).join("")}</div>` : ""}
+        </div>
+        <div class="pd-info">
+          <button class="close-x" id="closePD" aria-label="Close">&times;</button>
+          <span class="card-cat">${esc(lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || ""))}</span>
+          <h2 style="font-size:1.5rem;">${esc(p.name)}</h2>
+          <div style="font-size:1.35rem;font-weight:700;color:var(--gold-deep);">${fmtETB(p.price)}</div>
+          ${p.description ? `<p style="color:var(--muted);font-size:.92rem;">${esc(p.description)}</p>` : ""}
+          ${p.sizes && p.sizes.length ? `<div><span class="opt-label">${lang === "am" ? "መጠን" : "Size"}</span><div class="opts">${p.sizes.map(s => `<button type="button" class="opt-btn ${size === s ? "on" : ""}" data-size="${esc(s)}">${esc(s)}</button>`).join("")}</div></div>` : ""}
+          ${p.colors && p.colors.length ? `<div><span class="opt-label">${lang === "am" ? "ቀለም" : "Color"}</span><div class="opts">${p.colors.map(c => `<button type="button" class="opt-btn ${color === c ? "on" : ""}" data-color="${esc(c)}">${esc(c)}</button>`).join("")}</div></div>` : ""}
+          <div>
+            <span class="opt-label">${lang === "am" ? "ብዛት" : "Quantity"} (${lang === "am" ? "ክምችት" : "Stock"}: ${p.stock})</span>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <div class="qty-ctrl"><button type="button" id="pdMinus">−</button><span>${qty}</span><button type="button" id="pdPlus">+</button></div>
+              <small style="color:var(--gold-deep);font-weight:600;">${discPct > 0 ? `${discPct}% OFF` : (lang === "am" ? "3+ ሲገዙ 10% ቅናሽ" : "3+ pcs: 10% OFF")}</small>
+            </div>
+          </div>
+          <div class="err-msg" id="pdErr"></div>
+          <button type="button" class="btn solid" id="pdAddBtn" ${p.stock <= 0 ? "disabled" : ""}>${p.stock <= 0 ? (lang === "am" ? "አልቋል" : "Out of Stock") : (lang === "am" ? "ወደ ጋሪ ጨምር" : "Add to Cart")}</button>
+        </div>
+      </div>`;
+  }
+
+  document.getElementById("catalogRoot").addEventListener("click", e => {
+    const t = e.target.closest("[data-open]"); if (!t) return;
+    const p = allProducts.find(x => x.id === t.dataset.open); if (!p) return;
+    pdState = { p, imgIdx: 0, size: p.sizes?.length === 1 ? p.sizes[0] : "", color: p.colors?.length === 1 ? p.colors[0] : "", qty: 1 };
+    drawPD(); pdModal.showModal();
+  });
+
+  pdModal.addEventListener("click", e => {
+    if (e.target === pdModal || e.target.id === "closePD") { pdModal.close(); return; }
+    if (!pdState) return;
+    if (e.target.dataset.thumb !== undefined) { pdState.imgIdx = Number(e.target.dataset.thumb); drawPD(); }
+    else if (e.target.dataset.size !== undefined) { pdState.size = e.target.dataset.size; drawPD(); }
+    else if (e.target.dataset.color !== undefined) { pdState.color = e.target.dataset.color; drawPD(); }
+    else if (e.target.id === "pdMinus") { pdState.qty = Math.max(1, pdState.qty - 1); drawPD(); }
+    else if (e.target.id === "pdPlus") { if (pdState.qty < pdState.p.stock) { pdState.qty++; drawPD(); } }
+    else if (e.target.id === "pdAddBtn") {
+      const { p, size, color, qty } = pdState;
+      const missing = [];
+      if (p.sizes?.length && !size) missing.push(lang === "am" ? "መጠን" : "size");
+      if (p.colors?.length && !color) missing.push(lang === "am" ? "ቀለም" : "color");
+      if (missing.length) { document.getElementById("pdErr").textContent = (lang === "am" ? "እባክዎ ይምረጡ፦ " : "Please select: ") + missing.join(", "); return; }
+      addToCart(p, size, color, qty); pdModal.close(); openCart();
+    }
+  });
+
+  let sb = null;
+  try {
+    const initRes = window.initMiranSupabase ? window.initMiranSupabase() : { client: null, configured: false };
+    sb = initRes.client;
+    if (!initRes.configured || !sb) {
+      document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Supabase not configured</h3></div>`;
+    }
+  } catch (err) {
+    document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Supabase Init Error</h3><p class="sans">${esc(err.message)}</p></div>`;
+    toast("Supabase error: " + err.message, true);
+  }
+
+  async function loadProducts() {
+    if (!sb) return;
+    const { data, error } = await sb
+      .from("products")
+      .select("id, name, description, price, images, sizes, colors, stock, is_active, created_at, categories(slug, name_en, name_am)")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false });
     if (error) {
-      toast(error.message, true);
-      btn.disabled = false;
-      btn.textContent = lang === "am" ? "ትዕዛዝ አስቀምጥና በቴሌግራም አረጋግጥ" : "Place Order & Open Telegram";
+      document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Error</h3><p class="sans">${esc(error.message)}</p></div>`;
       return;
     }
-
-    // Order saved securely in Supabase. Build formatted Telegram message.
-    const lines = snapshot.map((i, idx) =>
-      `${idx + 1}. ${i.name} [${[i.color, i.size].filter(Boolean).join(" / ") || "Standard"}] x${i.quantity} = ${fmtETB(i.price * i.quantity)}`
-    ).join("\n");
-
-    let msg = `MIRAN ABAYA ORDER\n`;
-    msg += `Order ID: ${data.order_id}\n`;
-    msg += `Phone: ${phone}\n`;
-    msg += `Address: ${address}\n`;
-    if (note) msg += `Note: ${note}\n`;
-    msg += `\nItems:\n${lines}\n\n`;
-    msg += `Subtotal: ${fmtETB(data.subtotal)}\n`;
-    if (data.discount_percent > 0) {
-      msg += `Wholesale Discount (${data.discount_percent}%): -${fmtETB(data.discount_amount)}\n`;
-    }
-    msg += `TOTAL: ${fmtETB(data.total)}\nStatus: Pending`;
-
-    const tgUrl = `https://t.me/${TG_USER}?text=${encodeURIComponent(msg)}`;
-
-    cart = [];
-    saveCart();
-    renderCart();
-    loadProducts();
-    closeCart();
-
-    toast(lang === "am" ? "ትዕዛዝዎ በተሳካ ሁኔታ ተመዝግቧል!" : "Order saved! Opening Telegram...");
-    window.open(tgUrl, "_blank", "noopener");
-  }
-
-  // --- Customer Auth & Order History ---
-  const acctModal = document.getElementById("acctModal");
-  function openAccountModal() {
-    updateAccountUI();
-    acctModal.showModal();
-  }
-  document.getElementById("acctBtn").addEventListener("click", openAccountModal);
-  document.getElementById("closeAcct").addEventListener("click", () => acctModal.close());
-  acctModal.addEventListener("click", e => { if (e.target === acctModal) acctModal.close(); });
-
-  document.getElementById("tabSignIn").addEventListener("click", () => setAuthMode("signin"));
-  document.getElementById("tabSignUp").addEventListener("click", () => setAuthMode("signup"));
-
-  function setAuthMode(m) {
-    authMode = m;
-    document.getElementById("tabSignIn").classList.toggle("on", m === "signin");
-    document.getElementById("tabSignUp").classList.toggle("on", m === "signup");
-    document.getElementById("authName").style.display = m === "signup" ? "block" : "none";
-    document.getElementById("authPhone").style.display = m === "signup" ? "block" : "none";
-    document.getElementById("authSubmitBtn").textContent = m === "signup"
-      ? (lang === "am" ? "አካውንት ክፈት" : "Create Account")
-      : (lang === "am" ? "ግባ" : "Sign In");
-    document.getElementById("authErr").textContent = "";
-  }
-
-  document.getElementById("authForm").addEventListener("submit", async e => {
-    e.preventDefault();
-    if (!configured) {
-      document.getElementById("authErr").textContent = "Supabase is not configured yet.";
-      return;
-    }
-    const email = document.getElementById("authEmail").value.trim();
-    const password = document.getElementById("authPass").value;
-    const errEl = document.getElementById("authErr");
-    const btn = document.getElementById("authSubmitBtn");
-    errEl.textContent = "";
-    btn.disabled = true;
-
-    let res;
-    if (authMode === "signup") {
-      const full_name = document.getElementById("authName").value.trim();
-      const phone = document.getElementById("authPhone").value.trim();
-      res = await sb.auth.signUp({ email, password, options: { data: { full_name, phone } } });
-      if (!res.error) {
-        toast(lang === "am" ? "አካውንት ተከፍቷል! ኢሜይልዎን ያረጋግጡ ወይም ይግቡ።" : "Account created! Check your email if confirmation is enabled.");
-      }
-    } else {
-      res = await sb.auth.signInWithPassword({ email, password });
-      if (!res.error) toast(lang === "am" ? "በተሳካ ሁኔታ ገብተዋል" : "Signed in");
-    }
-
-    btn.disabled = false;
-    if (res.error) {
-      errEl.textContent = res.error.message;
-    } else {
-      e.target.reset();
-    }
-  });
-
-  document.getElementById("signOutBtn").addEventListener("click", async () => {
-    if (sb) await sb.auth.signOut();
-    toast(lang === "am" ? "ወጥተዋል" : "Signed out");
-  });
-
-  document.getElementById("refreshOrdersBtn").addEventListener("click", loadMyOrders);
-
-  function updateAccountUI() {
-    document.getElementById("acctGuest").style.display = currentUser ? "none" : "block";
-    document.getElementById("acctLoggedIn").style.display = currentUser ? "block" : "none";
-    document.getElementById("acctBtn").textContent = currentUser
-      ? (currentUser.user_metadata?.full_name?.split(" ")[0] || (lang === "am" ? "አካውንት" : "Account"))
-      : (lang === "am" ? "ግባ" : "Account");
-
-    if (currentUser) {
-      document.getElementById("userGreeting").textContent = currentUser.user_metadata?.full_name || "My Account";
-      document.getElementById("userEmailLabel").textContent = currentUser.email;
-      loadMyOrders();
-    }
+    allProducts = data || [];
+    renderCatalog();
   }
 
   async function loadMyOrders() {
     if (!sb || !currentUser) return;
     const box = document.getElementById("myOrdersList");
-    box.innerHTML = `<p style="color:var(--muted);font-size:.88rem;">Loading...</p>`;
-
     const { data, error } = await sb
       .from("orders")
       .select("id, status, subtotal, discount_percent, discount_amount, total, address, created_at, order_items(product_name, quantity, unit_price, size, color)")
       .eq("customer_id", currentUser.id)
       .order("created_at", { ascending: false });
-
-    if (error) {
-      box.innerHTML = `<p class="err-msg">${esc(error.message)}</p>`;
-      return;
-    }
-    if (!data || !data.length) {
-      box.innerHTML = `<p style="color:var(--muted);font-size:.88rem;">${lang === "am" ? "እስካሁን ትዕዛዝ የለም።" : "No orders yet."}</p>`;
-      return;
-    }
-
+    if (error) { box.innerHTML = `<p class="err-msg">${esc(error.message)}</p>`; return; }
+    if (!data || !data.length) { box.innerHTML = `<p style="color:var(--muted);font-size:.88rem;">${lang === "am" ? "እስካሁን ትዕዛዝ የለም።" : "No orders yet."}</p>`; return; }
     box.innerHTML = data.map(o => `
       <div class="ord-card">
-        <div class="ord-head">
-          <strong>#${esc(o.id.slice(0, 8))}</strong>
-          <span class="status-pill">${esc(o.status)}</span>
-        </div>
+        <div class="ord-head"><strong>#${esc(o.id.slice(0, 8))}</strong><span class="status-pill">${esc(o.status)}</span></div>
         <div style="font-size:.82rem;color:var(--muted);margin-bottom:6px;">${new Date(o.created_at).toLocaleString()}</div>
-        ${(o.order_items || []).map(it => `
-          <div>${esc(it.product_name)} (${[it.color, it.size].filter(Boolean).join("/") || "Std"}) &times; ${it.quantity} — ${fmtETB(it.unit_price * it.quantity)}</div>
-        `).join("")}
-        <div style="margin-top:8px;font-weight:700;">
-          ${lang === "am" ? "ጠቅላላ" : "Total"}: ${fmtETB(o.total)}
-          ${o.discount_percent > 0 ? `<small style="color:var(--ok);">(${o.discount_percent}% OFF)</small>` : ""}
-        </div>
+        ${(o.order_items || []).map(it => `<div>${esc(it.product_name)} (${[it.color, it.size].filter(Boolean).join("/") || "Std"}) &times; ${it.quantity} — ${fmtETB(it.unit_price * it.quantity)}</div>`).join("")}
+        <div style="margin-top:8px;font-weight:700;">${lang === "am" ? "ጠቅላላ" : "Total"}: ${fmtETB(o.total)}</div>
       </div>`).join("");
   }
 
-  // --- Init ---
+  document.getElementById("authForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const errEl = document.getElementById("authErr");
+    if (!sb) { errEl.textContent = "Supabase client not initialized."; return; }
+    const email = document.getElementById("authEmail").value.trim();
+    const password = document.getElementById("authPass").value;
+    const btn = document.getElementById("authSubmitBtn");
+    errEl.textContent = ""; btn.disabled = true;
+    const res = authMode === "signup"
+      ? await sb.auth.signUp({ email, password, options: { data: { full_name: document.getElementById("authName").value.trim(), phone: document.getElementById("authPhone").value.trim() } } })
+      : await sb.auth.signInWithPassword({ email, password });
+    btn.disabled = false;
+    if (res.error) errEl.textContent = res.error.message;
+    else { e.target.reset(); toast(authMode === "signup" ? "Account created" : "Signed in"); }
+  });
+
+  document.getElementById("signOutBtn").addEventListener("click", async () => { if (sb) await sb.auth.signOut(); });
+  document.getElementById("refreshOrdersBtn").addEventListener("click", loadMyOrders);
+
+  document.getElementById("cartDrawer").addEventListener("click", async e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.cdec !== undefined) { const i = Number(b.dataset.cdec); cart[i].quantity--; if (cart[i].quantity < 1) cart.splice(i, 1); renderCart(); }
+    else if (b.dataset.cinc !== undefined) { const i = Number(b.dataset.cinc); if (cart[i].quantity < (cart[i].stock || 99)) { cart[i].quantity++; renderCart(); } }
+    else if (b.dataset.crm !== undefined) { cart.splice(Number(b.dataset.crm), 1); renderCart(); }
+    else if (b.id === "chkSignInBtn") { closeCart(); openAccountModal(); }
+    else if (b.id === "placeOrderBtn" && sb && currentUser) {
+      const phone = document.getElementById("chkPhone").value.trim();
+      const address = document.getElementById("chkAddress").value.trim();
+      const note = document.getElementById("chkNote").value.trim();
+      if (!phone || !address) { toast("Phone and address required", true); return; }
+      b.disabled = true;
+      const snapshot = [...cart];
+      const { data, error } = await sb.rpc("place_order", {
+        p_items: snapshot.map(i => ({ product_id: i.product_id, quantity: i.quantity, size: i.size, color: i.color })),
+        p_phone: phone, p_address: address, p_note: note || null
+      });
+      b.disabled = false;
+      if (error) { toast(error.message, true); return; }
+      let msg = `MIRAN ABAYA ORDER\nOrder ID: ${data.order_id}\nPhone: ${phone}\nAddress: ${address}\nTOTAL: ${fmtETB(data.total)}`;
+      cart = []; saveCart(); renderCart(); loadProducts(); closeCart();
+      window.open(`https://t.me/${TG_USER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    }
+  });
+
+  document.getElementById("catChips").addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    activeSlug = b.dataset.slug;
+    document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c === b));
+    renderCatalog();
+  });
+  document.querySelectorAll("[data-cat-jump]").forEach(el => {
+    el.addEventListener("click", () => {
+      activeSlug = el.dataset.catJump;
+      document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c.dataset.slug === activeSlug));
+      renderCatalog();
+      document.getElementById("new").scrollIntoView({ behavior: "smooth" });
+    });
+  });
+  document.getElementById("searchInput").addEventListener("input", e => { searchTerm = e.target.value.trim().toLowerCase(); renderCatalog(); });
+
   saveCart();
-  if (configured && sb) {
-    sb.auth.getSession().then(({ data }) => {
-      currentUser = data.session?.user || null;
-      updateAccountUI();
-      renderCart();
-    });
-    sb.auth.onAuthStateChange((_event, session) => {
-      currentUser = session?.user || null;
-      updateAccountUI();
-      renderCart();
-    });
+  if (sb) {
+    sb.auth.getSession().then(({ data }) => { currentUser = data.session?.user || null; updateAccountUI(); renderCart(); });
+    sb.auth.onAuthStateChange((_ev, session) => { currentUser = session?.user || null; updateAccountUI(); renderCart(); });
+    loadProducts();
   }
-  loadProducts();
 </script>
 </body>
 </html>
