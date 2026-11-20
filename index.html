@@ -436,9 +436,11 @@
 <div class="toasts sans" id="toasts" aria-live="polite"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
 <script>
-  const TG_USER = (window.MIRAN_CONFIG && window.MIRAN_CONFIG.TELEGRAM_USERNAME) || "mame15";
+  const SUPABASE_URL = "https://ntwwaxpvmxivxermsver.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e";
+  const TG_USER = "mame15";
+
   const esc = s => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
   const fmtETB = n => `${Math.round(Number(n) || 0).toLocaleString()} ETB`;
 
@@ -726,11 +728,7 @@
     if (!window.supabase || !window.supabase.createClient) {
       throw new Error("Supabase JS library did not load (check network/CDN).");
     }
-    const initRes = window.initMiranSupabase ? window.initMiranSupabase() : { client: null, configured: false };
-    sb = initRes.client;
-    if (!initRes.configured || !sb) {
-      throw new Error("Supabase URL or Key missing in supabase-config.js.");
-    }
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   } catch (err) {
     document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Connection Error</h3><p class="sans">${esc(err.message)}</p></div>`;
     document.getElementById("authErr").textContent = err.message;
