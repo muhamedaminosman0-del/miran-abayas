@@ -1,5 +1,5 @@
 window.MIRAN_CONFIG = {
-  SUPABASE_URL: "https://ntwwaxpvmxivxermsver.supabase.co",
+  SUPABASE_URL: "https://htwwaxpvmxlvxermsver.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e",
   TELEGRAM_USERNAME: "mame15"
 };
