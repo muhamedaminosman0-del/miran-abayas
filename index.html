@@ -723,14 +723,18 @@
 
   let sb = null;
   try {
+    if (!window.supabase || !window.supabase.createClient) {
+      throw new Error("Supabase JS library did not load (check network/CDN).");
+    }
     const initRes = window.initMiranSupabase ? window.initMiranSupabase() : { client: null, configured: false };
     sb = initRes.client;
     if (!initRes.configured || !sb) {
-      document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Supabase not configured</h3></div>`;
+      throw new Error("Supabase URL or Key missing in supabase-config.js.");
     }
   } catch (err) {
-    document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Supabase Init Error</h3><p class="sans">${esc(err.message)}</p></div>`;
-    toast("Supabase error: " + err.message, true);
+    document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Connection Error</h3><p class="sans">${esc(err.message)}</p></div>`;
+    document.getElementById("authErr").textContent = err.message;
+    toast(err.message, true);
   }
 
   async function loadProducts() {
@@ -836,4 +840,3 @@
 </script>
 </body>
 </html>
-
