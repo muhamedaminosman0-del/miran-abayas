@@ -269,7 +269,6 @@
   .status-pill { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold-deep); }
   .status-pill.paid { border-color: var(--ok); color: var(--ok); }
 
-  /* Order confirmation */
   .done-box { padding: 28px 26px; position: relative; max-width: 520px; margin: 0 auto; display: grid; gap: 14px; }
   .done-box h2 { font-size: 1.5rem; }
   .done-total { font-size: 1.7rem; font-weight: 700; color: var(--gold-deep); }
@@ -285,10 +284,10 @@
   .cu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .cu-grid label, .cu-form label { font-size: .8rem; color: var(--muted); display: grid; gap: 4px; }
   .cu-form .field { margin-bottom: 0; }
+  .cu-preview { width: 96px; height: 120px; object-fit: cover; border: 1px solid var(--line); border-radius: 3px; margin-top: 4px; }
   .cu-card { border: 1px solid var(--gold); background: var(--card); padding: 14px; margin-bottom: 12px; font-size: .88rem; display: grid; gap: 6px; }
   .cu-card .pay-box { margin-top: 4px; }
 
-  /* Mobile cart bar */
   .cartbar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: none;
     background: var(--black); color: #F3ECDD; border-top: 1px solid var(--gold);
@@ -465,7 +464,6 @@
   <div class="wrap"><small>&copy; 2026 MIRAN ABAYA</small></div>
 </footer>
 
-<!-- Mobile cart bar -->
 <div class="cartbar sans" id="cartBar">
   <span id="cartBarText"></span>
   <button class="btn solid" id="cartBarBtn" type="button" style="padding:9px 18px;" data-t="view_cart">View cart</button>
@@ -482,9 +480,7 @@
 </aside>
 
 <dialog id="pdModal" class="sans"></dialog>
-
 <dialog id="doneModal" class="sans"></dialog>
-
 <dialog id="customModal" class="sans"></dialog>
 
 <dialog id="acctModal" class="sans">
@@ -606,7 +602,6 @@
     renderCart();
   });
 
-  // ---------- Supabase ----------
   let sb = null;
   try {
     if (!window.supabase || !window.supabase.createClient) {
@@ -618,7 +613,6 @@
     document.getElementById("authErr").textContent = err.message;
   }
 
-  // ---------- Cart ----------
   function cartTotals() {
     const qty = cart.reduce((s, i) => s + i.quantity, 0);
     const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
@@ -781,7 +775,6 @@
     showDone(data, snapshot, { phone, address, note, method });
   }
 
-  // ---------- Order confirmation + payment instructions ----------
   const doneModal = document.getElementById("doneModal");
 
   function payBox(method) {
@@ -845,7 +838,7 @@
     catch { toast(c.dataset.copy); }
   });
 
-  // ---------- Custom-made orders ----------
+  // ---------- Custom-made orders + design photo ----------
   const customModal = document.getElementById("customModal");
 
   const CU_STATUS = {
@@ -870,6 +863,27 @@
   }
   document.getElementById("customBtn").addEventListener("click", openCustom);
 
+  function compressDesignPhoto(file, maxWidth = 1000, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("ፋይሉን ማንበብ አልተቻለም"));
+      reader.onload = ev => {
+        const img = new Image();
+        img.onerror = () => reject(new Error("ትክክለኛ ፎቶ አይደለም"));
+        img.onload = () => {
+          const k = Math.min(1, maxWidth / img.width);
+          const c = document.createElement("canvas");
+          c.width = Math.round(img.width * k);
+          c.height = Math.round(img.height * k);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          c.toBlob(b => b ? resolve(b) : reject(new Error("ፎቶውን ማሳነስ አልተቻለም")), "image/jpeg", quality);
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
   function drawCustom() {
     const nm = currentUser?.user_metadata?.full_name || currentUser?.user_metadata?.name || "";
     const ph = currentUser?.user_metadata?.phone || "";
@@ -890,10 +904,19 @@
             <label>${T("Waist (cm) *", "ወገብ (ሴ.ሜ) *")}<input class="field" id="cuWaist" type="number" step="0.5" min="30" max="200" required></label>
             <label>${T("Sleeve (cm) *", "እጀታ (ሴ.ሜ) *")}<input class="field" id="cuSleeve" type="number" step="0.5" min="10" max="120" required></label>
           </div>
+          <label>${T("Design photo (optional)", "የዲዛይን ፎቶ (አማራጭ)")}
+            <input class="field" id="cuPhoto" type="file" accept="image/*">
+          </label>
+          <div id="cuPhotoWrap"></div>
           <textarea class="field" id="cuNotes" rows="2" placeholder="${T("Color, fabric, delivery area, notes...", "ቀለም፣ ጨርቅ፣ አድራሻ ወይም ማስታወሻ...")}"></textarea>
           <button class="btn solid" id="cuSubmit" type="submit">${T("Send request", "ጥያቄ ላክ")}</button>
         </form>
       </div>`;
+    document.getElementById("cuPhoto").addEventListener("change", e => {
+      const f = e.target.files?.[0];
+      const wrap = document.getElementById("cuPhotoWrap");
+      wrap.innerHTML = f ? `<img class="cu-preview" src="${URL.createObjectURL(f)}" alt="">` : "";
+    });
     document.getElementById("customForm").addEventListener("submit", submitCustom);
   }
 
@@ -906,23 +929,44 @@
     };
     const btn = document.getElementById("cuSubmit");
     btn.disabled = true; btn.textContent = T("Sending...", "በመላክ ላይ...");
+
+    let photoUrl = null;
+    const photoFile = document.getElementById("cuPhoto")?.files?.[0];
+    if (photoFile) {
+      try {
+        const blob = await compressDesignPhoto(photoFile);
+        const filePath = `custom_${Date.now()}_${Math.random().toString(36).slice(2, 7)}.jpg`;
+        const { error: upErr } = await sb.storage
+          .from("product-images")
+          .upload(filePath, blob, { contentType: "image/jpeg", upsert: false });
+        if (upErr) throw upErr;
+        photoUrl = sb.storage.from("product-images").getPublicUrl(filePath).data.publicUrl;
+      } catch (upErr) {
+        toast(T("Photo upload failed: ", "ፎቶ መጫን አልተቻለም፦ ") + upErr.message, true);
+        btn.disabled = false; btn.textContent = T("Send request", "ጥያቄ ላክ");
+        return;
+      }
+    }
+
     const { data, error } = await sb.rpc("submit_custom_order", {
       p_name: info.name, p_phone: info.phone, p_style: info.style,
       p_length: Number(info.length), p_bust: Number(info.bust), p_waist: Number(info.waist), p_sleeve: Number(info.sleeve),
-      p_notes: info.notes || null
+      p_notes: info.notes || null,
+      p_reference_image: photoUrl
     });
     if (error) {
       toast(error.message, true);
       btn.disabled = false; btn.textContent = T("Send request", "ጥያቄ ላክ");
       return;
     }
-    showCustomDone(data, info);
+    showCustomDone(data, info, photoUrl);
     loadMyOrders();
   }
 
-  function showCustomDone(id, i) {
+  function showCustomDone(id, i, photoUrl) {
     let msg = `MIRAN ABAYA CUSTOM ORDER\nRequest ID: ${id}\nName: ${i.name}\nPhone: ${i.phone}\nDesign: ${i.style}\n`;
     msg += `Measurements (cm): length ${i.length} | bust ${i.bust} | waist ${i.waist} | sleeve ${i.sleeve}`;
+    if (photoUrl) msg += `\nDesign Photo: ${photoUrl}`;
     if (i.notes) msg += `\nNotes: ${i.notes}`;
     const tg = `https://t.me/${TG_USER}?text=${encodeURIComponent(msg)}`;
     customModal.innerHTML = `
@@ -930,6 +974,7 @@
         <button class="close-x" id="closeCustom" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
         <h2>${T("Request received", "ጥያቄዎ ተመዝግቧል")}</h2>
         <div style="color:var(--muted);font-size:.9rem;">${T("Request", "ጥያቄ")} #${esc(String(id).slice(0, 8))}</div>
+        ${photoUrl ? `<img class="cu-preview" src="${esc(photoUrl)}" alt="Design">` : ""}
         <ol class="steps">
           <li>${T("Tap the button below to message us on Telegram.", "ከታች ያለውን አዝራር ተጭነው በቴሌግራም ያግኙን።")}</li>
           <li>${T("We agree the price with you.", "ዋጋውን አብረን እንስማማለን።")}</li>
@@ -1031,6 +1076,7 @@
     return `<div class="cu-card">
       <div class="ord-head"><strong>${T("Custom", "በትዕዛዝ")} #${esc(c.id.slice(0, 8))}</strong><span class="status-pill">${esc(T(st[0], st[1]))}</span></div>
       <div>${esc(c.style)}</div>
+      ${c.reference_image ? `<a href="${esc(c.reference_image)}" target="_blank" rel="noopener"><img class="cu-preview" src="${esc(c.reference_image)}" alt=""></a>` : ""}
       ${c.agreed_price != null ? `<div>${T("Price", "ዋጋ")}: <strong>${fmtETB(price)}</strong> · ${T("Deposit (50%)", "ቀብድ (50%)")}: ${fmtETB(dep)}
         <span class="status-pill ${c.deposit_paid ? "paid" : ""}">${c.deposit_paid ? T("Paid", "ተከፍሏል") : T("Unpaid", "አልተከፈለም")}</span> · ${T("Balance", "ቀሪ")}: ${fmtETB(bal)}
         <span class="status-pill ${c.final_paid ? "paid" : ""}">${c.final_paid ? T("Paid", "ተከፍሏል") : T("Unpaid", "አልተከፈለም")}</span></div>` : ""}
@@ -1047,7 +1093,7 @@
         .eq("customer_id", currentUser.id)
         .order("created_at", { ascending: false }),
       sb.from("custom_orders")
-        .select("id, status, style, agreed_price, deposit_amount, deposit_paid, final_paid, created_at")
+        .select("id, status, style, reference_image, agreed_price, deposit_amount, deposit_paid, final_paid, created_at")
         .eq("customer_id", currentUser.id)
         .order("created_at", { ascending: false })
     ]);
@@ -1069,7 +1115,6 @@
       </div>`).join("");
   }
 
-  // ---------- Catalog ----------
   async function loadProducts() {
     if (!sb) return;
     const { data, error } = await sb
@@ -1140,7 +1185,6 @@
   });
   document.getElementById("searchInput").addEventListener("input", e => { searchTerm = e.target.value.trim().toLowerCase(); renderCatalog(); });
 
-  // ---------- Product detail ----------
   const pdModal = document.getElementById("pdModal");
   let pdState = null;
 
@@ -1204,7 +1248,6 @@
     }
   });
 
-  // ---------- Init ----------
   saveCart();
   if (sb) {
     sb.auth.getSession().then(({ data }) => { currentUser = data.session?.user || null; updateAccountUI(); renderCart(); });
