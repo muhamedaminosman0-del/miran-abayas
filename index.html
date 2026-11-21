@@ -78,9 +78,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    gap: 16px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    gap: 14px;
   }
   .brand {
     font-size: 1.05rem;
@@ -89,18 +89,18 @@
     font-weight: 600;
     white-space: nowrap;
   }
-  nav { display: flex; gap: 24px; font-size: .92rem; }
+  nav { display: flex; gap: 22px; font-size: .92rem; }
   nav a { padding: 4px 0; border-bottom: 1.5px solid transparent; transition: .2s; }
   nav a:hover { border-color: var(--rose); color: var(--rose-deep); }
-  .head-right { display: flex; align-items: center; gap: 8px; }
+  .head-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .pill-btn {
     background: var(--card);
     border: 1px solid var(--line);
     color: var(--espresso);
     cursor: pointer;
-    padding: 6px 14px;
+    padding: 6px 13px;
     border-radius: 999px;
-    font-size: .85rem;
+    font-size: .84rem;
     transition: .2s;
     white-space: nowrap;
   }
@@ -116,154 +116,43 @@
     color: #FFFFFF;
   }
 
-  .hero {
-    background: linear-gradient(180deg, var(--pearl) 0%, var(--pearl-alt) 100%);
+  .newin {
+    background: var(--pearl-alt);
     border-bottom: 1px solid var(--line);
+    padding: 40px 0 68px;
   }
-  .hero .wrap {
-    display: grid;
-    grid-template-columns: 1.15fr .85fr;
-    gap: 32px;
-    align-items: center;
-    padding-top: 44px;
-    padding-bottom: 64px;
-    min-height: 540px;
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  .eyebrow {
-    display: inline-block;
-    font-size: .78rem;
-    text-transform: uppercase;
-    letter-spacing: .14em;
-    color: var(--rose-deep);
-    margin-bottom: 12px;
-    font-weight: 600;
-  }
-  .hero h1 {
-    font-weight: 400;
-    font-size: clamp(2.4rem, 5.5vw, 4.4rem);
-    line-height: 1.08;
-    letter-spacing: -.01em;
-    max-width: 13ch;
-  }
-  .hero p {
-    margin-top: 20px;
-    max-width: 44ch;
-    color: var(--muted);
-    font-size: 1.06rem;
-  }
-  .actions { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 999px;
-    font-size: .92rem;
-    cursor: pointer;
-    border: 1px solid var(--espresso);
-    background: none;
-    transition: .2s;
-  }
-  .btn.solid {
-    background: var(--espresso);
-    color: var(--pearl);
-    font-weight: 500;
-  }
-  .btn.solid:hover {
-    background: var(--rose-deep);
-    border-color: var(--rose-deep);
-    color: #FFFFFF;
-  }
-  .btn.line {
-    border-color: var(--line);
-    background: var(--card);
-    color: var(--espresso);
-  }
-  .btn.line:hover { border-color: var(--rose); background: var(--rose-tint); }
-  .btn:disabled { opacity: .5; cursor: not-allowed; }
-
-  .figure {
-    justify-self: center;
-    width: min(100%, 320px);
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 170px 170px 24px 24px;
-    padding: 28px 20px;
-    box-shadow: var(--shadow);
-  }
-  .figure svg { width: 100%; height: auto; display: block; overflow: visible; }
-  .figure path {
-    fill: none;
-    stroke: var(--rose-deep);
-    stroke-width: 1.45;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  .figure .fold { stroke-width: .95; opacity: .65; }
-  .figure .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 3s ease-out forwards; }
-  .figure .draw.d2 { animation-delay: .45s; }
-  .figure .draw.d3 { animation-delay: 1s; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-
-  section { padding: 76px 0; }
   h2 {
     font-weight: 400;
-    font-size: clamp(1.8rem, 3.6vw, 2.45rem);
+    font-size: clamp(1.75rem, 3.4vw, 2.35rem);
     line-height: 1.16;
     max-width: 24ch;
   }
-  .lede { color: var(--muted); max-width: 54ch; margin-top: 10px; }
+  .lede { color: var(--muted); max-width: 56ch; margin-top: 8px; font-size: .96rem; }
 
-  .collections { background: var(--pearl); }
-  .rows {
-    margin-top: 34px;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-  .row {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr auto;
-    gap: 24px;
-    align-items: center;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--line);
-    cursor: pointer;
-    transition: background .2s, padding-left .2s;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
-  }
-  .row:last-child { border-bottom: 0; }
-  .row:hover { padding-left: 30px; background: var(--rose-tint); }
-  .row strong { font-weight: 400; font-size: clamp(1.35rem, 2.5vw, 1.85rem); }
-  .row span { color: var(--muted); font-size: .95rem; }
-  .row .go { color: var(--rose-deep); font-size: .88rem; font-weight: 600; }
-
-  .newin { background: var(--pearl-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .shop-bar {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     align-items: center;
     justify-content: space-between;
-    margin-top: 26px;
-    margin-bottom: 26px;
+    margin-top: 22px;
+    margin-bottom: 24px;
   }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     border: 1px solid var(--line);
-    padding: 7px 16px;
+    padding: 7px 15px;
     border-radius: 999px;
     background: var(--card);
     cursor: pointer;
-    font-size: .88rem;
+    font-size: .86rem;
     transition: .2s;
   }
   .chip.on, .chip:hover {
@@ -303,12 +192,21 @@
     background: var(--espresso); color: var(--pearl);
     font-size: .72rem; padding: 3px 10px; border-radius: 999px;
   }
+  .wish-btn {
+    position: absolute; top: 10px; right: 10px;
+    width: 34px; height: 34px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card);
+    color: var(--espresso); cursor: pointer; display: grid; place-items: center;
+    font-size: 1rem; box-shadow: var(--shadow); transition: .2s;
+  }
+  .wish-btn.on { background: var(--rose-deep); color: #FFFFFF; border-color: var(--rose-deep); }
   .card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
   .card-cat { font-size: .74rem; color: var(--rose-deep); font-weight: 600; letter-spacing: .04em; }
   .card-title { font-size: 1rem; font-weight: 600; cursor: pointer; }
   .card-price { font-size: 1.04rem; font-weight: 700; margin-top: auto; padding-top: 6px; color: var(--espresso); }
+  .card-actions { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 10px; }
   .card-btn {
-    margin-top: 10px; width: 100%; padding: 9px 12px;
+    width: 100%; padding: 9px 12px;
     border: 1px solid var(--line); background: var(--pearl);
     border-radius: 999px; cursor: pointer; font-size: .84rem; font-weight: 500; transition: .2s;
   }
@@ -316,34 +214,86 @@
     background: var(--espresso); color: var(--pearl); border-color: var(--espresso);
   }
   .card-btn:disabled { opacity: .5; cursor: not-allowed; }
+  .share-mini {
+    border: 1px solid var(--line); background: var(--card); border-radius: 999px;
+    padding: 0 12px; cursor: pointer; font-size: .8rem; transition: .2s;
+  }
+  .share-mini:hover { border-color: var(--rose); background: var(--rose-tint); }
 
   .empty {
     margin-top: 20px;
     background: var(--card);
     border: 1px dashed var(--rose);
     border-radius: 10px;
-    padding: 44px 24px;
+    padding: 40px 24px;
     display: grid; justify-items: center; text-align: center; gap: 10px;
   }
-  .empty h3 { font-weight: 400; font-size: 1.3rem; }
+  .empty h3 { font-weight: 400; font-size: 1.25rem; }
   .empty p { color: var(--muted); max-width: 48ch; font-size: .95rem; }
 
-  .about { background: var(--pearl); }
-  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  section.info-sec { padding: 64px 0; background: var(--pearl); border-bottom: 1px solid var(--line); }
+  .policy-grid {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .policy-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .policy-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--rose-deep); }
+  .policy-card p { font-size: .9rem; color: var(--muted); }
+
+  .about { background: var(--pearl-alt); padding: 64px 0; }
+  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
   .about p { color: var(--muted); }
-  .about p + p { margin-top: 14px; }
-  .tg-btn { margin-top: 22px; }
+  .about p + p { margin-top: 12px; }
+  .tg-btn { margin-top: 20px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 999px;
+    font-size: .9rem;
+    cursor: pointer;
+    border: 1px solid var(--espresso);
+    background: none;
+    transition: .2s;
+  }
+  .btn.solid {
+    background: var(--espresso);
+    color: var(--pearl);
+    font-weight: 500;
+  }
+  .btn.solid:hover {
+    background: var(--rose-deep);
+    border-color: var(--rose-deep);
+    color: #FFFFFF;
+  }
+  .btn.line {
+    border-color: var(--line);
+    background: var(--card);
+    color: var(--espresso);
+  }
+  .btn.line:hover { border-color: var(--rose); background: var(--rose-tint); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
 
   footer {
-    background: var(--pearl-alt);
+    background: var(--pearl);
     border-top: 1px solid var(--line);
     color: var(--muted);
-    padding: 52px 0 38px;
+    padding: 46px 0 36px;
   }
   footer .wrap { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
   footer .brand { display: block; margin-bottom: 10px; }
   footer ul { list-style: none; display: grid; gap: 6px; font-size: .94rem; }
-  footer small { display: block; margin-top: 32px; color: var(--muted); opacity: .8; }
+  footer small { display: block; margin-top: 28px; color: var(--muted); opacity: .8; }
   footer a.tg { color: var(--rose-deep); font-weight: 600; border-bottom: 1px solid var(--rose); }
 
   .scrim {
@@ -434,16 +384,13 @@
 
   @media (max-width: 900px) {
     .grid { grid-template-columns: repeat(2, 1fr); }
+    .policy-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 800px) {
     nav { display: none; }
-    .hero .wrap { grid-template-columns: 1fr; min-height: 0; padding-bottom: 48px; }
-    .figure { width: min(64%, 220px); order: -1; padding: 20px 16px; }
-    .row { grid-template-columns: 1fr; gap: 4px; }
-    .row .go { display: none; }
     .about .wrap { grid-template-columns: 1fr; gap: 20px; }
     .pd-grid { grid-template-columns: 1fr; }
-    section { padding: 56px 0; }
+    section { padding: 52px 0; }
     body { padding-bottom: 68px; }
     .toasts { bottom: 82px; }
     .cartbar.show { display: flex; }
@@ -453,8 +400,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .figure .draw { animation: none; stroke-dashoffset: 0; }
-    .row, .card { transition: none; }
+    .card { transition: none; }
   }
 
   html[lang="am"] body, html[lang="am"] .sans {
@@ -462,74 +408,41 @@
     line-height: 1.8;
   }
   html[lang="am"] .brand { letter-spacing: .18em; }
-  html[lang="am"] .hero h1 { max-width: 14ch; font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.25; }
 </style>
 </head>
 <body>
 
 <div class="announce sans" data-t="announce">Wholesale Discounts: 3–4 pcs (10% OFF) · 5–9 pcs (15% OFF) · 10+ pcs (20% OFF)</div>
 
-<header class="site-header sans">
+<header class="site-header sans" id="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="MIRAN ABAYA">MIRAN ABAYA</a>
+    <a class="brand" href="#new" aria-label="MIRAN ABAYA">MIRAN ABAYA</a>
     <nav aria-label="Main">
-      <a href="#collections" data-t="nav_shop">Collections</a>
       <a href="#new" data-t="nav_new">Products</a>
+      <a href="#policies" data-t="nav_policies">Policies</a>
       <a href="#about" data-t="nav_about">About</a>
       <a href="#contact" data-t="nav_contact">Contact</a>
     </nav>
     <div class="head-right">
       <button class="pill-btn" id="langBtn" type="button">አማርኛ</button>
+      <button class="pill-btn" id="wishFilterBtn" type="button"><span data-t="wishlist">Saved</span> (<span id="wishCount">0</span>)</button>
       <button class="pill-btn" id="acctBtn" type="button" data-t="account">Account</button>
       <button class="pill-btn solid-pill" id="cartBtn" type="button"><span data-t="cart">Cart</span> (<span id="cartCount">0</span>)</button>
     </div>
   </div>
 </header>
 
-<div class="hero" id="top">
-  <div class="wrap">
-    <div>
-      <span class="eyebrow sans" data-t="eyebrow">Modest Boutique</span>
-      <h1 data-t="h1">Modest dress, cut to flow.</h1>
-      <p data-t="hero_p">Abayas, hijabs, jilbabs and dresses, chosen and sold directly by MIRAN ABAYA.</p>
-      <div class="actions sans">
-        <a class="btn solid" href="#new" data-t="cta1">Shop products</a>
-        <a class="btn line" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
-      </div>
-    </div>
-    <div class="figure" aria-hidden="true">
-      <svg viewBox="0 0 400 700">
-        <path class="draw" pathLength="1" d="M200 40 C165 40 150 70 152 105 C154 140 140 160 128 185 C100 260 90 420 70 640 C130 665 270 665 330 640 C310 420 300 260 272 185 C260 160 246 140 248 105 C250 70 235 40 200 40 Z"/>
-        <path class="draw d2" pathLength="1" d="M128 185 C112 300 98 420 88 540"/>
-        <path class="draw d2" pathLength="1" d="M272 185 C288 300 302 420 312 540"/>
-        <path class="draw d2" pathLength="1" d="M200 150 L200 200"/>
-        <path class="fold draw d3" pathLength="1" d="M200 200 C195 330 185 500 160 652"/>
-        <path class="fold draw d3" pathLength="1" d="M200 200 C205 330 215 500 240 652"/>
-        <path class="fold draw d3" pathLength="1" d="M180 190 C160 330 130 500 108 646"/>
-        <path class="fold draw d3" pathLength="1" d="M220 190 C240 330 270 500 292 646"/>
-      </svg>
-    </div>
-  </div>
-</div>
-
 <main>
-  <section class="collections" id="collections">
-    <div class="wrap">
-      <h2 data-t="h_col">Shop by collection</h2>
-      <p class="lede" data-t="col_lede">Everything in the shop, grouped the way you look for it.</p>
-      <div class="rows">
-        <button class="row" data-cat-jump="abayas"><strong data-t="c1">Abayas</strong><span data-t="c1d">Open and closed styles for everyday and occasions.</span><span class="go sans" data-t="c1g">View abayas</span></button>
-        <button class="row" data-cat-jump="hijabs"><strong data-t="c2">Hijabs</strong><span data-t="c2d">Scarves and wraps in a range of fabrics and colors.</span><span class="go sans" data-t="c2g">View hijabs</span></button>
-        <button class="row" data-cat-jump="jilbabs"><strong data-t="c3">Jilbabs</strong><span data-t="c3d">Full-length outer garments with easy fit.</span><span class="go sans" data-t="c3g">View jilbabs</span></button>
-        <button class="row" data-cat-jump="dresses"><strong data-t="c4">Dresses</strong><span data-t="c4d">Modest dresses for work, family and celebrations.</span><span class="go sans" data-t="c4g">View dresses</span></button>
-        <button class="row" data-cat-jump="accessories"><strong data-t="c5">Accessories</strong><span data-t="c5d">Finishing pieces to go with your outfit.</span><span class="go sans" data-t="c5g">View accessories</span></button>
-      </div>
-    </div>
-  </section>
-
   <section class="newin" id="new">
     <div class="wrap">
-      <h2 data-t="h_new">Products</h2>
+      <div class="section-head">
+        <div>
+          <h2 data-t="h_new">Products</h2>
+          <p class="lede" data-t="new_lede">Abayas, hijabs, jilbabs and dresses chosen directly by MIRAN ABAYA.</p>
+        </div>
+        <a class="btn solid sans" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
+      </div>
+
       <div class="shop-bar sans">
         <div class="chips" id="catChips">
           <button class="chip on" data-slug="all" data-t="all">All</button>
@@ -541,8 +454,30 @@
         </div>
         <input type="search" id="searchInput" class="search-box" placeholder="Search products...">
       </div>
+
       <div id="catalogRoot">
         <div class="empty"><p class="sans">Loading products...</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-sec" id="policies">
+    <div class="wrap">
+      <h2 data-t="h_policies">Delivery, Exchanges &amp; Care</h2>
+      <p class="lede" data-t="policies_lede">Clear details for every order from MIRAN ABAYA.</p>
+      <div class="policy-grid sans">
+        <article class="policy-card">
+          <h3 data-t="p1_title">Delivery</h3>
+          <p data-t="p1_body">Addis Ababa delivery is 100 ETB (typically 1–2 days). Regional delivery is 350 ETB (typically 2–4 days).</p>
+        </article>
+        <article class="policy-card">
+          <h3 data-t="p2_title">Size &amp; Exchange</h3>
+          <p data-t="p2_body">Check sizes 52–60 before ordering. Unused items with tags can be exchanged within 48 hours of receipt.</p>
+        </article>
+        <article class="policy-card">
+          <h3 data-t="p3_title">Fabric Care</h3>
+          <p data-t="p3_body">Wash gently in cold water or hand wash with mild soap. Steam or iron on low heat inside out.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -552,7 +487,7 @@
       <h2 data-t="h_about">One shop, one owner, one standard.</h2>
       <div>
         <p data-t="about1">MIRAN ABAYA is a modest fashion shop. Only the owner lists and sells products here, so every piece in the shop has been chosen by the same person.</p>
-        <p data-t="about2">Browse by collection, pick your size and color, and place your order. Orders are saved to your account and confirmed via Telegram.</p>
+        <p data-t="about2">Pick your size and color, place your order, pay via CBE or Telebirr, and confirm on Telegram.</p>
         <a class="btn solid sans tg-btn" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
       </div>
     </div>
@@ -562,7 +497,7 @@
 <footer class="sans" id="contact">
   <div class="wrap">
     <div>
-      <a class="brand" href="#top">MIRAN ABAYA</a>
+      <a class="brand" href="#new">MIRAN ABAYA</a>
       <p data-t="f_tag">Modest fashion.</p>
     </div>
     <ul>
@@ -600,6 +535,9 @@
   <div class="acct-box">
     <button class="close-x" id="closeAcct" style="position:absolute;top:12px;right:12px;">&times;</button>
     <div id="acctGuest">
+      <button type="button" class="btn line" id="googleSignInBtn" style="width:100%;margin-bottom:14px;font-weight:600;">
+        <span data-t="google_signin">Continue with Google</span>
+      </button>
       <div class="acct-tabs">
         <button id="tabSignIn" class="on" data-t="signin">Sign In</button>
         <button id="tabSignUp" data-t="signup">Create Account</button>
@@ -651,24 +589,25 @@
 
   const am = {
     announce: "የጅምላ ቅናሽ፦ 3–4 ቁርጥራጭ (10% ቅናሽ) · 5–9 ቁርጥራጭ (15% ቅናሽ) · 10+ ቁርጥራጭ (20% ቅናሽ)",
-    eyebrow: "ልከኛ ቡቲክ",
-    nav_shop: "ምድቦች", nav_new: "ምርቶች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
-    cart: "ጋሪ", account: "አካውንት", all: "ሁሉም",
-    h1: "በውበት የሚፈስ ልከኛ ልብስ።",
-    hero_p: "አባያ፣ ሂጃብ፣ ጅልባብ እና ቀሚሶች፤ በMIRAN ABAYA በቀጥታ የሚሸጡ።",
-    cta1: "ምርቶችን ይመልከቱ", cta2: "በቴሌግራም ይዘዙ",
-    h_col: "በምድብ ይግዙ", col_lede: "በሱቁ ውስጥ ያለው ሁሉ፣ እርስዎ በሚፈልጉት መንገድ ተከፋፍሎ።",
-    c1: "አባያ", c1d: "ለዕለት ተዕለትና ለበዓል የሚሆኑ ክፍት እና ዝግ ዲዛይኖች።", c1g: "አባያዎችን ይመልከቱ",
-    c2: "ሂጃብ", c2d: "በተለያዩ ጨርቆችና ቀለማት የተዘጋጁ ስካርፍና ሻሽ።", c2g: "ሂጃቦችን ይመልከቱ",
-    c3: "ጅልባብ", c3d: "ለሰውነት የሚመች ሙሉ ርዝመት ያለው የላይ ልብስ።", c3g: "ጅልባቦችን ይመልከቱ",
-    c4: "ቀሚሶች", c4d: "ለሥራ፣ ለቤተሰብና ለበዓላት የሚሆኑ ልከኛ ቀሚሶች።", c4g: "ቀሚሶችን ይመልከቱ",
-    c5: "ማስዋቢያዎች", c5d: "አለባበስዎን የሚያሟሉ ተጨማሪ ነገሮች።", c5g: "ማስዋቢያዎችን ይመልከቱ",
+    nav_new: "ምርቶች", nav_policies: "መመሪያዎች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
+    cart: "ጋሪ", account: "አካውንት", wishlist: "ተወዳጅ", all: "ሁሉም",
     h_new: "ምርቶች",
+    new_lede: "በMIRAN ABAYA በቀጥታ የተመረጡ አባያ፣ ሂጃብ፣ ጅልባብ እና ቀሚሶች።",
+    cta2: "በቴሌግራም ይዘዙ",
+    c1: "አባያ", c2: "ሂጃብ", c3: "ጅልባብ", c4: "ቀሚሶች", c5: "ማስዋቢያዎች",
+    h_policies: "የማድረሻ፣ የመለወጥ እና የጨርቅ እንክብካቤ መመሪያ",
+    policies_lede: "ለእያንዳንዱ ትዕዛዝ ግልጽ መረጃ።",
+    p1_title: "ማድረስ (Delivery)",
+    p1_body: "በአዲስ አበባ ውስጥ 100 ብር (በ1–2 ቀን)፤ ከአዲስ አበባ ውጭ (ክልል) 350 ብር (በ2–4 ቀን) ይደርሳል።",
+    p2_title: "መጠን እና መለወጥ",
+    p2_body: "ከመዘዝዎ በፊት ከ52–60 ያሉትን መጠኖች ይመልከቱ። ያልተለበሰ ምርት በ48 ሰዓት ውስጥ መቀየር ይቻላል።",
+    p3_title: "የጨርቅ እንክብካቤ",
+    p3_body: "በቀዝቃዛ ውሃ ወይም በእጅ በቀስታ ይታጠብ፤ ሲተኮስ ከውስጥ በኩል በዝቅተኛ ሙቀት ይሁን።",
     h_about: "አንድ ሱቅ፣ አንድ ባለቤት፣ አንድ ደረጃ።",
     about1: "MIRAN ABAYA የልከኛ አልባሳት ሱቅ ነው። እዚህ ምርት የሚዘረዝርና የሚሸጥ ባለቤቱ ብቻ ነው፤ ስለዚህ በሱቁ ውስጥ ያለው ሁሉ በአንድ ሰው የተመረጠ ነው።",
-    about2: "በምድብ ይመልከቱ፣ መጠንና ቀለም ይምረጡ፣ ትዕዛዝዎን ያስገቡ። ትዕዛዝዎ አካውንትዎ ላይ ይቀመጣል እንዲሁም በቴሌግራም ይረጋገጣል።",
+    about2: "መጠንና ቀለም ይምረጡ፣ ትዕዛዝዎን ያስገቡ፣ በንግድ ባንክ ወይም በቴሌብር ይክፈሉና በቴሌግራም ያረጋግጡ።",
     f_tag: "ልከኛ አልባሳት።", owner_portal: "የባለቤት ዳሽቦርድ",
-    signin: "ግባ", signup: "አካውንት ክፈት", my_orders: "የእኔ ትዕዛዞች"
+    google_signin: "በ Google ይግቡ", signin: "ግባ", signup: "አካውንት ክፈት", my_orders: "የእኔ ትዕዛዞች"
   };
 
   let lang = "en";
@@ -677,12 +616,43 @@
 
   let allProducts = [];
   let activeSlug = "all";
+  let wishOnly = false;
   let searchTerm = "";
   let currentUser = null;
   let authMode = "signin";
   let deliveryZone = "addis";
   let paymentMethod = "CBE";
   let cart = JSON.parse(localStorage.getItem("miran_sb_cart") || "[]");
+  let wishlist = JSON.parse(localStorage.getItem("miran_wish") || "[]");
+
+  function saveWish() {
+    localStorage.setItem("miran_wish", JSON.stringify(wishlist));
+    document.getElementById("wishCount").textContent = wishlist.length;
+  }
+
+  function toggleWish(id) {
+    const idx = wishlist.indexOf(id);
+    if (idx >= 0) {
+      wishlist.splice(idx, 1);
+      toast(lang === "am" ? "ከተወዳጅ ተወግዷል" : "Removed from saved");
+    } else {
+      wishlist.push(id);
+      toast(lang === "am" ? "በተወዳጅ ተቀምጧል" : "Saved to favorites");
+    }
+    saveWish();
+    renderCatalog();
+  }
+
+  function shareProduct(p) {
+    const text = `${p.name} - ${fmtETB(p.price)}\nMIRAN ABAYA: ${location.href.split("#")[0]}#new`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        toast(lang === "am" ? "የምርቱ መረጃ ተቀድቷል" : "Product details copied");
+      }).catch(() => toast(text));
+    } else {
+      toast(text);
+    }
+  }
 
   function calcDiscountPct(totalQty) {
     if (totalQty >= 10) return 20;
@@ -703,6 +673,12 @@
     document.getElementById("searchInput").placeholder = lang === "am" ? "ምርት ይፈልጉ..." : "Search products...";
     renderCatalog();
     renderCart();
+  });
+
+  document.getElementById("wishFilterBtn").addEventListener("click", () => {
+    wishOnly = !wishOnly;
+    document.getElementById("wishFilterBtn").classList.toggle("solid-pill", wishOnly);
+    renderCatalog();
   });
 
   function saveCart() {
@@ -772,6 +748,17 @@
   }
   document.getElementById("tabSignIn").addEventListener("click", () => setAuthMode("signin"));
   document.getElementById("tabSignUp").addEventListener("click", () => setAuthMode("signup"));
+
+  document.getElementById("googleSignInBtn").addEventListener("click", async () => {
+    const errEl = document.getElementById("authErr");
+    if (!sb) { errEl.textContent = "Supabase client not initialized."; return; }
+    const redirectTo = window.location.origin + window.location.pathname;
+    const { error } = await sb.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo }
+    });
+    if (error) errEl.textContent = error.message;
+  });
 
   function updateAccountUI() {
     document.getElementById("acctGuest").style.display = currentUser ? "none" : "block";
@@ -863,13 +850,14 @@
     const list = allProducts.filter(p => {
       const slug = p.categories?.slug || "";
       const matchCat = activeSlug === "all" || slug === activeSlug;
+      const matchWish = !wishOnly || wishlist.includes(p.id);
       const matchQ = !searchTerm || (p.name + " " + (p.description || "")).toLowerCase().includes(searchTerm);
-      return matchCat && matchQ;
+      return matchCat && matchWish && matchQ;
     });
     if (!list.length) {
       root.innerHTML = `
         <div class="empty">
-          <h3>${lang === "am" ? "ምንም ምርት አልተገኘም" : "No products listed yet"}</h3>
+          <h3>${lang === "am" ? "ምንም ምርት አልተገኘም" : "No products found"}</h3>
           <p class="sans">${lang === "am" ? "ባለቤቱ ከዳሽቦርድ ምርቶችን እንዳስገባ እዚህ ይታያሉ።" : "Products will appear here as soon as the owner publishes them from the dashboard."}</p>
         </div>`;
       return;
@@ -878,19 +866,24 @@
       const img = (p.images && p.images[0]) || "";
       const catLabel = lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || "");
       const outOfStock = p.stock <= 0;
+      const saved = wishlist.includes(p.id);
       return `
         <article class="card">
           <div class="card-img" data-open="${p.id}">
             ${img ? `<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="no-img">No photo</div>`}
             ${outOfStock ? `<span class="stock-tag">${lang === "am" ? "አልቋል" : "Out of stock"}</span>` : ""}
+            <button type="button" class="wish-btn ${saved ? "on" : ""}" data-wish="${p.id}" aria-label="Save">${saved ? "♥" : "♡"}</button>
           </div>
           <div class="card-body">
             <span class="card-cat">${esc(catLabel)}</span>
             <h3 class="card-title" data-open="${p.id}">${esc(p.name)}</h3>
             <div class="card-price">${fmtETB(p.price)}</div>
-            <button class="card-btn" data-open="${p.id}" ${outOfStock ? "disabled" : ""}>
-              ${outOfStock ? (lang === "am" ? "አልቋል" : "Out of stock") : (lang === "am" ? "ዝርዝር ይመልከቱ" : "Select options")}
-            </button>
+            <div class="card-actions">
+              <button class="card-btn" data-open="${p.id}" ${outOfStock ? "disabled" : ""}>
+                ${outOfStock ? (lang === "am" ? "አልቋል" : "Out of stock") : (lang === "am" ? "ዝርዝር ይመልከቱ" : "Select options")}
+              </button>
+              <button type="button" class="share-mini" data-share="${p.id}">${lang === "am" ? "ቅዳ" : "Copy"}</button>
+            </div>
           </div>
         </article>`;
     }).join("") + `</div>`;
@@ -935,6 +928,15 @@
   }
 
   document.getElementById("catalogRoot").addEventListener("click", e => {
+    const w = e.target.closest("[data-wish]");
+    if (w) { e.stopPropagation(); toggleWish(w.dataset.wish); return; }
+    const sh = e.target.closest("[data-share]");
+    if (sh) {
+      e.stopPropagation();
+      const prod = allProducts.find(x => x.id === sh.dataset.share);
+      if (prod) shareProduct(prod);
+      return;
+    }
     const t = e.target.closest("[data-open]"); if (!t) return;
     const p = allProducts.find(x => x.id === t.dataset.open); if (!p) return;
     pdState = { p, imgIdx: 0, size: p.sizes?.length === 1 ? p.sizes[0] : "", color: p.colors?.length === 1 ? p.colors[0] : "", qty: 1 };
@@ -1080,6 +1082,7 @@
   });
   document.getElementById("searchInput").addEventListener("input", e => { searchTerm = e.target.value.trim().toLowerCase(); renderCatalog(); });
 
+  saveWish();
   saveCart();
   if (sb) {
     sb.auth.getSession().then(({ data }) => { currentUser = data.session?.user || null; updateAccountUI(); renderCart(); });
