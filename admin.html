@@ -103,6 +103,7 @@
   .empty { border: 1px dashed var(--gold-deep); padding: 36px 20px; text-align: center; color: var(--muted); }
   .items div { font-size: .92rem; }
   .meas { display: flex; gap: 14px; flex-wrap: wrap; font-size: .9rem; }
+  .ref-img { width: 96px; height: 120px; object-fit: cover; border: 1px solid var(--line); border-radius: 3px; }
   .price-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .price-row .inp { max-width: 180px; }
 
@@ -162,7 +163,6 @@
   </nav>
 
   <main>
-    <!-- Home -->
     <section class="view on" id="v-home">
       <h1>ዳሽቦርድ</h1>
       <div class="stats">
@@ -177,7 +177,6 @@
       <div id="lowList"></div>
     </section>
 
-    <!-- Products -->
     <section class="view" id="v-products">
       <h1>ምርቶች</h1>
       <h2 style="margin-top:0;">አዲስ ምርት ጨምር</h2>
@@ -197,7 +196,6 @@
       <div id="list"></div>
     </section>
 
-    <!-- Orders -->
     <section class="view" id="v-orders">
       <div class="row-top"><h1>ትዕዛዞች</h1><button class="btn ghost" id="refreshOrders">አድስ</button></div>
       <div class="toolbar">
@@ -216,14 +214,12 @@
       <div id="ordersList"></div>
     </section>
 
-    <!-- Custom orders -->
     <section class="view" id="v-custom">
       <div class="row-top"><h1>በትዕዛዝ ማሰራት</h1><button class="btn ghost" id="refreshCustom">አድስ</button></div>
       <p class="muted" style="margin-bottom:14px;">ከደንበኛው ጋር በቴሌግራም ዋጋ ተስማምተህ እዚህ አስገባ። 50% ቀብዱ በራስ-ሰር ይሰላል።</p>
       <div id="customList"></div>
     </section>
 
-    <!-- Customers -->
     <section class="view" id="v-customers">
       <h1>ደንበኞች</h1>
       <div id="customersList"></div>
@@ -231,7 +227,6 @@
   </main>
 </div>
 
-<!-- Edit product -->
 <dialog id="editModal">
   <form class="add" id="editForm">
     <div class="f full"><b>ምርት አስተካክል</b></div>
@@ -272,14 +267,12 @@
   };
   const PAY_LABEL = { telebirr: "ቴሌብር", bank_transfer: "የባንክ ዝውውር" };
 
-  // ---------- navigation ----------
   const navBtns = document.querySelectorAll(".side button");
   navBtns.forEach(b => b.addEventListener("click", () => {
     navBtns.forEach(x => x.setAttribute("aria-current", x === b));
     document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.id === "v-" + b.dataset.view));
   }));
 
-  // ---------- owner check ----------
   function showGate(msg) {
     $("authGate").style.display = "grid";
     $("dashLayout").style.display = "none";
@@ -326,7 +319,6 @@
     if (session) checkOwner();
   });
 
-  // ---------- data ----------
   async function loadAll() {
     await Promise.all([loadCategories(), loadProducts(), loadOrders(), loadCustom(), loadCustomers()]);
     renderHome();
@@ -366,7 +358,6 @@
     renderCustomers();
   }
 
-  // ---------- home ----------
   function revenue() {
     let sum = 0;
     orders.forEach(o => { if (o.payment_status === "paid" && o.status !== "cancelled") sum += Number(o.total); });
@@ -396,7 +387,6 @@
       : '<div class="empty">ሁሉም ምርቶች በቂ ክምችት አላቸው።</div>';
   }
 
-  // ---------- image upload ----------
   function compressImage(file, maxWidth = 1000, quality = 0.8) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -428,7 +418,6 @@
     return urls;
   }
 
-  // ---------- products ----------
   $("photos").addEventListener("change", e => {
     const box = $("preview"); box.innerHTML = "";
     selectedFiles = [...e.target.files].slice(0, 5);
@@ -532,7 +521,6 @@
     } finally { btn.disabled = false; btn.textContent = "አስቀምጥ"; }
   });
 
-  // ---------- orders ----------
   function orderCopyText(o) {
     const items = (o.order_items || []).map((it, i) => `${i + 1}. ${it.product_name} [${[it.color, it.size].filter(Boolean).join(" / ") || "-"}] x${it.quantity}`).join("\n");
     return `ትዕዛዝ #${o.id.slice(0, 8)}\n${o.profiles?.full_name || ""}\nስልክ: ${o.phone}\nአድራሻ: ${o.address}\n${items}\nጠቅላላ: ${etb(o.total)}\nክፍያ: ${PAY_LABEL[o.payment_method] || ""} (${o.payment_status === "paid" ? "ተከፍሏል" : "አልተከፈለም"})`;
@@ -595,7 +583,6 @@
     await Promise.all([loadOrders(), loadProducts()]);
   });
 
-  // ---------- custom orders ----------
   function renderCustom() {
     const box = $("customList");
     if (!customs.length) { box.innerHTML = '<div class="empty">እስካሁን በትዕዛዝ ማሰራት ጥያቄ የለም።</div>'; return; }
@@ -608,6 +595,7 @@
           <span class="badge on">${esc(CU_STATUS[c.status] || c.status)}</span>
         </div>
         <div>${esc(c.style)}</div>
+        ${c.reference_image ? `<div><a href="${esc(c.reference_image)}" target="_blank" rel="noopener"><img class="ref-img" src="${esc(c.reference_image)}" alt="ዲዛይን"></a></div>` : ""}
         <div class="meas"><span>ቁመት ${c.length_cm}</span><span>ደረት ${c.bust_cm}</span><span>ወገብ ${c.waist_cm}</span><span>እጀታ ${c.sleeve_cm}</span><span class="muted">(ሴ.ሜ)</span></div>
         ${c.notes ? `<div class="muted">📝 ${esc(c.notes)}</div>` : ""}
         <div class="price-row">
@@ -656,7 +644,6 @@
     await loadCustom();
   });
 
-  // ---------- customers ----------
   function renderCustomers() {
     const box = $("customersList");
     if (!customers.length) { box.innerHTML = '<div class="empty">ደንበኞች ሲመዘገቡ እዚህ ይታያሉ።</div>'; return; }
