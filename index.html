@@ -7,246 +7,429 @@
 <meta name="description" content="Abayas, hijabs, jilbabs, dresses and accessories from MIRAN ABAYA.">
 <style>
   :root {
-    --black: #000000;
-    --ivory: #FBF8F0;
-    --gold: #C9A96E;
-    --gold-deep: #8F7440;
-    --beige: #E7DAC5;
-    --text: #1B1712;
-    --paper: var(--ivory);
-    --paper-alt: var(--beige);
+    --pearl: #FAF6F2;
+    --pearl-alt: #F1E8E0;
     --card: #FFFFFF;
-    --ink: var(--text);
-    --muted: #5E5648;
-    --line: rgba(27, 23, 18, .20);
+    --espresso: #241916;
+    --espresso-soft: #3A2924;
+    --rose: #9E766B;
+    --rose-deep: #7C584E;
+    --rose-tint: rgba(158, 118, 107, .14);
+    --muted: #6C5D57;
+    --line: rgba(36, 25, 22, .15);
     --danger: #9B2C2C;
     --ok: #276749;
+    --shadow: 0 10px 28px rgba(36, 25, 22, .06);
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #0C0A08;
-      --paper-alt: #17130F;
-      --card: #14110D;
-      --ink: #F3ECDD;
-      --muted: #B3A78F;
-      --line: rgba(243, 236, 221, .20);
-      --gold-deep: #C9A96E;
-      --danger: #E08A8A;
-      --ok: #68D391;
+      --pearl: #15100E;
+      --pearl-alt: #1E1714;
+      --card: #1B1512;
+      --espresso: #F6EFEA;
+      --espresso-soft: #E5D7CE;
+      --rose: #C89B8E;
+      --rose-deep: #D7AFA3;
+      --rose-tint: rgba(200, 155, 142, .16);
+      --muted: #B8A69E;
+      --line: rgba(246, 239, 234, .15);
+      --danger: #E5989B;
+      --ok: #74C69D;
+      --shadow: 0 12px 30px rgba(0, 0, 0, .35);
     }
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--pearl);
+    color: var(--espresso);
     font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; text-decoration: none; }
   button, input, select, textarea { font: inherit; color: inherit; }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
   .sans { font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
   .announce {
-    background: var(--gold); color: var(--black); text-align: center;
-    padding: 8px 16px; font-size: .84rem; font-weight: 600; letter-spacing: .04em;
+    background: var(--rose-tint);
+    color: var(--espresso);
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    padding: 8px 16px;
+    font-size: .84rem;
+    font-weight: 600;
+    letter-spacing: .03em;
   }
 
-  .stage { background: var(--black); color: #F3ECDD; }
+  header.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--pearl) 88%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
   header .wrap {
-    display: flex; align-items: center; justify-content: space-between;
-    padding-top: 20px; padding-bottom: 20px; gap: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    gap: 16px;
   }
-  .brand { font-size: 1.05rem; letter-spacing: .32em; color: var(--gold); white-space: nowrap; }
+  .brand {
+    font-size: 1.05rem;
+    letter-spacing: .28em;
+    color: var(--espresso);
+    font-weight: 600;
+    white-space: nowrap;
+  }
   nav { display: flex; gap: 24px; font-size: .92rem; }
-  nav a { padding: 4px 0; border-bottom: 1px solid transparent; }
-  nav a:hover { border-color: var(--gold); }
-  .head-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  nav a { padding: 4px 0; border-bottom: 1.5px solid transparent; transition: .2s; }
+  nav a:hover { border-color: var(--rose); color: var(--rose-deep); }
+  .head-right { display: flex; align-items: center; gap: 8px; }
   .pill-btn {
-    background: none; border: 1px solid rgba(243,236,221,.35); color: #F3ECDD; cursor: pointer;
-    padding: 6px 14px; border-radius: 999px; font-size: .86rem; transition: .2s;
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: var(--espresso);
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: .85rem;
+    transition: .2s;
+    white-space: nowrap;
   }
-  .pill-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .pill-btn.gold { border-color: var(--gold); color: var(--gold); }
-  .pill-btn.gold:hover { background: var(--gold); color: var(--black); }
+  .pill-btn:hover { border-color: var(--rose); background: var(--rose-tint); }
+  .pill-btn.solid-pill {
+    background: var(--espresso);
+    color: var(--pearl);
+    border-color: var(--espresso);
+  }
+  .pill-btn.solid-pill:hover {
+    background: var(--rose-deep);
+    border-color: var(--rose-deep);
+    color: #FFFFFF;
+  }
 
+  .hero {
+    background: linear-gradient(180deg, var(--pearl) 0%, var(--pearl-alt) 100%);
+    border-bottom: 1px solid var(--line);
+  }
   .hero .wrap {
-    display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center;
-    padding-top: 36px; padding-bottom: 68px; min-height: 580px;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 32px;
+    align-items: center;
+    padding-top: 44px;
+    padding-bottom: 64px;
+    min-height: 540px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--rose-deep);
+    margin-bottom: 12px;
+    font-weight: 600;
   }
   .hero h1 {
-    font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 1.05;
-    letter-spacing: -.01em; max-width: 12ch;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+    line-height: 1.08;
+    letter-spacing: -.01em;
+    max-width: 13ch;
   }
-  .hero p { margin-top: 22px; max-width: 42ch; color: #CFC5B1; font-size: 1.08rem; }
-  .actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero p {
+    margin-top: 20px;
+    max-width: 44ch;
+    color: var(--muted);
+    font-size: 1.06rem;
+  }
+  .actions { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 13px 26px; border-radius: 2px; font-size: .95rem; cursor: pointer;
-    border: 1px solid var(--gold); background: none; transition: background .2s, color .2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: .92rem;
+    cursor: pointer;
+    border: 1px solid var(--espresso);
+    background: none;
+    transition: .2s;
   }
-  .btn.solid { background: var(--gold); color: var(--black); font-weight: 500; }
-  .btn.solid:hover { background: #DDBF86; }
-  .btn.line { color: var(--gold); }
-  .btn.line:hover { background: rgba(201, 169, 110, .14); }
+  .btn.solid {
+    background: var(--espresso);
+    color: var(--pearl);
+    font-weight: 500;
+  }
+  .btn.solid:hover {
+    background: var(--rose-deep);
+    border-color: var(--rose-deep);
+    color: #FFFFFF;
+  }
+  .btn.line {
+    border-color: var(--line);
+    background: var(--card);
+    color: var(--espresso);
+  }
+  .btn.line:hover { border-color: var(--rose); background: var(--rose-tint); }
   .btn:disabled { opacity: .5; cursor: not-allowed; }
 
-  .figure { justify-self: center; width: min(100%, 340px); }
+  .figure {
+    justify-self: center;
+    width: min(100%, 320px);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 170px 170px 24px 24px;
+    padding: 28px 20px;
+    box-shadow: var(--shadow);
+  }
   .figure svg { width: 100%; height: auto; display: block; overflow: visible; }
-  .figure path { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-  .figure .fold { stroke-width: .9; opacity: .7; }
-  .figure .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 3.2s ease-out forwards; }
-  .figure .draw.d2 { animation-delay: .5s; }
-  .figure .draw.d3 { animation-delay: 1.1s; }
+  .figure path {
+    fill: none;
+    stroke: var(--rose-deep);
+    stroke-width: 1.45;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .figure .fold { stroke-width: .95; opacity: .65; }
+  .figure .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 3s ease-out forwards; }
+  .figure .draw.d2 { animation-delay: .45s; }
+  .figure .draw.d3 { animation-delay: 1s; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
 
-  section { padding: 80px 0; }
-  h2 { font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); line-height: 1.15; max-width: 22ch; }
-  .lede { color: var(--muted); max-width: 54ch; margin-top: 12px; }
-
-  .collections { background: var(--paper); }
-  .rows { margin-top: 40px; border-top: 1px solid var(--line); }
-  .row {
-    display: grid; grid-template-columns: 1fr 1.2fr auto; gap: 24px; align-items: baseline;
-    padding: 24px 0; border-bottom: 1px solid var(--line); cursor: pointer;
-    transition: padding-left .25s, border-color .25s; width: 100%; text-align: left; background: none; border-left: 0; border-right: 0; border-top: 0;
+  section { padding: 76px 0; }
+  h2 {
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.6vw, 2.45rem);
+    line-height: 1.16;
+    max-width: 24ch;
   }
-  .row:hover { padding-left: 14px; border-bottom-color: var(--gold); }
-  .row strong { font-weight: 400; font-size: clamp(1.45rem, 2.8vw, 2rem); }
-  .row span { color: var(--muted); }
-  .row .go { color: var(--gold-deep); font-size: .92rem; }
+  .lede { color: var(--muted); max-width: 54ch; margin-top: 10px; }
 
-  .newin { background: var(--paper-alt); }
+  .collections { background: var(--pearl); }
+  .rows {
+    margin-top: 34px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: background .2s, padding-left .2s;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+  }
+  .row:last-child { border-bottom: 0; }
+  .row:hover { padding-left: 30px; background: var(--rose-tint); }
+  .row strong { font-weight: 400; font-size: clamp(1.35rem, 2.5vw, 1.85rem); }
+  .row span { color: var(--muted); font-size: .95rem; }
+  .row .go { color: var(--rose-deep); font-size: .88rem; font-weight: 600; }
+
+  .newin { background: var(--pearl-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .shop-bar {
-    display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
-    margin-top: 28px; margin-bottom: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 26px;
+    margin-bottom: 26px;
   }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
-    border: 1px solid var(--line); padding: 7px 16px; border-radius: 999px;
-    background: transparent; cursor: pointer; font-size: .88rem; transition: .2s;
+    border: 1px solid var(--line);
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: var(--card);
+    cursor: pointer;
+    font-size: .88rem;
+    transition: .2s;
   }
-  .chip.on, .chip:hover { border-color: var(--gold); background: var(--gold); color: var(--black); }
+  .chip.on, .chip:hover {
+    border-color: var(--rose);
+    background: var(--espresso);
+    color: var(--pearl);
+  }
   .search-box {
-    border: 1px solid var(--line); background: var(--card); padding: 9px 14px;
-    border-radius: 999px; min-width: 220px; font-size: .9rem;
+    border: 1px solid var(--line);
+    background: var(--card);
+    padding: 9px 16px;
+    border-radius: 999px;
+    min-width: 220px;
+    font-size: .9rem;
   }
 
-  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 18px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 18px; }
   .card {
-    background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column;
-    overflow: hidden; transition: border-color .2s;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .25s, border-color .25s;
   }
-  .card:hover { border-color: var(--gold); }
-  .card-img { aspect-ratio: 3/4; background: var(--paper); overflow: hidden; position: relative; cursor: pointer; }
-  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+  .card:hover { transform: translateY(-3px); border-color: var(--rose); }
+  .card-img { aspect-ratio: 3/4; background: var(--pearl); overflow: hidden; position: relative; cursor: pointer; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s; }
   .card:hover .card-img img { transform: scale(1.04); }
   .card-img .no-img {
     width: 100%; height: 100%; display: grid; place-items: center; color: var(--muted); font-size: .85rem;
   }
   .stock-tag {
-    position: absolute; top: 10px; left: 10px; background: var(--black); color: var(--gold);
-    font-size: .72rem; padding: 3px 8px; letter-spacing: .05em;
+    position: absolute; top: 10px; left: 10px;
+    background: var(--espresso); color: var(--pearl);
+    font-size: .72rem; padding: 3px 10px; border-radius: 999px;
   }
   .card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  .card-cat { font-size: .75rem; color: var(--gold-deep); text-transform: uppercase; letter-spacing: .08em; }
-  .card-title { font-size: 1rem; font-weight: 500; cursor: pointer; }
-  .card-price { font-size: 1.05rem; font-weight: 600; margin-top: auto; padding-top: 6px; }
+  .card-cat { font-size: .74rem; color: var(--rose-deep); font-weight: 600; letter-spacing: .04em; }
+  .card-title { font-size: 1rem; font-weight: 600; cursor: pointer; }
+  .card-price { font-size: 1.04rem; font-weight: 700; margin-top: auto; padding-top: 6px; color: var(--espresso); }
   .card-btn {
-    margin-top: 10px; width: 100%; padding: 10px; border: 1px solid var(--ink);
-    background: none; cursor: pointer; font-size: .85rem; transition: .2s;
+    margin-top: 10px; width: 100%; padding: 9px 12px;
+    border: 1px solid var(--line); background: var(--pearl);
+    border-radius: 999px; cursor: pointer; font-size: .84rem; font-weight: 500; transition: .2s;
   }
-  .card-btn:hover { background: var(--ink); color: var(--paper); }
+  .card-btn:hover:not(:disabled) {
+    background: var(--espresso); color: var(--pearl); border-color: var(--espresso);
+  }
+  .card-btn:disabled { opacity: .5; cursor: not-allowed; }
 
   .empty {
-    margin-top: 24px; border: 1px dashed var(--gold-deep); padding: 48px 24px;
+    margin-top: 20px;
+    background: var(--card);
+    border: 1px dashed var(--rose);
+    border-radius: 10px;
+    padding: 44px 24px;
     display: grid; justify-items: center; text-align: center; gap: 10px;
   }
-  .empty h3 { font-weight: 400; font-size: 1.35rem; }
+  .empty h3 { font-weight: 400; font-size: 1.3rem; }
   .empty p { color: var(--muted); max-width: 48ch; font-size: .95rem; }
 
-  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .about { background: var(--pearl); }
+  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
   .about p { color: var(--muted); }
   .about p + p { margin-top: 14px; }
-  .tg-btn { margin-top: 24px; }
+  .tg-btn { margin-top: 22px; }
 
-  footer { background: var(--black); color: #CFC5B1; padding: 56px 0 40px; }
+  footer {
+    background: var(--pearl-alt);
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    padding: 52px 0 38px;
+  }
   footer .wrap { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
   footer .brand { display: block; margin-bottom: 10px; }
-  footer ul { list-style: none; display: grid; gap: 6px; font-size: .95rem; }
-  footer small { display: block; margin-top: 32px; color: #8A806D; }
-  footer a.tg { color: var(--gold); border-bottom: 1px solid var(--gold); }
+  footer ul { list-style: none; display: grid; gap: 6px; font-size: .94rem; }
+  footer small { display: block; margin-top: 32px; color: var(--muted); opacity: .8; }
+  footer a.tg { color: var(--rose-deep); font-weight: 600; border-bottom: 1px solid var(--rose); }
 
   .scrim {
-    position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 60;
+    position: fixed; inset: 0; background: rgba(36, 25, 22, .45); z-index: 60;
     opacity: 0; pointer-events: none; transition: opacity .25s;
   }
   .scrim.on { opacity: 1; pointer-events: auto; }
   .drawer {
     position: fixed; top: 0; bottom: 0; right: 0; width: min(440px, 100%);
-    background: var(--paper); z-index: 70; display: flex; flex-direction: column;
+    background: var(--pearl); z-index: 70; display: flex; flex-direction: column;
     transform: translateX(105%); transition: transform .3s; border-left: 1px solid var(--line);
   }
   .drawer.on { transform: none; }
   .dh {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 22px; border-bottom: 1px solid var(--line);
+    padding: 18px 22px; border-bottom: 1px solid var(--line); background: var(--card);
   }
-  .dh h2 { font-size: 1.35rem; }
+  .dh h2 { font-size: 1.3rem; }
   .close-x { background: none; border: 0; font-size: 1.4rem; cursor: pointer; padding: 4px 8px; }
   .db { flex: 1; overflow-y: auto; padding: 14px 22px; }
-  .df { border-top: 1px solid var(--line); padding: 18px 22px; background: var(--card); }
+  .df { border-top: 1px solid var(--line); padding: 18px 22px; background: var(--card); max-height: 64vh; overflow-y: auto; }
   .cart-item {
     display: grid; grid-template-columns: 64px 1fr auto; gap: 12px;
     padding: 12px 0; border-bottom: 1px solid var(--line); align-items: start;
   }
-  .cart-item img { width: 64px; height: 84px; object-fit: cover; border: 1px solid var(--line); }
+  .cart-item img { width: 64px; height: 84px; object-fit: cover; border: 1px solid var(--line); border-radius: 4px; }
   .cart-item small { color: var(--muted); display: block; font-size: .82rem; }
-  .qty-ctrl { display: inline-flex; align-items: center; border: 1px solid var(--line); margin-top: 6px; }
-  .qty-ctrl button { width: 28px; height: 28px; background: none; border: 0; cursor: pointer; }
+  .qty-ctrl { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; margin-top: 6px; background: var(--card); }
+  .qty-ctrl button { width: 30px; height: 28px; background: none; border: 0; cursor: pointer; }
   .qty-ctrl span { min-width: 26px; text-align: center; font-size: .88rem; }
   .rm-btn { background: none; border: 0; color: var(--danger); font-size: .78rem; cursor: pointer; text-decoration: underline; margin-top: 6px; }
   .tot-row { display: flex; justify-content: space-between; font-size: .9rem; margin-bottom: 5px; }
   .tot-row.disc { color: var(--ok); font-weight: 600; }
   .tot-row.grand { font-size: 1.08rem; font-weight: 700; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; margin-bottom: 12px; }
-  .field { width: 100%; border: 1px solid var(--line); background: var(--paper); padding: 10px 12px; border-radius: 3px; font-size: .9rem; margin-bottom: 8px; }
+  .field {
+    width: 100%; border: 1px solid var(--line); background: var(--pearl);
+    padding: 10px 12px; border-radius: 8px; font-size: .9rem; margin-bottom: 8px;
+  }
+  .field option { color: #241916; background: #FAF6F2; }
+  .pay-note {
+    border: 1px solid var(--line); background: var(--rose-tint);
+    padding: 9px 12px; border-radius: 8px; font-size: .82rem; color: var(--muted); margin-bottom: 10px;
+  }
+  .pay-note strong { color: var(--espresso); }
 
   dialog {
-    margin: auto; border: 1px solid var(--line); background: var(--paper); color: var(--ink);
-    width: min(820px, 94vw); max-height: 92vh; overflow-y: auto; border-radius: 4px; padding: 0;
+    margin: auto; border: 1px solid var(--line); background: var(--pearl); color: var(--espresso);
+    width: min(820px, 94vw); max-height: 92vh; overflow-y: auto; border-radius: 12px; padding: 0;
+    box-shadow: var(--shadow);
   }
-  dialog::backdrop { background: rgba(0,0,0,.65); }
+  dialog::backdrop { background: rgba(36, 25, 22, .55); }
   .pd-grid { display: grid; grid-template-columns: 1fr 1fr; }
-  .pd-gallery { background: var(--paper-alt); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .pd-main-img { aspect-ratio: 3/4; width: 100%; object-fit: cover; border: 1px solid var(--line); }
+  .pd-gallery { background: var(--pearl-alt); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .pd-main-img { aspect-ratio: 3/4; width: 100%; object-fit: cover; border: 1px solid var(--line); border-radius: 8px; }
   .pd-thumbs { display: flex; gap: 8px; overflow-x: auto; }
-  .pd-thumbs img { width: 56px; height: 72px; object-fit: cover; cursor: pointer; border: 2px solid transparent; opacity: .75; }
-  .pd-thumbs img.on { border-color: var(--gold); opacity: 1; }
+  .pd-thumbs img { width: 56px; height: 72px; object-fit: cover; cursor: pointer; border: 2px solid transparent; border-radius: 4px; opacity: .75; }
+  .pd-thumbs img.on { border-color: var(--rose); opacity: 1; }
   .pd-info { padding: 26px; position: relative; display: flex; flex-direction: column; gap: 12px; }
   .pd-info .close-x { position: absolute; top: 12px; right: 12px; }
-  .opt-label { font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; display: block; }
+  .opt-label { font-size: .8rem; color: var(--muted); margin-bottom: 6px; display: block; font-weight: 600; }
   .opts { display: flex; flex-wrap: wrap; gap: 8px; }
   .opt-btn {
-    border: 1px solid var(--line); padding: 7px 14px; background: none; cursor: pointer; font-size: .86rem;
+    border: 1px solid var(--line); padding: 7px 14px; background: var(--card);
+    border-radius: 999px; cursor: pointer; font-size: .85rem; transition: .2s;
   }
-  .opt-btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .opt-btn.on { background: var(--espresso); color: var(--pearl); border-color: var(--espresso); }
   .err-msg { color: var(--danger); font-size: .86rem; min-height: 20px; }
 
   .acct-box { padding: 26px; position: relative; max-width: 560px; margin: 0 auto; }
   .acct-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
   .acct-tabs button { background: none; border: 0; padding: 8px 4px; cursor: pointer; border-bottom: 2px solid transparent; font-size: .92rem; }
-  .acct-tabs button.on { border-bottom-color: var(--gold); font-weight: 600; }
-  .ord-card { border: 1px solid var(--line); background: var(--card); padding: 14px; margin-bottom: 12px; font-size: .88rem; }
+  .acct-tabs button.on { border-bottom-color: var(--rose); font-weight: 600; }
+  .ord-card { border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 14px; margin-bottom: 12px; font-size: .88rem; }
   .ord-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 8px; }
-  .status-pill { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold-deep); text-transform: uppercase; }
+  .status-pill { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--rose); color: var(--rose-deep); text-transform: uppercase; }
 
-  .toasts { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 95; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
-  .toast { background: var(--black); color: #F3ECDD; padding: 11px 20px; border-left: 3px solid var(--gold); font-size: .9rem; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .cartbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: none;
+    background: var(--espresso); color: var(--pearl); border-top: 1px solid var(--rose);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .cartbar.show { display: flex; }
+  .cartbar b { color: var(--rose); font-weight: 600; }
+
+  .toasts { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 95; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: max-content; max-width: 92vw; }
+  .toast { background: var(--espresso); color: var(--pearl); padding: 11px 20px; border-radius: 999px; border-left: 3px solid var(--rose); font-size: .9rem; box-shadow: var(--shadow); }
   .toast.bad { border-left-color: var(--danger); }
 
   @media (max-width: 900px) {
@@ -255,24 +438,30 @@
   @media (max-width: 800px) {
     nav { display: none; }
     .hero .wrap { grid-template-columns: 1fr; min-height: 0; padding-bottom: 48px; }
-    .figure { width: min(68%, 240px); order: -1; }
+    .figure { width: min(64%, 220px); order: -1; padding: 20px 16px; }
     .row { grid-template-columns: 1fr; gap: 4px; }
     .row .go { display: none; }
     .about .wrap { grid-template-columns: 1fr; gap: 20px; }
     .pd-grid { grid-template-columns: 1fr; }
     section { padding: 56px 0; }
+    body { padding-bottom: 68px; }
+    .toasts { bottom: 82px; }
+    .cartbar.show { display: flex; }
+  }
+  @media (min-width: 801px) {
+    .cartbar, .cartbar.show { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .figure .draw { animation: none; stroke-dashoffset: 0; }
-    .row { transition: none; }
+    .row, .card { transition: none; }
   }
 
   html[lang="am"] body, html[lang="am"] .sans {
     font-family: "Noto Serif Ethiopic", "Noto Sans Ethiopic", "Nyala", "Abyssinica SIL", serif;
     line-height: 1.8;
   }
-  html[lang="am"] .brand { letter-spacing: .2em; }
+  html[lang="am"] .brand { letter-spacing: .18em; }
   html[lang="am"] .hero h1 { max-width: 14ch; font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.25; }
 </style>
 </head>
@@ -280,46 +469,45 @@
 
 <div class="announce sans" data-t="announce">Wholesale Discounts: 3–4 pcs (10% OFF) · 5–9 pcs (15% OFF) · 10+ pcs (20% OFF)</div>
 
-<div class="stage">
-  <header class="sans">
-    <div class="wrap">
-      <a class="brand" href="#top" aria-label="MIRAN ABAYA">MIRAN ABAYA</a>
-      <nav aria-label="Main">
-        <a href="#collections" data-t="nav_shop">Collections</a>
-        <a href="#new" data-t="nav_new">Products</a>
-        <a href="#about" data-t="nav_about">About</a>
-        <a href="#contact" data-t="nav_contact">Contact</a>
-      </nav>
-      <div class="head-right">
-        <button class="pill-btn" id="langBtn" type="button">አማርኛ</button>
-        <button class="pill-btn" id="acctBtn" type="button" data-t="account">Account</button>
-        <button class="pill-btn gold" id="cartBtn" type="button"><span data-t="cart">Cart</span> (<span id="cartCount">0</span>)</button>
+<header class="site-header sans">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="MIRAN ABAYA">MIRAN ABAYA</a>
+    <nav aria-label="Main">
+      <a href="#collections" data-t="nav_shop">Collections</a>
+      <a href="#new" data-t="nav_new">Products</a>
+      <a href="#about" data-t="nav_about">About</a>
+      <a href="#contact" data-t="nav_contact">Contact</a>
+    </nav>
+    <div class="head-right">
+      <button class="pill-btn" id="langBtn" type="button">አማርኛ</button>
+      <button class="pill-btn" id="acctBtn" type="button" data-t="account">Account</button>
+      <button class="pill-btn solid-pill" id="cartBtn" type="button"><span data-t="cart">Cart</span> (<span id="cartCount">0</span>)</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow sans" data-t="eyebrow">Modest Boutique</span>
+      <h1 data-t="h1">Modest dress, cut to flow.</h1>
+      <p data-t="hero_p">Abayas, hijabs, jilbabs and dresses, chosen and sold directly by MIRAN ABAYA.</p>
+      <div class="actions sans">
+        <a class="btn solid" href="#new" data-t="cta1">Shop products</a>
+        <a class="btn line" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
       </div>
     </div>
-  </header>
-
-  <div class="hero" id="top">
-    <div class="wrap">
-      <div>
-        <h1 data-t="h1">Modest dress, cut to flow.</h1>
-        <p data-t="hero_p">Abayas, hijabs, jilbabs and dresses, chosen and sold directly by MIRAN ABAYA.</p>
-        <div class="actions sans">
-          <a class="btn solid" href="#new" data-t="cta1">Shop products</a>
-          <a class="btn line" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
-        </div>
-      </div>
-      <div class="figure" aria-hidden="true">
-        <svg viewBox="0 0 400 700">
-          <path class="draw" pathLength="1" d="M200 40 C165 40 150 70 152 105 C154 140 140 160 128 185 C100 260 90 420 70 640 C130 665 270 665 330 640 C310 420 300 260 272 185 C260 160 246 140 248 105 C250 70 235 40 200 40 Z"/>
-          <path class="draw d2" pathLength="1" d="M128 185 C112 300 98 420 88 540"/>
-          <path class="draw d2" pathLength="1" d="M272 185 C288 300 302 420 312 540"/>
-          <path class="draw d2" pathLength="1" d="M200 150 L200 200"/>
-          <path class="fold draw d3" pathLength="1" d="M200 200 C195 330 185 500 160 652"/>
-          <path class="fold draw d3" pathLength="1" d="M200 200 C205 330 215 500 240 652"/>
-          <path class="fold draw d3" pathLength="1" d="M180 190 C160 330 130 500 108 646"/>
-          <path class="fold draw d3" pathLength="1" d="M220 190 C240 330 270 500 292 646"/>
-        </svg>
-      </div>
+    <div class="figure" aria-hidden="true">
+      <svg viewBox="0 0 400 700">
+        <path class="draw" pathLength="1" d="M200 40 C165 40 150 70 152 105 C154 140 140 160 128 185 C100 260 90 420 70 640 C130 665 270 665 330 640 C310 420 300 260 272 185 C260 160 246 140 248 105 C250 70 235 40 200 40 Z"/>
+        <path class="draw d2" pathLength="1" d="M128 185 C112 300 98 420 88 540"/>
+        <path class="draw d2" pathLength="1" d="M272 185 C288 300 302 420 312 540"/>
+        <path class="draw d2" pathLength="1" d="M200 150 L200 200"/>
+        <path class="fold draw d3" pathLength="1" d="M200 200 C195 330 185 500 160 652"/>
+        <path class="fold draw d3" pathLength="1" d="M200 200 C205 330 215 500 240 652"/>
+        <path class="fold draw d3" pathLength="1" d="M180 190 C160 330 130 500 108 646"/>
+        <path class="fold draw d3" pathLength="1" d="M220 190 C240 330 270 500 292 646"/>
+      </svg>
     </div>
   </div>
 </div>
@@ -385,11 +573,16 @@
     </ul>
     <ul>
       <li>Telegram: <a class="tg" href="https://t.me/mame15" target="_blank" rel="noopener">@mame15</a></li>
-      <li><a href="admin.html" style="color:var(--gold); font-size:.86rem;" data-t="owner_portal">Owner Dashboard</a></li>
+      <li><a href="admin.html" style="color:var(--rose-deep); font-weight:600; font-size:.86rem;" data-t="owner_portal">Owner Dashboard</a></li>
     </ul>
   </div>
   <div class="wrap"><small>&copy; 2026 MIRAN ABAYA</small></div>
 </footer>
+
+<div class="cartbar sans" id="cartBar">
+  <span id="cartBarText"></span>
+  <button class="btn solid" id="cartBarBtn" type="button" style="padding:8px 16px;background:var(--rose);border-color:var(--rose);color:#fff;">Cart</button>
+</div>
 
 <div class="scrim" id="scrim"></div>
 <aside class="drawer sans" id="cartDrawer" aria-label="Shopping Cart">
@@ -440,6 +633,10 @@
   const SUPABASE_URL = "https://htwwaxpvmxlvxermsver.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e";
   const TG_USER = "mame15";
+  const CBE_ACCOUNT = "1000704450568";
+  const MOBILE_MONEY_PHONE = "0993001097";
+  const DELIVERY_ADDIS = 100;
+  const DELIVERY_REGIONAL = 350;
 
   const esc = s => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
   const fmtETB = n => `${Math.round(Number(n) || 0).toLocaleString()} ETB`;
@@ -454,6 +651,7 @@
 
   const am = {
     announce: "የጅምላ ቅናሽ፦ 3–4 ቁርጥራጭ (10% ቅናሽ) · 5–9 ቁርጥራጭ (15% ቅናሽ) · 10+ ቁርጥራጭ (20% ቅናሽ)",
+    eyebrow: "ልከኛ ቡቲክ",
     nav_shop: "ምድቦች", nav_new: "ምርቶች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
     cart: "ጋሪ", account: "አካውንት", all: "ሁሉም",
     h1: "በውበት የሚፈስ ልከኛ ልብስ።",
@@ -482,6 +680,8 @@
   let searchTerm = "";
   let currentUser = null;
   let authMode = "signin";
+  let deliveryZone = "addis";
+  let paymentMethod = "CBE";
   let cart = JSON.parse(localStorage.getItem("miran_sb_cart") || "[]");
 
   function calcDiscountPct(totalQty) {
@@ -489,6 +689,10 @@
     if (totalQty >= 5) return 15;
     if (totalQty >= 3) return 10;
     return 0;
+  }
+
+  function calcDeliveryFee() {
+    return deliveryZone === "regional" ? DELIVERY_REGIONAL : DELIVERY_ADDIS;
   }
 
   document.getElementById("langBtn").addEventListener("click", () => {
@@ -503,7 +707,15 @@
 
   function saveCart() {
     localStorage.setItem("miran_sb_cart", JSON.stringify(cart));
-    document.getElementById("cartCount").textContent = cart.reduce((s, i) => s + i.quantity, 0);
+    const totalQty = cart.reduce((s, i) => s + i.quantity, 0);
+    const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+    const discPct = calcDiscountPct(totalQty);
+    const total = subtotal - Math.round(subtotal * discPct / 100) + (totalQty > 0 ? calcDeliveryFee() : 0);
+    document.getElementById("cartCount").textContent = totalQty;
+    const bar = document.getElementById("cartBar");
+    bar.classList.toggle("show", totalQty > 0);
+    document.getElementById("cartBarText").innerHTML =
+      `${totalQty} ${lang === "am" ? "ቁርጥራጭ" : "items"} · <b>${fmtETB(total)}</b>`;
   }
 
   function addToCart(p, size, color, qty) {
@@ -534,6 +746,7 @@
     document.getElementById("scrim").classList.remove("on");
   }
   document.getElementById("cartBtn").addEventListener("click", openCart);
+  document.getElementById("cartBarBtn").addEventListener("click", openCart);
   document.getElementById("closeCart").addEventListener("click", closeCart);
   document.getElementById("scrim").addEventListener("click", closeCart);
 
@@ -584,7 +797,7 @@
     }
     itemsEl.innerHTML = cart.map((item, idx) => `
       <div class="cart-item">
-        ${item.image ? `<img src="${esc(item.image)}" alt="">` : `<div style="width:64px;height:84px;background:var(--paper-alt);"></div>`}
+        ${item.image ? `<img src="${esc(item.image)}" alt="">` : `<div style="width:64px;height:84px;background:var(--pearl-alt);border-radius:4px;"></div>`}
         <div>
           <strong style="font-size:.92rem;">${esc(item.name)}</strong>
           <small>${[item.color, item.size].filter(Boolean).join(" · ") || "Standard"}</small>
@@ -604,13 +817,32 @@
     const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
     const discPct = calcDiscountPct(totalQty);
     const discAmt = Math.round(subtotal * discPct / 100);
-    const total = subtotal - discAmt;
+    const deliveryFee = calcDeliveryFee();
+    const total = subtotal - discAmt + deliveryFee;
+
+    const payDetails = paymentMethod === "CBE"
+      ? (lang === "am"
+          ? `<strong>የኢትዮጵያ ንግድ ባንክ (CBE)፦</strong> <code>${esc(CBE_ACCOUNT)}</code> (ለክፍያ ፎቶ ደረሰኝ በቴሌግራም ይላኩ)`
+          : `<strong>Commercial Bank of Ethiopia (CBE):</strong> <code>${esc(CBE_ACCOUNT)}</code> (Send payment receipt on Telegram)`)
+      : (lang === "am"
+          ? `<strong>ቴሌብር / CBE Birr፦</strong> <code>${esc(MOBILE_MONEY_PHONE)}</code> (ለክፍያ ፎቶ ደረሰኝ በቴሌግራም ይላኩ)`
+          : `<strong>Telebirr / CBE Birr:</strong> <code>${esc(MOBILE_MONEY_PHONE)}</code> (Send payment receipt on Telegram)`);
 
     footEl.innerHTML = `
       <div class="tot-row"><span>${lang === "am" ? "ንዑስ ድምር" : "Subtotal"}</span><span>${fmtETB(subtotal)}</span></div>
       ${discPct > 0 ? `<div class="tot-row disc"><span>${lang === "am" ? `የጅምላ ቅናሽ (${discPct}%)` : `Wholesale Discount (${discPct}%)`}</span><span>−${fmtETB(discAmt)}</span></div>` : ""}
+      <div class="tot-row"><span>${lang === "am" ? "የማድረሻ ክፍያ" : "Delivery Fee"}</span><span>${fmtETB(deliveryFee)}</span></div>
       <div class="tot-row grand"><span>${lang === "am" ? "ጠቅላላ ድምር" : "Total"}</span><span>${fmtETB(total)}</span></div>
       ${currentUser ? `
+        <select id="chkZone" class="field">
+          <option value="addis" ${deliveryZone === "addis" ? "selected" : ""}>${lang === "am" ? "አዲስ አበባ ውስጥ (100 ብር)" : "Addis Ababa (100 ETB)"}</option>
+          <option value="regional" ${deliveryZone === "regional" ? "selected" : ""}>${lang === "am" ? "ከአዲስ አበባ ውጭ / ክልል (350 ብር)" : "Regional / Outside Addis (350 ETB)"}</option>
+        </select>
+        <select id="chkPayment" class="field">
+          <option value="CBE" ${paymentMethod === "CBE" ? "selected" : ""}>${lang === "am" ? "የኢትዮጵያ ንግድ ባንክ (CBE)" : "CBE Bank Transfer"}</option>
+          <option value="Telebirr / Mobile Money" ${paymentMethod === "Telebirr / Mobile Money" ? "selected" : ""}>${lang === "am" ? "ቴሌብር / CBE Birr" : "Telebirr / CBE Birr"}</option>
+        </select>
+        <div class="pay-note">${payDetails}</div>
         <input id="chkPhone" class="field" type="tel" placeholder="${lang === "am" ? "ስልክ ቁጥር *" : "Phone Number *"}" value="${esc(currentUser.user_metadata?.phone || "")}">
         <input id="chkAddress" class="field" placeholder="${lang === "am" ? "የመድረሻ አድራሻ (ከተማ / ሰፈር) *" : "Delivery Address (City / Area) *"}">
         <input id="chkNote" class="field" placeholder="${lang === "am" ? "ተጨማሪ ማስታወሻ (አማራጭ)" : "Note (optional)"}">
@@ -671,6 +903,9 @@
     const imgs = (p.images && p.images.length) ? p.images : [];
     const mainImg = imgs[imgIdx] || "";
     const discPct = calcDiscountPct(qty);
+    const sizeGuideText = lang === "am"
+      ? "የመጠን መመሪያ (Abaya Length): 52 (~132cm) · 54 (~137cm) · 56 (~142cm) · 58 (~147cm) · 60 (~152cm)"
+      : "Size Guide (Abaya Length): 52 (~132cm) · 54 (~137cm) · 56 (~142cm) · 58 (~147cm) · 60 (~152cm)";
     pdModal.innerHTML = `
       <div class="pd-grid">
         <div class="pd-gallery">
@@ -681,15 +916,16 @@
           <button class="close-x" id="closePD" aria-label="Close">&times;</button>
           <span class="card-cat">${esc(lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || ""))}</span>
           <h2 style="font-size:1.5rem;">${esc(p.name)}</h2>
-          <div style="font-size:1.35rem;font-weight:700;color:var(--gold-deep);">${fmtETB(p.price)}</div>
+          <div style="font-size:1.35rem;font-weight:700;color:var(--rose-deep);">${fmtETB(p.price)}</div>
           ${p.description ? `<p style="color:var(--muted);font-size:.92rem;">${esc(p.description)}</p>` : ""}
           ${p.sizes && p.sizes.length ? `<div><span class="opt-label">${lang === "am" ? "መጠን" : "Size"}</span><div class="opts">${p.sizes.map(s => `<button type="button" class="opt-btn ${size === s ? "on" : ""}" data-size="${esc(s)}">${esc(s)}</button>`).join("")}</div></div>` : ""}
+          <div class="pay-note">${esc(sizeGuideText)}</div>
           ${p.colors && p.colors.length ? `<div><span class="opt-label">${lang === "am" ? "ቀለም" : "Color"}</span><div class="opts">${p.colors.map(c => `<button type="button" class="opt-btn ${color === c ? "on" : ""}" data-color="${esc(c)}">${esc(c)}</button>`).join("")}</div></div>` : ""}
           <div>
             <span class="opt-label">${lang === "am" ? "ብዛት" : "Quantity"} (${lang === "am" ? "ክምችት" : "Stock"}: ${p.stock})</span>
             <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
               <div class="qty-ctrl"><button type="button" id="pdMinus">−</button><span>${qty}</span><button type="button" id="pdPlus">+</button></div>
-              <small style="color:var(--gold-deep);font-weight:600;">${discPct > 0 ? `${discPct}% OFF` : (lang === "am" ? "3+ ሲገዙ 10% ቅናሽ" : "3+ pcs: 10% OFF")}</small>
+              <small style="color:var(--rose-deep);font-weight:600;">${discPct > 0 ? `${discPct}% OFF` : (lang === "am" ? "3+ ሲገዙ 10% ቅናሽ" : "3+ pcs: 10% OFF")}</small>
             </div>
           </div>
           <div class="err-msg" id="pdErr"></div>
@@ -788,6 +1024,16 @@
   document.getElementById("signOutBtn").addEventListener("click", async () => { if (sb) await sb.auth.signOut(); });
   document.getElementById("refreshOrdersBtn").addEventListener("click", loadMyOrders);
 
+  document.getElementById("cartDrawer").addEventListener("change", e => {
+    if (e.target.id === "chkZone") {
+      deliveryZone = e.target.value;
+      renderCart();
+    } else if (e.target.id === "chkPayment") {
+      paymentMethod = e.target.value;
+      renderCart();
+    }
+  });
+
   document.getElementById("cartDrawer").addEventListener("click", async e => {
     const b = e.target.closest("button"); if (!b) return;
     if (b.dataset.cdec !== undefined) { const i = Number(b.dataset.cdec); cart[i].quantity--; if (cart[i].quantity < 1) cart.splice(i, 1); renderCart(); }
@@ -801,13 +1047,18 @@
       if (!phone || !address) { toast("Phone and address required", true); return; }
       b.disabled = true;
       const snapshot = [...cart];
+      const deliveryFee = calcDeliveryFee();
+      const zoneLabel = deliveryZone === "regional" ? "Regional / Outside Addis" : "Addis Ababa";
+      const combinedNote = [`Zone: ${zoneLabel} (${deliveryFee} ETB)`, `Payment: ${paymentMethod}`, note].filter(Boolean).join(" | ");
       const { data, error } = await sb.rpc("place_order", {
         p_items: snapshot.map(i => ({ product_id: i.product_id, quantity: i.quantity, size: i.size, color: i.color })),
-        p_phone: phone, p_address: address, p_note: note || null
+        p_phone: phone, p_address: address, p_note: combinedNote
       });
       b.disabled = false;
       if (error) { toast(error.message, true); return; }
-      let msg = `MIRAN ABAYA ORDER\nOrder ID: ${data.order_id}\nPhone: ${phone}\nAddress: ${address}\nTOTAL: ${fmtETB(data.total)}`;
+      const grandWithDelivery = Number(data.total || 0) + deliveryFee;
+      const itemsText = snapshot.map(i => `- ${i.name} (${[i.color, i.size].filter(Boolean).join("/") || "Std"}) x${i.quantity}`).join("\n");
+      const msg = `MIRAN ABAYA ORDER\nOrder ID: ${data.order_id}\nPhone: ${phone}\nZone: ${zoneLabel}\nAddress: ${address}\nPayment: ${paymentMethod}\nItems:\n${itemsText}\nDelivery: ${fmtETB(deliveryFee)}\nTOTAL: ${fmtETB(grandWithDelivery)}`;
       cart = []; saveCart(); renderCart(); loadProducts(); closeCart();
       window.open(`https://t.me/${TG_USER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
     }
