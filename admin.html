@@ -1,567 +1,671 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="am">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MIRAN ABAYA — Admin Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    :root {
-      --bg: #120f0e;
-      --surface: #1b1614;
-      --surface-2: #241e1b;
-      --text: #f5efe6;
-      --muted: #c2b6a8;
-      --accent: #f5efe6;
-      --accent-dark: #151110;
-      --gold: #e5c384;
-      --danger: #e06c6c;
-      --ok: #6fd395;
-      --border: rgba(245, 239, 230, 0.14);
-      --radius: 14px;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>MIRAN ABAYA | የባለቤት ዳሽቦርድ</title>
+<style>
+  :root {
+    --black: #000; --gold: #C9A96E; --gold-deep: #8F7440; --beige: #E7DAC5;
+    --bg: #FBF8F0; --panel: #FFFFFF; --ink: #1B1712; --muted: #6A604F; --line: rgba(27,23,18,.16);
+    --danger: #9B2C2C; --ok: #276749;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0C0A08; --panel: #17130F; --ink: #F3ECDD; --muted: #B3A78F; --line: rgba(243,236,221,.18); --gold-deep: #C9A96E; --danger: #E08A8A; --ok: #68D391; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink); line-height: 1.7;
+    font-family: "Noto Sans Ethiopic", "Nyala", "Abyssinica SIL", "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  button, input, select, textarea { font: inherit; color: inherit; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.5;
-      min-height: 100vh;
-    }
+  .top { background: #000; color: #F3ECDD; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .top b { color: var(--gold); letter-spacing: .24em; font-weight: 400; }
+  .top-right { display: flex; align-items: center; gap: 12px; font-size: .88rem; }
+  .top-right a { color: var(--gold); text-decoration: none; }
+  .top-right button { background: none; border: 1px solid rgba(243,236,221,.35); color: #F3ECDD; padding: 4px 12px; border-radius: 999px; cursor: pointer; font-size: .84rem; }
 
-    button, input, select, textarea { font-family: inherit; }
+  .gate { max-width: 440px; margin: 64px auto; background: var(--panel); border: 1px solid var(--line); padding: 28px; display: grid; gap: 14px; }
+  .gate h1 { font-size: 1.35rem; }
+  .gate p { color: var(--muted); font-size: .9rem; }
+  .gate input { background: transparent; border: 1px solid var(--line); padding: 10px 12px; border-radius: 3px; width: 100%; }
+  .google-btn {
+    width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 11px 16px; border: 1px solid var(--line); border-radius: 3px;
+    background: var(--bg); color: var(--ink); font-size: .92rem; font-weight: 500;
+    cursor: pointer; transition: .2s;
+  }
+  .google-btn:hover { border-color: var(--gold); }
+  .divider-or {
+    display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .8rem;
+  }
+  .divider-or::before, .divider-or::after {
+    content: ""; flex: 1; height: 1px; background: var(--line);
+  }
+  .err { color: var(--danger); font-size: .88rem; }
+  .ok { color: var(--ok); font-size: .88rem; }
 
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 16px;
-      position: sticky;
-      top: 0;
-      z-index: 40;
-    }
+  .layout { display: grid; grid-template-columns: 200px 1fr; min-height: calc(100vh - 60px); }
+  .side { border-right: 1px solid var(--line); padding: 20px 12px; display: grid; align-content: start; gap: 4px; }
+  .side button { text-align: left; background: none; border: 0; padding: 10px 14px; border-radius: 4px; cursor: pointer; border-left: 3px solid transparent; }
+  .side button:hover { background: rgba(201,169,110,.12); }
+  .side button[aria-current="true"] { border-left-color: var(--gold); background: rgba(201,169,110,.16); }
+  .side .dot { display: inline-block; min-width: 20px; padding: 0 6px; margin-left: 6px; border-radius: 999px; background: var(--danger); color: #fff; font-size: .72rem; text-align: center; }
 
-    .head-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+  main { padding: 28px 24px 80px; max-width: 1020px; width: 100%; }
+  h1 { font-weight: 500; font-size: 1.5rem; margin-bottom: 18px; }
+  h2 { font-weight: 500; font-size: 1.15rem; margin: 22px 0 12px; }
+  .view { display: none; }
+  .view.on { display: block; }
 
-    .brand {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-    }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); padding: 16px 18px; }
+  .stat b { display: block; font-size: 1.7rem; font-weight: 500; color: var(--gold-deep); line-height: 1.25; }
+  .stat span { color: var(--muted); font-size: .88rem; }
 
-    .pill-btn {
-      background: var(--surface-2);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 0.82rem;
-      cursor: pointer;
-    }
+  form.add, .box { background: var(--panel); border: 1px solid var(--line); padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; margin-bottom: 30px; }
+  .f { display: grid; gap: 4px; }
+  .f.full { grid-column: 1 / -1; }
+  .f label { font-size: .88rem; color: var(--muted); }
+  .f input, .f select, .f textarea, .inp { background: transparent; border: 1px solid var(--line); padding: 10px 12px; border-radius: 3px; width: 100%; }
+  select option { color: #000; }
+  .f textarea { min-height: 80px; resize: vertical; }
+  .preview { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .preview img { width: 64px; height: 80px; object-fit: cover; border: 1px solid var(--line); }
 
-    .pill-btn.primary {
-      background: var(--accent);
-      color: var(--accent-dark);
-      border-color: var(--accent);
-      font-weight: 600;
-    }
+  .btn { background: var(--gold); color: #000; border: 0; padding: 11px 22px; border-radius: 3px; cursor: pointer; font-weight: 500; }
+  .btn:hover { background: #DDBF86; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn.ghost { background: none; border: 1px solid var(--line); color: var(--ink); padding: 6px 12px; font-weight: 400; font-size: .86rem; }
+  .btn.ghost:hover { border-color: var(--gold); }
+  .btn.del { color: var(--danger); }
+  .btn.good { border-color: var(--ok); color: var(--ok); }
 
-    .pill-btn.danger {
-      border-color: rgba(224, 108, 108, 0.4);
-      color: var(--danger);
-    }
+  .card { background: var(--panel); border: 1px solid var(--line); padding: 16px; margin-bottom: 12px; display: grid; gap: 8px; }
+  .card.low { border-color: var(--danger); }
+  .row-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+  .muted { color: var(--muted); font-size: .86rem; }
+  .acts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .badge { font-size: .78rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); display: inline-block; }
+  .badge.on { border-color: var(--gold); color: var(--gold-deep); }
+  .badge.paid { border-color: var(--ok); color: var(--ok); }
+  .badge.unpaid { border-color: var(--danger); color: var(--danger); }
+  .low-txt { color: var(--danger); font-weight: 600; }
+  .prod { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: start; }
+  .prod img, .prod .ph { width: 56px; height: 70px; object-fit: cover; }
+  .ph { background: var(--beige); display: grid; place-items: center; color: var(--gold-deep); font-size: .7rem; }
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .toolbar .inp { max-width: 260px; }
+  .empty { border: 1px dashed var(--gold-deep); padding: 36px 20px; text-align: center; color: var(--muted); }
+  .items div { font-size: .92rem; }
+  .meas { display: flex; gap: 14px; flex-wrap: wrap; font-size: .9rem; }
+  .price-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .price-row .inp { max-width: 180px; }
 
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px 16px 60px;
-    }
+  dialog { margin: auto; border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: min(640px, 94vw); max-height: 92vh; overflow-y: auto; padding: 0; }
+  dialog::backdrop { background: rgba(0,0,0,.65); }
+  dialog form { margin: 0; border: 0; }
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
-    }
-
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .stat-val {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-top: 4px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .tab-btn.active {
-      background: var(--accent);
-      color: var(--accent-dark);
-      border-color: var(--accent);
-    }
-
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 18px;
-    }
-
-    .panel h2 {
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-    }
-
-    .form-grid {
-      display: grid;
-      gap: 10px;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 0.9rem;
-    }
-
-    .list-item {
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .row-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .badge {
-      font-size: 0.74rem;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(229, 195, 132, 0.15);
-      color: var(--gold);
-      border: 1px solid rgba(229, 195, 132, 0.35);
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .pre-notes {
-      white-space: pre-wrap;
-      font-size: 0.82rem;
-      color: var(--muted);
-      background: var(--bg);
-      padding: 8px 10px;
-      border-radius: 8px;
-    }
-
-    .auth-box {
-      max-width: 420px;
-      margin: 60px auto;
-      text-align: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 26px 20px;
-    }
-
-    @media (max-width: 600px) {
-      .two-col { grid-template-columns: 1fr; }
-    }
-  </style>
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    .side { grid-auto-flow: column; grid-auto-columns: 1fr; border-right: 0; border-bottom: 1px solid var(--line); padding: 8px; overflow-x: auto; }
+    .side button { text-align: center; border-left: 0; border-bottom: 3px solid transparent; padding: 8px 6px; font-size: .84rem; white-space: nowrap; }
+    .side button[aria-current="true"] { border-bottom-color: var(--gold); }
+    main { padding: 20px 16px 80px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    form.add, .box { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="head-wrap">
-      <div class="brand">MIRAN ABAYA · ADMIN</div>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <a href="./index.html" class="pill-btn">View Store</a>
-        <button type="button" class="pill-btn" id="authBtn" onclick="handleAuth()">Sign In</button>
-      </div>
-    </div>
-  </header>
+
+<div class="top">
+  <b>MIRAN ABAYA</b>
+  <div class="top-right">
+    <a href="index.html">ወደ ሱቁ ተመለስ</a>
+    <button id="logoutBtn" style="display:none;">ውጣ</button>
+  </div>
+</div>
+
+<div id="authGate" class="gate">
+  <h1>የባለቤት መግቢያ</h1>
+  <p id="gateInfo">በባለቤት (owner) Google አካውንትዎ ወይም በኢሜይል እና የይለፍ ቃል ይግቡ።</p>
+  <button type="button" class="google-btn" id="ownerGoogleBtn">
+    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+    </svg>
+    <span>በ Google ይግቡ</span>
+  </button>
+  <div class="divider-or">ወይም በኢሜይል</div>
+  <form id="ownerLoginForm" style="display:grid;gap:12px;">
+    <input id="loginEmail" type="email" placeholder="ኢሜይል" required>
+    <input id="loginPass" type="password" placeholder="የይለፍ ቃል" required>
+    <div id="gateErr" class="err"></div>
+    <button type="submit" class="btn" id="loginBtn">ግባ</button>
+  </form>
+</div>
+
+<div id="dashLayout" class="layout" style="display:none;">
+  <nav class="side" aria-label="ዋና ዝርዝር">
+    <button data-view="home" aria-current="true">ዳሽቦርድ</button>
+    <button data-view="products" aria-current="false">ምርቶች</button>
+    <button data-view="orders" aria-current="false">ትዕዛዞች<span class="dot" id="dotOrders" style="display:none;"></span></button>
+    <button data-view="custom" aria-current="false">በትዕዛዝ ማሰራት<span class="dot" id="dotCustom" style="display:none;"></span></button>
+    <button data-view="customers" aria-current="false">ደንበኞች</button>
+  </nav>
 
   <main>
-    <!-- Login / Access Guard -->
-    <div id="authGate" class="auth-box">
-      <h2 style="margin-bottom:8px;">Admin Access Only</h2>
-      <p id="gateMsg" style="color:var(--muted); font-size:0.9rem; margin-bottom:16px;">
-        Sign in with your owner Google account to manage products and orders.
-      </p>
-      <button type="button" class="pill-btn primary" onclick="signInGoogle()">Sign in with Google</button>
-    </div>
-
-    <!-- Admin Dashboard -->
-    <div id="dashboard" style="display:none;">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Paid Revenue</div>
-          <div class="stat-val" id="statRevenue">0 ETB</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Orders</div>
-          <div class="stat-val" id="statOrders">0</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Active Products</div>
-          <div class="stat-val" id="statProducts">0</div>
-        </div>
+    <!-- Home -->
+    <section class="view on" id="v-home">
+      <h1>ዳሽቦርድ</h1>
+      <div class="stats">
+        <div class="stat"><b id="s-revenue">0 ብር</b><span>የተከፈለ ገቢ</span></div>
+        <div class="stat"><b id="s-unpaid">0</b><span>ክፍያ የሚጠብቁ ትዕዛዞች</span></div>
+        <div class="stat"><b id="s-custom">0</b><span>ዋጋ የሚጠብቁ የትዕዛዝ ማሰራቶች</span></div>
+        <div class="stat"><b id="s-orders">0</b><span>ጠቅላላ ትዕዛዞች</span></div>
+        <div class="stat"><b id="s-products">0</b><span>ለሽያጭ ክፍት ምርቶች</span></div>
+        <div class="stat"><b id="s-stock">0</b><span>ጠቅላላ ክምችት</span></div>
       </div>
+      <h2>ክምችት እያለቀ ያለ (2 ወይም ያነሰ)</h2>
+      <div id="lowList"></div>
+    </section>
 
-      <div class="tabs">
-        <button type="button" class="tab-btn active" id="tabOrdersBtn" onclick="switchTab('orders')">Orders</button>
-        <button type="button" class="tab-btn" id="tabProductsBtn" onclick="switchTab('products')">Products</button>
+    <!-- Products -->
+    <section class="view" id="v-products">
+      <h1>ምርቶች</h1>
+      <h2 style="margin-top:0;">አዲስ ምርት ጨምር</h2>
+      <form class="add" id="addForm">
+        <div class="f full"><label for="name">የምርት ስም *</label><input id="name" required maxlength="120"></div>
+        <div class="f"><label for="cat">ምድብ *</label><select id="cat" required></select></div>
+        <div class="f"><label for="price">ዋጋ (ብር) *</label><input id="price" type="number" min="0" step="1" required></div>
+        <div class="f"><label for="sizes">መጠኖች (በነጠላ ሰረዝ ይለዩ)</label><input id="sizes" placeholder="52, 54, 56, 58"></div>
+        <div class="f"><label for="colors">ቀለሞች (በነጠላ ሰረዝ ይለዩ)</label><input id="colors" placeholder="ጥቁር, ክሬም"></div>
+        <div class="f"><label for="stock">ክምችት (ብዛት) *</label><input id="stock" type="number" min="0" step="1" value="5" required></div>
+        <div class="f"><label for="photos">ፎቶዎች (እስከ 5)</label><input id="photos" type="file" accept="image/*" multiple></div>
+        <div class="f full"><div class="preview" id="preview"></div></div>
+        <div class="f full"><label for="desc">መግለጫ</label><textarea id="desc"></textarea></div>
+        <div class="f full"><div id="prodMsg" style="margin-bottom:8px;"></div><button class="btn" type="submit" id="saveProdBtn">ምርቱን አስቀምጥ</button></div>
+      </form>
+      <h2>የተመዘገቡ ምርቶች</h2>
+      <div id="list"></div>
+    </section>
+
+    <!-- Orders -->
+    <section class="view" id="v-orders">
+      <div class="row-top"><h1>ትዕዛዞች</h1><button class="btn ghost" id="refreshOrders">አድስ</button></div>
+      <div class="toolbar">
+        <select id="orderFilter" class="inp">
+          <option value="all">ሁሉም</option>
+          <option value="unpaid">ክፍያ ያልተቀበልኩባቸው</option>
+          <option value="pending">በመጠባበቅ ላይ</option>
+          <option value="confirmed">ተረጋግጧል</option>
+          <option value="processing">በዝግጅት ላይ</option>
+          <option value="shipped">ተልኳል</option>
+          <option value="delivered">ደርሷል</option>
+          <option value="cancelled">ተሰርዟል</option>
+        </select>
+        <input id="orderSearch" class="inp" type="search" placeholder="በስም ወይም በስልክ ፈልግ">
       </div>
+      <div id="ordersList"></div>
+    </section>
 
-      <!-- ORDERS TAB -->
-      <section id="ordersSection">
-        <div class="panel">
-          <h2>Customer &amp; Custom Orders</h2>
-          <input type="search" id="orderSearch" placeholder="Search by name, phone, or status..." oninput="renderOrders()" style="margin-bottom:12px;" />
-          <div id="ordersList">Loading orders...</div>
-        </div>
-      </section>
+    <!-- Custom orders -->
+    <section class="view" id="v-custom">
+      <div class="row-top"><h1>በትዕዛዝ ማሰራት</h1><button class="btn ghost" id="refreshCustom">አድስ</button></div>
+      <p class="muted" style="margin-bottom:14px;">ከደንበኛው ጋር በቴሌግራም ዋጋ ተስማምተህ እዚህ አስገባ። 50% ቀብዱ በራስ-ሰር ይሰላል።</p>
+      <div id="customList"></div>
+    </section>
 
-      <!-- PRODUCTS TAB -->
-      <section id="productsSection" style="display:none;">
-        <div class="panel">
-          <h2>Add New Product</h2>
-          <form class="form-grid" id="addProductForm" onsubmit="addProduct(event)">
-            <div class="two-col">
-              <input type="text" id="pName" placeholder="Product Name (e.g. Dubai Silk Abaya)" required />
-              <input type="number" id="pPrice" placeholder="Price in ETB (e.g. 4500)" required />
-            </div>
-            <div class="two-col">
-              <select id="pCategory">
-                <option value="">Select Category (Optional)</option>
-              </select>
-              <input type="url" id="pImage" placeholder="Image URL (https://...)" required />
-            </div>
-            <textarea id="pDesc" rows="2" placeholder="Description (fabric, color, sizes...)"></textarea>
-            <button type="submit" class="pill-btn primary" style="padding:11px;">+ Add Product</button>
-          </form>
-        </div>
-
-        <div class="panel">
-          <h2>Manage Products</h2>
-          <div id="productsList">Loading products...</div>
-        </div>
-      </section>
-    </div>
+    <!-- Customers -->
+    <section class="view" id="v-customers">
+      <h1>ደንበኞች</h1>
+      <div id="customersList"></div>
+    </section>
   </main>
+</div>
 
-  <script>
-    const SUPABASE_URL = 'https://htwwaxpvmxlvxermsver.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e';
+<!-- Edit product -->
+<dialog id="editModal">
+  <form class="add" id="editForm">
+    <div class="f full"><b>ምርት አስተካክል</b></div>
+    <div class="f full"><label>የምርት ስም *</label><input id="eName" required maxlength="120"></div>
+    <div class="f"><label>ምድብ *</label><select id="eCat" required></select></div>
+    <div class="f"><label>ዋጋ (ብር) *</label><input id="ePrice" type="number" min="0" step="1" required></div>
+    <div class="f"><label>መጠኖች</label><input id="eSizes"></div>
+    <div class="f"><label>ቀለሞች</label><input id="eColors"></div>
+    <div class="f"><label>ክምችት *</label><input id="eStock" type="number" min="0" step="1" required></div>
+    <div class="f"><label>አዲስ ፎቶዎች (አሮጌዎቹን ይተካል)</label><input id="ePhotos" type="file" accept="image/*" multiple></div>
+    <div class="f full"><label>መግለጫ</label><textarea id="eDesc"></textarea></div>
+    <div class="f full"><div id="eMsg"></div></div>
+    <div class="f full acts"><button class="btn" type="submit" id="eSave">አስቀምጥ</button><button class="btn ghost" type="button" id="eCancel">ዝጋ</button></div>
+  </form>
+</dialog>
 
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://htwwaxpvmxlvxermsver.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e";
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    let currentUser = null;
-    let allOrders = [];
-    let allProducts = [];
-    let allCategories = [];
+  const $ = id => document.getElementById(id);
+  const esc = t => String(t ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const etb = n => `${Math.round(Number(n) || 0).toLocaleString()} ብር`;
+  const csv = id => $(id).value.split(",").map(x => x.trim()).filter(Boolean);
 
-    function esc(str) {
-      const div = document.createElement('div');
-      div.textContent = str == null ? '' : String(str);
-      return div.innerHTML;
+  let categories = [], products = [], orders = [], customs = [], customers = [];
+  let selectedFiles = [], editingId = null;
+
+  const ORDER_STATUS = {
+    pending: "በመጠባበቅ ላይ", confirmed: "ተረጋግጧል", paid: "ተከፍሏል", processing: "በዝግጅት ላይ",
+    shipped: "ተልኳል", delivered: "ደርሷል", cancelled: "ተሰርዟል"
+  };
+  const CU_STATUS = {
+    requested: "ዋጋ ይጠብቃል", price_set: "ዋጋ ተስማምተናል", deposit_paid: "ቀብድ ተከፍሏል", in_progress: "በመሰራት ላይ",
+    ready: "ተዘጋጅቷል", completed: "ተጠናቋል", cancelled: "ተሰርዟል"
+  };
+  const PAY_LABEL = { telebirr: "ቴሌብር", bank_transfer: "የባንክ ዝውውር" };
+
+  // ---------- navigation ----------
+  const navBtns = document.querySelectorAll(".side button");
+  navBtns.forEach(b => b.addEventListener("click", () => {
+    navBtns.forEach(x => x.setAttribute("aria-current", x === b));
+    document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.id === "v-" + b.dataset.view));
+  }));
+
+  // ---------- owner check ----------
+  function showGate(msg) {
+    $("authGate").style.display = "grid";
+    $("dashLayout").style.display = "none";
+    $("logoutBtn").style.display = "none";
+    $("gateErr").textContent = msg || "";
+  }
+
+  async function checkOwner() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { showGate(""); return; }
+    const { data: profile, error } = await sb.from("profiles").select("role").eq("id", session.user.id).single();
+    if (error || !profile || profile.role !== "owner") {
+      await sb.auth.signOut();
+      showGate("ይህ አካውንት የባለቤት (owner) ፈቃድ የለውም። በ profiles ጠረጴዛ ውስጥ role ወደ 'owner' መቀየሩን ያረጋግጡ።");
+      return;
     }
+    $("authGate").style.display = "none";
+    $("dashLayout").style.display = "grid";
+    $("logoutBtn").style.display = "inline-block";
+    await loadAll();
+  }
 
-    async function signInGoogle() {
-      await sb.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: window.location.origin + window.location.pathname
-        }
+  $("ownerGoogleBtn").addEventListener("click", async () => {
+    $("gateErr").textContent = "";
+    const { error } = await sb.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.origin + window.location.pathname }
+    });
+    if (error) $("gateErr").textContent = error.message;
+  });
+
+  $("ownerLoginForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = $("loginBtn");
+    $("gateErr").textContent = "";
+    btn.disabled = true; btn.textContent = "በመግባት ላይ...";
+    const { error } = await sb.auth.signInWithPassword({ email: $("loginEmail").value.trim(), password: $("loginPass").value });
+    btn.disabled = false; btn.textContent = "ግባ";
+    if (error) $("gateErr").textContent = error.message; else await checkOwner();
+  });
+  $("logoutBtn").addEventListener("click", async () => { await sb.auth.signOut(); showGate(""); });
+
+  sb.auth.onAuthStateChange((_ev, session) => {
+    if (session) checkOwner();
+  });
+
+  // ---------- data ----------
+  async function loadAll() {
+    await Promise.all([loadCategories(), loadProducts(), loadOrders(), loadCustom(), loadCustomers()]);
+    renderHome();
+  }
+
+  async function loadCategories() {
+    const { data } = await sb.from("categories").select("id, name_am, name_en").order("id");
+    categories = data || [];
+    const opts = categories.map(c => `<option value="${c.id}">${esc(c.name_am)} (${esc(c.name_en)})</option>`).join("");
+    $("cat").innerHTML = opts; $("eCat").innerHTML = opts;
+  }
+  async function loadProducts() {
+    const { data, error } = await sb.from("products")
+      .select("id, name, description, price, images, sizes, colors, stock, is_active, category_id, created_at, categories(name_am)")
+      .order("created_at", { ascending: false });
+    if (error) { $("list").innerHTML = `<div class="empty err">${esc(error.message)}</div>`; return; }
+    products = data || [];
+    renderProducts(); renderHome();
+  }
+  async function loadOrders() {
+    const { data, error } = await sb.from("orders")
+      .select("id, status, payment_method, payment_status, subtotal, discount_percent, discount_amount, total, phone, address, note, created_at, profiles(full_name), order_items(product_name, quantity, unit_price, size, color)")
+      .order("created_at", { ascending: false });
+    if (error) { $("ordersList").innerHTML = `<div class="empty err">${esc(error.message)}</div>`; return; }
+    orders = data || [];
+    renderOrders(); renderHome();
+  }
+  async function loadCustom() {
+    const { data, error } = await sb.from("custom_orders").select("*").order("created_at", { ascending: false });
+    if (error) { $("customList").innerHTML = `<div class="empty err">${esc(error.message)}<br>(patch-3 SQL ን አስኪደሃል?)</div>`; return; }
+    customs = data || [];
+    renderCustom(); renderHome();
+  }
+  async function loadCustomers() {
+    const { data } = await sb.from("profiles").select("id, full_name, phone, role, created_at").order("created_at", { ascending: false });
+    customers = data || [];
+    renderCustomers();
+  }
+
+  // ---------- home ----------
+  function revenue() {
+    let sum = 0;
+    orders.forEach(o => { if (o.payment_status === "paid" && o.status !== "cancelled") sum += Number(o.total); });
+    customs.forEach(c => {
+      if (c.agreed_price == null || c.status === "cancelled") return;
+      const dep = Number(c.deposit_amount || 0), price = Number(c.agreed_price);
+      if (c.deposit_paid) sum += dep;
+      if (c.final_paid) sum += price - dep;
+    });
+    return sum;
+  }
+  function renderHome() {
+    const active = products.filter(p => p.is_active);
+    const unpaid = orders.filter(o => o.payment_status === "unpaid" && o.status !== "cancelled").length;
+    const awaitingPrice = customs.filter(c => c.status === "requested").length;
+    $("s-revenue").textContent = etb(revenue());
+    $("s-unpaid").textContent = unpaid;
+    $("s-custom").textContent = awaitingPrice;
+    $("s-orders").textContent = orders.length;
+    $("s-products").textContent = active.length;
+    $("s-stock").textContent = products.reduce((n, p) => n + (p.stock || 0), 0);
+    $("dotOrders").style.display = unpaid ? "inline-block" : "none"; $("dotOrders").textContent = unpaid;
+    $("dotCustom").style.display = awaitingPrice ? "inline-block" : "none"; $("dotCustom").textContent = awaitingPrice;
+    const low = active.filter(p => p.stock <= 2);
+    $("lowList").innerHTML = low.length
+      ? low.map(p => `<div class="card low"><div class="row-top"><strong>${esc(p.name)}</strong><span class="low-txt">${p.stock} ቁርጥራጭ ቀርቷል</span></div></div>`).join("")
+      : '<div class="empty">ሁሉም ምርቶች በቂ ክምችት አላቸው።</div>';
+  }
+
+  // ---------- image upload ----------
+  function compressImage(file, maxWidth = 1000, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("ፋይሉን ማንበብ አልተቻለም"));
+      reader.onload = ev => {
+        const img = new Image();
+        img.onerror = () => reject(new Error("ትክክለኛ ፎቶ አይደለም"));
+        img.onload = () => {
+          const k = Math.min(1, maxWidth / img.width);
+          const c = document.createElement("canvas");
+          c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          c.toBlob(b => b ? resolve(b) : reject(new Error("ፎቶውን ማሳነስ አልተቻለም")), "image/jpeg", quality);
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  async function uploadPhotos(files) {
+    const urls = [];
+    for (let i = 0; i < files.length; i++) {
+      const blob = await compressImage(files[i]);
+      const path = `${Date.now()}_${i}.jpg`;
+      const { error } = await sb.storage.from("product-images").upload(path, blob, { contentType: "image/jpeg", upsert: false });
+      if (error) throw error;
+      urls.push(sb.storage.from("product-images").getPublicUrl(path).data.publicUrl);
+    }
+    return urls;
+  }
+
+  // ---------- products ----------
+  $("photos").addEventListener("change", e => {
+    const box = $("preview"); box.innerHTML = "";
+    selectedFiles = [...e.target.files].slice(0, 5);
+    selectedFiles.forEach(f => { const im = document.createElement("img"); im.src = URL.createObjectURL(f); im.alt = ""; box.appendChild(im); });
+  });
+
+  $("addForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = $("saveProdBtn"), msg = $("prodMsg");
+    msg.className = ""; msg.textContent = "";
+    btn.disabled = true; btn.textContent = "በማስቀመጥ ላይ...";
+    try {
+      const images = await uploadPhotos(selectedFiles);
+      const { error } = await sb.from("products").insert({
+        name: $("name").value.trim(), category_id: Number($("cat").value), price: Number($("price").value),
+        sizes: csv("sizes"), colors: csv("colors"), stock: Number($("stock").value),
+        description: $("desc").value.trim() || null, images, is_active: true
       });
-    }
+      if (error) throw error;
+      e.target.reset(); $("preview").innerHTML = ""; selectedFiles = [];
+      msg.className = "ok"; msg.textContent = "ምርቱ ተመዝግቧል!";
+      await loadProducts();
+    } catch (err) {
+      msg.className = "err"; msg.textContent = "ስህተት፦ " + err.message;
+    } finally { btn.disabled = false; btn.textContent = "ምርቱን አስቀምጥ"; }
+  });
 
-    async function handleAuth() {
-      if (!currentUser) {
-        await signInGoogle();
-      } else {
-        await sb.auth.signOut();
-        window.location.reload();
-      }
-    }
-
-    async function checkAdminAccess() {
-      const { data: { user } } = await sb.auth.getUser();
-      currentUser = user;
-
-      if (!user) {
-        document.getElementById('authGate').style.display = 'block';
-        document.getElementById('dashboard').style.display = 'none';
-        document.getElementById('authBtn').textContent = 'Sign In';
-        return;
-      }
-
-      document.getElementById('authBtn').textContent = 'Sign Out';
-
-      const { data: profile, error } = await sb
-        .from('profiles')
-        .select('role')
-        .eq('id', user.id)
-        .single();
-
-      const role = String(profile?.role || '').toLowerCase();
-      if (error || (role !== 'admin' && role !== 'owner')) {
-        document.getElementById('authGate').style.display = 'block';
-        document.getElementById('dashboard').style.display = 'none';
-        document.getElementById('gateMsg').textContent =
-          `Access denied for ${user.email}. Set role to "owner" or "admin" in Supabase profiles table.`;
-        return;
-      }
-
-      document.getElementById('authGate').style.display = 'none';
-      document.getElementById('dashboard').style.display = 'block';
-      await Promise.all([loadCategories(), loadProducts(), loadOrders()]);
-    }
-
-    function switchTab(tab) {
-      const isOrders = tab === 'orders';
-      document.getElementById('ordersSection').style.display = isOrders ? 'block' : 'none';
-      document.getElementById('productsSection').style.display = isOrders ? 'none' : 'block';
-      document.getElementById('tabOrdersBtn').classList.toggle('active', isOrders);
-      document.getElementById('tabProductsBtn').classList.toggle('active', !isOrders);
-    }
-
-    async function loadCategories() {
-      const { data } = await sb.from('categories').select('id, name').order('name');
-      allCategories = data || [];
-      const sel = document.getElementById('pCategory');
-      sel.innerHTML = '<option value="">Select Category (Optional)</option>' +
-        allCategories.map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
-    }
-
-    async function loadOrders() {
-      const { data, error } = await sb
-        .from('orders')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        document.getElementById('ordersList').innerHTML = `<p style="color:var(--danger);">${esc(error.message)}</p>`;
-        return;
-      }
-
-      allOrders = data || [];
-      updateStats();
-      renderOrders();
-    }
-
-    function updateStats() {
-      const paidOrders = allOrders.filter(o => ['paid', 'delivered', 'deposit_paid'].includes(String(o.status || '').toLowerCase()));
-      const revenue = paidOrders.reduce((sum, o) => {
-        const amt = Number(o.total_amount || 0);
-        return sum + (String(o.status).toLowerCase() === 'deposit_paid' ? Math.round(amt * 0.5) : amt);
-      }, 0);
-
-      document.getElementById('statRevenue').textContent = `${revenue.toLocaleString()} ETB`;
-      document.getElementById('statOrders').textContent = allOrders.length;
-      document.getElementById('statProducts').textContent = allProducts.filter(p => p.is_active).length;
-    }
-
-    function renderOrders() {
-      const wrap = document.getElementById('ordersList');
-      const q = (document.getElementById('orderSearch').value || '').toLowerCase().trim();
-
-      const filtered = allOrders.filter(o =>
-        !q ||
-        (o.customer_name || '').toLowerCase().includes(q) ||
-        (o.customer_phone || '').toLowerCase().includes(q) ||
-        (o.status || '').toLowerCase().includes(q)
-      );
-
-      if (!filtered.length) {
-        wrap.innerHTML = '<p style="color:var(--muted);">No orders found.</p>';
-        return;
-      }
-
-      wrap.innerHTML = filtered.map(o => `
-        <div class="list-item">
-          <div class="row-top">
-            <div>
-              <strong>${esc(o.customer_name || 'Customer')}</strong> · ${esc(o.customer_phone || '-')}
-              <div style="font-size:0.84rem; color:var(--gold); font-weight:600;">
-                ${Number(o.total_amount || 0).toLocaleString()} ETB
-              </div>
-            </div>
-            <span class="badge">${esc(o.status || 'pending')}</span>
-          </div>
-          ${o.notes ? `<div class="pre-notes">${esc(o.notes)}</div>` : ''}
-          <div class="actions">
-            <select onchange="updateOrderStatus('${esc(o.id)}', this.value)" style="max-width:170px; padding:6px 10px; font-size:0.82rem;">
-              <option value="pending_deposit" ${o.status === 'pending_deposit' ? 'selected' : ''}>pending_deposit</option>
-              <option value="deposit_paid" ${o.status === 'deposit_paid' ? 'selected' : ''}>deposit_paid (50%)</option>
-              <option value="paid" ${o.status === 'paid' ? 'selected' : ''}>paid (100%)</option>
-              <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>delivered</option>
-              <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>cancelled</option>
-            </select>
-            <button type="button" class="pill-btn" onclick="copyOrder(${JSON.stringify(o.notes || o.customer_name || '').replace(/"/g, '&quot;')})">Copy for Telegram</button>
+  function renderProducts() {
+    const list = $("list");
+    if (!products.length) { list.innerHTML = '<div class="empty">እስካሁን ምርት አልጨመርክም። ከላይ ያለውን ቅጽ ተጠቀም።</div>'; return; }
+    list.innerHTML = products.map(p => {
+      const photo = p.images && p.images[0];
+      return `<div class="card ${p.stock <= 2 && p.is_active ? "low" : ""}">
+        <div class="prod">
+          ${photo ? `<img src="${esc(photo)}" alt="">` : '<div class="ph">ፎቶ</div>'}
+          <div>
+            <div class="row-top"><strong>${esc(p.name)}</strong><span class="badge ${p.is_active ? "on" : ""}">${p.is_active ? "ለሽያጭ ክፍት" : "ተደብቋል"}</span></div>
+            <div class="muted">${esc(p.categories?.name_am || "")}${p.sizes?.length ? " · " + esc(p.sizes.join("/")) : ""}${p.colors?.length ? " · " + esc(p.colors.join("/")) : ""}</div>
+            <div>${etb(p.price)} · <span class="${p.stock <= 2 ? "low-txt" : ""}">${p.stock} ቁርጥራጭ</span></div>
           </div>
         </div>
-      `).join('');
-    }
+        <div class="acts">
+          <button class="btn ghost" data-act="edit" data-id="${p.id}">አስተካክል</button>
+          <button class="btn ghost" data-act="stock" data-id="${p.id}">ክምችት</button>
+          <button class="btn ghost" data-act="toggle" data-id="${p.id}">${p.is_active ? "ደብቅ" : "አሳይ"}</button>
+          <button class="btn ghost del" data-act="del" data-id="${p.id}">ሰርዝ</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
 
-    async function updateOrderStatus(id, status) {
-      const { error } = await sb.from('orders').update({ status }).eq('id', id);
-      if (error) {
-        alert('Error updating status: ' + error.message);
-        return;
+  $("list").addEventListener("click", async e => {
+    const b = e.target.closest("button[data-act]"); if (!b) return;
+    const p = products.find(x => x.id === b.dataset.id); if (!p) return;
+    if (b.dataset.act === "edit") openEdit(p);
+    else if (b.dataset.act === "toggle") {
+      const { error } = await sb.from("products").update({ is_active: !p.is_active }).eq("id", p.id);
+      if (error) return alert(error.message);
+      await loadProducts();
+    } else if (b.dataset.act === "stock") {
+      const v = prompt(`ለ "${p.name}" አዲስ የክምችት ብዛት፦`, String(p.stock));
+      if (v !== null && v.trim() !== "" && !isNaN(v) && Number(v) >= 0) {
+        const { error } = await sb.from("products").update({ stock: Math.floor(Number(v)) }).eq("id", p.id);
+        if (error) return alert(error.message);
+        await loadProducts();
       }
+    } else if (b.dataset.act === "del") {
+      if (confirm(`"${p.name}" መሰረዝ እርግጠኛ ነህ?`)) {
+        const { error } = await sb.from("products").delete().eq("id", p.id);
+        if (error) return alert(error.message);
+        await loadProducts();
+      }
+    }
+  });
+
+  function openEdit(p) {
+    editingId = p.id;
+    $("eName").value = p.name; $("eCat").value = p.category_id || (categories[0] && categories[0].id);
+    $("ePrice").value = p.price; $("eSizes").value = (p.sizes || []).join(", "); $("eColors").value = (p.colors || []).join(", ");
+    $("eStock").value = p.stock; $("eDesc").value = p.description || ""; $("ePhotos").value = ""; $("eMsg").textContent = "";
+    $("editModal").showModal();
+  }
+  $("eCancel").addEventListener("click", () => $("editModal").close());
+  $("editForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = $("eSave"); btn.disabled = true; btn.textContent = "በማስቀመጥ ላይ...";
+    try {
+      const patch = {
+        name: $("eName").value.trim(), category_id: Number($("eCat").value), price: Number($("ePrice").value),
+        sizes: csv("eSizes"), colors: csv("eColors"), stock: Math.floor(Number($("eStock").value)),
+        description: $("eDesc").value.trim() || null
+      };
+      const files = [...$("ePhotos").files].slice(0, 5);
+      if (files.length) patch.images = await uploadPhotos(files);
+      const { error } = await sb.from("products").update(patch).eq("id", editingId);
+      if (error) throw error;
+      $("editModal").close();
+      await loadProducts();
+    } catch (err) {
+      $("eMsg").className = "err"; $("eMsg").textContent = "ስህተት፦ " + err.message;
+    } finally { btn.disabled = false; btn.textContent = "አስቀምጥ"; }
+  });
+
+  // ---------- orders ----------
+  function orderCopyText(o) {
+    const items = (o.order_items || []).map((it, i) => `${i + 1}. ${it.product_name} [${[it.color, it.size].filter(Boolean).join(" / ") || "-"}] x${it.quantity}`).join("\n");
+    return `ትዕዛዝ #${o.id.slice(0, 8)}\n${o.profiles?.full_name || ""}\nስልክ: ${o.phone}\nአድራሻ: ${o.address}\n${items}\nጠቅላላ: ${etb(o.total)}\nክፍያ: ${PAY_LABEL[o.payment_method] || ""} (${o.payment_status === "paid" ? "ተከፍሏል" : "አልተከፈለም"})`;
+  }
+
+  function renderOrders() {
+    const box = $("ordersList");
+    const f = $("orderFilter").value, q = $("orderSearch").value.trim().toLowerCase();
+    const list = orders.filter(o => {
+      if (f === "unpaid" && !(o.payment_status === "unpaid" && o.status !== "cancelled")) return false;
+      if (f !== "all" && f !== "unpaid" && o.status !== f) return false;
+      if (q && !((o.profiles?.full_name || "").toLowerCase().includes(q) || (o.phone || "").toLowerCase().includes(q))) return false;
+      return true;
+    });
+    if (!list.length) { box.innerHTML = '<div class="empty">ምንም ትዕዛዝ አልተገኘም።</div>'; return; }
+    box.innerHTML = list.map(o => `
+      <div class="card">
+        <div class="row-top">
+          <div><strong>#${esc(o.id.slice(0, 8))}</strong> · ${esc(o.profiles?.full_name || "ደንበኛ")}<br>
+            <span class="muted">${new Date(o.created_at).toLocaleString()}</span></div>
+          <div class="acts"><span class="badge ${o.payment_status === "paid" ? "paid" : "unpaid"}">${o.payment_status === "paid" ? "ተከፍሏል" : "አልተከፈለም"}</span>
+            <span class="badge">${esc(PAY_LABEL[o.payment_method] || "")}</span></div>
+        </div>
+        <div class="muted">📞 ${esc(o.phone)} · 📍 ${esc(o.address)}${o.note ? " · 📝 " + esc(o.note) : ""}</div>
+        <div class="items">${(o.order_items || []).map(it => `<div>• ${esc(it.product_name)} (${esc([it.color, it.size].filter(Boolean).join("/") || "-")}) × ${it.quantity} = ${etb(it.unit_price * it.quantity)}</div>`).join("")}</div>
+        <div class="muted">ንዑስ ድምር ${etb(o.subtotal)}${o.discount_percent > 0 ? ` · ቅናሽ ${o.discount_percent}% (−${etb(o.discount_amount)})` : ""} · <strong style="color:var(--ink);">ጠቅላላ ${etb(o.total)}</strong></div>
+        <div class="acts">
+          <select class="inp" style="max-width:170px;" data-ostatus="${o.id}">
+            ${Object.entries(ORDER_STATUS).map(([k, l]) => `<option value="${k}" ${o.status === k ? "selected" : ""}>${l}</option>`).join("")}
+          </select>
+          <button class="btn ghost ${o.payment_status === "paid" ? "" : "good"}" data-oact="pay" data-id="${o.id}">${o.payment_status === "paid" ? "ወደ 'አልተከፈለም' መልስ" : "ክፍያ ተቀብያለሁ"}</button>
+          <button class="btn ghost" data-oact="copy" data-id="${o.id}">ለቴሌግራም ቅዳ</button>
+        </div>
+      </div>`).join("");
+  }
+  $("orderFilter").addEventListener("change", renderOrders);
+  $("orderSearch").addEventListener("input", renderOrders);
+  $("refreshOrders").addEventListener("click", loadOrders);
+
+  $("ordersList").addEventListener("click", async e => {
+    const b = e.target.closest("button[data-oact]"); if (!b) return;
+    const o = orders.find(x => x.id === b.dataset.id); if (!o) return;
+    if (b.dataset.oact === "copy") {
+      try { await navigator.clipboard.writeText(orderCopyText(o)); alert("ተቀድቷል"); } catch { prompt("ይቅዱት፦", orderCopyText(o)); }
+    } else if (b.dataset.oact === "pay") {
+      const paid = o.payment_status !== "paid";
+      const patch = { payment_status: paid ? "paid" : "unpaid" };
+      if (paid && o.status === "pending") patch.status = "confirmed";
+      const { error } = await sb.from("orders").update(patch).eq("id", o.id);
+      if (error) return alert(error.message);
       await loadOrders();
     }
+  });
+  $("ordersList").addEventListener("change", async e => {
+    const sel = e.target.closest("select[data-ostatus]"); if (!sel) return;
+    const o = orders.find(x => x.id === sel.dataset.ostatus); if (!o) return;
+    if (sel.value === "cancelled" && !confirm("ትዕዛዙን መሰረዝ ክምችቱን ይመልሳል። እርግጠኛ ነህ?")) { sel.value = o.status; return; }
+    const { error } = await sb.from("orders").update({ status: sel.value }).eq("id", o.id);
+    if (error) { alert("ሁኔታውን ማዘመን አልተቻለም፦ " + error.message); sel.value = o.status; return; }
+    await Promise.all([loadOrders(), loadProducts()]);
+  });
 
-    function copyOrder(text) {
-      navigator.clipboard?.writeText(text);
-      alert('Order details copied!');
-    }
-
-    async function loadProducts() {
-      const { data, error } = await sb
-        .from('products')
-        .select('*, categories(name)')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        document.getElementById('productsList').innerHTML = `<p style="color:var(--danger);">${esc(error.message)}</p>`;
-        return;
-      }
-
-      allProducts = data || [];
-      updateStats();
-      renderProducts();
-    }
-
-    async function addProduct(e) {
-      e.preventDefault();
-      const name = document.getElementById('pName').value.trim();
-      const price = Number(document.getElementById('pPrice').value);
-      const category_id = document.getElementById('pCategory').value || null;
-      const image_url = document.getElementById('pImage').value.trim();
-      const description = document.getElementById('pDesc').value.trim();
-
-      const payload = { name, price, image_url, description, is_active: true };
-      if (category_id) payload.category_id = category_id;
-
-      const { error } = await sb.from('products').insert(payload);
-      if (error) {
-        alert('Error adding product: ' + error.message);
-        return;
-      }
-
-      document.getElementById('addProductForm').reset();
-      await loadProducts();
-      alert('Product added!');
-    }
-
-    function renderProducts() {
-      const wrap = document.getElementById('productsList');
-      if (!allProducts.length) {
-        wrap.innerHTML = '<p style="color:var(--muted);">No products yet.</p>';
-        return;
-      }
-
-      wrap.innerHTML = allProducts.map(p => `
-        <div class="list-item">
-          <div class="row-top">
-            <div style="display:flex; gap:10px; align-items:center;">
-              <img src="${esc(p.image_url || '')}" alt="" style="width:52px; height:64px; object-fit:cover; border-radius:8px; background:#120f0e;" />
-              <div>
-                <strong>${esc(p.name)}</strong>
-                <div style="font-size:0.84rem; color:var(--gold);">${Number(p.price || 0).toLocaleString()} ETB</div>
-                <div style="font-size:0.78rem; color:var(--muted);">${esc(p.categories?.name || 'Uncategorized')}</div>
-              </div>
-            </div>
-            <span class="badge">${p.is_active ? 'Active' : 'Hidden'}</span>
-          </div>
-          <div class="actions">
-            <button type="button" class="pill-btn" onclick="toggleProductActive('${esc(p.id)}', ${!p.is_active})">
-              ${p.is_active ? 'Hide' : 'Activate'}
-            </button>
-            <button type="button" class="pill-btn danger" onclick="deleteProduct('${esc(p.id)}')">Delete</button>
-          </div>
+  // ---------- custom orders ----------
+  function renderCustom() {
+    const box = $("customList");
+    if (!customs.length) { box.innerHTML = '<div class="empty">እስካሁን በትዕዛዝ ማሰራት ጥያቄ የለም።</div>'; return; }
+    box.innerHTML = customs.map(c => {
+      const hasPrice = c.agreed_price != null;
+      const price = Number(c.agreed_price || 0), dep = Number(c.deposit_amount || 0), bal = price - dep;
+      return `<div class="card">
+        <div class="row-top">
+          <div><strong>#${esc(c.id.slice(0, 8))}</strong> · ${esc(c.customer_name)}<br><span class="muted">${new Date(c.created_at).toLocaleString()} · 📞 ${esc(c.phone)}</span></div>
+          <span class="badge on">${esc(CU_STATUS[c.status] || c.status)}</span>
         </div>
-      `).join('');
-    }
+        <div>${esc(c.style)}</div>
+        <div class="meas"><span>ቁመት ${c.length_cm}</span><span>ደረት ${c.bust_cm}</span><span>ወገብ ${c.waist_cm}</span><span>እጀታ ${c.sleeve_cm}</span><span class="muted">(ሴ.ሜ)</span></div>
+        ${c.notes ? `<div class="muted">📝 ${esc(c.notes)}</div>` : ""}
+        <div class="price-row">
+          <input class="inp" type="number" min="0" step="1" placeholder="የተስማማችሁበት ዋጋ (ብር)" value="${hasPrice ? price : ""}" data-priceinput="${c.id}">
+          <button class="btn ghost" data-cact="price" data-id="${c.id}">ዋጋ አስቀምጥ</button>
+        </div>
+        ${hasPrice ? `<div>ቀብድ (50%)፦ <strong>${etb(dep)}</strong> <span class="badge ${c.deposit_paid ? "paid" : "unpaid"}">${c.deposit_paid ? "ተከፍሏል" : "አልተከፈለም"}</span>
+          · ቀሪ፦ <strong>${etb(bal)}</strong> <span class="badge ${c.final_paid ? "paid" : "unpaid"}">${c.final_paid ? "ተከፍሏል" : "አልተከፈለም"}</span></div>` : ""}
+        <div class="acts">
+          <select class="inp" style="max-width:190px;" data-cstatus="${c.id}">
+            ${Object.entries(CU_STATUS).map(([k, l]) => `<option value="${k}" ${c.status === k ? "selected" : ""}>${l}</option>`).join("")}
+          </select>
+          <button class="btn ghost ${c.deposit_paid ? "" : "good"}" data-cact="dep" data-id="${c.id}" ${hasPrice ? "" : "disabled"}>${c.deposit_paid ? "ቀብድ ተመለስ" : "ቀብድ ተቀብያለሁ"}</button>
+          <button class="btn ghost ${c.final_paid ? "" : "good"}" data-cact="fin" data-id="${c.id}" ${hasPrice && c.deposit_paid ? "" : "disabled"}>${c.final_paid ? "ቀሪ ተመለስ" : "ቀሪ ተቀብያለሁ"}</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
+  $("refreshCustom").addEventListener("click", loadCustom);
 
-    async function toggleProductActive(id, nextState) {
-      const { error } = await sb.from('products').update({ is_active: nextState }).eq('id', id);
-      if (error) {
-        alert('Error: ' + error.message);
-        return;
-      }
-      await loadProducts();
+  $("customList").addEventListener("click", async e => {
+    const b = e.target.closest("button[data-cact]"); if (!b) return;
+    const c = customs.find(x => x.id === b.dataset.id); if (!c) return;
+    let patch = null;
+    if (b.dataset.cact === "price") {
+      const v = document.querySelector(`[data-priceinput="${c.id}"]`).value;
+      if (v === "" || isNaN(v) || Number(v) < 0) return alert("ትክክለኛ ዋጋ ያስገቡ");
+      patch = { agreed_price: Math.round(Number(v)) };
+      if (c.status === "requested") patch.status = "price_set";
+    } else if (b.dataset.cact === "dep") {
+      patch = { deposit_paid: !c.deposit_paid };
+      if (patch.deposit_paid && ["requested", "price_set"].includes(c.status)) patch.status = "deposit_paid";
+    } else if (b.dataset.cact === "fin") {
+      patch = { final_paid: !c.final_paid };
+      if (patch.final_paid && c.status !== "cancelled") patch.status = "completed";
     }
+    if (!patch) return;
+    const { error } = await sb.from("custom_orders").update(patch).eq("id", c.id);
+    if (error) return alert(error.message);
+    await loadCustom();
+  });
+  $("customList").addEventListener("change", async e => {
+    const sel = e.target.closest("select[data-cstatus]"); if (!sel) return;
+    const { error } = await sb.from("custom_orders").update({ status: sel.value }).eq("id", sel.dataset.cstatus);
+    if (error) return alert(error.message);
+    await loadCustom();
+  });
 
-    async function deleteProduct(id) {
-      if (!confirm('Delete this product permanently?')) return;
-      const { error } = await sb.from('products').delete().eq('id', id);
-      if (error) {
-        alert('Error: ' + error.message);
-        return;
-      }
-      await loadProducts();
-    }
+  // ---------- customers ----------
+  function renderCustomers() {
+    const box = $("customersList");
+    if (!customers.length) { box.innerHTML = '<div class="empty">ደንበኞች ሲመዘገቡ እዚህ ይታያሉ።</div>'; return; }
+    box.innerHTML = customers.map(c => `<div class="card"><div class="row-top">
+      <div><strong>${esc(c.full_name || "—")}</strong><br><span class="muted">📞 ${esc(c.phone || "—")} · ${new Date(c.created_at).toLocaleDateString()}</span></div>
+      <span class="badge ${c.role === "owner" ? "on" : ""}">${c.role === "owner" ? "ባለቤት" : "ደንበኛ"}</span></div></div>`).join("");
+  }
 
-    checkAdminAccess();
-  </script>
+  checkOwner();
+</script>
 </body>
 </html>
