@@ -1,1094 +1,854 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MIRAN ABAYA | Modest Fashion</title>
-<meta name="description" content="Abayas, hijabs, jilbabs, dresses and accessories from MIRAN ABAYA.">
-<style>
-  :root {
-    --pearl: #FAF6F2;
-    --pearl-alt: #F1E8E0;
-    --card: #FFFFFF;
-    --espresso: #241916;
-    --espresso-soft: #3A2924;
-    --rose: #9E766B;
-    --rose-deep: #7C584E;
-    --rose-tint: rgba(158, 118, 107, .14);
-    --muted: #6C5D57;
-    --line: rgba(36, 25, 22, .15);
-    --danger: #9B2C2C;
-    --ok: #276749;
-    --shadow: 0 10px 28px rgba(36, 25, 22, .06);
-    color-scheme: light dark;
-  }
-  @media (prefers-color-scheme: dark) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIRAN ABAYA — Modest Fashion</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
     :root {
-      --pearl: #15100E;
-      --pearl-alt: #1E1714;
-      --card: #1B1512;
-      --espresso: #F6EFEA;
-      --espresso-soft: #E5D7CE;
-      --rose: #C89B8E;
-      --rose-deep: #D7AFA3;
-      --rose-tint: rgba(200, 155, 142, .16);
-      --muted: #B8A69E;
-      --line: rgba(246, 239, 234, .15);
-      --danger: #E5989B;
-      --ok: #74C69D;
-      --shadow: 0 12px 30px rgba(0, 0, 0, .35);
+      --bg: #120f0e;
+      --surface: #1b1614;
+      --surface-2: #241e1b;
+      --text: #f5efe6;
+      --muted: #c2b6a8;
+      --accent: #f5efe6;
+      --accent-dark: #151110;
+      --gold: #e5c384;
+      --border: rgba(245, 239, 230, 0.14);
+      --radius: 14px;
     }
-  }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--pearl);
-    color: var(--espresso);
-    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration: none; }
-  button, input, select, textarea { font: inherit; color: inherit; }
-  :focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
-  .sans { font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif; }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .announce {
-    background: var(--rose-tint);
-    color: var(--espresso);
-    border-bottom: 1px solid var(--line);
-    text-align: center;
-    padding: 8px 16px;
-    font-size: .84rem;
-    font-weight: 600;
-    letter-spacing: .03em;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
 
-  header.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    background: color-mix(in srgb, var(--pearl) 88%, transparent);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  header .wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    gap: 14px;
-  }
-  .brand {
-    font-size: 1.05rem;
-    letter-spacing: .28em;
-    color: var(--espresso);
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  nav { display: flex; gap: 22px; font-size: .92rem; }
-  nav a { padding: 4px 0; border-bottom: 1.5px solid transparent; transition: .2s; }
-  nav a:hover { border-color: var(--rose); color: var(--rose-deep); }
-  .head-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .pill-btn {
-    background: var(--card);
-    border: 1px solid var(--line);
-    color: var(--espresso);
-    cursor: pointer;
-    padding: 6px 13px;
-    border-radius: 999px;
-    font-size: .84rem;
-    transition: .2s;
-    white-space: nowrap;
-  }
-  .pill-btn:hover { border-color: var(--rose); background: var(--rose-tint); }
-  .pill-btn.solid-pill {
-    background: var(--espresso);
-    color: var(--pearl);
-    border-color: var(--espresso);
-  }
-  .pill-btn.solid-pill:hover {
-    background: var(--rose-deep);
-    border-color: var(--rose-deep);
-    color: #FFFFFF;
-  }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  .newin {
-    background: var(--pearl-alt);
-    border-bottom: 1px solid var(--line);
-    padding: 40px 0 68px;
-  }
-  .section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  h2 {
-    font-weight: 400;
-    font-size: clamp(1.75rem, 3.4vw, 2.35rem);
-    line-height: 1.16;
-    max-width: 24ch;
-  }
-  .lede { color: var(--muted); max-width: 56ch; margin-top: 8px; font-size: .96rem; }
+    button, input, select, textarea {
+      font-family: inherit;
+    }
 
-  .shop-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 22px;
-    margin-bottom: 24px;
-  }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip {
-    border: 1px solid var(--line);
-    padding: 7px 15px;
-    border-radius: 999px;
-    background: var(--card);
-    cursor: pointer;
-    font-size: .86rem;
-    transition: .2s;
-  }
-  .chip.on, .chip:hover {
-    border-color: var(--rose);
-    background: var(--espresso);
-    color: var(--pearl);
-  }
-  .search-box {
-    border: 1px solid var(--line);
-    background: var(--card);
-    padding: 9px 16px;
-    border-radius: 999px;
-    min-width: 220px;
-    font-size: .9rem;
-  }
+    .promo-bar {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 14px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
 
-  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 18px; }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform .25s, border-color .25s;
-  }
-  .card:hover { transform: translateY(-3px); border-color: var(--rose); }
-  .card-img { aspect-ratio: 3/4; background: var(--pearl); overflow: hidden; position: relative; cursor: pointer; }
-  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s; }
-  .card:hover .card-img img { transform: scale(1.04); }
-  .card-img .no-img {
-    width: 100%; height: 100%; display: grid; place-items: center; color: var(--muted); font-size: .85rem;
-  }
-  .stock-tag {
-    position: absolute; top: 10px; left: 10px;
-    background: var(--espresso); color: var(--pearl);
-    font-size: .72rem; padding: 3px 10px; border-radius: 999px;
-  }
-  .wish-btn {
-    position: absolute; top: 10px; right: 10px;
-    width: 34px; height: 34px; border-radius: 999px;
-    border: 1px solid var(--line); background: var(--card);
-    color: var(--espresso); cursor: pointer; display: grid; place-items: center;
-    font-size: 1rem; box-shadow: var(--shadow); transition: .2s;
-  }
-  .wish-btn.on { background: var(--rose-deep); color: #FFFFFF; border-color: var(--rose-deep); }
-  .card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  .card-cat { font-size: .74rem; color: var(--rose-deep); font-weight: 600; letter-spacing: .04em; }
-  .card-title { font-size: 1rem; font-weight: 600; cursor: pointer; }
-  .card-price { font-size: 1.04rem; font-weight: 700; margin-top: auto; padding-top: 6px; color: var(--espresso); }
-  .card-actions { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 10px; }
-  .card-btn {
-    width: 100%; padding: 9px 12px;
-    border: 1px solid var(--line); background: var(--pearl);
-    border-radius: 999px; cursor: pointer; font-size: .84rem; font-weight: 500; transition: .2s;
-  }
-  .card-btn:hover:not(:disabled) {
-    background: var(--espresso); color: var(--pearl); border-color: var(--espresso);
-  }
-  .card-btn:disabled { opacity: .5; cursor: not-allowed; }
-  .share-mini {
-    border: 1px solid var(--line); background: var(--card); border-radius: 999px;
-    padding: 0 12px; cursor: pointer; font-size: .8rem; transition: .2s;
-  }
-  .share-mini:hover { border-color: var(--rose); background: var(--rose-tint); }
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(18, 15, 14, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
 
-  .empty {
-    margin-top: 20px;
-    background: var(--card);
-    border: 1px dashed var(--rose);
-    border-radius: 10px;
-    padding: 40px 24px;
-    display: grid; justify-items: center; text-align: center; gap: 10px;
-  }
-  .empty h3 { font-weight: 400; font-size: 1.25rem; }
-  .empty p { color: var(--muted); max-width: 48ch; font-size: .95rem; }
+    header.site-header .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
 
-  section.info-sec { padding: 64px 0; background: var(--pearl); border-bottom: 1px solid var(--line); }
-  .policy-grid {
-    margin-top: 24px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .policy-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: var(--shadow);
-  }
-  .policy-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--rose-deep); }
-  .policy-card p { font-size: .9rem; color: var(--muted); }
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
 
-  .about { background: var(--pearl-alt); padding: 64px 0; }
-  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-  .about p { color: var(--muted); }
-  .about p + p { margin-top: 12px; }
-  .tg-btn { margin-top: 20px; }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 11px 22px;
-    border-radius: 999px;
-    font-size: .9rem;
-    cursor: pointer;
-    border: 1px solid var(--espresso);
-    background: none;
-    transition: .2s;
-  }
-  .btn.solid {
-    background: var(--espresso);
-    color: var(--pearl);
-    font-weight: 500;
-  }
-  .btn.solid:hover {
-    background: var(--rose-deep);
-    border-color: var(--rose-deep);
-    color: #FFFFFF;
-  }
-  .btn.line {
-    border-color: var(--line);
-    background: var(--card);
-    color: var(--espresso);
-  }
-  .btn.line:hover { border-color: var(--rose); background: var(--rose-tint); }
-  .btn:disabled { opacity: .5; cursor: not-allowed; }
+    .head-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
 
-  footer {
-    background: var(--pearl);
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    padding: 46px 0 36px;
-  }
-  footer .wrap { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-  footer .brand { display: block; margin-bottom: 10px; }
-  footer ul { list-style: none; display: grid; gap: 6px; font-size: .94rem; }
-  footer small { display: block; margin-top: 28px; color: var(--muted); opacity: .8; }
-  footer a.tg { color: var(--rose-deep); font-weight: 600; border-bottom: 1px solid var(--rose); }
+    .pill-btn {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
 
-  .scrim {
-    position: fixed; inset: 0; background: rgba(36, 25, 22, .45); z-index: 60;
-    opacity: 0; pointer-events: none; transition: opacity .25s;
-  }
-  .scrim.on { opacity: 1; pointer-events: auto; }
-  .drawer {
-    position: fixed; top: 0; bottom: 0; right: 0; width: min(440px, 100%);
-    background: var(--pearl); z-index: 70; display: flex; flex-direction: column;
-    transform: translateX(105%); transition: transform .3s; border-left: 1px solid var(--line);
-  }
-  .drawer.on { transform: none; }
-  .dh {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 22px; border-bottom: 1px solid var(--line); background: var(--card);
-  }
-  .dh h2 { font-size: 1.3rem; }
-  .close-x { background: none; border: 0; font-size: 1.4rem; cursor: pointer; padding: 4px 8px; }
-  .db { flex: 1; overflow-y: auto; padding: 14px 22px; }
-  .df { border-top: 1px solid var(--line); padding: 18px 22px; background: var(--card); max-height: 64vh; overflow-y: auto; }
-  .cart-item {
-    display: grid; grid-template-columns: 64px 1fr auto; gap: 12px;
-    padding: 12px 0; border-bottom: 1px solid var(--line); align-items: start;
-  }
-  .cart-item img { width: 64px; height: 84px; object-fit: cover; border: 1px solid var(--line); border-radius: 4px; }
-  .cart-item small { color: var(--muted); display: block; font-size: .82rem; }
-  .qty-ctrl { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; margin-top: 6px; background: var(--card); }
-  .qty-ctrl button { width: 30px; height: 28px; background: none; border: 0; cursor: pointer; }
-  .qty-ctrl span { min-width: 26px; text-align: center; font-size: .88rem; }
-  .rm-btn { background: none; border: 0; color: var(--danger); font-size: .78rem; cursor: pointer; text-decoration: underline; margin-top: 6px; }
-  .tot-row { display: flex; justify-content: space-between; font-size: .9rem; margin-bottom: 5px; }
-  .tot-row.disc { color: var(--ok); font-weight: 600; }
-  .tot-row.grand { font-size: 1.08rem; font-weight: 700; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; margin-bottom: 12px; }
-  .field {
-    width: 100%; border: 1px solid var(--line); background: var(--pearl);
-    padding: 10px 12px; border-radius: 8px; font-size: .9rem; margin-bottom: 8px;
-  }
-  .field option { color: #241916; background: #FAF6F2; }
-  .pay-note {
-    border: 1px solid var(--line); background: var(--rose-tint);
-    padding: 9px 12px; border-radius: 8px; font-size: .82rem; color: var(--muted); margin-bottom: 10px;
-  }
-  .pay-note strong { color: var(--espresso); }
+    .pill-btn:hover {
+      border-color: var(--text);
+    }
 
-  dialog {
-    margin: auto; border: 1px solid var(--line); background: var(--pearl); color: var(--espresso);
-    width: min(820px, 94vw); max-height: 92vh; overflow-y: auto; border-radius: 12px; padding: 0;
-    box-shadow: var(--shadow);
-  }
-  dialog::backdrop { background: rgba(36, 25, 22, .55); }
-  .pd-grid { display: grid; grid-template-columns: 1fr 1fr; }
-  .pd-gallery { background: var(--pearl-alt); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .pd-main-img { aspect-ratio: 3/4; width: 100%; object-fit: cover; border: 1px solid var(--line); border-radius: 8px; }
-  .pd-thumbs { display: flex; gap: 8px; overflow-x: auto; }
-  .pd-thumbs img { width: 56px; height: 72px; object-fit: cover; cursor: pointer; border: 2px solid transparent; border-radius: 4px; opacity: .75; }
-  .pd-thumbs img.on { border-color: var(--rose); opacity: 1; }
-  .pd-info { padding: 26px; position: relative; display: flex; flex-direction: column; gap: 12px; }
-  .pd-info .close-x { position: absolute; top: 12px; right: 12px; }
-  .opt-label { font-size: .8rem; color: var(--muted); margin-bottom: 6px; display: block; font-weight: 600; }
-  .opts { display: flex; flex-wrap: wrap; gap: 8px; }
-  .opt-btn {
-    border: 1px solid var(--line); padding: 7px 14px; background: var(--card);
-    border-radius: 999px; cursor: pointer; font-size: .85rem; transition: .2s;
-  }
-  .opt-btn.on { background: var(--espresso); color: var(--pearl); border-color: var(--espresso); }
-  .err-msg { color: var(--danger); font-size: .86rem; min-height: 20px; }
+    .pill-btn.primary {
+      background: var(--accent);
+      color: var(--accent-dark);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
 
-  .acct-box { padding: 26px; position: relative; max-width: 560px; margin: 0 auto; }
-  .acct-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
-  .acct-tabs button { background: none; border: 0; padding: 8px 4px; cursor: pointer; border-bottom: 2px solid transparent; font-size: .92rem; }
-  .acct-tabs button.on { border-bottom-color: var(--rose); font-weight: 600; }
-  .ord-card { border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 14px; margin-bottom: 12px; font-size: .88rem; }
-  .ord-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 8px; }
-  .status-pill { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--rose); color: var(--rose-deep); text-transform: uppercase; }
+    main.container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 64px;
+    }
 
-  .cartbar {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: none;
-    background: var(--espresso); color: var(--pearl); border-top: 1px solid var(--rose);
-    padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); align-items: center; justify-content: space-between; gap: 12px;
-  }
-  .cartbar.show { display: flex; }
-  .cartbar b { color: var(--rose); font-weight: 600; }
+    .hero-head {
+      margin-bottom: 20px;
+    }
 
-  .toasts { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 95; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: max-content; max-width: 92vw; }
-  .toast { background: var(--espresso); color: var(--pearl); padding: 11px 20px; border-radius: 999px; border-left: 3px solid var(--rose); font-size: .9rem; box-shadow: var(--shadow); }
-  .toast.bad { border-left-color: var(--danger); }
+    .hero-head h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
 
-  @media (max-width: 900px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-    .policy-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 800px) {
-    nav { display: none; }
-    .about .wrap { grid-template-columns: 1fr; gap: 20px; }
-    .pd-grid { grid-template-columns: 1fr; }
-    section { padding: 52px 0; }
-    body { padding-bottom: 68px; }
-    .toasts { bottom: 82px; }
-    .cartbar.show { display: flex; }
-  }
-  @media (min-width: 801px) {
-    .cartbar, .cartbar.show { display: none; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .card { transition: none; }
-  }
+    .hero-head p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      max-width: 620px;
+    }
 
-  html[lang="am"] body, html[lang="am"] .sans {
-    font-family: "Noto Serif Ethiopic", "Noto Sans Ethiopic", "Nyala", "Abyssinica SIL", serif;
-    line-height: 1.8;
-  }
-  html[lang="am"] .brand { letter-spacing: .18em; }
-</style>
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 22px;
+    }
+
+    .btn-light {
+      background: var(--accent);
+      color: var(--accent-dark);
+      border: none;
+      border-radius: 999px;
+      padding: 11px 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 11px 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .filters-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cat-btn {
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+
+    .cat-btn.active {
+      background: var(--accent);
+      color: var(--accent-dark);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 420px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      background: var(--surface-2);
+    }
+
+    .card-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .card-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .card-price {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-top: auto;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .card-actions button {
+      flex: 1;
+      padding: 9px 10px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .card-actions button.add-btn {
+      background: var(--accent);
+      color: var(--accent-dark);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Drawer & Modals */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 460px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .close-x {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .notice-box {
+      background: rgba(229, 195, 132, 0.1);
+      border: 1px solid rgba(229, 195, 132, 0.3);
+      color: var(--gold);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      margin-bottom: 12px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+
+    .status-msg {
+      text-align: center;
+      color: var(--muted);
+      padding: 32px 12px;
+      grid-column: 1 / -1;
+    }
+
+    /* Mobile UI Fixes */
+    @media (max-width: 640px) {
+      header.site-header .wrap {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px 14px;
+        gap: 10px;
+      }
+
+      .brand {
+        font-size: 1rem;
+        letter-spacing: 0.22em;
+      }
+
+      .head-right {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+
+      .pill-btn {
+        padding: 7px 4px;
+        font-size: 0.74rem;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .hero-head h1 {
+        font-size: 1.55rem;
+      }
+
+      .cats {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .cats::-webkit-scrollbar {
+        display: none;
+      }
+
+      .cat-btn {
+        flex: 0 0 auto;
+      }
+
+      .search-box {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .card img {
+        height: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<div class="announce sans" data-t="announce">Wholesale Discounts: 3–4 pcs (10% OFF) · 5–9 pcs (15% OFF) · 10+ pcs (20% OFF)</div>
-
-<header class="site-header sans" id="top">
-  <div class="wrap">
-    <a class="brand" href="#new" aria-label="MIRAN ABAYA">MIRAN ABAYA</a>
-    <nav aria-label="Main">
-      <a href="#new" data-t="nav_new">Products</a>
-      <a href="#policies" data-t="nav_policies">Policies</a>
-      <a href="#about" data-t="nav_about">About</a>
-      <a href="#contact" data-t="nav_contact">Contact</a>
-    </nav>
-    <div class="head-right">
-      <button class="pill-btn" id="langBtn" type="button">አማርኛ</button>
-      <button class="pill-btn" id="wishFilterBtn" type="button"><span data-t="wishlist">Saved</span> (<span id="wishCount">0</span>)</button>
-      <button class="pill-btn" id="acctBtn" type="button" data-t="account">Account</button>
-      <button class="pill-btn solid-pill" id="cartBtn" type="button"><span data-t="cart">Cart</span> (<span id="cartCount">0</span>)</button>
-    </div>
+  <div class="promo-bar" id="promoBar">
+    Wholesale Discounts: 3–4 pcs (10% OFF) · 5–9 pcs (15% OFF) · 10+ pcs (20% OFF)
   </div>
-</header>
 
-<main>
-  <section class="newin" id="new">
+  <header class="site-header">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2 data-t="h_new">Products</h2>
-          <p class="lede" data-t="new_lede">Abayas, hijabs, jilbabs and dresses chosen directly by MIRAN ABAYA.</p>
+      <a href="#" class="brand">MIRAN ABAYA</a>
+      <div class="head-right">
+        <button type="button" class="pill-btn" id="langBtn" onclick="toggleLang()">አማርኛ</button>
+        <button type="button" class="pill-btn" id="savedBtn" onclick="openSavedModal()">Saved (0)</button>
+        <button type="button" class="pill-btn" id="accountBtn" onclick="handleAccountClick()">Account</button>
+        <button type="button" class="pill-btn primary" id="cartBtn" onclick="openCartModal()">Cart (0)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-head">
+      <h1 id="pageTitle">Products</h1>
+      <p id="pageSubtitle">Abayas and dresses chosen directly by MIRAN ABAYA.</p>
+
+      <div class="action-row">
+        <a id="tgOrderLink" href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener" class="btn-light">
+          Order on Telegram
+        </a>
+        <button type="button" class="btn-outline" id="customOrderBtn" onclick="openCustomModal()">
+          በትዕዛዝ አሰራ (50% ቀብድ)
+        </button>
+      </div>
+    </section>
+
+    <section class="filters-bar">
+      <div class="cats" id="categoryList">
+        <button type="button" class="cat-btn active" data-cat="all" onclick="selectCategory('all', this)">All</button>
+        <button type="button" class="cat-btn" data-cat="Abayas" onclick="selectCategory('Abayas', this)">Abayas</button>
+        <button type="button" class="cat-btn" data-cat="Dresses" onclick="selectCategory('Dresses', this)">Dresses</button>
+        <button type="button" class="cat-btn" data-cat="Accessories" onclick="selectCategory('Accessories', this)">Accessories</button>
+      </div>
+      <input type="search" class="search-box" id="searchInput" placeholder="Search products..." oninput="renderProducts()" />
+    </section>
+
+    <section class="grid" id="productsGrid">
+      <div class="status-msg">Loading products...</div>
+    </section>
+  </main>
+
+  <!-- Custom Order Modal (50% Deposit + Measurements) -->
+  <div class="overlay" id="customOrderModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>በትዕዛዝ ማሰራት (Custom Order)</h3>
+        <button type="button" class="close-x" onclick="closeModal('customOrderModal')">&times;</button>
+      </div>
+      <div class="notice-box">
+        በልኬት ለሚሰሩ ትዕዛዞች <strong>50% ቀብድ</strong> አስቀድሞ መከፈል አለበት፤ ቀሪው 50% ሲጠናቀቅ ይከፈላል።
+      </div>
+      <form class="form-grid" id="customOrderForm" onsubmit="submitCustomOrder(event)">
+        <input type="text" id="coName" placeholder="ሙሉ ስም (Full Name)" required />
+        <input type="tel" id="coPhone" placeholder="ስልክ ቁጥር (09...)" required />
+        <input type="text" id="coStyle" placeholder="የአባያ / ቀሚስ ዲዛይን ወይም ኮድ" required />
+
+        <div class="two-col">
+          <input type="number" id="coLength" placeholder="ቁመት (Length cm)" required />
+          <input type="number" id="coBust" placeholder="ደረት (Bust cm)" required />
+          <input type="number" id="coWaist" placeholder="ወገብ (Waist cm)" required />
+          <input type="number" id="coSleeve" placeholder="እጀታ (Sleeve cm)" required />
         </div>
-        <a class="btn solid sans" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
-      </div>
 
-      <div class="shop-bar sans">
-        <div class="chips" id="catChips">
-          <button class="chip on" data-slug="all" data-t="all">All</button>
-          <button class="chip" data-slug="abayas" data-t="c1">Abayas</button>
-          <button class="chip" data-slug="hijabs" data-t="c2">Hijabs</button>
-          <button class="chip" data-slug="jilbabs" data-t="c3">Jilbabs</button>
-          <button class="chip" data-slug="dresses" data-t="c4">Dresses</button>
-          <button class="chip" data-slug="accessories" data-t="c5">Accessories</button>
+        <input type="number" id="coPrice" oninput="calcDeposit()" placeholder="የተስማሙበት ጠቅላላ ዋጋ (ETB)" required />
+        <div id="coDepositDisplay" style="font-size:0.86rem; color:var(--gold); font-weight:600;">
+          የሚከፈል 50% ቀብድ፦ 0 ETB
         </div>
-        <input type="search" id="searchInput" class="search-box" placeholder="Search products...">
-      </div>
 
-      <div id="catalogRoot">
-        <div class="empty"><p class="sans">Loading products...</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="info-sec" id="policies">
-    <div class="wrap">
-      <h2 data-t="h_policies">Delivery, Exchanges &amp; Care</h2>
-      <p class="lede" data-t="policies_lede">Clear details for every order from MIRAN ABAYA.</p>
-      <div class="policy-grid sans">
-        <article class="policy-card">
-          <h3 data-t="p1_title">Delivery</h3>
-          <p data-t="p1_body">Addis Ababa delivery is 100 ETB (typically 1–2 days). Regional delivery is 350 ETB (typically 2–4 days).</p>
-        </article>
-        <article class="policy-card">
-          <h3 data-t="p2_title">Size &amp; Exchange</h3>
-          <p data-t="p2_body">Check sizes 52–60 before ordering. Unused items with tags can be exchanged within 48 hours of receipt.</p>
-        </article>
-        <article class="policy-card">
-          <h3 data-t="p3_title">Fabric Care</h3>
-          <p data-t="p3_body">Wash gently in cold water or hand wash with mild soap. Steam or iron on low heat inside out.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="about" id="about">
-    <div class="wrap">
-      <h2 data-t="h_about">One shop, one owner, one standard.</h2>
-      <div>
-        <p data-t="about1">MIRAN ABAYA is a modest fashion shop. Only the owner lists and sells products here, so every piece in the shop has been chosen by the same person.</p>
-        <p data-t="about2">Pick your size and color, place your order, pay via CBE or Telebirr, and confirm on Telegram.</p>
-        <a class="btn solid sans tg-btn" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="sans" id="contact">
-  <div class="wrap">
-    <div>
-      <a class="brand" href="#new">MIRAN ABAYA</a>
-      <p data-t="f_tag">Modest fashion.</p>
-    </div>
-    <ul>
-      <li><a href="#new" data-cat-jump="abayas" data-t="c1">Abayas</a></li>
-      <li><a href="#new" data-cat-jump="hijabs" data-t="c2">Hijabs</a></li>
-      <li><a href="#new" data-cat-jump="jilbabs" data-t="c3">Jilbabs</a></li>
-      <li><a href="#new" data-cat-jump="dresses" data-t="c4">Dresses</a></li>
-    </ul>
-    <ul>
-      <li>Telegram: <a class="tg" href="https://t.me/mame15" target="_blank" rel="noopener">@mame15</a></li>
-      <li><a href="admin.html" style="color:var(--rose-deep); font-weight:600; font-size:.86rem;" data-t="owner_portal">Owner Dashboard</a></li>
-    </ul>
-  </div>
-  <div class="wrap"><small>&copy; 2026 MIRAN ABAYA</small></div>
-</footer>
-
-<div class="cartbar sans" id="cartBar">
-  <span id="cartBarText"></span>
-  <button class="btn solid" id="cartBarBtn" type="button" style="padding:8px 16px;background:var(--rose);border-color:var(--rose);color:#fff;">Cart</button>
-</div>
-
-<div class="scrim" id="scrim"></div>
-<aside class="drawer sans" id="cartDrawer" aria-label="Shopping Cart">
-  <div class="dh">
-    <h2 data-t="cart">Cart</h2>
-    <button class="close-x" id="closeCart" aria-label="Close">&times;</button>
-  </div>
-  <div class="db" id="cartItems"></div>
-  <div class="df" id="cartFooter"></div>
-</aside>
-
-<dialog id="pdModal" class="sans"></dialog>
-
-<dialog id="acctModal" class="sans">
-  <div class="acct-box">
-    <button class="close-x" id="closeAcct" style="position:absolute;top:12px;right:12px;">&times;</button>
-    <div id="acctGuest">
-      <button type="button" class="btn line" id="googleSignInBtn" style="width:100%;margin-bottom:14px;font-weight:600;">
-        <span data-t="google_signin">Continue with Google</span>
-      </button>
-      <div class="acct-tabs">
-        <button id="tabSignIn" class="on" data-t="signin">Sign In</button>
-        <button id="tabSignUp" data-t="signup">Create Account</button>
-      </div>
-      <form id="authForm">
-        <input id="authName" class="field" placeholder="Full Name" style="display:none;">
-        <input id="authPhone" class="field" placeholder="Phone Number" style="display:none;">
-        <input id="authEmail" class="field" type="email" placeholder="Email" required>
-        <input id="authPass" class="field" type="password" placeholder="Password (min 6 chars)" minlength="6" required>
-        <div class="err-msg" id="authErr"></div>
-        <button type="submit" class="btn solid" style="width:100%;margin-top:8px;" id="authSubmitBtn">Sign In</button>
+        <textarea id="coNotes" rows="2" placeholder="ቀለም፣ ጨርቅ፣ አድራሻ ወይም ማስታወሻ..."></textarea>
+        <button type="submit" class="btn-light">ትዕዛዝ አስቀምጥ &amp; በቴሌግራም ላክ</button>
       </form>
     </div>
-    <div id="acctLoggedIn" style="display:none;">
-      <h2 style="font-size:1.35rem;margin-bottom:4px;" id="userGreeting">Account</h2>
-      <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px;" id="userEmailLabel"></p>
-      <div style="display:flex;gap:10px;margin-bottom:20px;">
-        <button class="btn line" id="refreshOrdersBtn" style="padding:8px 16px;font-size:.84rem;">Refresh Orders</button>
-        <button class="btn line" id="signOutBtn" style="padding:8px 16px;font-size:.84rem;border-color:var(--danger);color:var(--danger);">Sign Out</button>
+  </div>
+
+  <!-- Cart Modal -->
+  <div class="overlay" id="cartModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>Shopping Cart</h3>
+        <button type="button" class="close-x" onclick="closeModal('cartModal')">&times;</button>
       </div>
-      <h3 style="font-size:1.05rem;margin-bottom:10px;" data-t="my_orders">My Orders</h3>
-      <div id="myOrdersList"></div>
+      <div id="cartItems"></div>
+      <div style="margin-top:14px; display:flex; justify-content:space-between; font-weight:700;">
+        <span>Total:</span>
+        <span id="cartTotal">0 ETB</span>
+      </div>
+      <button type="button" class="btn-light" style="width:100%; margin-top:14px;" onclick="checkoutTelegram()">
+        Proceed via Telegram
+      </button>
     </div>
   </div>
-</dialog>
 
-<div class="toasts sans" id="toasts" aria-live="polite"></div>
+  <!-- Saved Modal -->
+  <div class="overlay" id="savedModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>Saved Items</h3>
+        <button type="button" class="close-x" onclick="closeModal('savedModal')">&times;</button>
+      </div>
+      <div id="savedItems"></div>
+    </div>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const SUPABASE_URL = "https://htwwaxpvmxlvxermsver.supabase.co";
-  const SUPABASE_ANON_KEY = "sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e";
-  const TG_USER = "mame15";
-  const CBE_ACCOUNT = "1000704450568";
-  const MOBILE_MONEY_PHONE = "0993001097";
-  const DELIVERY_ADDIS = 100;
-  const DELIVERY_REGIONAL = 350;
+  <script>
+    // 1. Configure your Supabase & Telegram details
+    const SUPABASE_URL = 'https://htwwaxpvmxlvxermsver.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    const TELEGRAM_USERNAME = 'YOUR_TELEGRAM_USERNAME'; // without @
 
-  const esc = s => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
-  const fmtETB = n => `${Math.round(Number(n) || 0).toLocaleString()} ETB`;
+    const sb = (SUPABASE_URL.startsWith('http') && !SUPABASE_ANON_KEY.startsWith('YOUR_'))
+      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+      : null;
 
-  function toast(msg, bad = false) {
-    const el = document.createElement("div");
-    el.className = "toast" + (bad ? " bad" : "");
-    el.textContent = msg;
-    document.getElementById("toasts").appendChild(el);
-    setTimeout(() => el.remove(), 3500);
-  }
+    let products = [];
+    let selectedCategory = 'all';
+    let cart = JSON.parse(localStorage.getItem('miran_cart') || '[]');
+    let saved = JSON.parse(localStorage.getItem('miran_saved') || '[]');
+    let currentUser = null;
+    let isAmharic = false;
 
-  const am = {
-    announce: "የጅምላ ቅናሽ፦ 3–4 ቁርጥራጭ (10% ቅናሽ) · 5–9 ቁርጥራጭ (15% ቅናሽ) · 10+ ቁርጥራጭ (20% ቅናሽ)",
-    nav_new: "ምርቶች", nav_policies: "መመሪያዎች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
-    cart: "ጋሪ", account: "አካውንት", wishlist: "ተወዳጅ", all: "ሁሉም",
-    h_new: "ምርቶች",
-    new_lede: "በMIRAN ABAYA በቀጥታ የተመረጡ አባያ፣ ሂጃብ፣ ጅልባብ እና ቀሚሶች።",
-    cta2: "በቴሌግራም ይዘዙ",
-    c1: "አባያ", c2: "ሂጃብ", c3: "ጅልባብ", c4: "ቀሚሶች", c5: "ማስዋቢያዎች",
-    h_policies: "የማድረሻ፣ የመለወጥ እና የጨርቅ እንክብካቤ መመሪያ",
-    policies_lede: "ለእያንዳንዱ ትዕዛዝ ግልጽ መረጃ።",
-    p1_title: "ማድረስ (Delivery)",
-    p1_body: "በአዲስ አበባ ውስጥ 100 ብር (በ1–2 ቀን)፤ ከአዲስ አበባ ውጭ (ክልል) 350 ብር (በ2–4 ቀን) ይደርሳል።",
-    p2_title: "መጠን እና መለወጥ",
-    p2_body: "ከመዘዝዎ በፊት ከ52–60 ያሉትን መጠኖች ይመልከቱ። ያልተለበሰ ምርት በ48 ሰዓት ውስጥ መቀየር ይቻላል።",
-    p3_title: "የጨርቅ እንክብካቤ",
-    p3_body: "በቀዝቃዛ ውሃ ወይም በእጅ በቀስታ ይታጠብ፤ ሲተኮስ ከውስጥ በኩል በዝቅተኛ ሙቀት ይሁን።",
-    h_about: "አንድ ሱቅ፣ አንድ ባለቤት፣ አንድ ደረጃ።",
-    about1: "MIRAN ABAYA የልከኛ አልባሳት ሱቅ ነው። እዚህ ምርት የሚዘረዝርና የሚሸጥ ባለቤቱ ብቻ ነው፤ ስለዚህ በሱቁ ውስጥ ያለው ሁሉ በአንድ ሰው የተመረጠ ነው።",
-    about2: "መጠንና ቀለም ይምረጡ፣ ትዕዛዝዎን ያስገቡ፣ በንግድ ባንክ ወይም በቴሌብር ይክፈሉና በቴሌግራም ያረጋግጡ።",
-    f_tag: "ልከኛ አልባሳት።", owner_portal: "የባለቤት ዳሽቦርድ",
-    google_signin: "በ Google ይግቡ", signin: "ግባ", signup: "አካውንት ክፈት", my_orders: "የእኔ ትዕዛዞች"
-  };
+    const BLOCKED_CATS = ['hijab', 'hijabs', 'jilbab', 'jilbabs'];
 
-  let lang = "en";
-  const tEls = document.querySelectorAll("[data-t]");
-  tEls.forEach(e => e.dataset.en = e.innerHTML);
-
-  let allProducts = [];
-  let activeSlug = "all";
-  let wishOnly = false;
-  let searchTerm = "";
-  let currentUser = null;
-  let authMode = "signin";
-  let deliveryZone = "addis";
-  let paymentMethod = "CBE";
-  let cart = JSON.parse(localStorage.getItem("miran_sb_cart") || "[]");
-  let wishlist = JSON.parse(localStorage.getItem("miran_wish") || "[]");
-
-  function saveWish() {
-    localStorage.setItem("miran_wish", JSON.stringify(wishlist));
-    document.getElementById("wishCount").textContent = wishlist.length;
-  }
-
-  function toggleWish(id) {
-    const idx = wishlist.indexOf(id);
-    if (idx >= 0) {
-      wishlist.splice(idx, 1);
-      toast(lang === "am" ? "ከተወዳጅ ተወግዷል" : "Removed from saved");
-    } else {
-      wishlist.push(id);
-      toast(lang === "am" ? "በተወዳጅ ተቀምጧል" : "Saved to favorites");
+    function esc(str) {
+      const div = document.createElement('div');
+      div.textContent = str == null ? '' : String(str);
+      return div.innerHTML;
     }
-    saveWish();
-    renderCatalog();
-  }
 
-  function shareProduct(p) {
-    const text = `${p.name} - ${fmtETB(p.price)}\nMIRAN ABAYA: ${location.href.split("#")[0]}#new`;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => {
-        toast(lang === "am" ? "የምርቱ መረጃ ተቀድቷል" : "Product details copied");
-      }).catch(() => toast(text));
-    } else {
-      toast(text);
+    function toggleLang() {
+      isAmharic = !isAmharic;
+      document.getElementById('langBtn').textContent = isAmharic ? 'English' : 'አማርኛ';
+      document.getElementById('pageTitle').textContent = isAmharic ? 'ምርቶች' : 'Products';
+      document.getElementById('pageSubtitle').textContent = isAmharic
+        ? 'በ MIRAN ABAYA በቀጥታ የተመረጡ አባያዎች እና ቀሚሶች።'
+        : 'Abayas and dresses chosen directly by MIRAN ABAYA.';
+      document.getElementById('searchInput').placeholder = isAmharic ? 'ምርት ፈልግ...' : 'Search products...';
+      updateHeaderCounts();
     }
-  }
 
-  function calcDiscountPct(totalQty) {
-    if (totalQty >= 10) return 20;
-    if (totalQty >= 5) return 15;
-    if (totalQty >= 3) return 10;
-    return 0;
-  }
+    function updateHeaderCounts() {
+      const cartQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById('cartBtn').textContent = `${isAmharic ? 'ጋሪ' : 'Cart'} (${cartQty})`;
+      document.getElementById('savedBtn').textContent = `${isAmharic ? 'የተቀመጡ' : 'Saved'} (${saved.length})`;
+      if (currentUser) {
+        const displayName =
+          currentUser.user_metadata?.full_name ||
+          currentUser.user_metadata?.name ||
+          currentUser.email?.split('@')[0] ||
+          'Account';
+        document.getElementById('accountBtn').textContent = displayName.split(' ')[0];
+      } else {
+        document.getElementById('accountBtn').textContent = isAmharic ? 'መግቢያ' : 'Account';
+      }
+    }
 
-  function calcDeliveryFee() {
-    return deliveryZone === "regional" ? DELIVERY_REGIONAL : DELIVERY_ADDIS;
-  }
+    async function initAuth() {
+      if (!sb) return;
+      const { data } = await sb.auth.getUser();
+      currentUser = data?.user || null;
+      updateHeaderCounts();
 
-  document.getElementById("langBtn").addEventListener("click", () => {
-    lang = lang === "en" ? "am" : "en";
-    document.documentElement.lang = lang;
-    tEls.forEach(e => { e.innerHTML = lang === "am" ? (am[e.dataset.t] || e.dataset.en) : e.dataset.en; });
-    document.getElementById("langBtn").textContent = lang === "am" ? "English" : "አማርኛ";
-    document.getElementById("searchInput").placeholder = lang === "am" ? "ምርት ይፈልጉ..." : "Search products...";
-    renderCatalog();
-    renderCart();
-  });
-
-  document.getElementById("wishFilterBtn").addEventListener("click", () => {
-    wishOnly = !wishOnly;
-    document.getElementById("wishFilterBtn").classList.toggle("solid-pill", wishOnly);
-    renderCatalog();
-  });
-
-  function saveCart() {
-    localStorage.setItem("miran_sb_cart", JSON.stringify(cart));
-    const totalQty = cart.reduce((s, i) => s + i.quantity, 0);
-    const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-    const discPct = calcDiscountPct(totalQty);
-    const total = subtotal - Math.round(subtotal * discPct / 100) + (totalQty > 0 ? calcDeliveryFee() : 0);
-    document.getElementById("cartCount").textContent = totalQty;
-    const bar = document.getElementById("cartBar");
-    bar.classList.toggle("show", totalQty > 0);
-    document.getElementById("cartBarText").innerHTML =
-      `${totalQty} ${lang === "am" ? "ቁርጥራጭ" : "items"} · <b>${fmtETB(total)}</b>`;
-  }
-
-  function addToCart(p, size, color, qty) {
-    const existing = cart.find(i => i.product_id === p.id && i.size === size && i.color === color);
-    if (existing) {
-      existing.quantity = Math.min(p.stock, existing.quantity + qty);
-      existing.stock = p.stock;
-      existing.price = Number(p.price);
-    } else {
-      cart.push({
-        product_id: p.id, name: p.name, price: Number(p.price),
-        image: (p.images && p.images[0]) || "", size: size || "", color: color || "",
-        quantity: qty, stock: p.stock
+      sb.auth.onAuthStateChange((_event, session) => {
+        currentUser = session?.user || null;
+        updateHeaderCounts();
       });
     }
-    saveCart();
-    renderCart();
-    toast(lang === "am" ? "ወደ ጋሪ ገብቷል" : "Added to cart");
-  }
 
-  function openCart() {
-    renderCart();
-    document.getElementById("cartDrawer").classList.add("on");
-    document.getElementById("scrim").classList.add("on");
-  }
-  function closeCart() {
-    document.getElementById("cartDrawer").classList.remove("on");
-    document.getElementById("scrim").classList.remove("on");
-  }
-  document.getElementById("cartBtn").addEventListener("click", openCart);
-  document.getElementById("cartBarBtn").addEventListener("click", openCart);
-  document.getElementById("closeCart").addEventListener("click", closeCart);
-  document.getElementById("scrim").addEventListener("click", closeCart);
-
-  const acctModal = document.getElementById("acctModal");
-  function openAccountModal() {
-    updateAccountUI();
-    acctModal.showModal();
-  }
-  document.getElementById("acctBtn").addEventListener("click", openAccountModal);
-  document.getElementById("closeAcct").addEventListener("click", () => acctModal.close());
-  acctModal.addEventListener("click", e => { if (e.target === acctModal) acctModal.close(); });
-
-  function setAuthMode(m) {
-    authMode = m;
-    document.getElementById("tabSignIn").classList.toggle("on", m === "signin");
-    document.getElementById("tabSignUp").classList.toggle("on", m === "signup");
-    document.getElementById("authName").style.display = m === "signup" ? "block" : "none";
-    document.getElementById("authPhone").style.display = m === "signup" ? "block" : "none";
-    document.getElementById("authSubmitBtn").textContent = m === "signup"
-      ? (lang === "am" ? "አካውንት ክፈት" : "Create Account")
-      : (lang === "am" ? "ግባ" : "Sign In");
-    document.getElementById("authErr").textContent = "";
-  }
-  document.getElementById("tabSignIn").addEventListener("click", () => setAuthMode("signin"));
-  document.getElementById("tabSignUp").addEventListener("click", () => setAuthMode("signup"));
-
-  document.getElementById("googleSignInBtn").addEventListener("click", async () => {
-    const errEl = document.getElementById("authErr");
-    if (!sb) { errEl.textContent = "Supabase client not initialized."; return; }
-    const redirectTo = window.location.origin + window.location.pathname;
-    const { error } = await sb.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo }
-    });
-    if (error) errEl.textContent = error.message;
-  });
-
-  function updateAccountUI() {
-    document.getElementById("acctGuest").style.display = currentUser ? "none" : "block";
-    document.getElementById("acctLoggedIn").style.display = currentUser ? "block" : "none";
-    document.getElementById("acctBtn").textContent = currentUser
-      ? (currentUser.user_metadata?.full_name?.split(" ")[0] || (lang === "am" ? "አካውንት" : "Account"))
-      : (lang === "am" ? "ግባ" : "Account");
-    if (currentUser) {
-      document.getElementById("userGreeting").textContent = currentUser.user_metadata?.full_name || "My Account";
-      document.getElementById("userEmailLabel").textContent = currentUser.email;
-      loadMyOrders();
+    async function handleAccountClick() {
+      if (!sb) {
+        alert('Supabase configuration is not set yet.');
+        return;
+      }
+      if (!currentUser) {
+        await sb.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: window.location.origin + window.location.pathname
+          }
+        });
+      } else {
+        const shouldSignOut = confirm(`Signed in as ${currentUser.email}\nSign out?`);
+        if (shouldSignOut) {
+          await sb.auth.signOut();
+          currentUser = null;
+          updateHeaderCounts();
+        }
+      }
     }
-  }
 
-  function renderCart() {
-    saveCart();
-    const itemsEl = document.getElementById("cartItems");
-    const footEl = document.getElementById("cartFooter");
-    if (!cart.length) {
-      itemsEl.innerHTML = `<div class="empty" style="margin-top:20px;"><p>${lang === "am" ? "ጋሪዎ ባዶ ነው።" : "Your cart is empty."}</p></div>`;
-      footEl.innerHTML = "";
-      return;
-    }
-    itemsEl.innerHTML = cart.map((item, idx) => `
-      <div class="cart-item">
-        ${item.image ? `<img src="${esc(item.image)}" alt="">` : `<div style="width:64px;height:84px;background:var(--pearl-alt);border-radius:4px;"></div>`}
-        <div>
-          <strong style="font-size:.92rem;">${esc(item.name)}</strong>
-          <small>${[item.color, item.size].filter(Boolean).join(" · ") || "Standard"}</small>
-          <div class="qty-ctrl">
-            <button data-cdec="${idx}">−</button>
-            <span>${item.quantity}</span>
-            <button data-cinc="${idx}">+</button>
-          </div>
-        </div>
-        <div style="text-align:right;">
-          <strong style="font-size:.92rem;">${fmtETB(item.price * item.quantity)}</strong><br>
-          <button class="rm-btn" data-crm="${idx}">${lang === "am" ? "አስወግድ" : "Remove"}</button>
-        </div>
-      </div>`).join("");
+    async function loadProducts() {
+      const grid = document.getElementById('productsGrid');
+      if (!sb) {
+        grid.innerHTML = '<div class="status-msg">Add your Supabase Anon Key in index.html to load products.</div>';
+        return;
+      }
 
-    const totalQty = cart.reduce((s, i) => s + i.quantity, 0);
-    const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-    const discPct = calcDiscountPct(totalQty);
-    const discAmt = Math.round(subtotal * discPct / 100);
-    const deliveryFee = calcDeliveryFee();
-    const total = subtotal - discAmt + deliveryFee;
+      const { data, error } = await sb
+        .from('products')
+        .select('*, categories(name)')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false });
 
-    const payDetails = paymentMethod === "CBE"
-      ? (lang === "am"
-          ? `<strong>የኢትዮጵያ ንግድ ባንክ (CBE)፦</strong> <code>${esc(CBE_ACCOUNT)}</code> (ለክፍያ ፎቶ ደረሰኝ በቴሌግራም ይላኩ)`
-          : `<strong>Commercial Bank of Ethiopia (CBE):</strong> <code>${esc(CBE_ACCOUNT)}</code> (Send payment receipt on Telegram)`)
-      : (lang === "am"
-          ? `<strong>ቴሌብር / CBE Birr፦</strong> <code>${esc(MOBILE_MONEY_PHONE)}</code> (ለክፍያ ፎቶ ደረሰኝ በቴሌግራም ይላኩ)`
-          : `<strong>Telebirr / CBE Birr:</strong> <code>${esc(MOBILE_MONEY_PHONE)}</code> (Send payment receipt on Telegram)`);
+      if (error) {
+        grid.innerHTML = `<div class="status-msg">Error loading products: ${esc(error.message)}</div>`;
+        return;
+      }
 
-    footEl.innerHTML = `
-      <div class="tot-row"><span>${lang === "am" ? "ንዑስ ድምር" : "Subtotal"}</span><span>${fmtETB(subtotal)}</span></div>
-      ${discPct > 0 ? `<div class="tot-row disc"><span>${lang === "am" ? `የጅምላ ቅናሽ (${discPct}%)` : `Wholesale Discount (${discPct}%)`}</span><span>−${fmtETB(discAmt)}</span></div>` : ""}
-      <div class="tot-row"><span>${lang === "am" ? "የማድረሻ ክፍያ" : "Delivery Fee"}</span><span>${fmtETB(deliveryFee)}</span></div>
-      <div class="tot-row grand"><span>${lang === "am" ? "ጠቅላላ ድምር" : "Total"}</span><span>${fmtETB(total)}</span></div>
-      ${currentUser ? `
-        <select id="chkZone" class="field">
-          <option value="addis" ${deliveryZone === "addis" ? "selected" : ""}>${lang === "am" ? "አዲስ አበባ ውስጥ (100 ብር)" : "Addis Ababa (100 ETB)"}</option>
-          <option value="regional" ${deliveryZone === "regional" ? "selected" : ""}>${lang === "am" ? "ከአዲስ አበባ ውጭ / ክልል (350 ብር)" : "Regional / Outside Addis (350 ETB)"}</option>
-        </select>
-        <select id="chkPayment" class="field">
-          <option value="CBE" ${paymentMethod === "CBE" ? "selected" : ""}>${lang === "am" ? "የኢትዮጵያ ንግድ ባንክ (CBE)" : "CBE Bank Transfer"}</option>
-          <option value="Telebirr / Mobile Money" ${paymentMethod === "Telebirr / Mobile Money" ? "selected" : ""}>${lang === "am" ? "ቴሌብር / CBE Birr" : "Telebirr / CBE Birr"}</option>
-        </select>
-        <div class="pay-note">${payDetails}</div>
-        <input id="chkPhone" class="field" type="tel" placeholder="${lang === "am" ? "ስልክ ቁጥር *" : "Phone Number *"}" value="${esc(currentUser.user_metadata?.phone || "")}">
-        <input id="chkAddress" class="field" placeholder="${lang === "am" ? "የመድረሻ አድራሻ (ከተማ / ሰፈር) *" : "Delivery Address (City / Area) *"}">
-        <input id="chkNote" class="field" placeholder="${lang === "am" ? "ተጨማሪ ማስታወሻ (አማራጭ)" : "Note (optional)"}">
-        <button class="btn solid" id="placeOrderBtn" style="width:100%;">
-          ${lang === "am" ? "ትዕዛዝ አስቀምጥና በቴሌግራም አረጋግጥ" : "Place Order & Open Telegram"}
-        </button>
-      ` : `
-        <p style="font-size:.84rem;color:var(--muted);margin-bottom:10px;">
-          ${lang === "am" ? "ትዕዛዝ ለማስቀመጥ መጀመሪያ ወደ አካውንትዎ ይግቡ።" : "Sign in to save your order and track its status."}
-        </p>
-        <button class="btn solid" id="chkSignInBtn" style="width:100%;">${lang === "am" ? "ግባ / አካውንት ክፈት" : "Sign In to Checkout"}</button>
-      `}`;
-  }
-
-  function renderCatalog() {
-    const root = document.getElementById("catalogRoot");
-    if (!sb) return;
-    const list = allProducts.filter(p => {
-      const slug = p.categories?.slug || "";
-      const matchCat = activeSlug === "all" || slug === activeSlug;
-      const matchWish = !wishOnly || wishlist.includes(p.id);
-      const matchQ = !searchTerm || (p.name + " " + (p.description || "")).toLowerCase().includes(searchTerm);
-      return matchCat && matchWish && matchQ;
-    });
-    if (!list.length) {
-      root.innerHTML = `
-        <div class="empty">
-          <h3>${lang === "am" ? "ምንም ምርት አልተገኘም" : "No products found"}</h3>
-          <p class="sans">${lang === "am" ? "ባለቤቱ ከዳሽቦርድ ምርቶችን እንዳስገባ እዚህ ይታያሉ።" : "Products will appear here as soon as the owner publishes them from the dashboard."}</p>
-        </div>`;
-      return;
-    }
-    root.innerHTML = `<div class="grid sans">` + list.map(p => {
-      const img = (p.images && p.images[0]) || "";
-      const catLabel = lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || "");
-      const outOfStock = p.stock <= 0;
-      const saved = wishlist.includes(p.id);
-      return `
-        <article class="card">
-          <div class="card-img" data-open="${p.id}">
-            ${img ? `<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="no-img">No photo</div>`}
-            ${outOfStock ? `<span class="stock-tag">${lang === "am" ? "አልቋል" : "Out of stock"}</span>` : ""}
-            <button type="button" class="wish-btn ${saved ? "on" : ""}" data-wish="${p.id}" aria-label="Save">${saved ? "♥" : "♡"}</button>
-          </div>
-          <div class="card-body">
-            <span class="card-cat">${esc(catLabel)}</span>
-            <h3 class="card-title" data-open="${p.id}">${esc(p.name)}</h3>
-            <div class="card-price">${fmtETB(p.price)}</div>
-            <div class="card-actions">
-              <button class="card-btn" data-open="${p.id}" ${outOfStock ? "disabled" : ""}>
-                ${outOfStock ? (lang === "am" ? "አልቋል" : "Out of stock") : (lang === "am" ? "ዝርዝር ይመልከቱ" : "Select options")}
-              </button>
-              <button type="button" class="share-mini" data-share="${p.id}">${lang === "am" ? "ቅዳ" : "Copy"}</button>
-            </div>
-          </div>
-        </article>`;
-    }).join("") + `</div>`;
-  }
-
-  const pdModal = document.getElementById("pdModal");
-  let pdState = null;
-  function drawPD() {
-    const { p, imgIdx, size, color, qty } = pdState;
-    const imgs = (p.images && p.images.length) ? p.images : [];
-    const mainImg = imgs[imgIdx] || "";
-    const discPct = calcDiscountPct(qty);
-    const sizeGuideText = lang === "am"
-      ? "የመጠን መመሪያ (Abaya Length): 52 (~132cm) · 54 (~137cm) · 56 (~142cm) · 58 (~147cm) · 60 (~152cm)"
-      : "Size Guide (Abaya Length): 52 (~132cm) · 54 (~137cm) · 56 (~142cm) · 58 (~147cm) · 60 (~152cm)";
-    pdModal.innerHTML = `
-      <div class="pd-grid">
-        <div class="pd-gallery">
-          ${mainImg ? `<img class="pd-main-img" src="${esc(mainImg)}" alt="${esc(p.name)}">` : `<div class="pd-main-img" style="display:grid;place-items:center;color:var(--muted);">No photo</div>`}
-          ${imgs.length > 1 ? `<div class="pd-thumbs">${imgs.map((u, i) => `<img src="${esc(u)}" class="${i === imgIdx ? "on" : ""}" data-thumb="${i}" alt="">`).join("")}</div>` : ""}
-        </div>
-        <div class="pd-info">
-          <button class="close-x" id="closePD" aria-label="Close">&times;</button>
-          <span class="card-cat">${esc(lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || ""))}</span>
-          <h2 style="font-size:1.5rem;">${esc(p.name)}</h2>
-          <div style="font-size:1.35rem;font-weight:700;color:var(--rose-deep);">${fmtETB(p.price)}</div>
-          ${p.description ? `<p style="color:var(--muted);font-size:.92rem;">${esc(p.description)}</p>` : ""}
-          ${p.sizes && p.sizes.length ? `<div><span class="opt-label">${lang === "am" ? "መጠን" : "Size"}</span><div class="opts">${p.sizes.map(s => `<button type="button" class="opt-btn ${size === s ? "on" : ""}" data-size="${esc(s)}">${esc(s)}</button>`).join("")}</div></div>` : ""}
-          <div class="pay-note">${esc(sizeGuideText)}</div>
-          ${p.colors && p.colors.length ? `<div><span class="opt-label">${lang === "am" ? "ቀለም" : "Color"}</span><div class="opts">${p.colors.map(c => `<button type="button" class="opt-btn ${color === c ? "on" : ""}" data-color="${esc(c)}">${esc(c)}</button>`).join("")}</div></div>` : ""}
-          <div>
-            <span class="opt-label">${lang === "am" ? "ብዛት" : "Quantity"} (${lang === "am" ? "ክምችት" : "Stock"}: ${p.stock})</span>
-            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-              <div class="qty-ctrl"><button type="button" id="pdMinus">−</button><span>${qty}</span><button type="button" id="pdPlus">+</button></div>
-              <small style="color:var(--rose-deep);font-weight:600;">${discPct > 0 ? `${discPct}% OFF` : (lang === "am" ? "3+ ሲገዙ 10% ቅናሽ" : "3+ pcs: 10% OFF")}</small>
-            </div>
-          </div>
-          <div class="err-msg" id="pdErr"></div>
-          <button type="button" class="btn solid" id="pdAddBtn" ${p.stock <= 0 ? "disabled" : ""}>${p.stock <= 0 ? (lang === "am" ? "አልቋል" : "Out of Stock") : (lang === "am" ? "ወደ ጋሪ ጨምር" : "Add to Cart")}</button>
-        </div>
-      </div>`;
-  }
-
-  document.getElementById("catalogRoot").addEventListener("click", e => {
-    const w = e.target.closest("[data-wish]");
-    if (w) { e.stopPropagation(); toggleWish(w.dataset.wish); return; }
-    const sh = e.target.closest("[data-share]");
-    if (sh) {
-      e.stopPropagation();
-      const prod = allProducts.find(x => x.id === sh.dataset.share);
-      if (prod) shareProduct(prod);
-      return;
-    }
-    const t = e.target.closest("[data-open]"); if (!t) return;
-    const p = allProducts.find(x => x.id === t.dataset.open); if (!p) return;
-    pdState = { p, imgIdx: 0, size: p.sizes?.length === 1 ? p.sizes[0] : "", color: p.colors?.length === 1 ? p.colors[0] : "", qty: 1 };
-    drawPD(); pdModal.showModal();
-  });
-
-  pdModal.addEventListener("click", e => {
-    if (e.target === pdModal || e.target.id === "closePD") { pdModal.close(); return; }
-    if (!pdState) return;
-    if (e.target.dataset.thumb !== undefined) { pdState.imgIdx = Number(e.target.dataset.thumb); drawPD(); }
-    else if (e.target.dataset.size !== undefined) { pdState.size = e.target.dataset.size; drawPD(); }
-    else if (e.target.dataset.color !== undefined) { pdState.color = e.target.dataset.color; drawPD(); }
-    else if (e.target.id === "pdMinus") { pdState.qty = Math.max(1, pdState.qty - 1); drawPD(); }
-    else if (e.target.id === "pdPlus") { if (pdState.qty < pdState.p.stock) { pdState.qty++; drawPD(); } }
-    else if (e.target.id === "pdAddBtn") {
-      const { p, size, color, qty } = pdState;
-      const missing = [];
-      if (p.sizes?.length && !size) missing.push(lang === "am" ? "መጠን" : "size");
-      if (p.colors?.length && !color) missing.push(lang === "am" ? "ቀለም" : "color");
-      if (missing.length) { document.getElementById("pdErr").textContent = (lang === "am" ? "እባክዎ ይምረጡ፦ " : "Please select: ") + missing.join(", "); return; }
-      addToCart(p, size, color, qty); pdModal.close(); openCart();
-    }
-  });
-
-  let sb = null;
-  try {
-    if (!window.supabase || !window.supabase.createClient) {
-      throw new Error("Supabase JS library did not load (check network/CDN).");
-    }
-    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  } catch (err) {
-    document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Connection Error</h3><p class="sans">${esc(err.message)}</p></div>`;
-    document.getElementById("authErr").textContent = err.message;
-    toast(err.message, true);
-  }
-
-  async function loadProducts() {
-    if (!sb) return;
-    const { data, error } = await sb
-      .from("products")
-      .select("id, name, description, price, images, sizes, colors, stock, is_active, created_at, categories(slug, name_en, name_am)")
-      .eq("is_active", true)
-      .order("created_at", { ascending: false });
-    if (error) {
-      document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Error</h3><p class="sans">${esc(error.message)}</p></div>`;
-      return;
-    }
-    allProducts = data || [];
-    renderCatalog();
-  }
-
-  async function loadMyOrders() {
-    if (!sb || !currentUser) return;
-    const box = document.getElementById("myOrdersList");
-    const { data, error } = await sb
-      .from("orders")
-      .select("id, status, subtotal, discount_percent, discount_amount, total, address, created_at, order_items(product_name, quantity, unit_price, size, color)")
-      .eq("customer_id", currentUser.id)
-      .order("created_at", { ascending: false });
-    if (error) { box.innerHTML = `<p class="err-msg">${esc(error.message)}</p>`; return; }
-    if (!data || !data.length) { box.innerHTML = `<p style="color:var(--muted);font-size:.88rem;">${lang === "am" ? "እስካሁን ትዕዛዝ የለም።" : "No orders yet."}</p>`; return; }
-    box.innerHTML = data.map(o => `
-      <div class="ord-card">
-        <div class="ord-head"><strong>#${esc(o.id.slice(0, 8))}</strong><span class="status-pill">${esc(o.status)}</span></div>
-        <div style="font-size:.82rem;color:var(--muted);margin-bottom:6px;">${new Date(o.created_at).toLocaleString()}</div>
-        ${(o.order_items || []).map(it => `<div>${esc(it.product_name)} (${[it.color, it.size].filter(Boolean).join("/") || "Std"}) &times; ${it.quantity} — ${fmtETB(it.unit_price * it.quantity)}</div>`).join("")}
-        <div style="margin-top:8px;font-weight:700;">${lang === "am" ? "ጠቅላላ" : "Total"}: ${fmtETB(o.total)}</div>
-      </div>`).join("");
-  }
-
-  document.getElementById("authForm").addEventListener("submit", async e => {
-    e.preventDefault();
-    const errEl = document.getElementById("authErr");
-    if (!sb) { errEl.textContent = "Supabase client not initialized."; return; }
-    const email = document.getElementById("authEmail").value.trim();
-    const password = document.getElementById("authPass").value;
-    const btn = document.getElementById("authSubmitBtn");
-    errEl.textContent = ""; btn.disabled = true;
-    const res = authMode === "signup"
-      ? await sb.auth.signUp({ email, password, options: { data: { full_name: document.getElementById("authName").value.trim(), phone: document.getElementById("authPhone").value.trim() } } })
-      : await sb.auth.signInWithPassword({ email, password });
-    btn.disabled = false;
-    if (res.error) errEl.textContent = res.error.message;
-    else { e.target.reset(); toast(authMode === "signup" ? "Account created" : "Signed in"); }
-  });
-
-  document.getElementById("signOutBtn").addEventListener("click", async () => { if (sb) await sb.auth.signOut(); });
-  document.getElementById("refreshOrdersBtn").addEventListener("click", loadMyOrders);
-
-  document.getElementById("cartDrawer").addEventListener("change", e => {
-    if (e.target.id === "chkZone") {
-      deliveryZone = e.target.value;
-      renderCart();
-    } else if (e.target.id === "chkPayment") {
-      paymentMethod = e.target.value;
-      renderCart();
-    }
-  });
-
-  document.getElementById("cartDrawer").addEventListener("click", async e => {
-    const b = e.target.closest("button"); if (!b) return;
-    if (b.dataset.cdec !== undefined) { const i = Number(b.dataset.cdec); cart[i].quantity--; if (cart[i].quantity < 1) cart.splice(i, 1); renderCart(); }
-    else if (b.dataset.cinc !== undefined) { const i = Number(b.dataset.cinc); if (cart[i].quantity < (cart[i].stock || 99)) { cart[i].quantity++; renderCart(); } }
-    else if (b.dataset.crm !== undefined) { cart.splice(Number(b.dataset.crm), 1); renderCart(); }
-    else if (b.id === "chkSignInBtn") { closeCart(); openAccountModal(); }
-    else if (b.id === "placeOrderBtn" && sb && currentUser) {
-      const phone = document.getElementById("chkPhone").value.trim();
-      const address = document.getElementById("chkAddress").value.trim();
-      const note = document.getElementById("chkNote").value.trim();
-      if (!phone || !address) { toast("Phone and address required", true); return; }
-      b.disabled = true;
-      const snapshot = [...cart];
-      const deliveryFee = calcDeliveryFee();
-      const zoneLabel = deliveryZone === "regional" ? "Regional / Outside Addis" : "Addis Ababa";
-      const combinedNote = [`Zone: ${zoneLabel} (${deliveryFee} ETB)`, `Payment: ${paymentMethod}`, note].filter(Boolean).join(" | ");
-      const { data, error } = await sb.rpc("place_order", {
-        p_items: snapshot.map(i => ({ product_id: i.product_id, quantity: i.quantity, size: i.size, color: i.color })),
-        p_phone: phone, p_address: address, p_note: combinedNote
+      products = (data || []).filter((p) => {
+        const catName = (p.categories?.name || p.category || '').toLowerCase().trim();
+        return !BLOCKED_CATS.includes(catName);
       });
-      b.disabled = false;
-      if (error) { toast(error.message, true); return; }
-      const grandWithDelivery = Number(data.total || 0) + deliveryFee;
-      const itemsText = snapshot.map(i => `- ${i.name} (${[i.color, i.size].filter(Boolean).join("/") || "Std"}) x${i.quantity}`).join("\n");
-      const msg = `MIRAN ABAYA ORDER\nOrder ID: ${data.order_id}\nPhone: ${phone}\nZone: ${zoneLabel}\nAddress: ${address}\nPayment: ${paymentMethod}\nItems:\n${itemsText}\nDelivery: ${fmtETB(deliveryFee)}\nTOTAL: ${fmtETB(grandWithDelivery)}`;
-      cart = []; saveCart(); renderCart(); loadProducts(); closeCart();
-      window.open(`https://t.me/${TG_USER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+
+      renderProducts();
     }
-  });
 
-  document.getElementById("catChips").addEventListener("click", e => {
-    const b = e.target.closest(".chip"); if (!b) return;
-    activeSlug = b.dataset.slug;
-    document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c === b));
-    renderCatalog();
-  });
-  document.querySelectorAll("[data-cat-jump]").forEach(el => {
-    el.addEventListener("click", () => {
-      activeSlug = el.dataset.catJump;
-      document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c.dataset.slug === activeSlug));
-      renderCatalog();
-      document.getElementById("new").scrollIntoView({ behavior: "smooth" });
-    });
-  });
-  document.getElementById("searchInput").addEventListener("input", e => { searchTerm = e.target.value.trim().toLowerCase(); renderCatalog(); });
+    function selectCategory(cat, btnEl) {
+      selectedCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach((b) => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      renderProducts();
+    }
 
-  saveWish();
-  saveCart();
-  if (sb) {
-    sb.auth.getSession().then(({ data }) => { currentUser = data.session?.user || null; updateAccountUI(); renderCart(); });
-    sb.auth.onAuthStateChange((_ev, session) => { currentUser = session?.user || null; updateAccountUI(); renderCart(); });
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+
+      const filtered = products.filter((p) => {
+        const catName = (p.categories?.name || p.category || '').toLowerCase();
+        const matchesCat = selectedCategory === 'all' || catName === selectedCategory.toLowerCase();
+        const matchesSearch =
+          !query ||
+          (p.name || '').toLowerCase().includes(query) ||
+          (p.description || '').toLowerCase().includes(query);
+        return matchesCat && matchesSearch;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="status-msg">No products found.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map((p) => {
+        const imgSrc = p.image_url || p.image || 'https://via.placeholder.com/400x500?text=MIRAN+ABAYA';
+        const price = Number(p.price || 0);
+        const catLabel = p.categories?.name || p.category || 'Abayas';
+        return `
+          <article class="card">
+            <img src="${esc(imgSrc)}" alt="${esc(p.name)}" loading="lazy" />
+            <div class="card-body">
+              <div class="card-title">${esc(p.name)}</div>
+              <div class="card-meta">${esc(catLabel)}</div>
+              <div class="card-price">${price.toLocaleString()} ETB</div>
+              <div class="card-actions">
+                <button type="button" onclick="toggleSaved('${esc(p.id)}')">Save</button>
+                <button type="button" class="add-btn" onclick="addToCart('${esc(p.id)}')">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function addToCart(id) {
+      const prod = products.find((item) => String(item.id) === String(id));
+      if (!prod) return;
+      const existing = cart.find((item) => String(item.id) === String(id));
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          id: prod.id,
+          name: prod.name,
+          price: Number(prod.price || 0),
+          qty: 1
+        });
+      }
+      localStorage.setItem('miran_cart', JSON.stringify(cart));
+      updateHeaderCounts();
+    }
+
+    function toggleSaved(id) {
+      const idx = saved.findIndex((item) => String(item.id) === String(id));
+      if (idx > -1) {
+        saved.splice(idx, 1);
+      } else {
+        const prod = products.find((item) => String(item.id) === String(id));
+        if (prod) saved.push(prod);
+      }
+      localStorage.setItem('miran_saved', JSON.stringify(saved));
+      updateHeaderCounts();
+    }
+
+    function openCartModal() {
+      const wrap = document.getElementById('cartItems');
+      if (!cart.length) {
+        wrap.innerHTML = '<p style="color:var(--muted); padding:14px 0;">Your cart is empty.</p>';
+        document.getElementById('cartTotal').textContent = '0 ETB';
+      } else {
+        let total = 0;
+        wrap.innerHTML = cart.map((item, i) => {
+          const lineTotal = item.price * item.qty;
+          total += lineTotal;
+          return `
+            <div class="cart-item">
+              <div>
+                <div><strong>${esc(item.name)}</strong> x${item.qty}</div>
+                <div style="color:var(--muted); font-size:0.8rem;">${lineTotal.toLocaleString()} ETB</div>
+              </div>
+              <button type="button" class="pill-btn" onclick="removeCartItem(${i})">Remove</button>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('cartTotal').textContent = `${total.toLocaleString()} ETB`;
+      }
+      document.getElementById('cartModal').classList.add('open');
+    }
+
+    function removeCartItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('miran_cart', JSON.stringify(cart));
+      updateHeaderCounts();
+      openCartModal();
+    }
+
+    function openSavedModal() {
+      const wrap = document.getElementById('savedItems');
+      if (!saved.length) {
+        wrap.innerHTML = '<p style="color:var(--muted); padding:14px 0;">No saved items yet.</p>';
+      } else {
+        wrap.innerHTML = saved.map((item) => `
+          <div class="cart-item">
+            <div>
+              <div><strong>${esc(item.name)}</strong></div>
+              <div style="color:var(--gold); font-size:0.84rem;">${Number(item.price || 0).toLocaleString()} ETB</div>
+            </div>
+            <button type="button" class="pill-btn primary" onclick="addToCart('${esc(item.id)}'); closeModal('savedModal'); openCartModal();">Add</button>
+          </div>
+        `).join('');
+      }
+      document.getElementById('savedModal').classList.add('open');
+    }
+
+    function checkoutTelegram() {
+      if (!cart.length) return;
+      const lines = cart.map((i) => `- ${i.name} x${i.qty} (${(i.price * i.qty).toLocaleString()} ETB)`);
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const msg = `MIRAN ABAYA Order:\n${lines.join('\n')}\nTotal: ${total.toLocaleString()} ETB`;
+      window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    }
+
+    function openCustomModal() {
+      if (currentUser) {
+        const nameInput = document.getElementById('coName');
+        if (!nameInput.value) {
+          nameInput.value = currentUser.user_metadata?.full_name || currentUser.user_metadata?.name || '';
+        }
+      }
+      document.getElementById('customOrderModal').classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function calcDeposit() {
+      const total = Number(document.getElementById('coPrice').value) || 0;
+      const deposit = Math.round(total * 0.5);
+      const remaining = total - deposit;
+      document.getElementById('coDepositDisplay').textContent =
+        `የሚከፈል 50% ቀብድ፦ ${deposit.toLocaleString()} ETB (ቀሪ፦ ${remaining.toLocaleString()} ETB)`;
+    }
+
+    async function submitCustomOrder(e) {
+      e.preventDefault();
+      const name = document.getElementById('coName').value.trim();
+      const phone = document.getElementById('coPhone').value.trim();
+      const style = document.getElementById('coStyle').value.trim();
+      const length = document.getElementById('coLength').value;
+      const bust = document.getElementById('coBust').value;
+      const waist = document.getElementById('coWaist').value;
+      const sleeve = document.getElementById('coSleeve').value;
+      const total = Number(document.getElementById('coPrice').value) || 0;
+      const deposit = Math.round(total * 0.5);
+      const notes = document.getElementById('coNotes').value.trim();
+
+      const summary =
+        `MIRAN ABAYA - በትዕዛዝ ማሰራት (Custom Order)\n` +
+        `ስም: ${name}\n` +
+        `ስልክ: ${phone}\n` +
+        `ዲዛይን: ${style}\n` +
+        `ልኬት (cm): ቁመት ${length} | ደረት ${bust} | ወገብ ${waist} | እጀታ ${sleeve}\n` +
+        `ጠቅላላ ዋጋ: ${total.toLocaleString()} ETB\n` +
+        `50% ቀብድ: ${deposit.toLocaleString()} ETB\n` +
+        `ማስታወሻ: ${notes || '-'}`;
+
+      if (sb) {
+        await sb.from('orders').insert({
+          customer_id: currentUser ? currentUser.id : null,
+          customer_name: name,
+          customer_phone: phone,
+          total_amount: total,
+          status: 'pending_deposit',
+          notes: summary
+        });
+      }
+
+      document.getElementById('tgOrderLink').href = `https://t.me/${TELEGRAM_USERNAME}`;
+      window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(summary)}`, '_blank', 'noopener');
+      closeModal('customOrderModal');
+      document.getElementById('customOrderForm').reset();
+      calcDeposit();
+    }
+
+    document.getElementById('tgOrderLink').href = `https://t.me/${TELEGRAM_USERNAME}`;
+    updateHeaderCounts();
+    initAuth();
     loadProducts();
-  }
-</script>
+  </script>
 </body>
 </html>
