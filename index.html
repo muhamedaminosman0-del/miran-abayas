@@ -270,7 +270,6 @@
       font-weight: 600;
     }
 
-    /* Drawer & Modals */
     .overlay {
       display: none;
       position: fixed;
@@ -362,7 +361,6 @@
       grid-column: 1 / -1;
     }
 
-    /* Mobile UI Fixes */
     @media (max-width: 640px) {
       header.site-header .wrap {
         flex-direction: column;
@@ -449,7 +447,7 @@
       <p id="pageSubtitle">Abayas and dresses chosen directly by MIRAN ABAYA.</p>
 
       <div class="action-row">
-        <a id="tgOrderLink" href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener" class="btn-light">
+        <a id="tgOrderLink" href="https://t.me/mame15" target="_blank" rel="noopener" class="btn-light">
           Order on Telegram
         </a>
         <button type="button" class="btn-outline" id="customOrderBtn" onclick="openCustomModal()">
@@ -536,14 +534,11 @@
   </div>
 
   <script>
-    // 1. Configure your Supabase & Telegram details
     const SUPABASE_URL = 'https://htwwaxpvmxlvxermsver.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e';
-    const TELEGRAM_USERNAME = '@mame15'; // without @
+    const TELEGRAM_USERNAME = 'mame15';
 
-    const sb = (SUPABASE_URL.startsWith('http') && !SUPABASE_ANON_KEY.startsWith('YOUR_'))
-      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-      : null;
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     let products = [];
     let selectedCategory = 'all';
@@ -588,7 +583,6 @@
     }
 
     async function initAuth() {
-      if (!sb) return;
       const { data } = await sb.auth.getUser();
       currentUser = data?.user || null;
       updateHeaderCounts();
@@ -600,10 +594,6 @@
     }
 
     async function handleAccountClick() {
-      if (!sb) {
-        alert('Supabase configuration is not set yet.');
-        return;
-      }
       if (!currentUser) {
         await sb.auth.signInWithOAuth({
           provider: 'google',
@@ -623,14 +613,9 @@
 
     async function loadProducts() {
       const grid = document.getElementById('productsGrid');
-      if (!sb) {
-        grid.innerHTML = '<div class="status-msg">Add your Supabase Anon Key in index.html to load products.</div>';
-        return;
-      }
-
       const { data, error } = await sb
         .from('products')
-        .select('*, categories(name)')
+        .select('*')
         .eq('is_active', true)
         .order('created_at', { ascending: false });
 
@@ -640,7 +625,7 @@
       }
 
       products = (data || []).filter((p) => {
-        const catName = (p.categories?.name || p.category || '').toLowerCase().trim();
+        const catName = (p.category_name || p.category || '').toLowerCase().trim();
         return !BLOCKED_CATS.includes(catName);
       });
 
@@ -659,7 +644,7 @@
       const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
 
       const filtered = products.filter((p) => {
-        const catName = (p.categories?.name || p.category || '').toLowerCase();
+        const catName = (p.category_name || p.category || '').toLowerCase();
         const matchesCat = selectedCategory === 'all' || catName === selectedCategory.toLowerCase();
         const matchesSearch =
           !query ||
@@ -676,7 +661,7 @@
       grid.innerHTML = filtered.map((p) => {
         const imgSrc = p.image_url || p.image || 'https://via.placeholder.com/400x500?text=MIRAN+ABAYA';
         const price = Number(p.price || 0);
-        const catLabel = p.categories?.name || p.category || 'Abayas';
+        const catLabel = p.category_name || p.category || 'Abayas';
         return `
           <article class="card">
             <img src="${esc(imgSrc)}" alt="${esc(p.name)}" loading="lazy" />
@@ -827,16 +812,14 @@
         `50% ቀብድ: ${deposit.toLocaleString()} ETB\n` +
         `ማስታወሻ: ${notes || '-'}`;
 
-      if (sb) {
-        await sb.from('orders').insert({
-          customer_id: currentUser ? currentUser.id : null,
-          customer_name: name,
-          customer_phone: phone,
-          total_amount: total,
-          status: 'pending_deposit',
-          notes: summary
-        });
-      }
+      await sb.from('orders').insert({
+        customer_id: currentUser ? currentUser.id : null,
+        customer_name: name,
+        customer_phone: phone,
+        total_amount: total,
+        status: 'pending_deposit',
+        notes: summary
+      });
 
       document.getElementById('tgOrderLink').href = `https://t.me/${TELEGRAM_USERNAME}`;
       window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(summary)}`, '_blank', 'noopener');
