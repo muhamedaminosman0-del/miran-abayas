@@ -1,837 +1,1216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MIRAN ABAYA — Modest Fashion</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIRAN ABAYA | Modest Fashion</title>
+<meta name="description" content="Abayas, hijabs, jilbabs, dresses and accessories from MIRAN ABAYA.">
+<style>
+  :root {
+    --black: #000000;
+    --ivory: #FBF8F0;
+    --gold: #C9A96E;
+    --gold-deep: #8F7440;
+    --beige: #E7DAC5;
+    --text: #1B1712;
+    --paper: var(--ivory);
+    --paper-alt: var(--beige);
+    --card: #FFFFFF;
+    --ink: var(--text);
+    --muted: #5E5648;
+    --line: rgba(27, 23, 18, .20);
+    --danger: #9B2C2C;
+    --ok: #276749;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #120f0e;
-      --surface: #1b1614;
-      --surface-2: #241e1b;
-      --text: #f5efe6;
-      --muted: #c2b6a8;
-      --accent: #f5efe6;
-      --accent-dark: #151110;
-      --gold: #e5c384;
-      --border: rgba(245, 239, 230, 0.14);
-      --radius: 14px;
+      --paper: #0C0A08;
+      --paper-alt: #17130F;
+      --card: #14110D;
+      --ink: #F3ECDD;
+      --muted: #B3A78F;
+      --line: rgba(243, 236, 221, .20);
+      --gold-deep: #C9A96E;
+      --danger: #E08A8A;
+      --ok: #68D391;
     }
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .sans { font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.5;
-      min-height: 100vh;
-    }
+  .announce {
+    background: var(--gold); color: var(--black); text-align: center;
+    padding: 8px 16px; font-size: .84rem; font-weight: 600; letter-spacing: .04em;
+  }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+  .stage { background: var(--black); color: #F3ECDD; }
+  header .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 20px; padding-bottom: 20px; gap: 16px;
+  }
+  .brand { font-size: 1.05rem; letter-spacing: .32em; color: var(--gold); white-space: nowrap; }
+  nav { display: flex; gap: 24px; font-size: .92rem; }
+  nav a { padding: 4px 0; border-bottom: 1px solid transparent; }
+  nav a:hover { border-color: var(--gold); }
+  .head-right { display: flex; align-items: center; gap: 8px; }
+  .pill-btn {
+    background: none; border: 1px solid rgba(243,236,221,.35); color: #F3ECDD; cursor: pointer;
+    padding: 6px 14px; border-radius: 999px; font-size: .86rem; transition: .2s; white-space: nowrap;
+  }
+  .pill-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .pill-btn.gold { border-color: var(--gold); color: var(--gold); }
+  .pill-btn.gold:hover { background: var(--gold); color: var(--black); }
 
-    button, input, select, textarea {
-      font-family: inherit;
-    }
+  .hero .wrap {
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center;
+    padding-top: 36px; padding-bottom: 68px; min-height: 580px;
+  }
+  .hero h1 {
+    font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 1.05;
+    letter-spacing: -.01em; max-width: 12ch;
+  }
+  .hero p { margin-top: 22px; max-width: 42ch; color: #CFC5B1; font-size: 1.08rem; }
+  .actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 26px; border-radius: 2px; font-size: .95rem; cursor: pointer;
+    border: 1px solid var(--gold); background: none; transition: background .2s, color .2s;
+  }
+  .btn.solid { background: var(--gold); color: var(--black); font-weight: 500; }
+  .btn.solid:hover { background: #DDBF86; }
+  .btn.line { color: var(--gold); }
+  .btn.line:hover { background: rgba(201, 169, 110, .14); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
 
-    .promo-bar {
-      background: var(--surface-2);
-      border-bottom: 1px solid var(--border);
-      padding: 8px 14px;
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
+  .figure { justify-self: center; width: min(100%, 340px); }
+  .figure svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .figure path { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .figure .fold { stroke-width: .9; opacity: .7; }
+  .figure .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 3.2s ease-out forwards; }
+  .figure .draw.d2 { animation-delay: .5s; }
+  .figure .draw.d3 { animation-delay: 1.1s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
 
-    header.site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(18, 15, 14, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
+  section { padding: 80px 0; }
+  h2 { font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); line-height: 1.15; max-width: 22ch; }
+  .lede { color: var(--muted); max-width: 54ch; margin-top: 12px; }
 
-    header.site-header .wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
+  .collections { background: var(--paper); }
+  .rows { margin-top: 40px; border-top: 1px solid var(--line); }
+  .row {
+    display: grid; grid-template-columns: 1fr 1.2fr auto; gap: 24px; align-items: baseline;
+    padding: 24px 0; border-bottom: 1px solid var(--line); cursor: pointer;
+    transition: padding-left .25s, border-color .25s; width: 100%; text-align: left; background: none; border-left: 0; border-right: 0; border-top: 0;
+  }
+  .row:hover { padding-left: 14px; border-bottom-color: var(--gold); }
+  .row strong { font-weight: 400; font-size: clamp(1.45rem, 2.8vw, 2rem); }
+  .row span { color: var(--muted); }
+  .row .go { color: var(--gold-deep); font-size: .92rem; }
 
-    .brand {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-    }
+  .newin { background: var(--paper-alt); }
+  .shop-bar {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+    margin-top: 28px; margin-bottom: 28px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1px solid var(--line); padding: 7px 16px; border-radius: 999px;
+    background: transparent; cursor: pointer; font-size: .88rem; transition: .2s;
+  }
+  .chip.on, .chip:hover { border-color: var(--gold); background: var(--gold); color: var(--black); }
+  .search-box {
+    border: 1px solid var(--line); background: var(--card); padding: 9px 14px;
+    border-radius: 999px; min-width: 220px; font-size: .9rem;
+  }
 
-    .head-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 18px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column;
+    overflow: hidden; transition: border-color .2s;
+  }
+  .card:hover { border-color: var(--gold); }
+  .card-img { aspect-ratio: 3/4; background: var(--paper); overflow: hidden; position: relative; cursor: pointer; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+  .card:hover .card-img img { transform: scale(1.04); }
+  .card-img .no-img {
+    width: 100%; height: 100%; display: grid; place-items: center; color: var(--muted); font-size: .85rem;
+  }
+  .stock-tag {
+    position: absolute; top: 10px; left: 10px; background: var(--black); color: var(--gold);
+    font-size: .72rem; padding: 3px 8px; letter-spacing: .05em;
+  }
+  .card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .card-cat { font-size: .75rem; color: var(--gold-deep); letter-spacing: .04em; }
+  .card-title { font-size: 1rem; font-weight: 500; cursor: pointer; }
+  .card-price { font-size: 1.05rem; font-weight: 600; margin-top: auto; padding-top: 6px; }
+  .card-btn {
+    margin-top: 10px; width: 100%; padding: 10px; border: 1px solid var(--ink);
+    background: none; cursor: pointer; font-size: .85rem; transition: .2s;
+  }
+  .card-btn:hover { background: var(--ink); color: var(--paper); }
 
-    .pill-btn {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 0.84rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.18s ease;
-    }
+  .empty {
+    margin-top: 24px; border: 1px dashed var(--gold-deep); padding: 48px 24px;
+    display: grid; justify-items: center; text-align: center; gap: 10px;
+  }
+  .empty h3 { font-weight: 400; font-size: 1.35rem; }
+  .empty p { color: var(--muted); max-width: 48ch; font-size: .95rem; }
 
-    .pill-btn:hover {
-      border-color: var(--text);
-    }
+  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .about p { color: var(--muted); }
+  .about p + p { margin-top: 14px; }
+  .tg-btn { margin-top: 24px; }
 
-    .pill-btn.primary {
-      background: var(--accent);
-      color: var(--accent-dark);
-      border-color: var(--accent);
-      font-weight: 600;
-    }
+  footer { background: var(--black); color: #CFC5B1; padding: 56px 0 40px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  footer .brand { display: block; margin-bottom: 10px; }
+  footer ul { list-style: none; display: grid; gap: 6px; font-size: .95rem; }
+  footer small { display: block; margin-top: 32px; color: #8A806D; }
+  footer a.tg { color: var(--gold); border-bottom: 1px solid var(--gold); }
 
-    main.container {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 28px 18px 64px;
-    }
+  .scrim {
+    position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 60;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .scrim.on { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; bottom: 0; right: 0; width: min(440px, 100%);
+    background: var(--paper); z-index: 70; display: flex; flex-direction: column;
+    transform: translateX(105%); transition: transform .3s; border-left: 1px solid var(--line);
+  }
+  .drawer.on { transform: none; }
+  .dh {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 22px; border-bottom: 1px solid var(--line);
+  }
+  .dh h2 { font-size: 1.35rem; }
+  .close-x { background: none; border: 0; font-size: 1.4rem; cursor: pointer; padding: 4px 8px; }
+  .db { flex: 1; overflow-y: auto; padding: 14px 22px; }
+  .df { border-top: 1px solid var(--line); padding: 18px 22px; background: var(--card); max-height: 62vh; overflow-y: auto; }
+  .cart-item {
+    display: grid; grid-template-columns: 64px 1fr auto; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--line); align-items: start;
+  }
+  .cart-item img { width: 64px; height: 84px; object-fit: cover; border: 1px solid var(--line); }
+  .cart-item small { color: var(--muted); display: block; font-size: .82rem; }
+  .qty-ctrl { display: inline-flex; align-items: center; border: 1px solid var(--line); margin-top: 6px; }
+  .qty-ctrl button { width: 32px; height: 32px; background: none; border: 0; cursor: pointer; }
+  .qty-ctrl span { min-width: 26px; text-align: center; font-size: .88rem; }
+  .rm-btn { background: none; border: 0; color: var(--danger); font-size: .78rem; cursor: pointer; text-decoration: underline; margin-top: 6px; }
+  .tot-row { display: flex; justify-content: space-between; font-size: .9rem; margin-bottom: 5px; }
+  .tot-row.disc { color: var(--ok); font-weight: 600; }
+  .tot-row.grand { font-size: 1.08rem; font-weight: 700; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; margin-bottom: 12px; }
+  .field { width: 100%; border: 1px solid var(--line); background: var(--paper); padding: 10px 12px; border-radius: 3px; font-size: .9rem; margin-bottom: 8px; }
 
-    .hero-head {
-      margin-bottom: 20px;
-    }
+  .pay-title { font-size: .82rem; color: var(--muted); margin: 4px 0 6px; display: block; }
+  .pay-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .pay-opt {
+    border: 1px solid var(--line); padding: 10px; cursor: pointer; font-size: .86rem;
+    display: flex; align-items: center; gap: 8px; border-radius: 3px;
+  }
+  .pay-opt:has(input:checked) { border-color: var(--gold); background: rgba(201,169,110,.14); }
+  .pay-opt input { accent-color: var(--gold-deep); }
 
-    .hero-head h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
+  dialog {
+    margin: auto; border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    width: min(820px, 94vw); max-height: 92vh; overflow-y: auto; border-radius: 4px; padding: 0;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.65); }
+  .pd-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .pd-gallery { background: var(--paper-alt); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .pd-main-img { aspect-ratio: 3/4; width: 100%; object-fit: cover; border: 1px solid var(--line); }
+  .pd-thumbs { display: flex; gap: 8px; overflow-x: auto; }
+  .pd-thumbs img { width: 56px; height: 72px; object-fit: cover; cursor: pointer; border: 2px solid transparent; opacity: .75; }
+  .pd-thumbs img.on { border-color: var(--gold); opacity: 1; }
+  .pd-info { padding: 26px; position: relative; display: flex; flex-direction: column; gap: 12px; }
+  .pd-info .close-x { position: absolute; top: 12px; right: 12px; }
+  .opt-label { font-size: .82rem; color: var(--muted); margin-bottom: 6px; display: block; }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opt-btn {
+    border: 1px solid var(--line); padding: 8px 14px; background: none; cursor: pointer; font-size: .86rem;
+  }
+  .opt-btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .err-msg { color: var(--danger); font-size: .86rem; min-height: 20px; }
 
-    .hero-head p {
-      color: var(--muted);
-      font-size: 0.96rem;
-      max-width: 620px;
-    }
+  .acct-box { padding: 26px; position: relative; max-width: 560px; margin: 0 auto; }
+  .acct-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .acct-tabs button { background: none; border: 0; padding: 8px 4px; cursor: pointer; border-bottom: 2px solid transparent; font-size: .92rem; }
+  .acct-tabs button.on { border-bottom-color: var(--gold); font-weight: 600; }
+  .divider-or {
+    display: flex; align-items: center; gap: 10px; color: var(--muted);
+    font-size: .82rem; margin: 14px 0;
+  }
+  .divider-or::before, .divider-or::after {
+    content: ""; flex: 1; height: 1px; background: var(--line);
+  }
+  .google-btn {
+    width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 11px 16px; border: 1px solid var(--line); border-radius: 3px;
+    background: var(--card); color: var(--ink); font-size: .92rem; font-weight: 500;
+    cursor: pointer; transition: .2s;
+  }
+  .google-btn:hover { border-color: var(--gold); }
+  .ord-card { border: 1px solid var(--line); background: var(--card); padding: 14px; margin-bottom: 12px; font-size: .88rem; }
+  .ord-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 8px; }
+  .status-pill { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold-deep); }
+  .status-pill.paid { border-color: var(--ok); color: var(--ok); }
 
-    .action-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 16px 0 22px;
-    }
+  /* Order confirmation */
+  .done-box { padding: 28px 26px; position: relative; max-width: 520px; margin: 0 auto; display: grid; gap: 14px; }
+  .done-box h2 { font-size: 1.5rem; }
+  .done-total { font-size: 1.7rem; font-weight: 700; color: var(--gold-deep); }
+  .pay-box { border: 1px solid var(--gold); background: var(--card); padding: 14px; display: grid; gap: 8px; }
+  .pay-row { display: grid; grid-template-columns: 90px 1fr auto; gap: 8px; align-items: center; font-size: .95rem; }
+  .pay-row span { color: var(--muted); font-size: .84rem; }
+  .pay-row strong { word-break: break-all; font-size: 1.05rem; letter-spacing: .02em; }
+  .copy { border: 1px solid var(--line); background: none; padding: 5px 12px; cursor: pointer; font-size: .8rem; border-radius: 3px; }
+  .copy:hover { border-color: var(--gold); }
+  .steps { padding-left: 20px; color: var(--muted); font-size: .92rem; display: grid; gap: 4px; }
 
-    .btn-light {
-      background: var(--accent);
-      color: var(--accent-dark);
-      border: none;
-      border-radius: 999px;
-      padding: 11px 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
+  .cu-form { display: grid; gap: 10px; }
+  .cu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cu-grid label, .cu-form label { font-size: .8rem; color: var(--muted); display: grid; gap: 4px; }
+  .cu-form .field { margin-bottom: 0; }
+  .cu-card { border: 1px solid var(--gold); background: var(--card); padding: 14px; margin-bottom: 12px; font-size: .88rem; display: grid; gap: 6px; }
+  .cu-card .pay-box { margin-top: 4px; }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 11px 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
+  /* Mobile cart bar */
+  .cartbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: none;
+    background: var(--black); color: #F3ECDD; border-top: 1px solid var(--gold);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .cartbar.show { display: flex; }
+  .cartbar b { color: var(--gold); font-weight: 600; }
 
-    .filters-bar {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
+  .toasts { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 95; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: max-content; max-width: 92vw; }
+  .toast { background: var(--black); color: #F3ECDD; padding: 11px 20px; border-left: 3px solid var(--gold); font-size: .9rem; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .toast.bad { border-left-color: var(--danger); }
 
-    .cats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 800px) {
+    nav { display: none; }
+    header .wrap { flex-direction: column; align-items: stretch; gap: 12px; padding-top: 14px; padding-bottom: 14px; }
+    .brand { text-align: center; font-size: .95rem; letter-spacing: .26em; }
+    .head-right { justify-content: center; }
+    .pill-btn { padding: 6px 12px; font-size: .82rem; }
+    .hero .wrap { grid-template-columns: 1fr; min-height: 0; padding-bottom: 48px; }
+    .figure { width: min(68%, 240px); order: -1; }
+    .row { grid-template-columns: 1fr; gap: 4px; }
+    .row .go { display: none; }
+    .about .wrap { grid-template-columns: 1fr; gap: 20px; }
+    .pd-grid { grid-template-columns: 1fr; }
+    section { padding: 56px 0; }
+    body { padding-bottom: 68px; }
+    .toasts { bottom: 82px; }
+    .cartbar.show { display: flex; }
+  }
+  @media (min-width: 801px) {
+    .cartbar, .cartbar.show { display: none; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .grid { gap: 14px 10px; }
+    .card-body { padding: 10px; }
+    .card-title { font-size: .92rem; }
+    .card-price { font-size: .98rem; }
+    .card-btn { padding: 9px 4px; font-size: .8rem; }
+    .search-box { width: 100%; }
+    .pay-row { grid-template-columns: 1fr auto; }
+    .pay-row span { grid-column: 1 / -1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .figure .draw { animation: none; stroke-dashoffset: 0; }
+    .row { transition: none; }
+  }
 
-    .cat-btn {
-      background: var(--surface);
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 8px 16px;
-      font-size: 0.86rem;
-      cursor: pointer;
-    }
-
-    .cat-btn.active {
-      background: var(--accent);
-      color: var(--accent-dark);
-      border-color: var(--accent);
-      font-weight: 600;
-    }
-
-    .search-box {
-      width: 100%;
-      max-width: 420px;
-      padding: 11px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 0.92rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card img {
-      width: 100%;
-      height: 290px;
-      object-fit: cover;
-      background: var(--surface-2);
-    }
-
-    .card-body {
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex: 1;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .card-meta {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .card-price {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-top: auto;
-    }
-
-    .card-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .card-actions button {
-      flex: 1;
-      padding: 9px 10px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--text);
-      font-size: 0.82rem;
-      cursor: pointer;
-    }
-
-    .card-actions button.add-btn {
-      background: var(--accent);
-      color: var(--accent-dark);
-      border-color: var(--accent);
-      font-weight: 600;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.78);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    .overlay.open {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      width: 100%;
-      max-width: 460px;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 20px;
-    }
-
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .close-x {
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.5rem;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .form-grid {
-      display: grid;
-      gap: 10px;
-    }
-
-    .form-grid input,
-    .form-grid textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 0.9rem;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .notice-box {
-      background: rgba(229, 195, 132, 0.1);
-      border: 1px solid rgba(229, 195, 132, 0.3);
-      color: var(--gold);
-      padding: 10px 12px;
-      border-radius: 10px;
-      font-size: 0.84rem;
-      margin-bottom: 12px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-      gap: 10px;
-      font-size: 0.9rem;
-    }
-
-    .status-msg {
-      text-align: center;
-      color: var(--muted);
-      padding: 32px 12px;
-      grid-column: 1 / -1;
-    }
-
-    @media (max-width: 640px) {
-      header.site-header .wrap {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 10px 14px;
-        gap: 10px;
-      }
-
-      .brand {
-        font-size: 1rem;
-        letter-spacing: 0.22em;
-      }
-
-      .head-right {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 6px;
-      }
-
-      .pill-btn {
-        padding: 7px 4px;
-        font-size: 0.74rem;
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .hero-head h1 {
-        font-size: 1.55rem;
-      }
-
-      .cats {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 4px;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .cats::-webkit-scrollbar {
-        display: none;
-      }
-
-      .cat-btn {
-        flex: 0 0 auto;
-      }
-
-      .search-box {
-        max-width: 100%;
-        width: 100%;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-
-      .card img {
-        height: 200px;
-      }
-    }
-  </style>
+  html[lang="am"] body, html[lang="am"] .sans {
+    font-family: "Noto Serif Ethiopic", "Noto Sans Ethiopic", "Nyala", "Abyssinica SIL", serif;
+    line-height: 1.8;
+  }
+  html[lang="am"] .brand { letter-spacing: .2em; }
+  html[lang="am"] .hero h1 { max-width: 14ch; font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.25; }
+</style>
 </head>
 <body>
-  <div class="promo-bar" id="promoBar">
-    Wholesale Discounts: 3–4 pcs (10% OFF) · 5–9 pcs (15% OFF) · 10+ pcs (20% OFF)
-  </div>
 
-  <header class="site-header">
+<div class="announce sans" data-t="announce">Wholesale Discounts: 3–4 pcs (10% OFF) · 5–9 pcs (15% OFF) · 10+ pcs (20% OFF)</div>
+
+<div class="stage">
+  <header class="sans">
     <div class="wrap">
-      <a href="#" class="brand">MIRAN ABAYA</a>
+      <a class="brand" href="#top" aria-label="MIRAN ABAYA">MIRAN ABAYA</a>
+      <nav aria-label="Main">
+        <a href="#collections" data-t="nav_shop">Collections</a>
+        <a href="#new" data-t="nav_new">Products</a>
+        <a href="#about" data-t="nav_about">About</a>
+        <a href="#contact" data-t="nav_contact">Contact</a>
+      </nav>
       <div class="head-right">
-        <button type="button" class="pill-btn" id="langBtn" onclick="toggleLang()">አማርኛ</button>
-        <button type="button" class="pill-btn" id="savedBtn" onclick="openSavedModal()">Saved (0)</button>
-        <button type="button" class="pill-btn" id="accountBtn" onclick="handleAccountClick()">Account</button>
-        <button type="button" class="pill-btn primary" id="cartBtn" onclick="openCartModal()">Cart (0)</button>
+        <button class="pill-btn" id="langBtn" type="button">አማርኛ</button>
+        <button class="pill-btn" id="acctBtn" type="button" data-t="account">Account</button>
+        <button class="pill-btn gold" id="cartBtn" type="button"><span data-t="cart">Cart</span> (<span id="cartCount">0</span>)</button>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero-head">
-      <h1 id="pageTitle">Products</h1>
-      <p id="pageSubtitle">Abayas and dresses chosen directly by MIRAN ABAYA.</p>
-
-      <div class="action-row">
-        <a id="tgOrderLink" href="https://t.me/mame15" target="_blank" rel="noopener" class="btn-light">
-          Order on Telegram
-        </a>
-        <button type="button" class="btn-outline" id="customOrderBtn" onclick="openCustomModal()">
-          በትዕዛዝ አሰራ (50% ቀብድ)
-        </button>
-      </div>
-    </section>
-
-    <section class="filters-bar">
-      <div class="cats" id="categoryList">
-        <button type="button" class="cat-btn active" data-cat="all" onclick="selectCategory('all', this)">All</button>
-        <button type="button" class="cat-btn" data-cat="Abayas" onclick="selectCategory('Abayas', this)">Abayas</button>
-        <button type="button" class="cat-btn" data-cat="Dresses" onclick="selectCategory('Dresses', this)">Dresses</button>
-        <button type="button" class="cat-btn" data-cat="Accessories" onclick="selectCategory('Accessories', this)">Accessories</button>
-      </div>
-      <input type="search" class="search-box" id="searchInput" placeholder="Search products..." oninput="renderProducts()" />
-    </section>
-
-    <section class="grid" id="productsGrid">
-      <div class="status-msg">Loading products...</div>
-    </section>
-  </main>
-
-  <!-- Custom Order Modal (50% Deposit + Measurements) -->
-  <div class="overlay" id="customOrderModal">
-    <div class="modal-box">
-      <div class="modal-head">
-        <h3>በትዕዛዝ ማሰራት (Custom Order)</h3>
-        <button type="button" class="close-x" onclick="closeModal('customOrderModal')">&times;</button>
-      </div>
-      <div class="notice-box">
-        በልኬት ለሚሰሩ ትዕዛዞች <strong>50% ቀብድ</strong> አስቀድሞ መከፈል አለበት፤ ቀሪው 50% ሲጠናቀቅ ይከፈላል።
-      </div>
-      <form class="form-grid" id="customOrderForm" onsubmit="submitCustomOrder(event)">
-        <input type="text" id="coName" placeholder="ሙሉ ስም (Full Name)" required />
-        <input type="tel" id="coPhone" placeholder="ስልክ ቁጥር (09...)" required />
-        <input type="text" id="coStyle" placeholder="የአባያ / ቀሚስ ዲዛይን ወይም ኮድ" required />
-
-        <div class="two-col">
-          <input type="number" id="coLength" placeholder="ቁመት (Length cm)" required />
-          <input type="number" id="coBust" placeholder="ደረት (Bust cm)" required />
-          <input type="number" id="coWaist" placeholder="ወገብ (Waist cm)" required />
-          <input type="number" id="coSleeve" placeholder="እጀታ (Sleeve cm)" required />
+  <div class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <h1 data-t="h1">Modest dress, cut to flow.</h1>
+        <p data-t="hero_p">Abayas, hijabs, jilbabs and dresses, chosen and sold directly by MIRAN ABAYA.</p>
+        <div class="actions sans">
+          <a class="btn solid" href="#new" data-t="cta1">Shop products</a>
+          <a class="btn line" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
+          <button class="btn line" id="customBtn" type="button" data-t="cta3">Custom-made order</button>
         </div>
+      </div>
+      <div class="figure" aria-hidden="true">
+        <svg viewBox="0 0 400 700">
+          <path class="draw" pathLength="1" d="M200 40 C165 40 150 70 152 105 C154 140 140 160 128 185 C100 260 90 420 70 640 C130 665 270 665 330 640 C310 420 300 260 272 185 C260 160 246 140 248 105 C250 70 235 40 200 40 Z"/>
+          <path class="draw d2" pathLength="1" d="M128 185 C112 300 98 420 88 540"/>
+          <path class="draw d2" pathLength="1" d="M272 185 C288 300 302 420 312 540"/>
+          <path class="draw d2" pathLength="1" d="M200 150 L200 200"/>
+          <path class="fold draw d3" pathLength="1" d="M200 200 C195 330 185 500 160 652"/>
+          <path class="fold draw d3" pathLength="1" d="M200 200 C205 330 215 500 240 652"/>
+          <path class="fold draw d3" pathLength="1" d="M180 190 C160 330 130 500 108 646"/>
+          <path class="fold draw d3" pathLength="1" d="M220 190 C240 330 270 500 292 646"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <input type="number" id="coPrice" oninput="calcDeposit()" placeholder="የተስማሙበት ጠቅላላ ዋጋ (ETB)" required />
-        <div id="coDepositDisplay" style="font-size:0.86rem; color:var(--gold); font-weight:600;">
-          የሚከፈል 50% ቀብድ፦ 0 ETB
+<main>
+  <section class="collections" id="collections">
+    <div class="wrap">
+      <h2 data-t="h_col">Shop by collection</h2>
+      <p class="lede" data-t="col_lede">Everything in the shop, grouped the way you look for it.</p>
+      <div class="rows">
+        <button class="row" data-cat-jump="abayas"><strong data-t="c1">Abayas</strong><span data-t="c1d">Open and closed styles for everyday and occasions.</span><span class="go sans" data-t="c1g">View abayas</span></button>
+        <button class="row" data-cat-jump="hijabs"><strong data-t="c2">Hijabs</strong><span data-t="c2d">Scarves and wraps in a range of fabrics and colors.</span><span class="go sans" data-t="c2g">View hijabs</span></button>
+        <button class="row" data-cat-jump="jilbabs"><strong data-t="c3">Jilbabs</strong><span data-t="c3d">Full-length outer garments with easy fit.</span><span class="go sans" data-t="c3g">View jilbabs</span></button>
+        <button class="row" data-cat-jump="dresses"><strong data-t="c4">Dresses</strong><span data-t="c4d">Modest dresses for work, family and celebrations.</span><span class="go sans" data-t="c4g">View dresses</span></button>
+        <button class="row" data-cat-jump="accessories"><strong data-t="c5">Accessories</strong><span data-t="c5d">Finishing pieces to go with your outfit.</span><span class="go sans" data-t="c5g">View accessories</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="newin" id="new">
+    <div class="wrap">
+      <h2 data-t="h_new">Products</h2>
+      <div class="shop-bar sans">
+        <div class="chips" id="catChips">
+          <button class="chip on" data-slug="all" data-t="all">All</button>
+          <button class="chip" data-slug="abayas" data-t="c1">Abayas</button>
+          <button class="chip" data-slug="hijabs" data-t="c2">Hijabs</button>
+          <button class="chip" data-slug="jilbabs" data-t="c3">Jilbabs</button>
+          <button class="chip" data-slug="dresses" data-t="c4">Dresses</button>
+          <button class="chip" data-slug="accessories" data-t="c5">Accessories</button>
         </div>
+        <input type="search" id="searchInput" class="search-box" placeholder="Search products...">
+      </div>
+      <div id="catalogRoot">
+        <div class="empty"><p class="sans">Loading products...</p></div>
+      </div>
+    </div>
+  </section>
 
-        <textarea id="coNotes" rows="2" placeholder="ቀለም፣ ጨርቅ፣ አድራሻ ወይም ማስታወሻ..."></textarea>
-        <button type="submit" class="btn-light">ትዕዛዝ አስቀምጥ &amp; በቴሌግራም ላክ</button>
+  <section class="about" id="about">
+    <div class="wrap">
+      <h2 data-t="h_about">One shop, one owner, one standard.</h2>
+      <div>
+        <p data-t="about1">MIRAN ABAYA is a modest fashion shop. Only the owner lists and sells products here, so every piece in the shop has been chosen by the same person.</p>
+        <p data-t="about2">Browse by collection, pick your size and color, and place your order. Pay by Telebirr or bank transfer, then send your payment proof on Telegram.</p>
+        <a class="btn solid sans tg-btn" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sans" id="contact">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top">MIRAN ABAYA</a>
+      <p data-t="f_tag">Modest fashion.</p>
+    </div>
+    <ul>
+      <li><a href="#new" data-cat-jump="abayas" data-t="c1">Abayas</a></li>
+      <li><a href="#new" data-cat-jump="hijabs" data-t="c2">Hijabs</a></li>
+      <li><a href="#new" data-cat-jump="jilbabs" data-t="c3">Jilbabs</a></li>
+      <li><a href="#new" data-cat-jump="dresses" data-t="c4">Dresses</a></li>
+    </ul>
+    <ul>
+      <li>Telegram: <a class="tg" href="https://t.me/mame15" target="_blank" rel="noopener">@mame15</a></li>
+      <li><a href="admin.html" style="color:var(--gold); font-size:.86rem;" data-t="owner_portal">Owner Dashboard</a></li>
+    </ul>
+  </div>
+  <div class="wrap"><small>&copy; 2026 MIRAN ABAYA</small></div>
+</footer>
+
+<!-- Mobile cart bar -->
+<div class="cartbar sans" id="cartBar">
+  <span id="cartBarText"></span>
+  <button class="btn solid" id="cartBarBtn" type="button" style="padding:9px 18px;" data-t="view_cart">View cart</button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer sans" id="cartDrawer" aria-label="Shopping Cart">
+  <div class="dh">
+    <h2 data-t="cart">Cart</h2>
+    <button class="close-x" id="closeCart" aria-label="Close">&times;</button>
+  </div>
+  <div class="db" id="cartItems"></div>
+  <div class="df" id="cartFooter"></div>
+</aside>
+
+<dialog id="pdModal" class="sans"></dialog>
+
+<dialog id="doneModal" class="sans"></dialog>
+
+<dialog id="customModal" class="sans"></dialog>
+
+<dialog id="acctModal" class="sans">
+  <div class="acct-box">
+    <button class="close-x" id="closeAcct" style="position:absolute;top:12px;right:12px;" aria-label="Close">&times;</button>
+    <div id="acctGuest">
+      <button type="button" class="google-btn" id="googleLoginBtn">
+        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        <span data-t="google_btn">Continue with Google</span>
+      </button>
+      <div class="divider-or" data-t="or_email">or with email</div>
+      <div class="acct-tabs">
+        <button id="tabSignIn" class="on" data-t="signin">Sign In</button>
+        <button id="tabSignUp" data-t="signup">Create Account</button>
+      </div>
+      <form id="authForm">
+        <input id="authName" class="field" placeholder="Full Name" style="display:none;">
+        <input id="authPhone" class="field" placeholder="Phone Number" style="display:none;">
+        <input id="authEmail" class="field" type="email" placeholder="Email" required>
+        <input id="authPass" class="field" type="password" placeholder="Password (min 6 chars)" minlength="6" required>
+        <div class="err-msg" id="authErr"></div>
+        <button type="submit" class="btn solid" style="width:100%;margin-top:8px;" id="authSubmitBtn">Sign In</button>
       </form>
     </div>
-  </div>
-
-  <!-- Cart Modal -->
-  <div class="overlay" id="cartModal">
-    <div class="modal-box">
-      <div class="modal-head">
-        <h3>Shopping Cart</h3>
-        <button type="button" class="close-x" onclick="closeModal('cartModal')">&times;</button>
+    <div id="acctLoggedIn" style="display:none;">
+      <h2 style="font-size:1.35rem;margin-bottom:4px;" id="userGreeting">Account</h2>
+      <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px;" id="userEmailLabel"></p>
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+        <button class="btn line" id="refreshOrdersBtn" style="padding:8px 16px;font-size:.84rem;">Refresh Orders</button>
+        <button class="btn line" id="signOutBtn" style="padding:8px 16px;font-size:.84rem;border-color:var(--danger);color:var(--danger);">Sign Out</button>
       </div>
-      <div id="cartItems"></div>
-      <div style="margin-top:14px; display:flex; justify-content:space-between; font-weight:700;">
-        <span>Total:</span>
-        <span id="cartTotal">0 ETB</span>
-      </div>
-      <button type="button" class="btn-light" style="width:100%; margin-top:14px;" onclick="checkoutTelegram()">
-        Proceed via Telegram
-      </button>
+      <h3 style="font-size:1.05rem;margin-bottom:10px;" data-t="my_orders">My Orders</h3>
+      <div id="myOrdersList"></div>
     </div>
   </div>
+</dialog>
 
-  <!-- Saved Modal -->
-  <div class="overlay" id="savedModal">
-    <div class="modal-box">
-      <div class="modal-head">
-        <h3>Saved Items</h3>
-        <button type="button" class="close-x" onclick="closeModal('savedModal')">&times;</button>
-      </div>
-      <div id="savedItems"></div>
-    </div>
-  </div>
+<div class="toasts sans" id="toasts" aria-live="polite"></div>
 
-  <script>
-    const SUPABASE_URL = 'https://htwwaxpvmxlvxermsver.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e';
-    const TELEGRAM_USERNAME = 'mame15';
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://htwwaxpvmxlvxermsver.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_fFLpRv1_3-PAXzop8yA1Hw_IprKuI-e";
+  const TG_USER = "mame15";
 
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const PAY = {
+    name: "Muhamedamin Osman",
+    telebirr: "0993001097",
+    cbe: "1000704450568"
+  };
 
-    let products = [];
-    let selectedCategory = 'all';
-    let cart = JSON.parse(localStorage.getItem('miran_cart') || '[]');
-    let saved = JSON.parse(localStorage.getItem('miran_saved') || '[]');
-    let currentUser = null;
-    let isAmharic = false;
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmtETB = n => `${Math.round(Number(n) || 0).toLocaleString()} ETB`;
+  const T = (en, a) => (lang === "am" ? a : en);
 
-    const BLOCKED_CATS = ['hijab', 'hijabs', 'jilbab', 'jilbabs'];
+  function toast(msg, bad = false) {
+    const el = document.createElement("div");
+    el.className = "toast" + (bad ? " bad" : "");
+    el.textContent = msg;
+    document.getElementById("toasts").appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+  }
 
-    function esc(str) {
-      const div = document.createElement('div');
-      div.textContent = str == null ? '' : String(str);
-      return div.innerHTML;
+  const am = {
+    announce: "የጅምላ ቅናሽ፦ 3–4 ቁርጥራጭ (10% ቅናሽ) · 5–9 ቁርጥራጭ (15% ቅናሽ) · 10+ ቁርጥራጭ (20% ቅናሽ)",
+    nav_shop: "ምድቦች", nav_new: "ምርቶች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
+    cart: "ጋሪ", account: "አካውንት", all: "ሁሉም", view_cart: "ጋሪ ይመልከቱ",
+    h1: "በውበት የሚፈስ ልከኛ ልብስ።",
+    hero_p: "አባያ፣ ሂጃብ፣ ጅልባብ እና ቀሚሶች፤ በMIRAN ABAYA በቀጥታ የሚሸጡ።",
+    cta1: "ምርቶችን ይመልከቱ", cta2: "በቴሌግራም ይዘዙ", cta3: "በትዕዛዝ ማሰራት",
+    h_col: "በምድብ ይግዙ", col_lede: "በሱቁ ውስጥ ያለው ሁሉ፣ እርስዎ በሚፈልጉት መንገድ ተከፋፍሎ።",
+    c1: "አባያ", c1d: "ለዕለት ተዕለትና ለበዓል የሚሆኑ ክፍት እና ዝግ ዲዛይኖች።", c1g: "አባያዎችን ይመልከቱ",
+    c2: "ሂጃብ", c2d: "በተለያዩ ጨርቆችና ቀለማት የተዘጋጁ ስካርፍና ሻሽ።", c2g: "ሂጃቦችን ይመልከቱ",
+    c3: "ጅልባብ", c3d: "ለሰውነት የሚመች ሙሉ ርዝመት ያለው የላይ ልብስ።", c3g: "ጅልባቦችን ይመልከቱ",
+    c4: "ቀሚሶች", c4d: "ለሥራ፣ ለቤተሰብና ለበዓላት የሚሆኑ ልከኛ ቀሚሶች።", c4g: "ቀሚሶችን ይመልከቱ",
+    c5: "ማስዋቢያዎች", c5d: "አለባበስዎን የሚያሟሉ ተጨማሪ ነገሮች።", c5g: "ማስዋቢያዎችን ይመልከቱ",
+    h_new: "ምርቶች",
+    h_about: "አንድ ሱቅ፣ አንድ ባለቤት፣ አንድ ደረጃ።",
+    about1: "MIRAN ABAYA የልከኛ አልባሳት ሱቅ ነው። እዚህ ምርት የሚዘረዝርና የሚሸጥ ባለቤቱ ብቻ ነው፤ ስለዚህ በሱቁ ውስጥ ያለው ሁሉ በአንድ ሰው የተመረጠ ነው።",
+    about2: "በምድብ ይመልከቱ፣ መጠንና ቀለም ይምረጡ፣ ትዕዛዝዎን ያስገቡ። በቴሌብር ወይም በባንክ ዝውውር ይክፈሉ፣ ከዚያ የክፍያ ማረጋገጫውን በቴሌግራም ይላኩ።",
+    f_tag: "ልከኛ አልባሳት።", owner_portal: "የባለቤት ዳሽቦርድ",
+    google_btn: "በ Google ይቀጥሉ", or_email: "ወይም በኢሜይል",
+    signin: "ግባ", signup: "አካውንት ክፈት", my_orders: "የእኔ ትዕዛዞች"
+  };
+
+  let lang = "en";
+  const tEls = document.querySelectorAll("[data-t]");
+  tEls.forEach(e => e.dataset.en = e.innerHTML);
+
+  let allProducts = [];
+  let activeSlug = "all";
+  let searchTerm = "";
+  let currentUser = null;
+  let authMode = "signin";
+  let cart = JSON.parse(localStorage.getItem("miran_sb_cart") || "[]");
+  let checkout = { phone: "", address: "", note: "", pay: "telebirr" };
+
+  function calcDiscountPct(totalQty) {
+    if (totalQty >= 10) return 20;
+    if (totalQty >= 5) return 15;
+    if (totalQty >= 3) return 10;
+    return 0;
+  }
+
+  document.getElementById("langBtn").addEventListener("click", () => {
+    lang = lang === "en" ? "am" : "en";
+    document.documentElement.lang = lang;
+    tEls.forEach(e => { e.innerHTML = lang === "am" ? (am[e.dataset.t] || e.dataset.en) : e.dataset.en; });
+    document.getElementById("langBtn").textContent = lang === "am" ? "English" : "አማርኛ";
+    document.getElementById("searchInput").placeholder = T("Search products...", "ምርት ይፈልጉ...");
+    setAuthMode(authMode);
+    updateAccountUI();
+    renderCatalog();
+    renderCart();
+  });
+
+  // ---------- Supabase ----------
+  let sb = null;
+  try {
+    if (!window.supabase || !window.supabase.createClient) {
+      throw new Error("Supabase JS library did not load (check network/CDN).");
     }
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (err) {
+    document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Connection error</h3><p class="sans">${esc(err.message)}</p></div>`;
+    document.getElementById("authErr").textContent = err.message;
+  }
 
-    function toggleLang() {
-      isAmharic = !isAmharic;
-      document.getElementById('langBtn').textContent = isAmharic ? 'English' : 'አማርኛ';
-      document.getElementById('pageTitle').textContent = isAmharic ? 'ምርቶች' : 'Products';
-      document.getElementById('pageSubtitle').textContent = isAmharic
-        ? 'በ MIRAN ABAYA በቀጥታ የተመረጡ አባያዎች እና ቀሚሶች።'
-        : 'Abayas and dresses chosen directly by MIRAN ABAYA.';
-      document.getElementById('searchInput').placeholder = isAmharic ? 'ምርት ፈልግ...' : 'Search products...';
-      updateHeaderCounts();
-    }
+  // ---------- Cart ----------
+  function cartTotals() {
+    const qty = cart.reduce((s, i) => s + i.quantity, 0);
+    const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+    const pct = calcDiscountPct(qty);
+    const disc = Math.round(subtotal * pct / 100);
+    return { qty, subtotal, pct, disc, total: subtotal - disc };
+  }
 
-    function updateHeaderCounts() {
-      const cartQty = cart.reduce((sum, item) => sum + item.qty, 0);
-      document.getElementById('cartBtn').textContent = `${isAmharic ? 'ጋሪ' : 'Cart'} (${cartQty})`;
-      document.getElementById('savedBtn').textContent = `${isAmharic ? 'የተቀመጡ' : 'Saved'} (${saved.length})`;
-      if (currentUser) {
-        const displayName =
-          currentUser.user_metadata?.full_name ||
-          currentUser.user_metadata?.name ||
-          currentUser.email?.split('@')[0] ||
-          'Account';
-        document.getElementById('accountBtn').textContent = displayName.split(' ')[0];
-      } else {
-        document.getElementById('accountBtn').textContent = isAmharic ? 'መግቢያ' : 'Account';
-      }
-    }
+  function saveCart() {
+    localStorage.setItem("miran_sb_cart", JSON.stringify(cart));
+    const t = cartTotals();
+    document.getElementById("cartCount").textContent = t.qty;
+    const bar = document.getElementById("cartBar");
+    bar.classList.toggle("show", t.qty > 0);
+    document.getElementById("cartBarText").innerHTML =
+      `${t.qty} ${T(t.qty === 1 ? "item" : "items", "ቁርጥራጭ")} · <b>${fmtETB(t.total)}</b>`;
+  }
 
-    async function initAuth() {
-      const { data } = await sb.auth.getUser();
-      currentUser = data?.user || null;
-      updateHeaderCounts();
-
-      sb.auth.onAuthStateChange((_event, session) => {
-        currentUser = session?.user || null;
-        updateHeaderCounts();
+  function addToCart(p, size, color, qty) {
+    const existing = cart.find(i => i.product_id === p.id && i.size === size && i.color === color);
+    if (existing) {
+      existing.quantity = Math.min(p.stock, existing.quantity + qty);
+      existing.stock = p.stock;
+      existing.price = Number(p.price);
+    } else {
+      cart.push({
+        product_id: p.id, name: p.name, price: Number(p.price),
+        image: (p.images && p.images[0]) || "", size: size || "", color: color || "",
+        quantity: qty, stock: p.stock
       });
     }
+    renderCart();
+    toast(T("Added to cart", "ወደ ጋሪ ገብቷል"));
+  }
 
-    async function handleAccountClick() {
-      if (!currentUser) {
-        await sb.auth.signInWithOAuth({
-          provider: 'google',
-          options: {
-            redirectTo: window.location.origin + window.location.pathname
-          }
-        });
-      } else {
-        const shouldSignOut = confirm(`Signed in as ${currentUser.email}\nSign out?`);
-        if (shouldSignOut) {
-          await sb.auth.signOut();
-          currentUser = null;
-          updateHeaderCounts();
-        }
-      }
+  function openCart() {
+    renderCart();
+    document.getElementById("cartDrawer").classList.add("on");
+    document.getElementById("scrim").classList.add("on");
+  }
+  function closeCart() {
+    document.getElementById("cartDrawer").classList.remove("on");
+    document.getElementById("scrim").classList.remove("on");
+  }
+  document.getElementById("cartBtn").addEventListener("click", openCart);
+  document.getElementById("cartBarBtn").addEventListener("click", openCart);
+  document.getElementById("closeCart").addEventListener("click", closeCart);
+  document.getElementById("scrim").addEventListener("click", closeCart);
+
+  function renderCart() {
+    saveCart();
+    const itemsEl = document.getElementById("cartItems");
+    const footEl = document.getElementById("cartFooter");
+    if (!cart.length) {
+      itemsEl.innerHTML = `<div class="empty" style="margin-top:20px;"><p>${T("Your cart is empty.", "ጋሪዎ ባዶ ነው።")}</p></div>`;
+      footEl.innerHTML = "";
+      return;
     }
-
-    async function loadProducts() {
-      const grid = document.getElementById('productsGrid');
-      const { data, error } = await sb
-        .from('products')
-        .select('*')
-        .eq('is_active', true)
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        grid.innerHTML = `<div class="status-msg">Error loading products: ${esc(error.message)}</div>`;
-        return;
-      }
-
-      products = (data || []).filter((p) => {
-        const catName = (p.category_name || p.category || '').toLowerCase().trim();
-        return !BLOCKED_CATS.includes(catName);
-      });
-
-      renderProducts();
-    }
-
-    function selectCategory(cat, btnEl) {
-      selectedCategory = cat;
-      document.querySelectorAll('.cat-btn').forEach((b) => b.classList.remove('active'));
-      if (btnEl) btnEl.classList.add('active');
-      renderProducts();
-    }
-
-    function renderProducts() {
-      const grid = document.getElementById('productsGrid');
-      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-
-      const filtered = products.filter((p) => {
-        const catName = (p.category_name || p.category || '').toLowerCase();
-        const matchesCat = selectedCategory === 'all' || catName === selectedCategory.toLowerCase();
-        const matchesSearch =
-          !query ||
-          (p.name || '').toLowerCase().includes(query) ||
-          (p.description || '').toLowerCase().includes(query);
-        return matchesCat && matchesSearch;
-      });
-
-      if (!filtered.length) {
-        grid.innerHTML = '<div class="status-msg">No products found.</div>';
-        return;
-      }
-
-      grid.innerHTML = filtered.map((p) => {
-        const imgSrc = p.image_url || p.image || 'https://via.placeholder.com/400x500?text=MIRAN+ABAYA';
-        const price = Number(p.price || 0);
-        const catLabel = p.category_name || p.category || 'Abayas';
-        return `
-          <article class="card">
-            <img src="${esc(imgSrc)}" alt="${esc(p.name)}" loading="lazy" />
-            <div class="card-body">
-              <div class="card-title">${esc(p.name)}</div>
-              <div class="card-meta">${esc(catLabel)}</div>
-              <div class="card-price">${price.toLocaleString()} ETB</div>
-              <div class="card-actions">
-                <button type="button" onclick="toggleSaved('${esc(p.id)}')">Save</button>
-                <button type="button" class="add-btn" onclick="addToCart('${esc(p.id)}')">Add to Cart</button>
-              </div>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    function addToCart(id) {
-      const prod = products.find((item) => String(item.id) === String(id));
-      if (!prod) return;
-      const existing = cart.find((item) => String(item.id) === String(id));
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({
-          id: prod.id,
-          name: prod.name,
-          price: Number(prod.price || 0),
-          qty: 1
-        });
-      }
-      localStorage.setItem('miran_cart', JSON.stringify(cart));
-      updateHeaderCounts();
-    }
-
-    function toggleSaved(id) {
-      const idx = saved.findIndex((item) => String(item.id) === String(id));
-      if (idx > -1) {
-        saved.splice(idx, 1);
-      } else {
-        const prod = products.find((item) => String(item.id) === String(id));
-        if (prod) saved.push(prod);
-      }
-      localStorage.setItem('miran_saved', JSON.stringify(saved));
-      updateHeaderCounts();
-    }
-
-    function openCartModal() {
-      const wrap = document.getElementById('cartItems');
-      if (!cart.length) {
-        wrap.innerHTML = '<p style="color:var(--muted); padding:14px 0;">Your cart is empty.</p>';
-        document.getElementById('cartTotal').textContent = '0 ETB';
-      } else {
-        let total = 0;
-        wrap.innerHTML = cart.map((item, i) => {
-          const lineTotal = item.price * item.qty;
-          total += lineTotal;
-          return `
-            <div class="cart-item">
-              <div>
-                <div><strong>${esc(item.name)}</strong> x${item.qty}</div>
-                <div style="color:var(--muted); font-size:0.8rem;">${lineTotal.toLocaleString()} ETB</div>
-              </div>
-              <button type="button" class="pill-btn" onclick="removeCartItem(${i})">Remove</button>
-            </div>
-          `;
-        }).join('');
-        document.getElementById('cartTotal').textContent = `${total.toLocaleString()} ETB`;
-      }
-      document.getElementById('cartModal').classList.add('open');
-    }
-
-    function removeCartItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('miran_cart', JSON.stringify(cart));
-      updateHeaderCounts();
-      openCartModal();
-    }
-
-    function openSavedModal() {
-      const wrap = document.getElementById('savedItems');
-      if (!saved.length) {
-        wrap.innerHTML = '<p style="color:var(--muted); padding:14px 0;">No saved items yet.</p>';
-      } else {
-        wrap.innerHTML = saved.map((item) => `
-          <div class="cart-item">
-            <div>
-              <div><strong>${esc(item.name)}</strong></div>
-              <div style="color:var(--gold); font-size:0.84rem;">${Number(item.price || 0).toLocaleString()} ETB</div>
-            </div>
-            <button type="button" class="pill-btn primary" onclick="addToCart('${esc(item.id)}'); closeModal('savedModal'); openCartModal();">Add</button>
+    itemsEl.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        ${item.image ? `<img src="${esc(item.image)}" alt="">` : `<div style="width:64px;height:84px;background:var(--paper-alt);"></div>`}
+        <div>
+          <strong style="font-size:.92rem;">${esc(item.name)}</strong>
+          <small>${esc([item.color, item.size].filter(Boolean).join(" · ") || "Standard")}</small>
+          <div class="qty-ctrl">
+            <button data-cdec="${idx}" aria-label="Less">−</button>
+            <span>${item.quantity}</span>
+            <button data-cinc="${idx}" aria-label="More">+</button>
           </div>
-        `).join('');
-      }
-      document.getElementById('savedModal').classList.add('open');
+        </div>
+        <div style="text-align:right;">
+          <strong style="font-size:.92rem;">${fmtETB(item.price * item.quantity)}</strong><br>
+          <button class="rm-btn" data-crm="${idx}">${T("Remove", "አስወግድ")}</button>
+        </div>
+      </div>`).join("");
+
+    const t = cartTotals();
+    const phoneVal = checkout.phone || currentUser?.user_metadata?.phone || "";
+
+    footEl.innerHTML = `
+      <div class="tot-row"><span>${T("Subtotal", "ንዑስ ድምር")}</span><span>${fmtETB(t.subtotal)}</span></div>
+      ${t.pct > 0 ? `<div class="tot-row disc"><span>${T(`Wholesale Discount (${t.pct}%)`, `የጅምላ ቅናሽ (${t.pct}%)`)}</span><span>−${fmtETB(t.disc)}</span></div>` : ""}
+      <div class="tot-row grand"><span>${T("Total", "ጠቅላላ ድምር")}</span><span>${fmtETB(t.total)}</span></div>
+      ${currentUser ? `
+        <input id="chkPhone" class="field" type="tel" placeholder="${T("Phone Number *", "ስልክ ቁጥር *")}" value="${esc(phoneVal)}">
+        <input id="chkAddress" class="field" placeholder="${T("Delivery Address (City / Area) *", "የመድረሻ አድራሻ (ከተማ / ሰፈር) *")}" value="${esc(checkout.address)}">
+        <input id="chkNote" class="field" placeholder="${T("Note (optional)", "ተጨማሪ ማስታወሻ (አማራጭ)")}" value="${esc(checkout.note)}">
+        <span class="pay-title">${T("How will you pay?", "እንዴት ይከፍላሉ?")}</span>
+        <div class="pay-opts">
+          <label class="pay-opt"><input type="radio" name="payMethod" value="telebirr" ${checkout.pay === "telebirr" ? "checked" : ""}> Telebirr</label>
+          <label class="pay-opt"><input type="radio" name="payMethod" value="bank_transfer" ${checkout.pay === "bank_transfer" ? "checked" : ""}> ${T("Bank transfer", "የባንክ ዝውውር")}</label>
+        </div>
+        <button class="btn solid" id="placeOrderBtn" style="width:100%;">${T("Place order", "ትዕዛዝ አስገባ")}</button>
+      ` : `
+        <p style="font-size:.84rem;color:var(--muted);margin-bottom:10px;">
+          ${T("Sign in to save your order and track its status.", "ትዕዛዝ ለማስቀመጥ መጀመሪያ ወደ አካውንትዎ ይግቡ።")}
+        </p>
+        <button class="btn solid" id="chkSignInBtn" style="width:100%;">${T("Sign in to checkout", "ግባ / አካውንት ክፈት")}</button>
+      `}`;
+  }
+
+  const drawer = document.getElementById("cartDrawer");
+  drawer.addEventListener("input", e => {
+    if (e.target.id === "chkPhone") checkout.phone = e.target.value;
+    else if (e.target.id === "chkAddress") checkout.address = e.target.value;
+    else if (e.target.id === "chkNote") checkout.note = e.target.value;
+  });
+  drawer.addEventListener("change", e => {
+    if (e.target.name === "payMethod") checkout.pay = e.target.value;
+  });
+
+  drawer.addEventListener("click", async e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.cdec !== undefined) {
+      const i = Number(b.dataset.cdec); cart[i].quantity--;
+      if (cart[i].quantity < 1) cart.splice(i, 1);
+      renderCart();
+    } else if (b.dataset.cinc !== undefined) {
+      const i = Number(b.dataset.cinc);
+      if (cart[i].quantity < (cart[i].stock || 99)) { cart[i].quantity++; renderCart(); }
+      else toast(T("Stock limit reached", "ከክምችት በላይ መጨመር አይቻልም"), true);
+    } else if (b.dataset.crm !== undefined) {
+      cart.splice(Number(b.dataset.crm), 1); renderCart();
+    } else if (b.id === "chkSignInBtn") {
+      closeCart(); openAccountModal();
+    } else if (b.id === "placeOrderBtn") {
+      await submitOrder(b);
+    }
+  });
+
+  async function submitOrder(btn) {
+    if (!sb || !currentUser) return;
+    const phone = checkout.phone.trim() || (currentUser.user_metadata?.phone || "").trim();
+    const address = checkout.address.trim();
+    const note = checkout.note.trim();
+    if (!phone || !address) {
+      toast(T("Enter your phone number and delivery address", "ስልክ ቁጥር እና አድራሻ ያስገቡ"), true);
+      return;
     }
 
-    function checkoutTelegram() {
-      if (!cart.length) return;
-      const lines = cart.map((i) => `- ${i.name} x${i.qty} (${(i.price * i.qty).toLocaleString()} ETB)`);
-      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-      const msg = `MIRAN ABAYA Order:\n${lines.join('\n')}\nTotal: ${total.toLocaleString()} ETB`;
-      window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    btn.disabled = true;
+    btn.textContent = T("Saving order...", "በመመዝገብ ላይ...");
+    const snapshot = [...cart];
+    const method = checkout.pay;
+
+    const { data, error } = await sb.rpc("place_order", {
+      p_items: snapshot.map(i => ({ product_id: i.product_id, quantity: i.quantity, size: i.size, color: i.color })),
+      p_phone: phone, p_address: address, p_note: note || null, p_payment_method: method
+    });
+
+    if (error) {
+      toast(error.message, true);
+      btn.disabled = false;
+      btn.textContent = T("Place order", "ትዕዛዝ አስገባ");
+      return;
     }
 
-    function openCustomModal() {
-      if (currentUser) {
-        const nameInput = document.getElementById('coName');
-        if (!nameInput.value) {
-          nameInput.value = currentUser.user_metadata?.full_name || currentUser.user_metadata?.name || '';
-        }
-      }
-      document.getElementById('customOrderModal').classList.add('open');
+    cart = []; checkout.address = ""; checkout.note = "";
+    renderCart(); loadProducts(); closeCart();
+    showDone(data, snapshot, { phone, address, note, method });
+  }
+
+  // ---------- Order confirmation + payment instructions ----------
+  const doneModal = document.getElementById("doneModal");
+
+  function payBox(method) {
+    if (method === "telebirr") {
+      return `<div class="pay-box">
+        <div class="pay-row"><span>Telebirr</span><strong>${esc(PAY.telebirr)}</strong><button class="copy" data-copy="${esc(PAY.telebirr)}">${T("Copy", "ቅዳ")}</button></div>
+        <div class="pay-row"><span>${T("Name", "ስም")}</span><strong>${esc(PAY.name)}</strong></div>
+      </div>`;
     }
+    return `<div class="pay-box">
+      <div class="pay-row"><span>${T("Bank", "ባንክ")}</span><strong>CBE</strong></div>
+      <div class="pay-row"><span>${T("Account", "አካውንት")}</span><strong>${esc(PAY.cbe)}</strong><button class="copy" data-copy="${esc(PAY.cbe)}">${T("Copy", "ቅዳ")}</button></div>
+      <div class="pay-row"><span>${T("Name", "ስም")}</span><strong>${esc(PAY.name)}</strong></div>
+    </div>`;
+  }
 
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('open');
+  function telegramMessage(data, items, info) {
+    const lines = items.map((i, n) =>
+      `${n + 1}. ${i.name} [${[i.color, i.size].filter(Boolean).join(" / ") || "Standard"}] x${i.quantity} = ${fmtETB(i.price * i.quantity)}`
+    ).join("\n");
+    let msg = `MIRAN ABAYA ORDER\nOrder ID: ${data.order_id}\n\nItems:\n${lines}\n\n`;
+    msg += `Subtotal: ${fmtETB(data.subtotal)}\n`;
+    if (data.discount_percent > 0) msg += `Wholesale discount (${data.discount_percent}%): -${fmtETB(data.discount_amount)}\n`;
+    msg += `TOTAL: ${fmtETB(data.total)}\n\n`;
+    msg += `Payment: ${info.method === "telebirr" ? "Telebirr" : "Bank transfer (CBE)"} - payment proof attached\n`;
+    msg += `Phone: ${info.phone}\nAddress: ${info.address}`;
+    if (info.note) msg += `\nNote: ${info.note}`;
+    return msg;
+  }
+
+  function showDone(data, items, info) {
+    const tg = `https://t.me/${TG_USER}?text=${encodeURIComponent(telegramMessage(data, items, info))}`;
+    doneModal.innerHTML = `
+      <div class="done-box">
+        <button class="close-x" id="closeDone" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
+        <h2>${T("Order received", "ትዕዛዝዎ ተመዝግቧል")}</h2>
+        <div style="color:var(--muted);font-size:.9rem;">${T("Order", "ትዕዛዝ")} #${esc(String(data.order_id).slice(0, 8))}</div>
+        <div class="done-total">${fmtETB(data.total)}</div>
+        ${data.discount_percent > 0 ? `<div style="color:var(--ok);font-size:.88rem;margin-top:-8px;">${T(`Includes ${data.discount_percent}% wholesale discount`, `${data.discount_percent}% የጅምላ ቅናሽ ተካቷል`)}</div>` : ""}
+        <strong>${T("Pay this amount to:", "ይህን መጠን ይክፈሉ፦")}</strong>
+        ${payBox(info.method)}
+        <ol class="steps">
+          <li>${T("Send the exact total above.", "ከላይ ያለውን ጠቅላላ ድምር በትክክል ይላኩ።")}</li>
+          <li>${T("Tap the button below and attach your payment screenshot in Telegram.", "ከታች ያለውን አዝራር ተጭነው የክፍያ ስክሪንሾት በቴሌግራም ያያይዙ።")}</li>
+          <li>${T("We confirm your payment and send your order.", "ክፍያዎን አረጋግጠን ትዕዛዝዎን እንልካለን።")}</li>
+        </ol>
+        <a class="btn solid" href="${tg}" target="_blank" rel="noopener">${T("Send payment proof on Telegram", "የክፍያ ማረጋገጫ በቴሌግራም ላክ")}</a>
+        <button class="btn line" id="closeDone2" type="button" style="color:var(--ink);border-color:var(--line);">${T("Close", "ዝጋ")}</button>
+      </div>`;
+    doneModal.showModal();
+  }
+
+  doneModal.addEventListener("click", e => {
+    if (e.target === doneModal || e.target.id === "closeDone" || e.target.id === "closeDone2") doneModal.close();
+  });
+
+  document.addEventListener("click", async e => {
+    const c = e.target.closest("[data-copy]");
+    if (!c) return;
+    try { await navigator.clipboard.writeText(c.dataset.copy); toast(T("Copied", "ተቀድቷል")); }
+    catch { toast(c.dataset.copy); }
+  });
+
+  // ---------- Custom-made orders ----------
+  const customModal = document.getElementById("customModal");
+
+  const CU_STATUS = {
+    requested:    ["Waiting for price", "ዋጋ በመጠባበቅ ላይ"],
+    price_set:    ["Price agreed: pay deposit", "ዋጋ ተስማምተናል፤ ቀብድ ይክፈሉ"],
+    deposit_paid: ["Deposit received", "ቀብድ ተቀብለናል"],
+    in_progress:  ["Being made", "በመሰራት ላይ"],
+    ready:        ["Ready: pay the balance", "ተዘጋጅቷል፤ ቀሪውን ይክፈሉ"],
+    completed:    ["Completed", "ተጠናቋል"],
+    cancelled:    ["Cancelled", "ተሰርዟል"]
+  };
+
+  function openCustom() {
+    if (!sb) return;
+    if (!currentUser) {
+      toast(T("Sign in first to send a custom order", "በትዕዛዝ ለማሰራት መጀመሪያ ይግቡ"), true);
+      openAccountModal();
+      return;
     }
+    drawCustom();
+    customModal.showModal();
+  }
+  document.getElementById("customBtn").addEventListener("click", openCustom);
 
-    function calcDeposit() {
-      const total = Number(document.getElementById('coPrice').value) || 0;
-      const deposit = Math.round(total * 0.5);
-      const remaining = total - deposit;
-      document.getElementById('coDepositDisplay').textContent =
-        `የሚከፈል 50% ቀብድ፦ ${deposit.toLocaleString()} ETB (ቀሪ፦ ${remaining.toLocaleString()} ETB)`;
+  function drawCustom() {
+    const nm = currentUser?.user_metadata?.full_name || currentUser?.user_metadata?.name || "";
+    const ph = currentUser?.user_metadata?.phone || "";
+    customModal.innerHTML = `
+      <div class="done-box">
+        <button class="close-x" id="closeCustom" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
+        <h2>${T("Custom-made order", "በትዕዛዝ ማሰራት")}</h2>
+        <p style="color:var(--muted);font-size:.92rem;">${T(
+          "Tell us the design and your measurements. We agree the price with you on Telegram, then you pay a 50% deposit. The other 50% is paid when your piece is ready.",
+          "ዲዛይኑንና ልኬትዎን ይላኩ። ዋጋውን በቴሌግራም ተስማምተን 50% ቀብድ ይከፍላሉ፤ ቀሪው 50% ሲጠናቀቅ ይከፈላል።")}</p>
+        <form class="cu-form" id="customForm">
+          <input class="field" id="cuName" placeholder="${T("Full name *", "ሙሉ ስም *")}" value="${esc(nm)}" required>
+          <input class="field" id="cuPhone" type="tel" placeholder="${T("Phone number *", "ስልክ ቁጥር *")}" value="${esc(ph)}" required>
+          <input class="field" id="cuStyle" placeholder="${T("Design or code you want *", "የሚፈልጉት ዲዛይን ወይም ኮድ *")}" required>
+          <div class="cu-grid">
+            <label>${T("Length (cm) *", "ቁመት (ሴ.ሜ) *")}<input class="field" id="cuLength" type="number" step="0.5" min="20" max="250" required></label>
+            <label>${T("Bust (cm) *", "ደረት (ሴ.ሜ) *")}<input class="field" id="cuBust" type="number" step="0.5" min="40" max="200" required></label>
+            <label>${T("Waist (cm) *", "ወገብ (ሴ.ሜ) *")}<input class="field" id="cuWaist" type="number" step="0.5" min="30" max="200" required></label>
+            <label>${T("Sleeve (cm) *", "እጀታ (ሴ.ሜ) *")}<input class="field" id="cuSleeve" type="number" step="0.5" min="10" max="120" required></label>
+          </div>
+          <textarea class="field" id="cuNotes" rows="2" placeholder="${T("Color, fabric, delivery area, notes...", "ቀለም፣ ጨርቅ፣ አድራሻ ወይም ማስታወሻ...")}"></textarea>
+          <button class="btn solid" id="cuSubmit" type="submit">${T("Send request", "ጥያቄ ላክ")}</button>
+        </form>
+      </div>`;
+    document.getElementById("customForm").addEventListener("submit", submitCustom);
+  }
+
+  async function submitCustom(e) {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value.trim();
+    const info = {
+      name: v("cuName"), phone: v("cuPhone"), style: v("cuStyle"),
+      length: v("cuLength"), bust: v("cuBust"), waist: v("cuWaist"), sleeve: v("cuSleeve"), notes: v("cuNotes")
+    };
+    const btn = document.getElementById("cuSubmit");
+    btn.disabled = true; btn.textContent = T("Sending...", "በመላክ ላይ...");
+    const { data, error } = await sb.rpc("submit_custom_order", {
+      p_name: info.name, p_phone: info.phone, p_style: info.style,
+      p_length: Number(info.length), p_bust: Number(info.bust), p_waist: Number(info.waist), p_sleeve: Number(info.sleeve),
+      p_notes: info.notes || null
+    });
+    if (error) {
+      toast(error.message, true);
+      btn.disabled = false; btn.textContent = T("Send request", "ጥያቄ ላክ");
+      return;
     }
+    showCustomDone(data, info);
+    loadMyOrders();
+  }
 
-    async function submitCustomOrder(e) {
-      e.preventDefault();
-      const name = document.getElementById('coName').value.trim();
-      const phone = document.getElementById('coPhone').value.trim();
-      const style = document.getElementById('coStyle').value.trim();
-      const length = document.getElementById('coLength').value;
-      const bust = document.getElementById('coBust').value;
-      const waist = document.getElementById('coWaist').value;
-      const sleeve = document.getElementById('coSleeve').value;
-      const total = Number(document.getElementById('coPrice').value) || 0;
-      const deposit = Math.round(total * 0.5);
-      const notes = document.getElementById('coNotes').value.trim();
+  function showCustomDone(id, i) {
+    let msg = `MIRAN ABAYA CUSTOM ORDER\nRequest ID: ${id}\nName: ${i.name}\nPhone: ${i.phone}\nDesign: ${i.style}\n`;
+    msg += `Measurements (cm): length ${i.length} | bust ${i.bust} | waist ${i.waist} | sleeve ${i.sleeve}`;
+    if (i.notes) msg += `\nNotes: ${i.notes}`;
+    const tg = `https://t.me/${TG_USER}?text=${encodeURIComponent(msg)}`;
+    customModal.innerHTML = `
+      <div class="done-box">
+        <button class="close-x" id="closeCustom" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
+        <h2>${T("Request received", "ጥያቄዎ ተመዝግቧል")}</h2>
+        <div style="color:var(--muted);font-size:.9rem;">${T("Request", "ጥያቄ")} #${esc(String(id).slice(0, 8))}</div>
+        <ol class="steps">
+          <li>${T("Tap the button below to message us on Telegram.", "ከታች ያለውን አዝራር ተጭነው በቴሌግራም ያግኙን።")}</li>
+          <li>${T("We agree the price with you.", "ዋጋውን አብረን እንስማማለን።")}</li>
+          <li>${T("You pay the 50% deposit and we start sewing. Open Account to see the amount and payment details.", "50% ቀብድ ይከፍላሉ፣ ስፌት እንጀምራለን። መጠኑንና የክፍያ መረጃውን በአካውንትዎ ውስጥ ያገኛሉ።")}</li>
+        </ol>
+        <a class="btn solid" href="${tg}" target="_blank" rel="noopener">${T("Message us on Telegram", "በቴሌግራም ያግኙን")}</a>
+        <button class="btn line" id="closeCustom2" type="button" style="color:var(--ink);border-color:var(--line);">${T("Close", "ዝጋ")}</button>
+      </div>`;
+  }
 
-      const summary =
-        `MIRAN ABAYA - በትዕዛዝ ማሰራት (Custom Order)\n` +
-        `ስም: ${name}\n` +
-        `ስልክ: ${phone}\n` +
-        `ዲዛይን: ${style}\n` +
-        `ልኬት (cm): ቁመት ${length} | ደረት ${bust} | ወገብ ${waist} | እጀታ ${sleeve}\n` +
-        `ጠቅላላ ዋጋ: ${total.toLocaleString()} ETB\n` +
-        `50% ቀብድ: ${deposit.toLocaleString()} ETB\n` +
-        `ማስታወሻ: ${notes || '-'}`;
+  customModal.addEventListener("click", e => {
+    if (e.target === customModal || e.target.id === "closeCustom" || e.target.id === "closeCustom2") customModal.close();
+  });
 
-      await sb.from('orders').insert({
-        customer_id: currentUser ? currentUser.id : null,
-        customer_name: name,
-        customer_phone: phone,
-        total_amount: total,
-        status: 'pending_deposit',
-        notes: summary
-      });
+  // ---------- Account (Google + Email) ----------
+  const acctModal = document.getElementById("acctModal");
+  function openAccountModal() { updateAccountUI(); acctModal.showModal(); }
+  document.getElementById("acctBtn").addEventListener("click", openAccountModal);
+  document.getElementById("closeAcct").addEventListener("click", () => acctModal.close());
+  acctModal.addEventListener("click", e => { if (e.target === acctModal) acctModal.close(); });
 
-      document.getElementById('tgOrderLink').href = `https://t.me/${TELEGRAM_USERNAME}`;
-      window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(summary)}`, '_blank', 'noopener');
-      closeModal('customOrderModal');
-      document.getElementById('customOrderForm').reset();
-      calcDeposit();
+  document.getElementById("googleLoginBtn").addEventListener("click", async () => {
+    const errEl = document.getElementById("authErr");
+    if (!sb) { errEl.textContent = "Supabase client not initialized."; return; }
+    errEl.textContent = "";
+    const { error } = await sb.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.origin + window.location.pathname }
+    });
+    if (error) errEl.textContent = error.message;
+  });
+
+  function setAuthMode(m) {
+    authMode = m;
+    document.getElementById("tabSignIn").classList.toggle("on", m === "signin");
+    document.getElementById("tabSignUp").classList.toggle("on", m === "signup");
+    document.getElementById("authName").style.display = m === "signup" ? "block" : "none";
+    document.getElementById("authPhone").style.display = m === "signup" ? "block" : "none";
+    document.getElementById("authName").placeholder = T("Full Name", "ሙሉ ስም");
+    document.getElementById("authPhone").placeholder = T("Phone Number", "ስልክ ቁጥር");
+    document.getElementById("authEmail").placeholder = T("Email", "ኢሜይል");
+    document.getElementById("authPass").placeholder = T("Password (min 6 chars)", "የይለፍ ቃል (ቢያንስ 6 ቁምፊ)");
+    document.getElementById("authSubmitBtn").textContent = m === "signup" ? T("Create Account", "አካውንት ክፈት") : T("Sign In", "ግባ");
+    document.getElementById("authErr").textContent = "";
+  }
+  document.getElementById("tabSignIn").addEventListener("click", () => setAuthMode("signin"));
+  document.getElementById("tabSignUp").addEventListener("click", () => setAuthMode("signup"));
+
+  function updateAccountUI() {
+    document.getElementById("acctGuest").style.display = currentUser ? "none" : "block";
+    document.getElementById("acctLoggedIn").style.display = currentUser ? "block" : "none";
+    const fullName = currentUser?.user_metadata?.full_name || currentUser?.user_metadata?.name || "";
+    document.getElementById("acctBtn").textContent = currentUser
+      ? (fullName.split(" ")[0] || T("Account", "አካውንት"))
+      : T("Account", "አካውንት");
+    document.getElementById("refreshOrdersBtn").textContent = T("Refresh Orders", "አድስ");
+    document.getElementById("signOutBtn").textContent = T("Sign Out", "ውጣ");
+    if (currentUser) {
+      document.getElementById("userGreeting").textContent = fullName || T("My Account", "አካውንቴ");
+      document.getElementById("userEmailLabel").textContent = currentUser.email;
+      loadMyOrders();
     }
+  }
 
-    document.getElementById('tgOrderLink').href = `https://t.me/${TELEGRAM_USERNAME}`;
-    updateHeaderCounts();
-    initAuth();
+  document.getElementById("authForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const errEl = document.getElementById("authErr");
+    if (!sb) { errEl.textContent = "Supabase client not initialized."; return; }
+    const email = document.getElementById("authEmail").value.trim();
+    const password = document.getElementById("authPass").value;
+    const btn = document.getElementById("authSubmitBtn");
+    errEl.textContent = ""; btn.disabled = true;
+    const res = authMode === "signup"
+      ? await sb.auth.signUp({ email, password, options: { data: { full_name: document.getElementById("authName").value.trim(), phone: document.getElementById("authPhone").value.trim() } } })
+      : await sb.auth.signInWithPassword({ email, password });
+    btn.disabled = false;
+    if (res.error) errEl.textContent = res.error.message;
+    else { e.target.reset(); toast(authMode === "signup" ? T("Account created", "አካውንት ተከፍቷል") : T("Signed in", "ገብተዋል")); }
+  });
+
+  document.getElementById("signOutBtn").addEventListener("click", async () => { if (sb) await sb.auth.signOut(); });
+  document.getElementById("refreshOrdersBtn").addEventListener("click", loadMyOrders);
+
+  function customCard(c) {
+    const st = CU_STATUS[c.status] || [c.status, c.status];
+    const price = Number(c.agreed_price || 0);
+    const dep = Number(c.deposit_amount || 0);
+    const bal = price - dep;
+    let pay = "";
+    const owingDeposit = c.agreed_price != null && !c.deposit_paid && c.status !== "cancelled";
+    const owingBalance = c.agreed_price != null && c.deposit_paid && !c.final_paid && c.status === "ready";
+    if (owingDeposit || owingBalance) {
+      const amt = owingDeposit ? dep : bal;
+      pay = `<div style="font-weight:700;color:var(--gold-deep);">${owingDeposit ? T("Pay deposit", "ቀብድ ይክፈሉ") : T("Pay balance", "ቀሪውን ይክፈሉ")}: ${fmtETB(amt)}</div>
+        <div style="font-size:.82rem;color:var(--muted);">Telebirr</div>${payBox("telebirr")}
+        <div style="font-size:.82rem;color:var(--muted);">${T("Bank transfer", "የባንክ ዝውውር")}</div>${payBox("bank_transfer")}
+        <div style="font-size:.82rem;color:var(--muted);">${T("After paying, send the screenshot on Telegram.", "ከከፈሉ በኋላ ስክሪንሾቱን በቴሌግራም ይላኩ።")}</div>`;
+    }
+    return `<div class="cu-card">
+      <div class="ord-head"><strong>${T("Custom", "በትዕዛዝ")} #${esc(c.id.slice(0, 8))}</strong><span class="status-pill">${esc(T(st[0], st[1]))}</span></div>
+      <div>${esc(c.style)}</div>
+      ${c.agreed_price != null ? `<div>${T("Price", "ዋጋ")}: <strong>${fmtETB(price)}</strong> · ${T("Deposit (50%)", "ቀብድ (50%)")}: ${fmtETB(dep)}
+        <span class="status-pill ${c.deposit_paid ? "paid" : ""}">${c.deposit_paid ? T("Paid", "ተከፍሏል") : T("Unpaid", "አልተከፈለም")}</span> · ${T("Balance", "ቀሪ")}: ${fmtETB(bal)}
+        <span class="status-pill ${c.final_paid ? "paid" : ""}">${c.final_paid ? T("Paid", "ተከፍሏል") : T("Unpaid", "አልተከፈለም")}</span></div>` : ""}
+      ${pay}
+    </div>`;
+  }
+
+  async function loadMyOrders() {
+    if (!sb || !currentUser) return;
+    const box = document.getElementById("myOrdersList");
+    const [ord, cus] = await Promise.all([
+      sb.from("orders")
+        .select("id, status, payment_method, payment_status, subtotal, discount_percent, discount_amount, total, address, created_at, order_items(product_name, quantity, unit_price, size, color)")
+        .eq("customer_id", currentUser.id)
+        .order("created_at", { ascending: false }),
+      sb.from("custom_orders")
+        .select("id, status, style, agreed_price, deposit_amount, deposit_paid, final_paid, created_at")
+        .eq("customer_id", currentUser.id)
+        .order("created_at", { ascending: false })
+    ]);
+    if (ord.error) { box.innerHTML = `<p class="err-msg">${esc(ord.error.message)}</p>`; return; }
+    const customHtml = cus.error ? "" : (cus.data || []).map(customCard).join("");
+    const orders = ord.data || [];
+    if (!orders.length && !customHtml) { box.innerHTML = `<p style="color:var(--muted);font-size:.88rem;">${T("No orders yet.", "እስካሁን ትዕዛዝ የለም።")}</p>`; return; }
+    box.innerHTML = customHtml + orders.map(o => `
+      <div class="ord-card">
+        <div class="ord-head"><strong>#${esc(o.id.slice(0, 8))}</strong><span class="status-pill">${esc(o.status)}</span></div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:6px;">${new Date(o.created_at).toLocaleString()}</div>
+        ${(o.order_items || []).map(it => `<div>${esc(it.product_name)} (${esc([it.color, it.size].filter(Boolean).join("/") || "Std")}) &times; ${it.quantity} — ${fmtETB(it.unit_price * it.quantity)}</div>`).join("")}
+        <div style="margin-top:8px;font-weight:700;">${T("Total", "ጠቅላላ")}: ${fmtETB(o.total)}
+          ${o.discount_percent > 0 ? `<small style="color:var(--ok);">(${o.discount_percent}% OFF)</small>` : ""}</div>
+        <div style="margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <span style="color:var(--muted);">${o.payment_method === "telebirr" ? "Telebirr" : T("Bank transfer", "የባንክ ዝውውር")}</span>
+          <span class="status-pill ${o.payment_status === "paid" ? "paid" : ""}">${o.payment_status === "paid" ? T("Paid", "ተከፍሏል") : T("Unpaid", "አልተከፈለም")}</span>
+        </div>
+      </div>`).join("");
+  }
+
+  // ---------- Catalog ----------
+  async function loadProducts() {
+    if (!sb) return;
+    const { data, error } = await sb
+      .from("products")
+      .select("id, name, description, price, images, sizes, colors, stock, is_active, created_at, categories(slug, name_en, name_am)")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false });
+    if (error) {
+      document.getElementById("catalogRoot").innerHTML = `<div class="empty"><h3>Error</h3><p class="sans">${esc(error.message)}</p></div>`;
+      return;
+    }
+    allProducts = data || [];
+    renderCatalog();
+  }
+
+  function renderCatalog() {
+    const root = document.getElementById("catalogRoot");
+    if (!sb) return;
+    const list = allProducts.filter(p => {
+      const slug = p.categories?.slug || "";
+      const matchCat = activeSlug === "all" || slug === activeSlug;
+      const matchQ = !searchTerm || (p.name + " " + (p.description || "")).toLowerCase().includes(searchTerm);
+      return matchCat && matchQ;
+    });
+    if (!list.length) {
+      root.innerHTML = `
+        <div class="empty">
+          <h3>${T("No products listed yet", "ምንም ምርት አልተገኘም")}</h3>
+          <p class="sans">${T("Products will appear here as soon as the owner publishes them from the dashboard.", "ባለቤቱ ከዳሽቦርድ ምርቶችን እንዳስገባ እዚህ ይታያሉ።")}</p>
+        </div>`;
+      return;
+    }
+    root.innerHTML = `<div class="grid sans">` + list.map(p => {
+      const img = (p.images && p.images[0]) || "";
+      const catLabel = lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || "");
+      const out = p.stock <= 0;
+      return `
+        <article class="card">
+          <div class="card-img" data-open="${p.id}">
+            ${img ? `<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="no-img">${T("No photo", "ፎቶ የለም")}</div>`}
+            ${out ? `<span class="stock-tag">${T("Out of stock", "አልቋል")}</span>` : ""}
+          </div>
+          <div class="card-body">
+            <span class="card-cat">${esc(catLabel)}</span>
+            <h3 class="card-title" data-open="${p.id}">${esc(p.name)}</h3>
+            <div class="card-price">${fmtETB(p.price)}</div>
+            <button class="card-btn" data-open="${p.id}" ${out ? "disabled" : ""}>
+              ${out ? T("Out of stock", "አልቋል") : T("Select options", "ዝርዝር ይመልከቱ")}
+            </button>
+          </div>
+        </article>`;
+    }).join("") + `</div>`;
+  }
+
+  document.getElementById("catChips").addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    activeSlug = b.dataset.slug;
+    document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c === b));
+    renderCatalog();
+  });
+  document.querySelectorAll("[data-cat-jump]").forEach(el => {
+    el.addEventListener("click", () => {
+      activeSlug = el.dataset.catJump;
+      document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c.dataset.slug === activeSlug));
+      renderCatalog();
+      document.getElementById("new").scrollIntoView({ behavior: "smooth" });
+    });
+  });
+  document.getElementById("searchInput").addEventListener("input", e => { searchTerm = e.target.value.trim().toLowerCase(); renderCatalog(); });
+
+  // ---------- Product detail ----------
+  const pdModal = document.getElementById("pdModal");
+  let pdState = null;
+
+  function drawPD() {
+    const { p, imgIdx, size, color, qty } = pdState;
+    const imgs = (p.images && p.images.length) ? p.images : [];
+    const mainImg = imgs[imgIdx] || "";
+    const discPct = calcDiscountPct(qty);
+    pdModal.innerHTML = `
+      <div class="pd-grid">
+        <div class="pd-gallery">
+          ${mainImg ? `<img class="pd-main-img" src="${esc(mainImg)}" alt="${esc(p.name)}">` : `<div class="pd-main-img" style="display:grid;place-items:center;color:var(--muted);">${T("No photo", "ፎቶ የለም")}</div>`}
+          ${imgs.length > 1 ? `<div class="pd-thumbs">${imgs.map((u, i) => `<img src="${esc(u)}" class="${i === imgIdx ? "on" : ""}" data-thumb="${i}" alt="">`).join("")}</div>` : ""}
+        </div>
+        <div class="pd-info">
+          <button class="close-x" id="closePD" aria-label="Close">&times;</button>
+          <span class="card-cat">${esc(lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || ""))}</span>
+          <h2 style="font-size:1.5rem;">${esc(p.name)}</h2>
+          <div style="font-size:1.35rem;font-weight:700;color:var(--gold-deep);">${fmtETB(p.price)}</div>
+          ${p.description ? `<p style="color:var(--muted);font-size:.92rem;">${esc(p.description)}</p>` : ""}
+          ${p.sizes && p.sizes.length ? `<div><span class="opt-label">${T("Size", "መጠን")}</span><div class="opts">${p.sizes.map(s => `<button type="button" class="opt-btn ${size === s ? "on" : ""}" data-size="${esc(s)}">${esc(s)}</button>`).join("")}</div></div>` : ""}
+          ${p.colors && p.colors.length ? `<div><span class="opt-label">${T("Color", "ቀለም")}</span><div class="opts">${p.colors.map(c => `<button type="button" class="opt-btn ${color === c ? "on" : ""}" data-color="${esc(c)}">${esc(c)}</button>`).join("")}</div></div>` : ""}
+          <div>
+            <span class="opt-label">${T("Quantity", "ብዛት")} (${T("In stock", "ክምችት")}: ${p.stock})</span>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <div class="qty-ctrl"><button type="button" id="pdMinus" aria-label="Less">−</button><span>${qty}</span><button type="button" id="pdPlus" aria-label="More">+</button></div>
+              <small style="color:var(--gold-deep);font-weight:600;">${discPct > 0 ? `${discPct}% OFF` : T("3+ pcs: 10% OFF", "3+ ሲገዙ 10% ቅናሽ")}</small>
+            </div>
+          </div>
+          <div class="err-msg" id="pdErr"></div>
+          <button type="button" class="btn solid" id="pdAddBtn" ${p.stock <= 0 ? "disabled" : ""}>${p.stock <= 0 ? T("Out of stock", "አልቋል") : T("Add to cart", "ወደ ጋሪ ጨምር")}</button>
+        </div>
+      </div>`;
+  }
+
+  document.getElementById("catalogRoot").addEventListener("click", e => {
+    const t = e.target.closest("[data-open]"); if (!t) return;
+    const p = allProducts.find(x => x.id === t.dataset.open); if (!p) return;
+    pdState = { p, imgIdx: 0, size: p.sizes?.length === 1 ? p.sizes[0] : "", color: p.colors?.length === 1 ? p.colors[0] : "", qty: 1 };
+    drawPD(); pdModal.showModal();
+  });
+
+  pdModal.addEventListener("click", e => {
+    if (e.target === pdModal || e.target.id === "closePD") { pdModal.close(); return; }
+    if (!pdState) return;
+    if (e.target.dataset.thumb !== undefined) { pdState.imgIdx = Number(e.target.dataset.thumb); drawPD(); }
+    else if (e.target.dataset.size !== undefined) { pdState.size = e.target.dataset.size; drawPD(); }
+    else if (e.target.dataset.color !== undefined) { pdState.color = e.target.dataset.color; drawPD(); }
+    else if (e.target.id === "pdMinus") { pdState.qty = Math.max(1, pdState.qty - 1); drawPD(); }
+    else if (e.target.id === "pdPlus") {
+      if (pdState.qty < pdState.p.stock) { pdState.qty++; drawPD(); }
+      else toast(T("Reached available stock limit", "ከክምችት በላይ መጨመር አይቻልም"), true);
+    }
+    else if (e.target.id === "pdAddBtn") {
+      const { p, size, color, qty } = pdState;
+      const missing = [];
+      if (p.sizes?.length && !size) missing.push(T("size", "መጠን"));
+      if (p.colors?.length && !color) missing.push(T("color", "ቀለም"));
+      if (missing.length) { document.getElementById("pdErr").textContent = T("Please select: ", "እባክዎ ይምረጡ፦ ") + missing.join(", "); return; }
+      addToCart(p, size, color, qty); pdModal.close(); openCart();
+    }
+  });
+
+  // ---------- Init ----------
+  saveCart();
+  if (sb) {
+    sb.auth.getSession().then(({ data }) => { currentUser = data.session?.user || null; updateAccountUI(); renderCart(); });
+    sb.auth.onAuthStateChange((_ev, session) => { currentUser = session?.user || null; updateAccountUI(); renderCart(); });
     loadProducts();
-  </script>
+  }
+</script>
 </body>
 </html>
