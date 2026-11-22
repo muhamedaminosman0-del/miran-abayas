@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MIRAN ABAYA | Modest Fashion</title>
 <meta name="description" content="Abayas, hijabs, jilbabs, dresses and accessories from MIRAN ABAYA.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MIRAN ABAYA | Modest Fashion">
+<meta property="og:description" content="Abayas, dresses and custom-made modest fashion, chosen and sold directly by MIRAN ABAYA.">
+<meta property="og:image" content="https://muhamedaminosman0-del.github.io/miran-abayas/og-image.png">
+<meta property="og:url" content="https://muhamedaminosman0-del.github.io/miran-abayas/">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root {
     --black: #000000;
@@ -75,16 +81,6 @@
   .pill-btn.gold { border-color: var(--gold); color: var(--gold); }
   .pill-btn.gold:hover { background: var(--gold); color: var(--black); }
 
-  .hero .wrap {
-    display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center;
-    padding-top: 36px; padding-bottom: 68px; min-height: 580px;
-  }
-  .hero h1 {
-    font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 1.05;
-    letter-spacing: -.01em; max-width: 12ch;
-  }
-  .hero p { margin-top: 22px; max-width: 42ch; color: #CFC5B1; font-size: 1.08rem; }
-  .actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     padding: 13px 26px; border-radius: 2px; font-size: .95rem; cursor: pointer;
@@ -96,14 +92,14 @@
   .btn.line:hover { background: rgba(201, 169, 110, .14); }
   .btn:disabled { opacity: .5; cursor: not-allowed; }
 
-  .figure { justify-self: center; width: min(100%, 340px); }
-  .figure svg { width: 100%; height: auto; display: block; overflow: visible; }
-  .figure path { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-  .figure .fold { stroke-width: .9; opacity: .7; }
-  .figure .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 3.2s ease-out forwards; }
-  .figure .draw.d2 { animation-delay: .5s; }
-  .figure .draw.d3 { animation-delay: 1.1s; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .strip .wrap {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap;
+    padding-top: 4px; padding-bottom: 22px;
+  }
+  .strip p { color: #CFC5B1; font-size: .98rem; max-width: 56ch; }
+  .strip-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .strip-actions .btn { padding: 10px 20px; font-size: .9rem; }
+  .newin { padding-top: 36px; }
 
   section { padding: 80px 0; }
   h2 { font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); line-height: 1.15; max-width: 22ch; }
@@ -309,8 +305,6 @@
     .brand { text-align: center; font-size: .95rem; letter-spacing: .26em; }
     .head-right { justify-content: center; }
     .pill-btn { padding: 6px 12px; font-size: .82rem; }
-    .hero .wrap { grid-template-columns: 1fr; min-height: 0; padding-bottom: 48px; }
-    .figure { width: min(68%, 240px); order: -1; }
     .row { grid-template-columns: 1fr; gap: 4px; }
     .row .go { display: none; }
     .about .wrap { grid-template-columns: 1fr; gap: 20px; }
@@ -325,6 +319,11 @@
   }
   @media (max-width: 480px) {
     .wrap { padding: 0 16px; }
+    .strip p { display: none; }
+    .strip .wrap { padding-bottom: 16px; }
+    .strip-actions { width: 100%; }
+    .strip-actions .btn { flex: 1; padding: 10px 8px; font-size: .84rem; }
+    .newin { padding-top: 24px; }
     .grid { gap: 14px 10px; }
     .card-body { padding: 10px; }
     .card-title { font-size: .92rem; }
@@ -334,18 +333,12 @@
     .pay-row { grid-template-columns: 1fr auto; }
     .pay-row span { grid-column: 1 / -1; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .figure .draw { animation: none; stroke-dashoffset: 0; }
-    .row { transition: none; }
-  }
 
   html[lang="am"] body, html[lang="am"] .sans {
     font-family: "Noto Serif Ethiopic", "Noto Sans Ethiopic", "Nyala", "Abyssinica SIL", serif;
     line-height: 1.8;
   }
   html[lang="am"] .brand { letter-spacing: .2em; }
-  html[lang="am"] .hero h1 { max-width: 14ch; font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.25; }
 </style>
 </head>
 <body>
@@ -370,48 +363,18 @@
     </div>
   </header>
 
-  <div class="hero" id="top">
+  <div class="strip" id="top">
     <div class="wrap">
-      <div>
-        <h1 data-t="h1">Modest dress, cut to flow.</h1>
-        <p data-t="hero_p">Abayas, hijabs, jilbabs and dresses, chosen and sold directly by MIRAN ABAYA.</p>
-        <div class="actions sans">
-          <a class="btn solid" href="#new" data-t="cta1">Shop products</a>
-          <a class="btn line" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
-          <button class="btn line" id="customBtn" type="button" data-t="cta3">Custom-made order</button>
-        </div>
-      </div>
-      <div class="figure" aria-hidden="true">
-        <svg viewBox="0 0 400 700">
-          <path class="draw" pathLength="1" d="M200 40 C165 40 150 70 152 105 C154 140 140 160 128 185 C100 260 90 420 70 640 C130 665 270 665 330 640 C310 420 300 260 272 185 C260 160 246 140 248 105 C250 70 235 40 200 40 Z"/>
-          <path class="draw d2" pathLength="1" d="M128 185 C112 300 98 420 88 540"/>
-          <path class="draw d2" pathLength="1" d="M272 185 C288 300 302 420 312 540"/>
-          <path class="draw d2" pathLength="1" d="M200 150 L200 200"/>
-          <path class="fold draw d3" pathLength="1" d="M200 200 C195 330 185 500 160 652"/>
-          <path class="fold draw d3" pathLength="1" d="M200 200 C205 330 215 500 240 652"/>
-          <path class="fold draw d3" pathLength="1" d="M180 190 C160 330 130 500 108 646"/>
-          <path class="fold draw d3" pathLength="1" d="M220 190 C240 330 270 500 292 646"/>
-        </svg>
+      <p data-t="hero_p">Abayas, hijabs, jilbabs and dresses, chosen and sold directly by MIRAN ABAYA.</p>
+      <div class="strip-actions sans">
+        <a class="btn solid" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
+        <button class="btn line" id="customBtn" type="button" data-t="cta3">Custom-made order</button>
       </div>
     </div>
   </div>
 </div>
 
 <main>
-  <section class="collections" id="collections">
-    <div class="wrap">
-      <h2 data-t="h_col">Shop by collection</h2>
-      <p class="lede" data-t="col_lede">Everything in the shop, grouped the way you look for it.</p>
-      <div class="rows">
-        <button class="row" data-cat-jump="abayas"><strong data-t="c1">Abayas</strong><span data-t="c1d">Open and closed styles for everyday and occasions.</span><span class="go sans" data-t="c1g">View abayas</span></button>
-        <button class="row" data-cat-jump="hijabs"><strong data-t="c2">Hijabs</strong><span data-t="c2d">Scarves and wraps in a range of fabrics and colors.</span><span class="go sans" data-t="c2g">View hijabs</span></button>
-        <button class="row" data-cat-jump="jilbabs"><strong data-t="c3">Jilbabs</strong><span data-t="c3d">Full-length outer garments with easy fit.</span><span class="go sans" data-t="c3g">View jilbabs</span></button>
-        <button class="row" data-cat-jump="dresses"><strong data-t="c4">Dresses</strong><span data-t="c4d">Modest dresses for work, family and celebrations.</span><span class="go sans" data-t="c4g">View dresses</span></button>
-        <button class="row" data-cat-jump="accessories"><strong data-t="c5">Accessories</strong><span data-t="c5d">Finishing pieces to go with your outfit.</span><span class="go sans" data-t="c5g">View accessories</span></button>
-      </div>
-    </div>
-  </section>
-
   <section class="newin" id="new">
     <div class="wrap">
       <h2 data-t="h_new">Products</h2>
@@ -428,6 +391,20 @@
       </div>
       <div id="catalogRoot">
         <div class="empty"><p class="sans">Loading products...</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="collections" id="collections">
+    <div class="wrap">
+      <h2 data-t="h_col">Shop by collection</h2>
+      <p class="lede" data-t="col_lede">Everything in the shop, grouped the way you look for it.</p>
+      <div class="rows">
+        <button class="row" data-cat-jump="abayas"><strong data-t="c1">Abayas</strong><span data-t="c1d">Open and closed styles for everyday and occasions.</span><span class="go sans" data-t="c1g">View abayas</span></button>
+        <button class="row" data-cat-jump="hijabs"><strong data-t="c2">Hijabs</strong><span data-t="c2d">Scarves and wraps in a range of fabrics and colors.</span><span class="go sans" data-t="c2g">View hijabs</span></button>
+        <button class="row" data-cat-jump="jilbabs"><strong data-t="c3">Jilbabs</strong><span data-t="c3d">Full-length outer garments with easy fit.</span><span class="go sans" data-t="c3g">View jilbabs</span></button>
+        <button class="row" data-cat-jump="dresses"><strong data-t="c4">Dresses</strong><span data-t="c4d">Modest dresses for work, family and celebrations.</span><span class="go sans" data-t="c4g">View dresses</span></button>
+        <button class="row" data-cat-jump="accessories"><strong data-t="c5">Accessories</strong><span data-t="c5d">Finishing pieces to go with your outfit.</span><span class="go sans" data-t="c5g">View accessories</span></button>
       </div>
     </div>
   </section>
@@ -553,9 +530,8 @@
     announce: "የጅምላ ቅናሽ፦ 3–4 ቁርጥራጭ (10% ቅናሽ) · 5–9 ቁርጥራጭ (15% ቅናሽ) · 10+ ቁርጥራጭ (20% ቅናሽ)",
     nav_shop: "ምድቦች", nav_new: "ምርቶች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
     cart: "ጋሪ", account: "አካውንት", all: "ሁሉም", view_cart: "ጋሪ ይመልከቱ",
-    h1: "በውበት የሚፈስ ልከኛ ልብስ።",
     hero_p: "አባያ፣ ሂጃብ፣ ጅልባብ እና ቀሚሶች፤ በMIRAN ABAYA በቀጥታ የሚሸጡ።",
-    cta1: "ምርቶችን ይመልከቱ", cta2: "በቴሌግራም ይዘዙ", cta3: "በትዕዛዝ ማሰራት",
+    cta2: "በቴሌግራም ይዘዙ", cta3: "በትዕዛዝ ማሰራት",
     h_col: "በምድብ ይግዙ", col_lede: "በሱቁ ውስጥ ያለው ሁሉ፣ እርስዎ በሚፈልጉት መንገድ ተከፋፍሎ።",
     c1: "አባያ", c1d: "ለዕለት ተዕለትና ለበዓል የሚሆኑ ክፍት እና ዝግ ዲዛይኖች።", c1g: "አባያዎችን ይመልከቱ",
     c2: "ሂጃብ", c2d: "በተለያዩ ጨርቆችና ቀለማት የተዘጋጁ ስካርፍና ሻሽ።", c2g: "ሂጃቦችን ይመልከቱ",
@@ -989,7 +965,7 @@
     if (e.target === customModal || e.target.id === "closeCustom" || e.target.id === "closeCustom2") customModal.close();
   });
 
-  // ---------- Account (Google + Email) ----------
+  // ---------- Account ----------
   const acctModal = document.getElementById("acctModal");
   function openAccountModal() { updateAccountUI(); acctModal.showModal(); }
   document.getElementById("acctBtn").addEventListener("click", openAccountModal);
@@ -1128,6 +1104,7 @@
     }
     allProducts = data || [];
     renderCatalog();
+    openFromUrl();
   }
 
   function renderCatalog() {
@@ -1216,16 +1193,43 @@
           </div>
           <div class="err-msg" id="pdErr"></div>
           <button type="button" class="btn solid" id="pdAddBtn" ${p.stock <= 0 ? "disabled" : ""}>${p.stock <= 0 ? T("Out of stock", "አልቋል") : T("Add to cart", "ወደ ጋሪ ጨምር")}</button>
+          <button type="button" class="btn line" id="pdShare" style="color:var(--ink);border-color:var(--line);">${T("Share this product", "ምርቱን አጋራ")}</button>
         </div>
       </div>`;
+  }
+
+  function openProduct(p) {
+    pdState = { p, imgIdx: 0, size: p.sizes?.length === 1 ? p.sizes[0] : "", color: p.colors?.length === 1 ? p.colors[0] : "", qty: 1 };
+    drawPD(); pdModal.showModal();
   }
 
   document.getElementById("catalogRoot").addEventListener("click", e => {
     const t = e.target.closest("[data-open]"); if (!t) return;
     const p = allProducts.find(x => x.id === t.dataset.open); if (!p) return;
-    pdState = { p, imgIdx: 0, size: p.sizes?.length === 1 ? p.sizes[0] : "", color: p.colors?.length === 1 ? p.colors[0] : "", qty: 1 };
-    drawPD(); pdModal.showModal();
+    openProduct(p);
   });
+
+  let deepLinkDone = false;
+  function openFromUrl() {
+    if (deepLinkDone) return;
+    deepLinkDone = true;
+    const id = new URLSearchParams(location.search).get("p");
+    if (!id) return;
+    const p = allProducts.find(x => x.id === id);
+    if (!p) { toast(T("This product is no longer available", "ይህ ምርት አሁን አይገኝም"), true); return; }
+    document.getElementById("new").scrollIntoView();
+    openProduct(p);
+  }
+
+  async function shareProduct(p) {
+    const url = `${location.origin}${location.pathname}?p=${p.id}`;
+    if (navigator.share) {
+      try { await navigator.share({ title: p.name, text: `${p.name} - ${fmtETB(p.price)}`, url }); return; }
+      catch (err) { if (err && err.name === "AbortError") return; }
+    }
+    try { await navigator.clipboard.writeText(url); toast(T("Link copied", "አገናኙ ተቀድቷል")); }
+    catch { toast(url); }
+  }
 
   pdModal.addEventListener("click", e => {
     if (e.target === pdModal || e.target.id === "closePD") { pdModal.close(); return; }
@@ -1238,6 +1242,7 @@
       if (pdState.qty < pdState.p.stock) { pdState.qty++; drawPD(); }
       else toast(T("Reached available stock limit", "ከክምችት በላይ መጨመር አይቻልም"), true);
     }
+    else if (e.target.id === "pdShare") { shareProduct(pdState.p); }
     else if (e.target.id === "pdAddBtn") {
       const { p, size, color, qty } = pdState;
       const missing = [];
