@@ -36,16 +36,11 @@
   .google-btn {
     width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     padding: 11px 16px; border: 1px solid var(--line); border-radius: 3px;
-    background: var(--bg); color: var(--ink); font-size: .92rem; font-weight: 500;
-    cursor: pointer; transition: .2s;
+    background: var(--bg); color: var(--ink); font-size: .92rem; font-weight: 500; cursor: pointer; transition: .2s;
   }
   .google-btn:hover { border-color: var(--gold); }
-  .divider-or {
-    display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .8rem;
-  }
-  .divider-or::before, .divider-or::after {
-    content: ""; flex: 1; height: 1px; background: var(--line);
-  }
+  .divider-or { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .8rem; }
+  .divider-or::before, .divider-or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
   .err { color: var(--danger); font-size: .88rem; }
   .ok { color: var(--ok); font-size: .88rem; }
 
@@ -286,7 +281,7 @@
     const { data: profile, error } = await sb.from("profiles").select("role").eq("id", session.user.id).single();
     if (error || !profile || profile.role !== "owner") {
       await sb.auth.signOut();
-      showGate("ይህ አካውንት የባለቤት (owner) ፈቃድ የለውም። በ profiles ጠረጴዛ ውስጥ role ወደ 'owner' መቀየሩን ያረጋግጡ።");
+      showGate("ይህ አካውንት የባለቤት (owner) ፈቃድ የለውም።");
       return;
     }
     $("authGate").style.display = "none";
@@ -315,9 +310,7 @@
   });
   $("logoutBtn").addEventListener("click", async () => { await sb.auth.signOut(); showGate(""); });
 
-  sb.auth.onAuthStateChange((_ev, session) => {
-    if (session) checkOwner();
-  });
+  sb.auth.onAuthStateChange((_ev, session) => { if (session) checkOwner(); });
 
   async function loadAll() {
     await Promise.all([loadCategories(), loadProducts(), loadOrders(), loadCustom(), loadCustomers()]);
@@ -460,6 +453,7 @@
           </div>
         </div>
         <div class="acts">
+          <button class="btn ghost" data-act="link" data-id="${p.id}">አገናኝ ቅዳ</button>
           <button class="btn ghost" data-act="edit" data-id="${p.id}">አስተካክል</button>
           <button class="btn ghost" data-act="stock" data-id="${p.id}">ክምችት</button>
           <button class="btn ghost" data-act="toggle" data-id="${p.id}">${p.is_active ? "ደብቅ" : "አሳይ"}</button>
@@ -473,6 +467,11 @@
     const b = e.target.closest("button[data-act]"); if (!b) return;
     const p = products.find(x => x.id === b.dataset.id); if (!p) return;
     if (b.dataset.act === "edit") openEdit(p);
+    else if (b.dataset.act === "link") {
+      const url = new URL("index.html?p=" + p.id, location.href).href;
+      try { await navigator.clipboard.writeText(url); alert("አገናኙ ተቀድቷል፤ በቴሌግራም ወይም በኢንስታግራም መላክ ትችላለህ።"); }
+      catch { prompt("አገናኙን ይቅዱት፦", url); }
+    }
     else if (b.dataset.act === "toggle") {
       const { error } = await sb.from("products").update({ is_active: !p.is_active }).eq("id", p.id);
       if (error) return alert(error.message);
