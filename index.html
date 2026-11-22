@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MIRAN ABAYA | Modest Fashion</title>
-<meta name="description" content="Abayas, hijabs, jilbabs, dresses and accessories from MIRAN ABAYA.">
+<title>MIRAN ABAYA | Luxury Modest Fashion</title>
+<meta name="description" content="Curated abayas, hijabs, jilbabs, dresses and bespoke modest fashion from MIRAN ABAYA.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="MIRAN ABAYA | Modest Fashion">
+<meta property="og:title" content="MIRAN ABAYA | Luxury Modest Fashion">
 <meta property="og:description" content="Abayas, dresses and custom-made modest fashion, chosen and sold directly by MIRAN ABAYA.">
 <meta property="og:image" content="https://muhamedaminosman0-del.github.io/miran-abayas/og-image.png">
 <meta property="og:url" content="https://muhamedaminosman0-del.github.io/miran-abayas/">
@@ -14,34 +14,34 @@
 <script>document.documentElement.classList.add("js");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+Ethiopic:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Ethiopic:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #000000;
+    --black: #080706;
     --ivory: #FBF8F0;
     --gold: #C9A96E;
     --gold-deep: #8F7440;
-    --beige: #E7DAC5;
+    --beige: #EFE6D5;
     --text: #1B1712;
     --paper: var(--ivory);
     --paper-alt: var(--beige);
     --card: #FFFFFF;
     --ink: var(--text);
     --muted: #5E5648;
-    --line: rgba(27, 23, 18, .20);
+    --line: rgba(27, 23, 18, .16);
     --danger: #9B2C2C;
     --ok: #276749;
-    --display: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --paper: #0C0A08;
-      --paper-alt: #17130F;
-      --card: #14110D;
+      --paper-alt: #15120E;
+      --card: #13100C;
       --ink: #F3ECDD;
       --muted: #B3A78F;
-      --line: rgba(243, 236, 221, .20);
+      --line: rgba(243, 236, 221, .16);
       --gold-deep: #C9A96E;
       --danger: #E08A8A;
       --ok: #68D391;
@@ -49,11 +49,11 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
@@ -61,200 +61,233 @@
   button, input, select, textarea { font: inherit; color: inherit; }
   :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   .sans { font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif; }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
+  /* Announcement Bar */
   .announce {
-    background: linear-gradient(100deg, var(--gold) 0%, var(--gold) 42%, #F0DCAE 50%, var(--gold) 58%, var(--gold) 100%);
+    background: linear-gradient(100deg, var(--gold) 0%, var(--gold) 42%, #F3E2BE 50%, var(--gold) 58%, var(--gold) 100%);
     background-size: 260% 100%;
     animation: sheen 7s ease-in-out infinite;
     color: var(--black);
     text-align: center;
     padding: 8px 16px;
-    font-size: .84rem;
+    font-size: .8rem;
     font-weight: 600;
-    letter-spacing: .04em;
+    letter-spacing: .06em;
+    text-transform: uppercase;
   }
   @keyframes sheen { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
 
+  /* Sticky Header */
   header.site {
     position: sticky; top: 0; z-index: 55;
-    background: #000; color: #F3ECDD;
+    background: rgba(8, 7, 6, .96); color: #F3ECDD;
+    border-bottom: 1px solid rgba(201, 169, 110, .18);
     transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
   }
   header.site.hide { transform: translateY(-100%); box-shadow: none; }
-  header.site.scrolled { box-shadow: 0 8px 28px rgba(0,0,0,.4); }
+  header.site.scrolled { box-shadow: 0 10px 30px rgba(0,0,0,.45); }
   header .wrap {
     display: flex; align-items: center; justify-content: space-between;
-    padding-top: 18px; padding-bottom: 18px; gap: 16px;
+    padding-top: 16px; padding-bottom: 16px; gap: 16px;
   }
   .brand {
-    font-size: 1.05rem; letter-spacing: .32em; color: var(--gold); white-space: nowrap;
-    animation: brandIn 1.4s cubic-bezier(.2,.8,.2,1) both;
+    font-family: var(--display); font-weight: 600;
+    font-size: 1.25rem; letter-spacing: .32em; color: var(--gold); white-space: nowrap;
   }
-  @keyframes brandIn { from { opacity: 0; letter-spacing: .7em; } to { opacity: 1; } }
-
-  nav { display: flex; gap: 22px; font-size: .92rem; }
-  nav a { padding: 4px 0; border-bottom: 1px solid transparent; }
-  nav a:hover { border-color: var(--gold); }
+  nav { display: flex; gap: 26px; font-size: .88rem; letter-spacing: .04em; }
+  nav a { padding: 4px 0; border-bottom: 1px solid transparent; transition: .2s; }
+  nav a:hover { border-color: var(--gold); color: var(--gold); }
   .head-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .pill-btn {
-    background: none; border: 1px solid rgba(243,236,221,.35); color: #F3ECDD; cursor: pointer;
-    padding: 6px 13px; border-radius: 999px; font-size: .84rem; transition: .2s; white-space: nowrap;
+    background: none; border: 1px solid rgba(243,236,221,.28); color: #F3ECDD; cursor: pointer;
+    padding: 6px 13px; border-radius: 999px; font-size: .82rem; transition: .2s; white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
   }
   .pill-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .pill-btn:active { transform: scale(.97); }
   .pill-btn.gold { border-color: var(--gold); color: var(--gold); }
   .pill-btn.gold:hover { background: var(--gold); color: var(--black); }
 
-  .stage {
+  /* Editorial Hero Section */
+  .hero {
     position: relative;
-    background: radial-gradient(75% 150% at 50% 100%, rgba(201,169,110,.15), transparent 70%), var(--black);
+    background: radial-gradient(80% 130% at 75% 50%, rgba(201,169,110,.16), transparent 65%), var(--black);
     color: #F3ECDD;
+    border-bottom: 1px solid rgba(201,169,110,.35);
+    overflow: hidden;
   }
-  .stage::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: .7;
+  .hero .wrap {
+    display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center;
+    padding-top: 64px; padding-bottom: 72px;
   }
-  .strip .wrap {
-    display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap;
-    padding-top: 12px; padding-bottom: 22px;
+  .eyebrow {
+    display: inline-block; font-size: .76rem; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
   }
-  .strip .wrap > * { animation: fadeUp .9s cubic-bezier(.2,.8,.2,1) both; }
-  .strip .wrap > *:nth-child(2) { animation-delay: .15s; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .hero h1 {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(2.4rem, 5.2vw, 4.2rem); line-height: 1.06; letter-spacing: -.01em;
+    max-width: 15ch;
+  }
+  .hero p { margin-top: 18px; color: #CFC5B1; font-size: 1.04rem; max-width: 46ch; }
+  .hero-actions { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
 
-  .strip p { color: #CFC5B1; font-size: .98rem; max-width: 52ch; }
-  .strip-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .hero-card {
+    border: 1px solid rgba(201,169,110,.32);
+    background: linear-gradient(160deg, rgba(255,255,255,.04), rgba(201,169,110,.06));
+    padding: 32px 28px; display: grid; gap: 18px;
+  }
+  .hero-stat { border-bottom: 1px solid rgba(243,236,221,.12); padding-bottom: 14px; }
+  .hero-stat:last-child { border-bottom: 0; padding-bottom: 0; }
+  .hero-stat strong { display: block; font-family: var(--display); font-size: 1.35rem; color: var(--gold); font-weight: 500; }
+  .hero-stat span { font-size: .86rem; color: #B8AE9A; }
+
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 13px 26px; border-radius: 2px; font-size: .95rem; cursor: pointer;
-    border: 1px solid var(--gold); background: none; transition: background .2s, color .2s;
+    padding: 12px 24px; border-radius: 2px; font-size: .9rem; cursor: pointer;
+    border: 1px solid var(--gold); background: none; transition: background .2s, color .2s, transform .15s;
     -webkit-tap-highlight-color: transparent;
   }
-  .btn:active { transform: scale(.97); }
-  .strip-actions .btn { padding: 10px 18px; font-size: .88rem; }
-  .btn.solid { background: var(--gold); color: var(--black); font-weight: 500; position: relative; overflow: hidden; }
-  .btn.solid::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
-    transform: translateX(-120%); transition: transform .8s;
-  }
+  .btn:active { transform: scale(.98); }
+  .btn.solid { background: var(--gold); color: var(--black); font-weight: 600; }
   .btn.solid:hover { background: #DDBF86; }
-  .btn.solid:hover::after { transform: translateX(120%); }
   .btn.line { color: var(--gold); }
   .btn.line:hover { background: rgba(201, 169, 110, .14); }
   .btn:disabled { opacity: .5; cursor: not-allowed; }
 
-  section { padding: 80px 0; }
+  /* Value / Trust Strip */
+  .trust-bar {
+    background: var(--card); border-bottom: 1px solid var(--line); padding: 22px 0;
+  }
+  .trust-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .trust-item strong { display: block; font-size: .88rem; color: var(--ink); letter-spacing: .02em; }
+  .trust-item span { display: block; font-size: .8rem; color: var(--muted); margin-top: 2px; }
+
+  section { padding: 76px 0; }
   h2, .card-title, .row strong { font-family: var(--display); }
-  h2 { font-weight: 500; font-size: clamp(1.8rem, 3.6vw, 2.5rem); line-height: 1.15; max-width: 22ch; }
-  main h2::after { content: ""; display: block; width: 46px; height: 1px; margin-top: 12px; background: var(--gold); }
+  h2 { font-weight: 500; font-size: clamp(1.85rem, 3.6vw, 2.6rem); line-height: 1.15; }
+  main h2::after { content: ""; display: block; width: 48px; height: 1px; margin-top: 12px; background: var(--gold); }
   .lede { color: var(--muted); max-width: 54ch; margin-top: 12px; }
 
-  .newin { background: var(--paper-alt); padding-top: 36px; }
+  /* Catalog Section */
+  .newin { background: var(--paper); padding-top: 56px; }
+  .catalog-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .result-count { font-size: .85rem; color: var(--muted); }
+
   .shop-bar {
     display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
-    margin-top: 28px; margin-bottom: 28px;
+    margin-top: 26px; margin-bottom: 28px;
   }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     border: 1px solid var(--line); padding: 7px 16px; border-radius: 999px;
-    background: transparent; cursor: pointer; font-size: .88rem;
-    transition: background .3s, color .3s, border-color .3s, transform .2s;
+    background: transparent; cursor: pointer; font-size: .86rem; transition: .2s;
   }
-  .chip:active { transform: scale(.95); }
-  .chip.on, .chip:hover { border-color: var(--gold); background: var(--gold); color: var(--black); }
-  .search-box {
-    border: 1px solid var(--line); background: var(--card); padding: 9px 14px;
-    border-radius: 999px; min-width: 220px; font-size: .9rem;
-  }
+  .chip.on, .chip:hover { border-color: var(--gold); background: var(--gold); color: var(--black); font-weight: 500; }
 
-  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 18px; }
+  .filter-controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .search-box, .sort-select {
+    border: 1px solid var(--line); background: var(--card); padding: 8px 14px;
+    border-radius: 999px; font-size: .88rem;
+  }
+  .search-box { min-width: 210px; }
+  .sort-select { cursor: pointer; padding-right: 28px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px 20px; }
   .card {
     background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column;
-    overflow: hidden; transition: border-color .2s; position: relative;
+    overflow: hidden; transition: border-color .25s, transform .3s, box-shadow .3s; position: relative;
   }
   .card:hover { border-color: var(--gold); }
-  .card-img { aspect-ratio: 3/4; background: var(--paper); overflow: hidden; position: relative; cursor: pointer; }
-  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
-  .card-img .img2 { position: absolute; inset: 0; opacity: 0; transition: opacity .5s ease, transform .9s cubic-bezier(.2,.8,.2,1); }
+  .card-img { aspect-ratio: 3/4; background: var(--paper-alt); overflow: hidden; position: relative; cursor: pointer; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+  .card-img .img2 { position: absolute; inset: 0; opacity: 0; transition: opacity .45s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
   .card:hover .card-img img { transform: scale(1.04); }
   .card-img .no-img { width: 100%; height: 100%; display: grid; place-items: center; color: var(--muted); font-size: .85rem; }
+
   .stock-tag {
     position: absolute; top: 10px; left: 10px; background: var(--black); color: var(--gold);
-    font-size: .72rem; padding: 3px 8px; letter-spacing: .05em; z-index: 2;
+    font-size: .7rem; padding: 3px 9px; letter-spacing: .06em; text-transform: uppercase; z-index: 2;
   }
   .badge-new {
     position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--black);
-    font-size: .7rem; padding: 3px 10px; font-weight: 600; letter-spacing: .05em; z-index: 2;
+    font-size: .7rem; padding: 3px 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; z-index: 2;
+  }
+  .low-stock {
+    position: absolute; bottom: 10px; left: 10px; background: rgba(155, 44, 44, .92); color: #fff;
+    font-size: .7rem; padding: 2px 8px; border-radius: 2px; z-index: 2;
   }
   .wish-btn {
     position: absolute; top: 8px; right: 8px; z-index: 3;
     width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(27,23,18,.15);
-    background: rgba(251,248,240,.88); color: #1B1712; font-size: 1.1rem; line-height: 1;
-    display: grid; place-items: center; cursor: pointer; transition: transform .2s, background .2s, color .2s;
+    background: rgba(251,248,240,.9); color: #1B1712; font-size: 1.05rem;
+    display: grid; place-items: center; cursor: pointer; transition: .2s;
   }
   .wish-btn:hover { transform: scale(1.08); border-color: var(--gold); }
   .wish-btn.saved { background: var(--black); color: var(--gold); border-color: var(--gold); }
 
-  .card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  .card-cat { font-size: .75rem; color: var(--gold-deep); letter-spacing: .04em; }
+  .card-body { padding: 15px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .card-cat { font-size: .74rem; color: var(--gold-deep); letter-spacing: .08em; text-transform: uppercase; }
   .card-title { font-size: 1.15rem; font-weight: 600; line-height: 1.25; cursor: pointer; }
-  .card-price { font-size: 1.05rem; font-weight: 600; color: var(--gold-deep); margin-top: auto; padding-top: 6px; }
+  .card-price { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-top: auto; padding-top: 6px; }
   .card-btn {
     margin-top: 10px; width: 100%; padding: 10px; border: 1px solid var(--ink);
-    background: none; cursor: pointer; font-size: .85rem; transition: .2s;
-    -webkit-tap-highlight-color: transparent;
+    background: none; cursor: pointer; font-size: .84rem; letter-spacing: .03em; transition: .2s;
   }
   .card-btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
-  .card-btn:active:not(:disabled) { transform: scale(.97); }
   .card-btn:disabled { opacity: .45; cursor: not-allowed; }
 
   @media (hover: hover) {
     .card:hover .card-img .img2 { opacity: 1; }
-    .card.in:hover, .card:not(.reveal):hover { transform: translateY(-5px); box-shadow: 0 18px 38px rgba(0,0,0,.16); }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0,0,0,.12); }
   }
 
-  .collections { background: var(--paper); }
-  .rows { margin-top: 40px; border-top: 1px solid var(--line); }
+  /* Collections */
+  .collections { background: var(--paper-alt); }
+  .rows { margin-top: 36px; border-top: 1px solid var(--line); }
   .row {
-    display: grid; grid-template-columns: 1fr 1.2fr auto; gap: 24px; align-items: baseline;
-    padding: 24px 0; border-bottom: 1px solid var(--line); cursor: pointer;
+    display: grid; grid-template-columns: 1fr 1.3fr auto; gap: 24px; align-items: baseline;
+    padding: 22px 0; border-bottom: 1px solid var(--line); cursor: pointer;
     transition: padding-left .25s, border-color .25s; width: 100%; text-align: left; background: none; border-left: 0; border-right: 0; border-top: 0;
   }
   .row:hover { padding-left: 14px; border-bottom-color: var(--gold); }
-  .row strong { font-weight: 500; font-size: clamp(1.45rem, 2.8vw, 2rem); }
+  .row strong { font-weight: 500; font-size: clamp(1.4rem, 2.6vw, 1.95rem); }
   .row span { color: var(--muted); }
-  .row .go { color: var(--gold-deep); font-size: .92rem; }
+  .row .go { color: var(--gold-deep); font-size: .9rem; }
 
   .empty {
     margin-top: 24px; border: 1px dashed var(--gold-deep); padding: 48px 24px;
-    display: grid; justify-items: center; text-align: center; gap: 10px;
+    display: grid; justify-items: center; text-align: center; gap: 10px; background: var(--card);
   }
   .empty h3 { font-weight: 400; font-size: 1.35rem; }
   .empty p { color: var(--muted); max-width: 48ch; font-size: .95rem; }
 
+  /* About & Bespoke */
+  .about { background: var(--paper); }
   .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
   .about p { color: var(--muted); }
   .about p + p { margin-top: 14px; }
   .tg-btn { margin-top: 24px; }
 
-  footer { background: var(--black); color: #CFC5B1; padding: 56px 0 40px; }
-  footer .wrap { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  /* Footer */
+  footer { background: var(--black); color: #CFC5B1; padding: 60px 0 40px; border-top: 1px solid rgba(201,169,110,.25); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 36px; flex-wrap: wrap; }
   footer .brand { display: block; margin-bottom: 10px; }
-  footer ul { list-style: none; display: grid; gap: 6px; font-size: .95rem; }
-  footer small { display: block; margin-top: 32px; color: #8A806D; }
+  footer h4 { color: var(--gold); font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 12px; }
+  footer ul { list-style: none; display: grid; gap: 8px; font-size: .9rem; }
+  footer small { display: block; margin-top: 36px; color: #8A806D; }
   footer a.tg { color: var(--gold); border-bottom: 1px solid var(--gold); }
 
+  /* Cart Drawer */
   .scrim {
     position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 60;
     opacity: 0; pointer-events: none; transition: opacity .25s;
   }
   .scrim.on { opacity: 1; pointer-events: auto; }
   .drawer {
-    position: fixed; top: 0; bottom: 0; right: 0; width: min(440px, 100%);
+    position: fixed; top: 0; bottom: 0; right: 0; width: min(450px, 100%);
     background: var(--paper); z-index: 70; display: flex; flex-direction: column;
     transform: translateX(105%); transition: transform .3s; border-left: 1px solid var(--line);
   }
@@ -263,7 +296,7 @@
   .dh h2 { font-size: 1.35rem; }
   .close-x { background: none; border: 0; font-size: 1.4rem; cursor: pointer; padding: 4px 8px; }
   .db { flex: 1; overflow-y: auto; padding: 14px 22px; }
-  .df { border-top: 1px solid var(--line); padding: 18px 22px; background: var(--card); max-height: 62vh; overflow-y: auto; }
+  .df { border-top: 1px solid var(--line); padding: 16px 22px; background: var(--card); max-height: 66vh; overflow-y: auto; }
   .cart-item {
     display: grid; grid-template-columns: 64px 1fr auto; gap: 12px;
     padding: 12px 0; border-bottom: 1px solid var(--line); align-items: start;
@@ -271,42 +304,41 @@
   .cart-item img { width: 64px; height: 84px; object-fit: cover; border: 1px solid var(--line); }
   .cart-item small { color: var(--muted); display: block; font-size: .82rem; }
   .qty-ctrl { display: inline-flex; align-items: center; border: 1px solid var(--line); margin-top: 6px; }
-  .qty-ctrl button { width: 32px; height: 32px; background: none; border: 0; cursor: pointer; }
+  .qty-ctrl button { width: 30px; height: 30px; background: none; border: 0; cursor: pointer; }
   .qty-ctrl span { min-width: 26px; text-align: center; font-size: .88rem; }
   .rm-btn { background: none; border: 0; color: var(--danger); font-size: .78rem; cursor: pointer; text-decoration: underline; margin-top: 6px; }
-  .tot-row { display: flex; justify-content: space-between; font-size: .9rem; margin-bottom: 5px; }
+  .tot-row { display: flex; justify-content: space-between; font-size: .88rem; margin-bottom: 5px; }
   .tot-row.disc { color: var(--ok); font-weight: 600; }
   .tot-row.grand { font-size: 1.08rem; font-weight: 700; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; margin-bottom: 12px; }
-  .field { width: 100%; border: 1px solid var(--line); background: var(--paper); padding: 10px 12px; border-radius: 3px; font-size: .9rem; margin-bottom: 8px; }
+  .field { width: 100%; border: 1px solid var(--line); background: var(--paper); padding: 9px 12px; border-radius: 3px; font-size: .88rem; margin-bottom: 8px; }
 
-  .pay-title { font-size: .82rem; color: var(--muted); margin: 4px 0 6px; display: block; }
+  .pay-title { font-size: .8rem; color: var(--muted); margin: 4px 0 6px; display: block; }
   .pay-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
   .pay-opt {
-    border: 1px solid var(--line); padding: 10px; cursor: pointer; font-size: .86rem;
+    border: 1px solid var(--line); padding: 9px 10px; cursor: pointer; font-size: .84rem;
     display: flex; align-items: center; gap: 8px; border-radius: 3px;
   }
   .pay-opt:has(input:checked) { border-color: var(--gold); background: rgba(201,169,110,.14); }
   .pay-opt input { accent-color: var(--gold-deep); }
 
+  /* Dialogs & Modals */
   dialog {
     margin: auto; border: 1px solid var(--line); background: var(--paper); color: var(--ink);
-    width: min(820px, 94vw); max-height: 92vh; overflow-y: auto; border-radius: 4px; padding: 0;
+    width: min(840px, 94vw); max-height: 92vh; overflow-y: auto; border-radius: 4px; padding: 0;
   }
-  dialog[open] { animation: dlgIn .32s cubic-bezier(.2,.8,.2,1); }
-  dialog::backdrop { background: rgba(0,0,0,.65); }
-  dialog[open]::backdrop { animation: fadeIn .32s ease both; }
-  @keyframes dlgIn { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+  dialog[open] { animation: dlgIn .28s cubic-bezier(.2,.8,.2,1); }
+  dialog::backdrop { background: rgba(0,0,0,.68); }
+  @keyframes dlgIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
 
   .pd-close {
-    position: sticky; top: 8px; z-index: 5; display: block; width: 40px; height: 40px;
-    margin: 8px 8px -48px auto; border-radius: 50%; padding: 0; line-height: 40px; text-align: center;
+    position: sticky; top: 8px; z-index: 5; display: block; width: 38px; height: 38px;
+    margin: 8px 8px -46px auto; border-radius: 50%; padding: 0; line-height: 38px; text-align: center;
     background: rgba(251,248,240,.92); color: #1B1712; box-shadow: 0 2px 10px rgba(0,0,0,.25);
   }
   .pd-grid { display: grid; grid-template-columns: 1fr 1fr; }
   .pd-gallery { background: var(--paper-alt); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
   .pd-main-wrap { position: relative; cursor: zoom-in; overflow: hidden; }
   .pd-main-img { aspect-ratio: 3/4; width: 100%; object-fit: cover; border: 1px solid var(--line); display: block; }
-  .pd-main-img.fade { animation: fadeIn .45s ease both; }
   .zoom-hint {
     position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,.72); color: #F3ECDD;
     font-size: .74rem; padding: 4px 10px; border-radius: 999px; pointer-events: none;
@@ -315,36 +347,34 @@
   .pd-thumbs img { width: 56px; height: 72px; object-fit: cover; cursor: pointer; border: 2px solid transparent; opacity: .75; }
   .pd-thumbs img.on { border-color: var(--gold); opacity: 1; }
   .pd-info { padding: 26px; position: relative; display: flex; flex-direction: column; gap: 12px; }
-  .opt-label { font-size: .82rem; color: var(--muted); margin-bottom: 6px; display: block; }
+  .opt-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .opt-label { font-size: .82rem; color: var(--muted); }
+  .size-guide-link { background: none; border: 0; color: var(--gold-deep); font-size: .8rem; text-decoration: underline; cursor: pointer; }
   .opts { display: flex; flex-wrap: wrap; gap: 8px; }
-  .opt-btn { border: 1px solid var(--line); padding: 8px 14px; background: none; cursor: pointer; font-size: .86rem; }
+  .opt-btn { border: 1px solid var(--line); padding: 7px 14px; background: none; cursor: pointer; font-size: .86rem; }
   .opt-btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .err-msg { color: var(--danger); font-size: .86rem; min-height: 20px; }
+  .err-msg { color: var(--danger); font-size: .85rem; min-height: 18px; }
 
-  /* Fullscreen Lightbox Zoom */
+  /* Size Table */
+  .size-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-top: 8px; }
+  .size-table th, .size-table td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; }
+  .size-table th { background: var(--paper-alt); font-weight: 600; }
+
+  /* Lightbox */
   .lightbox {
     position: fixed; inset: 0; z-index: 98; background: rgba(0,0,0,.94);
     display: none; flex-direction: column; align-items: center; justify-content: center; padding: 16px;
   }
-  .lightbox.on { display: flex; animation: fadeIn .2s ease; }
-  .lb-stage {
-    max-width: 96vw; max-height: 82vh; overflow: auto; display: grid; place-items: center;
-    cursor: zoom-in;
-  }
-  .lb-stage img {
-    max-width: 92vw; max-height: 80vh; object-fit: contain; transition: transform .25s ease;
-    transform-origin: center center;
-  }
+  .lightbox.on { display: flex; }
+  .lb-stage { max-width: 96vw; max-height: 82vh; overflow: auto; display: grid; place-items: center; cursor: zoom-in; }
+  .lb-stage img { max-width: 92vw; max-height: 80vh; object-fit: contain; transition: transform .25s ease; }
   .lb-stage.zoomed { cursor: zoom-out; }
   .lb-stage.zoomed img { transform: scale(2); max-width: none; max-height: none; }
-  .lb-bar {
-    position: fixed; top: 14px; right: 16px; display: flex; gap: 10px; z-index: 99;
-  }
+  .lb-bar { position: fixed; top: 14px; right: 16px; display: flex; gap: 10px; z-index: 99; }
   .lb-btn {
     background: rgba(255,255,255,.15); color: #F3ECDD; border: 1px solid rgba(255,255,255,.3);
     padding: 7px 14px; border-radius: 999px; cursor: pointer; font-size: .85rem;
   }
-  .lb-btn:hover { border-color: var(--gold); color: var(--gold); }
 
   .acct-box { padding: 26px; position: relative; max-width: 560px; margin: 0 auto; }
   .acct-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
@@ -355,32 +385,28 @@
   .google-btn {
     width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     padding: 11px 16px; border: 1px solid var(--line); border-radius: 3px;
-    background: var(--card); color: var(--ink); font-size: .92rem; font-weight: 500;
-    cursor: pointer; transition: .2s;
+    background: var(--card); color: var(--ink); font-size: .92rem; font-weight: 500; cursor: pointer;
   }
-  .google-btn:hover { border-color: var(--gold); }
   .ord-card { border: 1px solid var(--line); background: var(--card); padding: 14px; margin-bottom: 12px; font-size: .88rem; }
   .ord-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 8px; }
   .status-pill { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold-deep); text-transform: capitalize; }
   .status-pill.paid { border-color: var(--ok); color: var(--ok); }
 
-  .done-box { padding: 28px 26px; position: relative; max-width: 520px; margin: 0 auto; display: grid; gap: 14px; }
-  .done-box h2 { font-size: 1.5rem; }
+  .done-box { padding: 28px 26px; position: relative; max-width: 540px; margin: 0 auto; display: grid; gap: 14px; }
+  .done-box h2 { font-size: 1.55rem; }
   .done-total { font-size: 1.7rem; font-weight: 700; color: var(--gold-deep); }
   .pay-box { border: 1px solid var(--gold); background: var(--card); padding: 14px; display: grid; gap: 8px; }
   .pay-row { display: grid; grid-template-columns: 90px 1fr auto; gap: 8px; align-items: center; font-size: .95rem; }
   .pay-row span { color: var(--muted); font-size: .84rem; }
-  .pay-row strong { word-break: break-all; font-size: 1.05rem; letter-spacing: .02em; }
+  .pay-row strong { word-break: break-all; font-size: 1.05rem; }
   .copy { border: 1px solid var(--line); background: none; padding: 5px 12px; cursor: pointer; font-size: .8rem; border-radius: 3px; }
-  .copy:hover { border-color: var(--gold); }
-  .steps { padding-left: 20px; color: var(--muted); font-size: .92rem; display: grid; gap: 4px; }
+  .steps { padding-left: 20px; color: var(--muted); font-size: .9rem; display: grid; gap: 4px; }
 
   .cu-form { display: grid; gap: 10px; }
   .cu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .cu-grid label, .cu-form label { font-size: .8rem; color: var(--muted); display: grid; gap: 4px; }
+  .cu-grid label { font-size: .8rem; color: var(--muted); display: grid; gap: 4px; }
   .cu-form .field { margin-bottom: 0; }
   .cu-card { border: 1px solid var(--gold); background: var(--card); padding: 14px; margin-bottom: 12px; font-size: .88rem; display: grid; gap: 6px; }
-  .cu-card .pay-box { margin-top: 4px; }
 
   .cartbar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: none;
@@ -391,21 +417,8 @@
   .cartbar b { color: var(--gold); font-weight: 600; }
 
   .toasts { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 95; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: max-content; max-width: 92vw; }
-  .toast { background: var(--black); color: #F3ECDD; padding: 11px 20px; border-left: 3px solid var(--gold); font-size: .9rem; box-shadow: 0 8px 24px rgba(0,0,0,.3); animation: toastIn .4s cubic-bezier(.2,.8,.2,1); }
+  .toast { background: var(--black); color: #F3ECDD; padding: 11px 20px; border-left: 3px solid var(--gold); font-size: .9rem; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
   .toast.bad { border-left-color: var(--danger); }
-  @keyframes toastIn { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
-
-  .js .reveal {
-    opacity: 0; transform: translateY(22px);
-    transition: opacity .7s cubic-bezier(.2,.8,.2,1) var(--d, 0ms), transform .7s cubic-bezier(.2,.8,.2,1) var(--d, 0ms);
-  }
-  .js .reveal.in { opacity: 1; transform: none; }
-  .js .card.reveal {
-    transition: opacity .7s cubic-bezier(.2,.8,.2,1) var(--d, 0ms), transform .7s cubic-bezier(.2,.8,.2,1) var(--d, 0ms), border-color .2s, box-shadow .3s;
-  }
-  .js .row.reveal {
-    transition: opacity .7s cubic-bezier(.2,.8,.2,1) var(--d, 0ms), transform .7s cubic-bezier(.2,.8,.2,1) var(--d, 0ms), padding-left .25s, border-color .25s;
-  }
 
   .sk { background: linear-gradient(90deg, rgba(150,140,120,.14) 25%, rgba(150,140,120,.28) 37%, rgba(150,140,120,.14) 63%); background-size: 400% 100%; animation: shimmer 1.5s ease infinite; }
   @keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
@@ -414,9 +427,6 @@
   .sk-l { height: 11px; margin: 14px 14px 0; border-radius: 2px; }
   .sk-l.s { width: 40%; } .sk-l.m { width: 75%; }
   .sk-card .sk-l:last-child { margin-bottom: 18px; }
-
-  .bump { animation: bump .55s cubic-bezier(.3,1.6,.5,1); }
-  @keyframes bump { 0% { transform: scale(1); } 40% { transform: scale(1.16); } 100% { transform: scale(1); } }
 
   html[lang="am"] { --display: "Noto Serif Ethiopic", "Nyala", "Abyssinica SIL", serif; }
   html[lang="am"] body, html[lang="am"] .sans {
@@ -427,10 +437,12 @@
 
   @media (max-width: 900px) {
     .grid { grid-template-columns: repeat(2, 1fr); }
+    .hero .wrap { grid-template-columns: 1fr; padding-top: 44px; padding-bottom: 48px; }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 800px) {
     header .wrap { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
-    .brand { text-align: center; font-size: .95rem; letter-spacing: .26em; }
+    .brand { text-align: center; font-size: 1.05rem; letter-spacing: .26em; }
     nav { justify-content: center; gap: 16px; font-size: .82rem; border-top: 1px solid rgba(243,236,221,.12); padding-top: 8px; }
     .head-right { justify-content: center; }
     .pill-btn { padding: 6px 11px; font-size: .8rem; }
@@ -438,14 +450,11 @@
     .row .go { display: none; }
     .about .wrap { grid-template-columns: 1fr; gap: 20px; }
     .pd-grid { grid-template-columns: 1fr; }
-    .pd-gallery { padding: 12px; gap: 8px; }
     .pd-main-img { aspect-ratio: 4/5; max-height: 46vh; }
-    .pd-thumbs img { width: 46px; height: 58px; }
     #pdAddBtn { position: sticky; bottom: 10px; z-index: 3; box-shadow: 0 10px 24px rgba(0,0,0,.28); }
     .chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px; padding: 2px 16px 6px; scrollbar-width: none; }
     .chips::-webkit-scrollbar { display: none; }
     .chip { flex: 0 0 auto; }
-    .shop-bar { margin-top: 18px; margin-bottom: 20px; }
     section { padding: 56px 0; }
     body { padding-bottom: 68px; }
     .toasts { bottom: 82px; }
@@ -456,25 +465,12 @@
   }
   @media (max-width: 480px) {
     .wrap { padding: 0 16px; }
-    .strip p { display: none; }
-    .strip .wrap { padding-bottom: 16px; }
-    .strip-actions { width: 100%; }
-    .strip-actions .btn { flex: 1; padding: 10px 8px; font-size: .82rem; }
-    .newin { padding-top: 24px; }
     .grid { gap: 14px 10px; }
     .card-body { padding: 10px; }
-    .card-title { font-size: .92rem; }
-    .card-price { font-size: .98rem; }
-    .card-btn { padding: 9px 4px; font-size: .8rem; }
-    .search-box { width: 100%; }
+    .card-title { font-size: .94rem; }
+    .search-box, .sort-select { width: 100%; }
     .pay-row { grid-template-columns: 1fr auto; }
     .pay-row span { grid-column: 1 / -1; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-    html { scroll-behavior: auto; }
-    .js .reveal { opacity: 1; transform: none; }
-    header.site.hide { transform: none; }
   }
 </style>
 </head>
@@ -484,11 +480,11 @@
 
 <header class="site sans">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="MIRAN ABAYA">MIRAN ABAYA</a>
+    <a class="brand" href="#top">MIRAN ABAYA</a>
     <nav aria-label="Main">
+      <a href="#new" data-t="nav_new">Catalog</a>
       <a href="#collections" data-t="nav_shop">Collections</a>
-      <a href="#new" data-t="nav_new">Products</a>
-      <a href="#about" data-t="nav_about">About</a>
+      <a href="#about" data-t="nav_about">Atelier</a>
       <a href="#contact" data-t="nav_contact">Contact</a>
     </nav>
     <div class="head-right">
@@ -500,15 +496,52 @@
   </div>
 </header>
 
-<div class="stage">
-  <div class="strip" id="top">
-    <div class="wrap">
-      <p data-t="hero_p">Abayas, hijabs, jilbabs and dresses, chosen and sold directly by MIRAN ABAYA.</p>
-      <div class="strip-actions sans">
-        <a class="btn solid" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
-        <button class="btn line" id="customBtn" type="button" data-t="cta3">Custom-made order</button>
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow sans" data-t="eyebrow">Addis Ababa · Modest Couture</span>
+      <h1 data-t="hero_h1">Timeless elegance, tailored for grace.</h1>
+      <p data-t="hero_p">Curated abayas, hijabs, jilbabs and bespoke pieces—hand-selected and crafted with uncompromising quality by MIRAN ABAYA.</p>
+      <div class="hero-actions sans">
+        <a class="btn solid" href="#new" data-t="cta_shop">Explore Collection</a>
+        <button class="btn line" id="customBtn" type="button" data-t="cta3">Bespoke / Custom Order</button>
         <button class="btn line" id="trackBtn" type="button" data-t="track_order">Track Order</button>
       </div>
+    </div>
+    <div class="hero-card sans">
+      <div class="hero-stat">
+        <strong data-t="stat1_t">Direct Boutique Curation</strong>
+        <span data-t="stat1_d">Every piece is inspected and sold directly by the owner—no third-party resellers.</span>
+      </div>
+      <div class="hero-stat">
+        <strong data-t="stat2_t">Custom Tailoring Available</strong>
+        <span data-t="stat2_d">Order any design sewn to your exact length, bust, waist, and sleeve measurements.</span>
+      </div>
+      <div class="hero-stat">
+        <strong data-t="stat3_t">Fast Local & Regional Delivery</strong>
+        <span data-t="stat3_d">Same-day dispatch in Addis Ababa and reliable shipping across Ethiopia.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar sans">
+  <div class="wrap trust-grid">
+    <div class="trust-item">
+      <strong data-t="tr1_t">Verified Fabrics</strong>
+      <span data-t="tr1_d">Breathable Nida, Silk & Crepe</span>
+    </div>
+    <div class="trust-item">
+      <strong data-t="tr2_t">Wholesale Tiers</strong>
+      <span data-t="tr2_d">Up to 20% off on 3+ pieces</span>
+    </div>
+    <div class="trust-item">
+      <strong data-t="tr3_t">Instant Checkout</strong>
+      <span data-t="tr3_d">Order with or without an account</span>
+    </div>
+    <div class="trust-item">
+      <strong data-t="tr4_t">Direct Support</strong>
+      <span data-t="tr4_d">Telegram @mame15 & 0993001097</span>
     </div>
   </div>
 </div>
@@ -516,7 +549,14 @@
 <main>
   <section class="newin" id="new">
     <div class="wrap">
-      <h2 data-t="h_new">Products</h2>
+      <div class="catalog-head">
+        <div>
+          <h2 data-t="h_new">Catalog</h2>
+          <p class="lede" data-t="cat_lede">Filter by style, sort by price, or save your favorites for later.</p>
+        </div>
+        <div class="result-count sans" id="resultCount"></div>
+      </div>
+
       <div class="shop-bar sans">
         <div class="chips" id="catChips">
           <button class="chip on" data-slug="all" data-t="all">All</button>
@@ -527,8 +567,16 @@
           <button class="chip" data-slug="dresses" data-t="c4">Dresses</button>
           <button class="chip" data-slug="accessories" data-t="c5">Accessories</button>
         </div>
-        <input type="search" id="searchInput" class="search-box" placeholder="Search products...">
+        <div class="filter-controls">
+          <select id="sortSelect" class="sort-select" aria-label="Sort products">
+            <option value="newest" data-t="sort_new">Sort: Newest</option>
+            <option value="price_asc" data-t="sort_low">Price: Low to High</option>
+            <option value="price_desc" data-t="sort_high">Price: High to Low</option>
+          </select>
+          <input type="search" id="searchInput" class="search-box" placeholder="Search products...">
+        </div>
       </div>
+
       <div id="catalogRoot">
         <div class="grid" aria-hidden="true">
           <div class="sk-card"><div class="sk-img sk"></div><div class="sk-l s sk"></div><div class="sk-l m sk"></div><div class="sk-l s sk"></div></div>
@@ -542,25 +590,28 @@
 
   <section class="collections" id="collections">
     <div class="wrap">
-      <h2 data-t="h_col">Shop by collection</h2>
-      <p class="lede" data-t="col_lede">Everything in the shop, grouped the way you look for it.</p>
+      <h2 data-t="h_col">Shop by Collection</h2>
+      <p class="lede" data-t="col_lede">Explore our curated categories tailored for everyday grace and special occasions.</p>
       <div class="rows">
-        <button class="row" data-cat-jump="abayas"><strong data-t="c1">Abayas</strong><span data-t="c1d">Open and closed styles for everyday and occasions.</span><span class="go sans" data-t="c1g">View abayas</span></button>
-        <button class="row" data-cat-jump="hijabs"><strong data-t="c2">Hijabs</strong><span data-t="c2d">Scarves and wraps in a range of fabrics and colors.</span><span class="go sans" data-t="c2g">View hijabs</span></button>
-        <button class="row" data-cat-jump="jilbabs"><strong data-t="c3">Jilbabs</strong><span data-t="c3d">Full-length outer garments with easy fit.</span><span class="go sans" data-t="c3g">View jilbabs</span></button>
-        <button class="row" data-cat-jump="dresses"><strong data-t="c4">Dresses</strong><span data-t="c4d">Modest dresses for work, family and celebrations.</span><span class="go sans" data-t="c4g">View dresses</span></button>
-        <button class="row" data-cat-jump="accessories"><strong data-t="c5">Accessories</strong><span data-t="c5d">Finishing pieces to go with your outfit.</span><span class="go sans" data-t="c5g">View accessories</span></button>
+        <button class="row" data-cat-jump="abayas"><strong data-t="c1">Abayas</strong><span data-t="c1d">Open and closed styles in premium Nida, crepe, and silk finishes.</span><span class="go sans" data-t="c1g">View abayas &rarr;</span></button>
+        <button class="row" data-cat-jump="hijabs"><strong data-t="c2">Hijabs</strong><span data-t="c2d">Lightweight chiffon, jersey, and modal wraps in versatile tones.</span><span class="go sans" data-t="c2g">View hijabs &rarr;</span></button>
+        <button class="row" data-cat-jump="jilbabs"><strong data-t="c3">Jilbabs</strong><span data-t="c3d">Full-coverage garments crafted for effortless movement and comfort.</span><span class="go sans" data-t="c3g">View jilbabs &rarr;</span></button>
+        <button class="row" data-cat-jump="dresses"><strong data-t="c4">Dresses</strong><span data-t="c4d">Refined modest dresses designed for celebrations, work, and gatherings.</span><span class="go sans" data-t="c4g">View dresses &rarr;</span></button>
+        <button class="row" data-cat-jump="accessories"><strong data-t="c5">Accessories</strong><span data-t="c5d">Pins, undercaps, and finishing touches to complete your look.</span><span class="go sans" data-t="c5g">View accessories &rarr;</span></button>
       </div>
     </div>
   </section>
 
   <section class="about" id="about">
     <div class="wrap">
-      <h2 data-t="h_about">One shop, one owner, one standard.</h2>
+      <h2 data-t="h_about">One Boutique, One Standard.</h2>
       <div>
-        <p data-t="about1">MIRAN ABAYA is a modest fashion shop. Only the owner lists and sells products here, so every piece in the shop has been chosen by the same person.</p>
-        <p data-t="about2">Browse by collection, pick your size and color, and place your order. Pay by Telebirr or bank transfer, then send your payment proof on Telegram.</p>
-        <a class="btn solid sans tg-btn" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Order on Telegram</a>
+        <p data-t="about1">MIRAN ABAYA is an independent modest fashion house. Every garment listed here is personally sourced, inspected, and fulfilled by the founder—ensuring consistent quality in stitching, drape, and fabric.</p>
+        <p data-t="about2">Order directly online in seconds or request a bespoke custom-sewn piece tailored to your exact measurements. Pay securely via Telebirr or CBE transfer and track your order every step of the way.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
+          <a class="btn solid sans" href="https://t.me/mame15" target="_blank" rel="noopener" data-t="cta2">Chat on Telegram</a>
+          <button class="btn line sans" id="openSizeGuideAbout" type="button" style="color:var(--ink);border-color:var(--line);" data-t="size_guide">Abaya Size Guide</button>
+        </div>
       </div>
     </div>
   </section>
@@ -570,32 +621,45 @@
   <div class="wrap">
     <div>
       <a class="brand" href="#top">MIRAN ABAYA</a>
-      <p data-t="f_tag">Modest fashion.</p>
+      <p style="max-width:34ch;font-size:.88rem;color:#9E9480;" data-t="f_tag">Refined modest fashion & bespoke tailoring in Addis Ababa.</p>
     </div>
-    <ul>
-      <li><a href="#new" data-cat-jump="abayas" data-t="c1">Abayas</a></li>
-      <li><a href="#new" data-cat-jump="hijabs" data-t="c2">Hijabs</a></li>
-      <li><a href="#new" data-cat-jump="jilbabs" data-t="c3">Jilbabs</a></li>
-      <li><a href="#new" data-cat-jump="dresses" data-t="c4">Dresses</a></li>
-    </ul>
-    <ul>
-      <li>Telegram: <a class="tg" href="https://t.me/mame15" target="_blank" rel="noopener">@mame15</a></li>
-      <li><a href="#top" id="footerTrackLink" style="color:var(--gold);" data-t="track_order">Track Order</a></li>
-      <li><a href="admin.html" style="color:var(--gold); font-size:.86rem;" data-t="owner_portal">Owner Dashboard</a></li>
-    </ul>
+    <div>
+      <h4 data-t="f_shop">Collections</h4>
+      <ul>
+        <li><a href="#new" data-cat-jump="abayas" data-t="c1">Abayas</a></li>
+        <li><a href="#new" data-cat-jump="hijabs" data-t="c2">Hijabs</a></li>
+        <li><a href="#new" data-cat-jump="jilbabs" data-t="c3">Jilbabs</a></li>
+        <li><a href="#new" data-cat-jump="dresses" data-t="c4">Dresses</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-t="f_help">Customer Care</h4>
+      <ul>
+        <li><a href="#top" id="footerTrackLink" style="color:var(--gold);" data-t="track_order">Track Your Order</a></li>
+        <li><a href="#top" id="footerSizeLink" data-t="size_guide">Abaya Size Guide</a></li>
+        <li>Telegram: <a class="tg" href="https://t.me/mame15" target="_blank" rel="noopener">@mame15</a></li>
+        <li>Phone: <a href="tel:+251993001097">0993 00 10 97</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-t="f_manage">Management</h4>
+      <ul>
+        <li><a href="admin.html" style="color:var(--gold);" data-t="owner_portal">Owner Dashboard</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="wrap"><small>&copy; 2026 MIRAN ABAYA</small></div>
+  <div class="wrap"><small>&copy; 2026 MIRAN ABAYA. All rights reserved.</small></div>
 </footer>
 
 <div class="cartbar sans" id="cartBar">
   <span id="cartBarText"></span>
-  <button class="btn solid" id="cartBarBtn" type="button" style="padding:9px 18px;" data-t="view_cart">View cart</button>
+  <button class="btn solid" id="cartBarBtn" type="button" style="padding:9px 18px;" data-t="view_cart">View Bag</button>
 </div>
 
 <div class="scrim" id="scrim"></div>
-<aside class="drawer sans" id="cartDrawer" aria-label="Shopping Cart">
+<aside class="drawer sans" id="cartDrawer" aria-label="Shopping Bag">
   <div class="dh">
-    <h2 data-t="cart">Cart</h2>
+    <h2 data-t="cart">Shopping Bag</h2>
     <button class="close-x" id="closeCart" aria-label="Close">&times;</button>
   </div>
   <div class="db" id="cartItems"></div>
@@ -606,6 +670,7 @@
 <dialog id="doneModal" class="sans"></dialog>
 <dialog id="customModal" class="sans"></dialog>
 <dialog id="trackModal" class="sans"></dialog>
+<dialog id="sizeModal" class="sans"></dialog>
 
 <!-- Fullscreen Image Zoom Lightbox -->
 <div class="lightbox sans" id="lightbox" role="dialog" aria-modal="true">
@@ -672,6 +737,13 @@
     cbe: "1000704450568"
   };
 
+  // Delivery Fees (ETB)
+  const DELIVERY_ZONES = [
+    { id: "addis", labelEn: "Addis Ababa Delivery (150 ETB)", labelAm: "አዲስ አበባ ዴሊቨሪ (150 ብር)", fee: 150 },
+    { id: "regional", labelEn: "Regional Cities / Cargo (300 ETB)", labelAm: "ክልል ከተሞች መላኪያ (300 ብር)", fee: 300 },
+    { id: "pickup", labelEn: "Self Pickup / Arrange Own Rider (Free)", labelAm: "በራስ መውሰድ (ነጻ)", fee: 0 }
+  ];
+
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtETB = n => `${Math.round(Number(n) || 0).toLocaleString()} ETB`;
   const T = (en, a) => (lang === "am" ? a : en);
@@ -688,20 +760,31 @@
     announce: "የጅምላ ቅናሽ፦ 3–4 ቁርጥራጭ (10% ቅናሽ) · 5–9 ቁርጥራጭ (15% ቅናሽ) · 10+ ቁርጥራጭ (20% ቅናሽ)",
     nav_shop: "ምድቦች", nav_new: "ምርቶች", nav_about: "ስለ እኛ", nav_contact: "አግኙን",
     cart: "ጋሪ", account: "አካውንት", all: "ሁሉም", saved_chip: "የተቀመጡ ♡", view_cart: "ጋሪ ይመልከቱ",
-    hero_p: "አባያ፣ ሂጃብ፣ ጅልባብ እና ቀሚሶች፤ በMIRAN ABAYA በቀጥታ የሚሸጡ።",
-    cta2: "በቴሌግራም ይዘዙ", cta3: "በትዕዛዝ ማሰራት", track_order: "ትዕዛዝ መከታተያ",
-    h_col: "በምድብ ይግዙ", col_lede: "በሱቁ ውስጥ ያለው ሁሉ፣ እርስዎ በሚፈልጉት መንገድ ተከፋፍሎ።",
-    c1: "አባያ", c1d: "ለዕለት ተዕለትና ለበዓል የሚሆኑ ክፍት እና ዝግ ዲዛይኖች።", c1g: "አባያዎችን ይመልከቱ",
-    c2: "ሂጃብ", c2d: "በተለያዩ ጨርቆችና ቀለማት የተዘጋጁ ስካርፍና ሻሽ።", c2g: "ሂጃቦችን ይመልከቱ",
-    c3: "ጅልባብ", c3d: "ለሰውነት የሚመች ሙሉ ርዝመት ያለው የላይ ልብስ።", c3g: "ጅልባቦችን ይመልከቱ",
-    c4: "ቀሚሶች", c4d: "ለሥራ፣ ለቤተሰብና ለበዓላት የሚሆኑ ልከኛ ቀሚሶች።", c4g: "ቀሚሶችን ይመልከቱ",
-    c5: "ማስዋቢያዎች", c5d: "አለባበስዎን የሚያሟሉ ተጨማሪ ነገሮች።", c5g: "ማስዋቢያዎችን ይመልከቱ",
-    h_new: "ምርቶች",
-    h_about: "አንድ ሱቅ፣ አንድ ባለቤት፣ አንድ ደረጃ።",
-    about1: "MIRAN ABAYA የልከኛ አልባሳት ሱቅ ነው። እዚህ ምርት የሚዘረዝርና የሚሸጥ ባለቤቱ ብቻ ነው፤ ስለዚህ በሱቁ ውስጥ ያለው ሁሉ በአንድ ሰው የተመረጠ ነው።",
-    about2: "በምድብ ይመልከቱ፣ መጠንና ቀለም ይምረጡ፣ ትዕዛዝዎን ያስገቡ። በቴሌብር ወይም በባንክ ዝውውር ይክፈሉ፣ ከዚያ የክፍያ ማረጋገጫውን በቴሌግራም ይላኩ።",
-    f_tag: "ልከኛ አልባሳት።", owner_portal: "የባለቤት ዳሽቦርድ",
-    google_btn: "በ Google ይቀጥሉ", or_email: "ወይም በኢሜይል",
+    eyebrow: "አዲስ አበባ · ልከኛ ፋሽን",
+    hero_h1: "ዘመን የማይሽረው ውበት፣ በልከኝነት የተሰፋ።",
+    hero_p: "አባያ፣ ሂጃብ፣ ጅልባብ እና በልኬት የሚሰፉ ልብሶች፤ በMIRAN ABAYA በጥራት ተመርጠው የሚቀርቡ።",
+    cta_shop: "ምርቶችን ይመልከቱ", cta2: "በቴሌግራም ያውሩን", cta3: "በልኬት ማሰራት", track_order: "ትዕዛዝ መከታተያ",
+    stat1_t: "ቀጥታ የቡቲክ ጥራት", stat1_d: "እያንዳንዱ ልብስ በባለቤቱ ተመርጦና ተፈትሾ የሚቀርብ ነው።",
+    stat2_t: "በልኬት ስፌት", stat2_d: "የሚፈልጉትን ዲዛይን በቁመትዎና በሰውነትዎ ልኬት እናሰፋለን።",
+    stat3_t: "ፈጣን አቅርቦት", stat3_d: "አዲስ አበባ ውስጥ በቀኑ፣ ወደ ክልል ከተሞች በፈጣን መላኪያ እናደርሳለን።",
+    tr1_t: "የተረጋገጠ ጨርቅ", tr1_d: "ምቹ ኒዳ፣ ሲልክ እና ክሬፕ",
+    tr2_t: "የጅምላ ቅናሽ", tr2_d: "3+ ሲገዙ እስከ 20% ቅናሽ",
+    tr3_t: "ፈጣን ግዢ", tr3_d: "ያለ ምዝገባ በቀጥታ ይዘዙ",
+    tr4_t: "ቀጥታ ድጋፍ", tr4_d: "ቴሌግራም @mame15 · 0993001097",
+    h_new: "ምርቶች", cat_lede: "በምድብ ይምረጡ፣ በዋጋ ይደርድሩ ወይም ለወደፊት ያስቀምጡ።",
+    sort_new: "ቅደም ተከተል፦ አዲስ", sort_low: "ዋጋ፦ ከርካሽ ወደ ውድ", sort_high: "ዋጋ፦ ከውድ ወደ ርካሽ",
+    h_col: "በምድብ ይግዙ", col_lede: "ለዕለት ተዕለትና ለልዩ ፕሮግራሞች የተዘጋጁ ምድቦች።",
+    c1: "አባያ", c1d: "ለዕለት ተዕለትና ለበዓል የሚሆኑ ክፍት እና ዝግ ዲዛይኖች።", c1g: "አባያዎችን ይመልከቱ →",
+    c2: "ሂጃብ", c2d: "በተለያዩ ጨርቆችና ቀለማት የተዘጋጁ ስካርፍና ሻሽ።", c2g: "ሂጃቦችን ይመልከቱ →",
+    c3: "ጅልባብ", c3d: "ለሰውነት የሚመች ሙሉ ርዝመት ያለው የላይ ልብስ።", c3g: "ጅልባቦችን ይመልከቱ →",
+    c4: "ቀሚሶች", c4d: "ለሥራ፣ ለቤተሰብና ለበዓላት የሚሆኑ ልከኛ ቀሚሶች።", c4g: "ቀሚሶችን ይመልከቱ →",
+    c5: "ማስዋቢያዎች", c5d: "አለባበስዎን የሚያሟሉ ተጨማሪ ነገሮች።", c5g: "ማስዋቢያዎችን ይመልከቱ →",
+    h_about: "አንድ ሱቅ፣ አንድ ደረጃ።",
+    about1: "MIRAN ABAYA የልከኛ አልባሳት ሱቅ ነው። እያንዳንዱ ልብስ በባለቤቱ ተመርጦና ስፌቱ ተፈትሾ የሚቀርብ በመሆኑ ጥራቱ አስተማማኝ ነው።",
+    about2: "ያለ ምንም ውጣ ውረድ በቀጥታ ይዘዙ ወይም በልኬትዎ ያሰፉ። በቴሌብር ወይም በንግድ ባንክ ከፍለው ትዕዛዝዎን በቀላሉ ይከታተሉ።",
+    size_guide: "የአባያ መለኪያ መመሪያ",
+    f_tag: "ልከኛ ፋሽን እና በልኬት ስፌት — አዲስ አበባ።", f_shop: "ምድቦች", f_help: "የደንበኞች አገልግሎት", f_manage: "አስተዳደር",
+    owner_portal: "የባለቤት ዳሽቦርድ", google_btn: "በ Google ይቀጥሉ", or_email: "ወይም በኢሜይል",
     signin: "ግባ", signup: "አካውንት ክፈት", my_orders: "የእኔ ትዕዛዞች"
   };
 
@@ -711,13 +794,14 @@
 
   let allProducts = [];
   let activeSlug = "all";
+  let sortMode = "newest";
   let searchTerm = "";
   let currentUser = null;
   let lastUserId = undefined;
   let authMode = "signin";
   let cart = JSON.parse(localStorage.getItem("miran_sb_cart") || "[]");
   let wishlist = new Set(JSON.parse(localStorage.getItem("miran_wishlist") || "[]"));
-  let checkout = { phone: "", address: "", note: "", pay: "telebirr" };
+  let checkout = { name: "", phone: "", address: "", note: "", pay: "telebirr", zone: "addis" };
 
   function calcDiscountPct(totalQty) {
     if (totalQty >= 10) return 20;
@@ -743,7 +827,7 @@
     applyLanguage();
   });
 
-  // ---------- Wishlist (Saved Items) ----------
+  // ---------- Wishlist ----------
   function saveWishlist() {
     localStorage.setItem("miran_wishlist", JSON.stringify([...wishlist]));
     document.getElementById("wishCount").textContent = wishlist.size;
@@ -768,11 +852,43 @@
     document.getElementById("new").scrollIntoView({ behavior: "smooth" });
   });
 
+  // ---------- Size Guide Modal ----------
+  const sizeModal = document.getElementById("sizeModal");
+  function openSizeGuide() {
+    sizeModal.innerHTML = `
+      <div class="done-box">
+        <button class="close-x" id="closeSize" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
+        <h2>${T("Abaya Size Guide", "የአባያ መለኪያ መመሪያ")}</h2>
+        <p style="color:var(--muted);font-size:.9rem;">${T("Choose your size based on your height with heels/shoes you usually wear.", "ጫማ ሲያደርጉ ባለዎት ቁመት መሰረት ትክክለኛውን ቁጥር ይምረጡ።")}</p>
+        <table class="size-table">
+          <thead>
+            <tr>
+              <th>${T("Abaya Size", "የአባያ ቁጥር")}</th>
+              <th>${T("Your Height", "የእርስዎ ቁመት")}</th>
+              <th>${T("Length (cm)", "የአባያው ርዝመት")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>52</strong></td><td>155 – 160 cm (5'1" – 5'3")</td><td>132 cm</td></tr>
+            <tr><td><strong>54</strong></td><td>161 – 165 cm (5'3" – 5'5")</td><td>137 cm</td></tr>
+            <tr><td><strong>56</strong></td><td>166 – 170 cm (5'5" – 5'7")</td><td>142 cm</td></tr>
+            <tr><td><strong>58</strong></td><td>171 – 175 cm (5'7" – 5'9")</td><td>147 cm</td></tr>
+            <tr><td><strong>60</strong></td><td>176 – 182 cm (5'9" – 6'0")</td><td>152 cm</td></tr>
+          </tbody>
+        </table>
+        <p style="color:var(--muted);font-size:.84rem;">${T("Need a custom length or wider cut? Use our Bespoke / Custom Order option.", "የተለየ ርዝመት ወይም ስፋት ከፈለጉ «በልኬት ማሰራት» የሚለውን ይጠቀሙ።")}</p>
+      </div>`;
+    sizeModal.showModal();
+  }
+  document.getElementById("openSizeGuideAbout").addEventListener("click", openSizeGuide);
+  document.getElementById("footerSizeLink").addEventListener("click", e => { e.preventDefault(); openSizeGuide(); });
+  sizeModal.addEventListener("click", e => { if (e.target === sizeModal || e.target.id === "closeSize") sizeModal.close(); });
+
   // ---------- Supabase ----------
   let sb = null;
   try {
     if (!window.supabase || !window.supabase.createClient) {
-      throw new Error("Supabase JS library did not load (check network/CDN).");
+      throw new Error("Supabase JS library did not load.");
     }
     sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   } catch (err) {
@@ -780,13 +896,15 @@
     document.getElementById("authErr").textContent = err.message;
   }
 
-  // ---------- Cart ----------
+  // ---------- Cart & Guest Checkout ----------
   function cartTotals() {
     const qty = cart.reduce((s, i) => s + i.quantity, 0);
     const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
     const pct = calcDiscountPct(qty);
     const disc = Math.round(subtotal * pct / 100);
-    return { qty, subtotal, pct, disc, total: subtotal - disc };
+    const zoneObj = DELIVERY_ZONES.find(z => z.id === checkout.zone) || DELIVERY_ZONES[0];
+    const delivery = qty > 0 ? zoneObj.fee : 0;
+    return { qty, subtotal, pct, disc, delivery, total: (subtotal - disc) + delivery };
   }
 
   function saveCart() {
@@ -821,8 +939,7 @@
       });
     }
     renderCart();
-    bumpCart();
-    toast(T("Added to cart", "ወደ ጋሪ ገብቷል"));
+    toast(T("Added to bag", "ወደ ጋሪ ገብቷል"));
     return true;
   }
 
@@ -845,7 +962,7 @@
     const itemsEl = document.getElementById("cartItems");
     const footEl = document.getElementById("cartFooter");
     if (!cart.length) {
-      itemsEl.innerHTML = `<div class="empty" style="margin-top:20px;"><p>${T("Your cart is empty.", "ጋሪዎ ባዶ ነው።")}</p></div>`;
+      itemsEl.innerHTML = `<div class="empty" style="margin-top:20px;"><p>${T("Your shopping bag is empty.", "ጋሪዎ ባዶ ነው።")}</p></div>`;
       footEl.innerHTML = "";
       return;
     }
@@ -868,38 +985,42 @@
       </div>`).join("");
 
     const t = cartTotals();
+    const nameVal = checkout.name || currentUser?.user_metadata?.full_name || currentUser?.user_metadata?.name || "";
     const phoneVal = checkout.phone || currentUser?.user_metadata?.phone || "";
 
     footEl.innerHTML = `
       <div class="tot-row"><span>${T("Subtotal", "ንዑስ ድምር")}</span><span>${fmtETB(t.subtotal)}</span></div>
       ${t.pct > 0 ? `<div class="tot-row disc"><span>${T(`Wholesale Discount (${t.pct}%)`, `የጅምላ ቅናሽ (${t.pct}%)`)}</span><span>−${fmtETB(t.disc)}</span></div>` : ""}
+      <div class="tot-row"><span>${T("Delivery", "መላኪያ")}</span><span>${t.delivery === 0 ? T("Free", "ነጻ") : fmtETB(t.delivery)}</span></div>
       <div class="tot-row grand"><span>${T("Total", "ጠቅላላ ድምር")}</span><span>${fmtETB(t.total)}</span></div>
-      ${currentUser ? `
-        <input id="chkPhone" class="field" type="tel" placeholder="${T("Phone Number *", "ስልክ ቁጥር *")}" value="${esc(phoneVal)}">
-        <input id="chkAddress" class="field" placeholder="${T("Delivery Address (City / Area) *", "የመድረሻ አድራሻ (ከተማ / ሰፈር) *")}" value="${esc(checkout.address)}">
-        <input id="chkNote" class="field" placeholder="${T("Note (optional)", "ተጨማሪ ማስታወሻ (አማራጭ)")}" value="${esc(checkout.note)}">
-        <span class="pay-title">${T("How will you pay?", "እንዴት ይከፍላሉ?")}</span>
-        <div class="pay-opts">
-          <label class="pay-opt"><input type="radio" name="payMethod" value="telebirr" ${checkout.pay === "telebirr" ? "checked" : ""}> Telebirr</label>
-          <label class="pay-opt"><input type="radio" name="payMethod" value="bank_transfer" ${checkout.pay === "bank_transfer" ? "checked" : ""}> ${T("Bank transfer", "የባንክ ዝውውር")}</label>
-        </div>
-        <button class="btn solid" id="placeOrderBtn" style="width:100%;">${T("Place order", "ትዕዛዝ አስገባ")}</button>
-      ` : `
-        <p style="font-size:.84rem;color:var(--muted);margin-bottom:10px;">
-          ${T("Sign in to save your order and track its status.", "ትዕዛዝ ለማስቀመጥ መጀመሪያ ወደ አካውንትዎ ይግቡ።")}
-        </p>
-        <button class="btn solid" id="chkSignInBtn" style="width:100%;">${T("Sign in to checkout", "ግባ / አካውንት ክፈት")}</button>
-      `}`;
+
+      <input id="chkName" class="field" placeholder="${T("Full Name *", "ሙሉ ስም *")}" value="${esc(nameVal)}">
+      <input id="chkPhone" class="field" type="tel" placeholder="${T("Phone Number (09...) *", "ስልክ ቁጥር (09...) *")}" value="${esc(phoneVal)}">
+      <select id="chkZone" class="field">
+        ${DELIVERY_ZONES.map(z => `<option value="${z.id}" ${checkout.zone === z.id ? "selected" : ""}>${esc(T(z.labelEn, z.labelAm))}</option>`).join("")}
+      </select>
+      <input id="chkAddress" class="field" placeholder="${T("Delivery Area / Landmark *", "የመድረሻ ሰፈር / ልዩ ቦታ *")}" value="${esc(checkout.address)}">
+      <input id="chkNote" class="field" placeholder="${T("Note (optional)", "ተጨማሪ ማስታወሻ (አማራጭ)")}" value="${esc(checkout.note)}">
+
+      <span class="pay-title">${T("Payment Method", "የክፍያ ዘዴ")}</span>
+      <div class="pay-opts">
+        <label class="pay-opt"><input type="radio" name="payMethod" value="telebirr" ${checkout.pay === "telebirr" ? "checked" : ""}> Telebirr</label>
+        <label class="pay-opt"><input type="radio" name="payMethod" value="bank_transfer" ${checkout.pay === "bank_transfer" ? "checked" : ""}> ${T("CBE Transfer", "ንግድ ባንክ")}</label>
+      </div>
+      <button class="btn solid" id="placeOrderBtn" style="width:100%;">${T("Complete Order", "ትዕዛዝ አስገባ")}</button>
+      ${!currentUser ? `<p style="font-size:.76rem;color:var(--muted);margin-top:8px;text-align:center;">${T("No account needed. Track anytime with your Order Code.", "አካውንት መክፈት አያስፈልግም፤ በትዕዛዝ ኮድዎ መከታተል ይችላሉ።")}</p>` : ""}`;
   }
 
   const drawer = document.getElementById("cartDrawer");
   drawer.addEventListener("input", e => {
-    if (e.target.id === "chkPhone") checkout.phone = e.target.value;
+    if (e.target.id === "chkName") checkout.name = e.target.value;
+    else if (e.target.id === "chkPhone") checkout.phone = e.target.value;
     else if (e.target.id === "chkAddress") checkout.address = e.target.value;
     else if (e.target.id === "chkNote") checkout.note = e.target.value;
   });
   drawer.addEventListener("change", e => {
     if (e.target.name === "payMethod") checkout.pay = e.target.value;
+    else if (e.target.id === "chkZone") { checkout.zone = e.target.value; renderCart(); }
   });
 
   drawer.addEventListener("click", async e => {
@@ -914,46 +1035,51 @@
       else toast(T("Stock limit reached", "ከክምችት በላይ መጨመር አይቻልም"), true);
     } else if (b.dataset.crm !== undefined) {
       cart.splice(Number(b.dataset.crm), 1); renderCart();
-    } else if (b.id === "chkSignInBtn") {
-      closeCart(); openAccountModal();
     } else if (b.id === "placeOrderBtn") {
       await submitOrder(b);
     }
   });
 
   async function submitOrder(btn) {
-    if (!sb || !currentUser) return;
-    const phone = checkout.phone.trim() || (currentUser.user_metadata?.phone || "").trim();
+    if (!sb) return;
+    const name = (checkout.name || currentUser?.user_metadata?.full_name || "").trim();
+    const phone = (checkout.phone || currentUser?.user_metadata?.phone || "").trim();
     const address = checkout.address.trim();
     const note = checkout.note.trim();
-    if (!phone || !address) {
-      toast(T("Enter your phone number and delivery address", "ስልክ ቁጥር እና አድራሻ ያስገቡ"), true);
+    if (!name || !phone || !address) {
+      toast(T("Enter your name, phone number, and delivery area", "ስም፣ ስልክ ቁጥር እና አድራሻ ያስገቡ"), true);
       return;
     }
 
     btn.disabled = true;
-    btn.textContent = T("Saving order...", "በመመዝገብ ላይ...");
+    btn.textContent = T("Placing order...", "በመመዝገብ ላይ...");
     const snapshot = [...cart];
     const method = checkout.pay;
+    const t = cartTotals();
 
     const { data, error } = await sb.rpc("place_order", {
       p_items: snapshot.map(i => ({ product_id: i.product_id, quantity: i.quantity, size: i.size, color: i.color })),
-      p_phone: phone, p_address: address, p_note: note || null, p_payment_method: method
+      p_phone: phone,
+      p_address: address,
+      p_note: note || null,
+      p_payment_method: method,
+      p_customer_name: name,
+      p_delivery_fee: t.delivery
     });
 
     if (error) {
       toast(error.message, true);
       btn.disabled = false;
-      btn.textContent = T("Place order", "ትዕዛዝ አስገባ");
+      btn.textContent = T("Complete Order", "ትዕዛዝ አስገባ");
       return;
     }
 
     cart = []; checkout.address = ""; checkout.note = "";
-    renderCart(); loadProducts(); loadMyOrders(); closeCart();
-    showDone(data, snapshot, { phone, address, note, method });
+    renderCart(); loadProducts(); if (currentUser) loadMyOrders(); closeCart();
+    showDone(data, snapshot, { name, phone, address, note, method });
   }
 
-  // ---------- Order confirmation ----------
+  // ---------- Order Confirmation ----------
   const doneModal = document.getElementById("doneModal");
 
   function payBox(method) {
@@ -974,11 +1100,12 @@
     const lines = items.map((i, n) =>
       `${n + 1}. ${i.name} [${[i.color, i.size].filter(Boolean).join(" / ") || "Standard"}] x${i.quantity} = ${fmtETB(i.price * i.quantity)}`
     ).join("\n");
-    let msg = `MIRAN ABAYA ORDER\nOrder ID: ${data.order_id}\n\nItems:\n${lines}\n\n`;
+    let msg = `MIRAN ABAYA ORDER\nOrder Code: #${String(data.order_id).slice(0, 8)}\nCustomer: ${info.name}\n\nItems:\n${lines}\n\n`;
     msg += `Subtotal: ${fmtETB(data.subtotal)}\n`;
     if (data.discount_percent > 0) msg += `Wholesale discount (${data.discount_percent}%): -${fmtETB(data.discount_amount)}\n`;
+    if (Number(data.delivery_fee) > 0) msg += `Delivery: ${fmtETB(data.delivery_fee)}\n`;
     msg += `TOTAL: ${fmtETB(data.total)}\n\n`;
-    msg += `Payment: ${info.method === "telebirr" ? "Telebirr" : "Bank transfer (CBE)"} - payment proof attached\n`;
+    msg += `Payment: ${info.method === "telebirr" ? "Telebirr" : "CBE Transfer"} - proof attached\n`;
     msg += `Phone: ${info.phone}\nAddress: ${info.address}`;
     if (info.note) msg += `\nNote: ${info.note}`;
     return msg;
@@ -990,21 +1117,21 @@
     doneModal.innerHTML = `
       <div class="done-box">
         <button class="close-x" id="closeDone" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
-        <h2>${T("Order received", "ትዕዛዝዎ ተመዝግቧል")}</h2>
+        <h2>${T("Order Confirmed", "ትዕዛዝዎ ተመዝግቧል")}</h2>
         <div style="display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.9rem;">
           <span>${T("Order Code", "የትዕዛዝ ኮድ")}: <strong>#${esc(shortId)}</strong></span>
           <button class="copy" data-copy="${esc(shortId)}">${T("Copy", "ቅዳ")}</button>
         </div>
         <div class="done-total">${fmtETB(data.total)}</div>
-        ${data.discount_percent > 0 ? `<div style="color:var(--ok);font-size:.88rem;margin-top:-8px;">${T(`Includes ${data.discount_percent}% wholesale discount`, `${data.discount_percent}% የጅምላ ቅናሽ ተካቷል`)}</div>` : ""}
-        <strong>${T("Pay this amount to:", "ይህን መጠን ይክፈሉ፦")}</strong>
+        ${data.discount_percent > 0 ? `<div style="color:var(--ok);font-size:.86rem;margin-top:-8px;">${T(`Includes ${data.discount_percent}% wholesale discount`, `${data.discount_percent}% የጅምላ ቅናሽ ተካቷል`)}</div>` : ""}
+        <strong>${T("Transfer exact amount to:", "ይህን መጠን ይክፈሉ፦")}</strong>
         ${payBox(info.method)}
         <ol class="steps">
           <li>${T("Send the exact total above.", "ከላይ ያለውን ጠቅላላ ድምር በትክክል ይላኩ።")}</li>
-          <li>${T("Tap the button below and attach your payment screenshot in Telegram.", "ከታች ያለውን አዝራር ተጭነው የክፍያ ስክሪንሾት በቴሌግራም ያያይዙ።")}</li>
-          <li>${T("Save your Order Code (#" + shortId + ") to track your delivery anytime.", "ትዕዛዝዎን በማንኛውም ሰዓት ለመከታተል የትዕዛዝ ኮድዎን (#" + shortId + ") ይያዙ።")}</li>
+          <li>${T("Tap below to send your payment screenshot on Telegram.", "ከታች ያለውን ተጭነው የክፍያ ስክሪንሾት በቴሌግራም ይላኩ።")}</li>
+          <li>${T("Use Order Code #" + shortId + " in Track Order anytime.", "ትዕዛዝዎን ለመከታተል #" + shortId + " የሚለውን ኮድ ይጠቀሙ።")}</li>
         </ol>
-        <a class="btn solid" href="${tg}" target="_blank" rel="noopener">${T("Send payment proof on Telegram", "የክፍያ ማረጋገጫ በቴሌግራም ላክ")}</a>
+        <a class="btn solid" href="${tg}" target="_blank" rel="noopener">${T("Send Payment Proof on Telegram", "የክፍያ ማረጋገጫ በቴሌግራም ላክ")}</a>
         <button class="btn line" id="closeDone2" type="button" style="color:var(--ink);border-color:var(--line);">${T("Close", "ዝጋ")}</button>
       </div>`;
     doneModal.showModal();
@@ -1021,7 +1148,7 @@
     catch { toast(c.dataset.copy); }
   });
 
-  // ---------- Order Tracking Modal ----------
+  // ---------- Order Tracking ----------
   const trackModal = document.getElementById("trackModal");
 
   function openTrackModal() {
@@ -1029,12 +1156,12 @@
     trackModal.innerHTML = `
       <div class="done-box">
         <button class="close-x" id="closeTrack" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
-        <h2>${T("Track your order", "ትዕዛዝዎን ይከታተሉ")}</h2>
-        <p style="color:var(--muted);font-size:.9rem;">${T("Enter your 8-character Order Code and the phone number used when ordering.", "የ8 ቁምፊ የትዕዛዝ ኮድዎን እና ሲያዙ የተጠቀሙበትን ስልክ ቁጥር ያስገቡ።")}</p>
+        <h2>${T("Track Your Order", "ትዕዛዝዎን ይከታተሉ")}</h2>
+        <p style="color:var(--muted);font-size:.9rem;">${T("Enter your 8-character Order Code and the phone number used at checkout.", "የ8 ቁምፊ የትዕዛዝ ኮድዎን እና ሲያዙ የተጠቀሙበትን ስልክ ቁጥር ያስገቡ።")}</p>
         <form id="trackForm" style="display:grid;gap:8px;">
           <input id="trCode" class="field" placeholder="${T("Order Code (e.g. a1b2c3d4) *", "የትዕዛዝ ኮድ (ምሳሌ፦ a1b2c3d4) *")}" required>
-          <input id="trPhone" class="field" type="tel" placeholder="${T("Phone Number (e.g. 09...) *", "ስልክ ቁጥር (09...) *")}" value="${esc(savedPhone)}" required>
-          <button type="submit" class="btn solid" id="trSubmit">${T("Check status", "ሁኔታውን አሳይ")}</button>
+          <input id="trPhone" class="field" type="tel" placeholder="${T("Phone Number (09...) *", "ስልክ ቁጥር (09...) *")}" value="${esc(savedPhone)}" required>
+          <button type="submit" class="btn solid" id="trSubmit">${T("Check Status", "ሁኔታውን አሳይ")}</button>
         </form>
         <div id="trackResult"></div>
       </div>`;
@@ -1044,9 +1171,7 @@
 
   document.getElementById("trackBtn").addEventListener("click", openTrackModal);
   document.getElementById("footerTrackLink").addEventListener("click", e => { e.preventDefault(); openTrackModal(); });
-  trackModal.addEventListener("click", e => {
-    if (e.target === trackModal || e.target.id === "closeTrack") trackModal.close();
-  });
+  trackModal.addEventListener("click", e => { if (e.target === trackModal || e.target.id === "closeTrack") trackModal.close(); });
 
   async function runTrackOrder(e) {
     e.preventDefault();
@@ -1055,22 +1180,15 @@
     const phone = document.getElementById("trPhone").value.trim();
     const btn = document.getElementById("trSubmit");
     const resBox = document.getElementById("trackResult");
-    btn.disabled = true;
-    btn.textContent = T("Searching...", "በመፈለግ ላይ...");
+    btn.disabled = true; btn.textContent = T("Searching...", "በመፈለግ ላይ...");
     resBox.innerHTML = "";
 
     const { data, error } = await sb.rpc("track_order", { p_order_prefix: code, p_phone: phone });
-    btn.disabled = false;
-    btn.textContent = T("Check status", "ሁኔታውን አሳይ");
+    btn.disabled = false; btn.textContent = T("Check Status", "ሁኔታውን አሳይ");
 
-    if (error) {
-      resBox.innerHTML = `<p class="err-msg">${esc(error.message)}</p>`;
-      return;
-    }
+    if (error) { resBox.innerHTML = `<p class="err-msg">${esc(error.message)}</p>`; return; }
     if (!data) {
-      resBox.innerHTML = `<div class="empty" style="margin-top:8px;padding:24px;">
-        <p>${T("No order matched that code and phone number. Check both and try again.", "በዚህ ኮድ እና ስልክ ቁጥር የተመዘገበ ትዕዛዝ አልተገኘም። እባክዎ አረጋግጠው እንደገና ይሞክሩ።")}</p>
-      </div>`;
+      resBox.innerHTML = `<div class="empty" style="margin-top:8px;padding:24px;"><p>${T("No order matched that code and phone number.", "በዚህ ኮድ እና ስልክ ቁጥር የተመዘገበ ትዕዛዝ አልተገኘም።")}</p></div>`;
       return;
     }
 
@@ -1078,7 +1196,7 @@
       const st = CU_STATUS[data.status] || [data.status, data.status];
       resBox.innerHTML = `
         <div class="cu-card" style="margin-top:8px;">
-          <div class="ord-head"><strong>${T("Custom Order", "በትዕዛዝ")} #${esc(String(data.id).slice(0, 8))}</strong><span class="status-pill">${esc(T(st[0], st[1]))}</span></div>
+          <div class="ord-head"><strong>${T("Custom Order", "በልኬት")} #${esc(String(data.id).slice(0, 8))}</strong><span class="status-pill">${esc(T(st[0], st[1]))}</span></div>
           <div>${esc(data.style)}</div>
           ${data.agreed_price != null ? `<div>${T("Agreed Price", "የተስማሙበት ዋጋ")}: <strong>${fmtETB(data.agreed_price)}</strong></div>` : ""}
           <div style="font-size:.82rem;color:var(--muted);">${new Date(data.created_at).toLocaleString()}</div>
@@ -1099,9 +1217,8 @@
     }
   }
 
-  // ---------- Custom-made orders ----------
+  // ---------- Custom Orders ----------
   const customModal = document.getElementById("customModal");
-
   const CU_STATUS = {
     requested:    ["Waiting for price", "ዋጋ በመጠባበቅ ላይ"],
     price_set:    ["Price agreed: pay deposit", "ዋጋ ተስማምተናል፤ ቀብድ ይክፈሉ"],
@@ -1115,7 +1232,7 @@
   function openCustom() {
     if (!sb) return;
     if (!currentUser) {
-      toast(T("Sign in first to send a custom order", "በትዕዛዝ ለማሰራት መጀመሪያ ይግቡ"), true);
+      toast(T("Sign in first to save and track bespoke orders", "በልኬት ለማሰራት መጀመሪያ ይግቡ"), true);
       openAccountModal();
       return;
     }
@@ -1130,22 +1247,22 @@
     customModal.innerHTML = `
       <div class="done-box">
         <button class="close-x" id="closeCustom" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
-        <h2>${T("Custom-made order", "በትዕዛዝ ማሰራት")}</h2>
-        <p style="color:var(--muted);font-size:.92rem;">${T(
-          "Tell us the design and your measurements. We agree the price with you on Telegram, then you pay a 50% deposit. The other 50% is paid when your piece is ready.",
-          "ዲዛይኑንና ልኬትዎን ይላኩ። ዋጋውን በቴሌግራም ተስማምተን 50% ቀብድ ይከፍላሉ፤ ቀሪው 50% ሲጠናቀቅ ይከፈላል።")}</p>
+        <h2>${T("Bespoke / Custom Order", "በልኬት ማሰራት")}</h2>
+        <p style="color:var(--muted);font-size:.9rem;">${T(
+          "Share your desired design and measurements. Once we confirm the price on Telegram, a 50% deposit starts tailoring.",
+          "ዲዛይኑንና ልኬትዎን ይላኩ። ዋጋውን በቴሌግራም ተስማምተን 50% ቀብድ ሲከፍሉ ስፌት እንጀምራለን።")}</p>
         <form class="cu-form" id="customForm">
           <input class="field" id="cuName" placeholder="${T("Full name *", "ሙሉ ስም *")}" value="${esc(nm)}" required>
           <input class="field" id="cuPhone" type="tel" placeholder="${T("Phone number *", "ስልክ ቁጥር *")}" value="${esc(ph)}" required>
-          <input class="field" id="cuStyle" placeholder="${T("Design or code you want *", "የሚፈልጉት ዲዛይን ወይም ኮድ *")}" required>
+          <input class="field" id="cuStyle" placeholder="${T("Design name or code *", "የሚፈልጉት ዲዛይን ወይም ኮድ *")}" required>
           <div class="cu-grid">
             <label>${T("Length (cm) *", "ቁመት (ሴ.ሜ) *")}<input class="field" id="cuLength" type="number" step="0.5" min="20" max="250" required></label>
             <label>${T("Bust (cm) *", "ደረት (ሴ.ሜ) *")}<input class="field" id="cuBust" type="number" step="0.5" min="40" max="200" required></label>
             <label>${T("Waist (cm) *", "ወገብ (ሴ.ሜ) *")}<input class="field" id="cuWaist" type="number" step="0.5" min="30" max="200" required></label>
             <label>${T("Sleeve (cm) *", "እጀታ (ሴ.ሜ) *")}<input class="field" id="cuSleeve" type="number" step="0.5" min="10" max="120" required></label>
           </div>
-          <textarea class="field" id="cuNotes" rows="2" placeholder="${T("Color, fabric, delivery area, notes...", "ቀለም፣ ጨርቅ፣ አድራሻ ወይም ማስታወሻ...")}"></textarea>
-          <button class="btn solid" id="cuSubmit" type="submit">${T("Send request", "ጥያቄ ላክ")}</button>
+          <textarea class="field" id="cuNotes" rows="2" placeholder="${T("Color, fabric preference, delivery area...", "ቀለም፣ ጨርቅ፣ አድራሻ...")}"></textarea>
+          <button class="btn solid" id="cuSubmit" type="submit">${T("Submit Bespoke Request", "ጥያቄ ላክ")}</button>
         </form>
       </div>`;
     document.getElementById("customForm").addEventListener("submit", submitCustom);
@@ -1165,31 +1282,28 @@
       p_length: Number(info.length), p_bust: Number(info.bust), p_waist: Number(info.waist), p_sleeve: Number(info.sleeve),
       p_notes: info.notes || null
     });
-    if (error) {
-      toast(error.message, true);
-      btn.disabled = false; btn.textContent = T("Send request", "ጥያቄ ላክ");
-      return;
-    }
+    if (error) { toast(error.message, true); btn.disabled = false; btn.textContent = T("Submit Bespoke Request", "ጥያቄ ላክ"); return; }
     showCustomDone(data, info);
     loadMyOrders();
   }
 
   function showCustomDone(id, i) {
-    let msg = `MIRAN ABAYA CUSTOM ORDER\nRequest ID: ${id}\nName: ${i.name}\nPhone: ${i.phone}\nDesign: ${i.style}\n`;
+    const shortId = String(id).slice(0, 8);
+    let msg = `MIRAN ABAYA BESPOKE ORDER\nRequest Code: #${shortId}\nName: ${i.name}\nPhone: ${i.phone}\nDesign: ${i.style}\n`;
     msg += `Measurements (cm): length ${i.length} | bust ${i.bust} | waist ${i.waist} | sleeve ${i.sleeve}`;
     if (i.notes) msg += `\nNotes: ${i.notes}`;
     const tg = `https://t.me/${TG_USER}?text=${encodeURIComponent(msg)}`;
     customModal.innerHTML = `
       <div class="done-box">
         <button class="close-x" id="closeCustom" style="position:absolute;top:10px;right:10px;" aria-label="Close">&times;</button>
-        <h2>${T("Request received", "ጥያቄዎ ተመዝግቧል")}</h2>
-        <div style="color:var(--muted);font-size:.9rem;">${T("Request", "ጥያቄ")} #${esc(String(id).slice(0, 8))}</div>
+        <h2>${T("Request Received", "ጥያቄዎ ተመዝግቧል")}</h2>
+        <div style="color:var(--muted);font-size:.9rem;">${T("Request Code", "የጥያቄ ኮድ")}: <strong>#${esc(shortId)}</strong></div>
         <ol class="steps">
-          <li>${T("Tap the button below to message us on Telegram.", "ከታች ያለውን አዝራር ተጭነው በቴሌግራም ያግኙን።")}</li>
-          <li>${T("We agree the price with you.", "ዋጋውን አብረን እንስማማለን።")}</li>
-          <li>${T("You pay the 50% deposit and we start sewing. Open Account to see the amount and payment details.", "50% ቀብድ ይከፍላሉ፣ ስፌት እንጀምራለን። መጠኑንና የክፍያ መረጃውን በአካውንትዎ ውስጥ ያገኛሉ።")}</li>
+          <li>${T("Message us on Telegram to confirm fabric and price.", "ጨርቁንና ዋጋውን ለማረጋገጥ በቴሌግራም ያግኙን።")}</li>
+          <li>${T("Pay the 50% deposit via Telebirr or CBE.", "50% ቀብድ በቴሌብር ወይም በንግድ ባንክ ይክፈሉ።")}</li>
+          <li>${T("Track progress anytime using #" + shortId + ".", "#" + shortId + " በመጠቀም ሁኔታውን ይከታተሉ።")}</li>
         </ol>
-        <a class="btn solid" href="${tg}" target="_blank" rel="noopener">${T("Message us on Telegram", "በቴሌግራም ያግኙን")}</a>
+        <a class="btn solid" href="${tg}" target="_blank" rel="noopener">${T("Confirm on Telegram", "በቴሌግራም ያረጋግጡ")}</a>
         <button class="btn line" id="closeCustom2" type="button" style="color:var(--ink);border-color:var(--line);">${T("Close", "ዝጋ")}</button>
       </div>`;
   }
@@ -1207,7 +1321,7 @@
 
   document.getElementById("googleLoginBtn").addEventListener("click", async () => {
     const errEl = document.getElementById("authErr");
-    if (!sb) { errEl.textContent = "Supabase client not initialized."; return; }
+    if (!sb) return;
     errEl.textContent = "";
     const { error } = await sb.auth.signInWithOAuth({
       provider: "google",
@@ -1251,7 +1365,7 @@
   document.getElementById("authForm").addEventListener("submit", async e => {
     e.preventDefault();
     const errEl = document.getElementById("authErr");
-    if (!sb) { errEl.textContent = "Supabase client not initialized."; return; }
+    if (!sb) return;
     const email = document.getElementById("authEmail").value.trim();
     const password = document.getElementById("authPass").value;
     const btn = document.getElementById("authSubmitBtn");
@@ -1278,16 +1392,12 @@
     if (owingDeposit || owingBalance) {
       const amt = owingDeposit ? dep : bal;
       pay = `<div style="font-weight:700;color:var(--gold-deep);">${owingDeposit ? T("Pay deposit", "ቀብድ ይክፈሉ") : T("Pay balance", "ቀሪውን ይክፈሉ")}: ${fmtETB(amt)}</div>
-        <div style="font-size:.82rem;color:var(--muted);">Telebirr</div>${payBox("telebirr")}
-        <div style="font-size:.82rem;color:var(--muted);">${T("Bank transfer", "የባንክ ዝውውር")}</div>${payBox("bank_transfer")}
-        <div style="font-size:.82rem;color:var(--muted);">${T("After paying, send the screenshot on Telegram.", "ከከፈሉ በኋላ ስክሪንሾቱን በቴሌግራም ይላኩ።")}</div>`;
+        ${payBox("telebirr")}${payBox("bank_transfer")}`;
     }
     return `<div class="cu-card">
-      <div class="ord-head"><strong>${T("Custom", "በትዕዛዝ")} #${esc(c.id.slice(0, 8))}</strong><span class="status-pill">${esc(T(st[0], st[1]))}</span></div>
+      <div class="ord-head"><strong>${T("Bespoke", "በልኬት")} #${esc(c.id.slice(0, 8))}</strong><span class="status-pill">${esc(T(st[0], st[1]))}</span></div>
       <div>${esc(c.style)}</div>
-      ${c.agreed_price != null ? `<div>${T("Price", "ዋጋ")}: <strong>${fmtETB(price)}</strong> · ${T("Deposit (50%)", "ቀብድ (50%)")}: ${fmtETB(dep)}
-        <span class="status-pill ${c.deposit_paid ? "paid" : ""}">${c.deposit_paid ? T("Paid", "ተከፍሏል") : T("Unpaid", "አልተከፈለም")}</span> · ${T("Balance", "ቀሪ")}: ${fmtETB(bal)}
-        <span class="status-pill ${c.final_paid ? "paid" : ""}">${c.final_paid ? T("Paid", "ተከፍሏል") : T("Unpaid", "አልተከፈለም")}</span></div>` : ""}
+      ${c.agreed_price != null ? `<div>${T("Price", "ዋጋ")}: <strong>${fmtETB(price)}</strong></div>` : ""}
       ${pay}
     </div>`;
   }
@@ -1314,16 +1424,15 @@
         <div class="ord-head"><strong>#${esc(o.id.slice(0, 8))}</strong><span class="status-pill">${esc(o.status)}</span></div>
         <div style="font-size:.82rem;color:var(--muted);margin-bottom:6px;">${new Date(o.created_at).toLocaleString()}</div>
         ${(o.order_items || []).map(it => `<div>${esc(it.product_name)} (${esc([it.color, it.size].filter(Boolean).join("/") || "Std")}) &times; ${it.quantity} — ${fmtETB(it.unit_price * it.quantity)}</div>`).join("")}
-        <div style="margin-top:8px;font-weight:700;">${T("Total", "ጠቅላላ")}: ${fmtETB(o.total)}
-          ${o.discount_percent > 0 ? `<small style="color:var(--ok);">(${o.discount_percent}% OFF)</small>` : ""}</div>
+        <div style="margin-top:8px;font-weight:700;">${T("Total", "ጠቅላላ")}: ${fmtETB(o.total)}</div>
         <div style="margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <span style="color:var(--muted);">${o.payment_method === "telebirr" ? "Telebirr" : T("Bank transfer", "የባንክ ዝውውር")}</span>
+          <span style="color:var(--muted);">${o.payment_method === "telebirr" ? "Telebirr" : T("CBE Transfer", "ንግድ ባንክ")}</span>
           <span class="status-pill ${o.payment_status === "paid" ? "paid" : ""}">${o.payment_status === "paid" ? T("Paid", "ተከፍሏል") : T("Unpaid", "አልተከፈለም")}</span>
         </div>
       </div>`).join("");
   }
 
-  // ---------- Catalog ----------
+  // ---------- Catalog & Sorting ----------
   async function loadProducts() {
     if (!sb) return;
     const { data, error } = await sb
@@ -1342,8 +1451,10 @@
 
   function renderCatalog() {
     const root = document.getElementById("catalogRoot");
+    const countEl = document.getElementById("resultCount");
     if (!sb) return;
-    const list = allProducts.filter(p => {
+
+    let list = allProducts.filter(p => {
       const slug = p.categories?.slug || "";
       const matchCat = activeSlug === "all"
         ? true
@@ -1351,41 +1462,49 @@
       const matchQ = !searchTerm || (p.name + " " + (p.description || "")).toLowerCase().includes(searchTerm);
       return matchCat && matchQ;
     });
+
+    if (sortMode === "price_asc") list.sort((a, b) => Number(a.price) - Number(b.price));
+    else if (sortMode === "price_desc") list.sort((a, b) => Number(b.price) - Number(a.price));
+
+    countEl.textContent = `${list.length} ${T(list.length === 1 ? "piece" : "pieces", "ምርቶች")}`;
+
     if (!list.length) {
       const isSaved = activeSlug === "saved";
       root.innerHTML = `
         <div class="empty">
-          <h3>${isSaved ? T("No saved items yet", "እስካሁን የተቀመጠ ምርት የለም") : T("No products listed yet", "ምንም ምርት አልተገኘም")}</h3>
-          <p class="sans">${isSaved ? T("Tap the ♡ icon on any product to save it here for later.", "ለወደፊት ለማስቀመጥ በምርቱ ላይ ያለውን ♡ ምልክት ይንኩ።") : T("Products will appear here as soon as the owner publishes them from the dashboard.", "ባለቤቱ ከዳሽቦርድ ምርቶችን እንዳስገባ እዚህ ይታያሉ።")}</p>
+          <h3>${isSaved ? T("No saved items yet", "እስካሁን የተቀመጠ ምርት የለም") : T("No matching products", "ምንም ምርት አልተገኘም")}</h3>
+          <p class="sans">${isSaved ? T("Tap the ♡ icon on any product to save it here.", "ለወደፊት ለማስቀመጥ በምርቱ ላይ ያለውን ♡ ምልክት ይንኩ።") : T("Try clearing your search or selecting another collection.", "ፍለጋውን ያጽዱ ወይም ሌላ ምድብ ይምረጡ።")}</p>
         </div>`;
       return;
     }
-    root.innerHTML = `<div class="grid sans">` + list.map((p, i) => {
+
+    root.innerHTML = `<div class="grid sans">` + list.map(p => {
       const img = (p.images && p.images[0]) || "";
       const img2 = (p.images && p.images[1]) || "";
       const catLabel = lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || "");
       const out = p.stock <= 0;
+      const low = p.stock > 0 && p.stock <= 3;
       const isNew = p.created_at && (Date.now() - new Date(p.created_at).getTime()) < 14 * 86400000;
       const saved = wishlist.has(p.id);
       return `
-        <article class="card reveal" style="--d:${(i % 4) * 80}ms">
+        <article class="card">
           <button type="button" class="wish-btn ${saved ? "saved" : ""}" data-wish="${p.id}" aria-label="Save item">${saved ? "♥" : "♡"}</button>
           <div class="card-img" data-open="${p.id}">
-            ${img ? `<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="no-img">${T("No photo", "ፎቶ የለም")}</div>`}
-            ${img2 ? `<img class="img2" src="${esc(img2)}" alt="" loading="lazy">` : ""}
-            ${out ? `<span class="stock-tag">${T("Out of stock", "አልቋል")}</span>` : (isNew ? `<span class="badge-new">${T("New", "አዲስ")}</span>` : "")}
+            ${img ? `<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none'">` : `<div class="no-img">${T("No photo", "ፎቶ የለም")}</div>`}
+            ${img2 ? `<img class="img2" src="${esc(img2)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
+            ${out ? `<span class="stock-tag">${T("Sold Out", "አልቋል")}</span>` : (isNew ? `<span class="badge-new">${T("New Arrival", "አዲስ")}</span>` : "")}
+            ${low ? `<span class="low-stock">${T(`Only ${p.stock} left`, `${p.stock} ብቻ ቀርቷል`)}</span>` : ""}
           </div>
           <div class="card-body">
             <span class="card-cat">${esc(catLabel)}</span>
             <h3 class="card-title" data-open="${p.id}">${esc(p.name)}</h3>
             <div class="card-price">${fmtETB(p.price)}</div>
             <button class="card-btn" data-open="${p.id}" ${out ? "disabled" : ""}>
-              ${out ? T("Out of stock", "አልቋል") : T("Select options", "ዝርዝር ይመልከቱ")}
+              ${out ? T("Sold Out", "አልቋል") : T("Select Size & Color", "መጠንና ቀለም ይምረጡ")}
             </button>
           </div>
         </article>`;
     }).join("") + `</div>`;
-    revealNew(root);
   }
 
   document.getElementById("catChips").addEventListener("click", e => {
@@ -1394,6 +1513,7 @@
     document.querySelectorAll("#catChips .chip").forEach(c => c.classList.toggle("on", c === b));
     renderCatalog();
   });
+  document.getElementById("sortSelect").addEventListener("change", e => { sortMode = e.target.value; renderCatalog(); });
   document.querySelectorAll("[data-cat-jump]").forEach(el => {
     el.addEventListener("click", () => {
       activeSlug = el.dataset.catJump;
@@ -1404,7 +1524,7 @@
   });
   document.getElementById("searchInput").addEventListener("input", e => { searchTerm = e.target.value.trim().toLowerCase(); renderCatalog(); });
 
-  // ---------- Product detail & Lightbox Zoom ----------
+  // ---------- Product Detail & Zoom ----------
   const pdModal = document.getElementById("pdModal");
   const lightbox = document.getElementById("lightbox");
   const lbStage = document.getElementById("lbStage");
@@ -1414,15 +1534,11 @@
 
   function openLightbox(src) {
     if (!src) return;
-    lbImg.src = src;
-    lbStage.classList.remove("zoomed");
+    lbImg.src = src; lbStage.classList.remove("zoomed");
     lbZoomBtn.textContent = T("Zoom +", "አጉላ +");
     lightbox.classList.add("on");
   }
-  function closeLightbox() {
-    lightbox.classList.remove("on");
-    lbStage.classList.remove("zoomed");
-  }
+  function closeLightbox() { lightbox.classList.remove("on"); lbStage.classList.remove("zoomed"); }
   function toggleLightboxZoom() {
     const z = lbStage.classList.toggle("zoomed");
     lbZoomBtn.textContent = z ? T("Zoom −", "አሳንስ −") : T("Zoom +", "አጉላ +");
@@ -1445,27 +1561,38 @@
         <div class="pd-gallery">
           ${mainImg ? `
             <div class="pd-main-wrap" id="pdZoomTrigger">
-              <img class="pd-main-img${pdState.fade ? " fade" : ""}" src="${esc(mainImg)}" alt="${esc(p.name)}">
+              <img class="pd-main-img" src="${esc(mainImg)}" alt="${esc(p.name)}">
               <span class="zoom-hint">🔍 ${T("Tap to zoom", "ለማጉላት ይንኩ")}</span>
             </div>` : `<div class="pd-main-img" style="display:grid;place-items:center;color:var(--muted);">${T("No photo", "ፎቶ የለም")}</div>`}
           ${imgs.length > 1 ? `<div class="pd-thumbs">${imgs.map((u, i) => `<img src="${esc(u)}" class="${i === imgIdx ? "on" : ""}" data-thumb="${i}" alt="">`).join("")}</div>` : ""}
         </div>
         <div class="pd-info">
           <span class="card-cat">${esc(lang === "am" ? (p.categories?.name_am || "") : (p.categories?.name_en || ""))}</span>
-          <h2 style="font-size:1.5rem;">${esc(p.name)}</h2>
+          <h2 style="font-size:1.6rem;">${esc(p.name)}</h2>
           <div style="font-size:1.35rem;font-weight:700;color:var(--gold-deep);">${fmtETB(p.price)}</div>
           ${p.description ? `<p style="color:var(--muted);font-size:.92rem;">${esc(p.description)}</p>` : ""}
-          ${p.sizes && p.sizes.length ? `<div><span class="opt-label">${T("Size", "መጠን")}</span><div class="opts">${p.sizes.map(s => `<button type="button" class="opt-btn ${size === s ? "on" : ""}" data-size="${esc(s)}">${esc(s)}</button>`).join("")}</div></div>` : ""}
-          ${p.colors && p.colors.length ? `<div><span class="opt-label">${T("Color", "ቀለም")}</span><div class="opts">${p.colors.map(c => `<button type="button" class="opt-btn ${color === c ? "on" : ""}" data-color="${esc(c)}">${esc(c)}</button>`).join("")}</div></div>` : ""}
+          ${p.sizes && p.sizes.length ? `
+            <div>
+              <div class="opt-head">
+                <span class="opt-label">${T("Size", "መጠን")}</span>
+                <button type="button" class="size-guide-link" id="pdSizeGuide">${T("Size Guide", "የመጠን መመሪያ")}</button>
+              </div>
+              <div class="opts">${p.sizes.map(s => `<button type="button" class="opt-btn ${size === s ? "on" : ""}" data-size="${esc(s)}">${esc(s)}</button>`).join("")}</div>
+            </div>` : ""}
+          ${p.colors && p.colors.length ? `
+            <div>
+              <div class="opt-head"><span class="opt-label">${T("Color", "ቀለም")}</span></div>
+              <div class="opts">${p.colors.map(c => `<button type="button" class="opt-btn ${color === c ? "on" : ""}" data-color="${esc(c)}">${esc(c)}</button>`).join("")}</div>
+            </div>` : ""}
           <div>
-            <span class="opt-label">${T("Quantity", "ብዛት")} (${T("In stock", "ክምችት")}: ${p.stock})</span>
+            <div class="opt-head"><span class="opt-label">${T("Quantity", "ብዛት")} (${T("Available", "ክምችት")}: ${p.stock})</span></div>
             <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
               <div class="qty-ctrl"><button type="button" id="pdMinus" aria-label="Less">−</button><span>${qty}</span><button type="button" id="pdPlus" aria-label="More">+</button></div>
               <small style="color:var(--gold-deep);font-weight:600;">${discPct > 0 ? `${discPct}% OFF` : T("3+ pcs: 10% OFF", "3+ ሲገዙ 10% ቅናሽ")}</small>
             </div>
           </div>
           <div class="err-msg" id="pdErr"></div>
-          <button type="button" class="btn solid" id="pdAddBtn" ${p.stock <= 0 ? "disabled" : ""}>${p.stock <= 0 ? T("Out of stock", "አልቋል") : T("Add to cart", "ወደ ጋሪ ጨምር")}</button>
+          <button type="button" class="btn solid" id="pdAddBtn" ${p.stock <= 0 ? "disabled" : ""}>${p.stock <= 0 ? T("Sold Out", "አልቋል") : T("Add to Bag", "ወደ ጋሪ ጨምር")}</button>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
             <button type="button" class="btn line" id="pdWishBtn" style="color:var(--ink);border-color:var(--line);padding:10px;">${saved ? T("Saved ♥", "ተቀምጧል ♥") : T("Save ♡", "አስቀምጥ ♡")}</button>
             <button type="button" class="btn line" id="pdShare" style="color:var(--ink);border-color:var(--line);padding:10px;">${T("Share", "አጋራ")}</button>
@@ -1512,11 +1639,12 @@
   pdModal.addEventListener("click", e => {
     if (e.target === pdModal || e.target.id === "closePD") { pdModal.close(); return; }
     if (!pdState) return;
-    if (e.target.closest("#pdZoomTrigger")) {
+    if (e.target.id === "pdSizeGuide") { openSizeGuide(); }
+    else if (e.target.closest("#pdZoomTrigger")) {
       const imgs = pdState.p.images || [];
       if (imgs[pdState.imgIdx]) openLightbox(imgs[pdState.imgIdx]);
     }
-    else if (e.target.dataset.thumb !== undefined) { pdState.imgIdx = Number(e.target.dataset.thumb); pdState.fade = true; drawPD(); pdState.fade = false; }
+    else if (e.target.dataset.thumb !== undefined) { pdState.imgIdx = Number(e.target.dataset.thumb); drawPD(); }
     else if (e.target.dataset.size !== undefined) { pdState.size = e.target.dataset.size; drawPD(); }
     else if (e.target.dataset.color !== undefined) { pdState.color = e.target.dataset.color; drawPD(); }
     else if (e.target.id === "pdMinus") { pdState.qty = Math.max(1, pdState.qty - 1); drawPD(); }
@@ -1532,40 +1660,11 @@
       if (p.sizes?.length && !size) missing.push(T("size", "መጠን"));
       if (p.colors?.length && !color) missing.push(T("color", "ቀለም"));
       if (missing.length) { document.getElementById("pdErr").textContent = T("Please select: ", "እባክዎ ይምረጡ፦ ") + missing.join(", "); return; }
-      if (addToCart(p, size, color, qty)) {
-        pdModal.close();
-        openCart();
-      }
+      if (addToCart(p, size, color, qty)) { pdModal.close(); openCart(); }
     }
   });
 
-  // ---------- Motion ----------
-  function bumpCart() {
-    ["cartBtn", "cartBarBtn"].forEach(id => {
-      const el = document.getElementById(id);
-      el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump");
-    });
-  }
-
-  const io = ("IntersectionObserver" in window) ? new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const el = en.target;
-      el.classList.add("in");
-      io.unobserve(el);
-      setTimeout(() => el.style.setProperty("--d", "0ms"), 1000);
-    });
-  }, { rootMargin: "0px 0px -6% 0px", threshold: 0.05 }) : null;
-
-  function revealNew(scope) {
-    (scope || document).querySelectorAll(".reveal:not(.in)").forEach(el => io ? io.observe(el) : el.classList.add("in"));
-  }
-  document.querySelectorAll("main h2, main .lede, .rows .row, .about .wrap > *").forEach((el, i) => {
-    el.classList.add("reveal");
-    if (el.classList.contains("row")) el.style.setProperty("--d", ((i % 5) * 70) + "ms");
-  });
-  revealNew(document);
-
+  // Sticky Header Hide/Show
   const siteHeader = document.querySelector("header.site");
   let lastY = window.scrollY;
   window.addEventListener("scroll", () => {
@@ -1574,18 +1673,6 @@
     if (y > lastY + 6 && y > 140) siteHeader.classList.add("hide");
     else if (y < lastY - 6 || y < 60) siteHeader.classList.remove("hide");
     lastY = y;
-  }, { passive: true });
-
-  let touchX = null;
-  pdModal.addEventListener("touchstart", e => { touchX = e.changedTouches[0].clientX; }, { passive: true });
-  pdModal.addEventListener("touchend", e => {
-    if (touchX === null || !pdState) return;
-    const dx = e.changedTouches[0].clientX - touchX;
-    touchX = null;
-    const n = (pdState.p.images || []).length;
-    if (Math.abs(dx) < 45 || n < 2 || !e.target.closest(".pd-gallery")) return;
-    pdState.imgIdx = (pdState.imgIdx + (dx < 0 ? 1 : -1) + n) % n;
-    pdState.fade = true; drawPD(); pdState.fade = false;
   }, { passive: true });
 
   // ---------- Init ----------
